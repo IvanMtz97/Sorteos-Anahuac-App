@@ -8,6 +8,6 @@ import { Page } from "ui/page";
 })
 export class LoginComponent {
     constructor(page: Page) {
-        page.actionBarHidden = true;
+        page.actionBarHidden = true;  
     }
 }
