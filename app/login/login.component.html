@@ -4,9 +4,11 @@
 <!--
 Use the tkMainContent directive to display the content of the page when you have an app drawer.
 -->
-<Page xmlns="http://www.nativescript.org/tns.xsd" loaded="pageLoaded" actionBarHidden="true">
-    <GridLayout class="page page-content" tkMainContent>
-        <Label class="page-icon fa" text="&#xf015;"></Label>
-        <Label class="page-placeholder" text="<!-- Page content goes here -->"></Label>
-    </GridLayout>
-</Page>
+<StackLayout class="page page-content" orientation="vertical">
+    <StackLayout class="page page-content" orientation="vertical" height="15%" backgroundColor="lightgray">
+
+    </StackLayout>
+    <StackLayout class="page page-content" orientation="vertical" height="85%">
+        <Image class="LogoLogin" src="res://ahc_logo_login" height="27%"></Image>
+    </StackLayout>
+</StackLayout>
