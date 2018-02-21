@@ -27,7 +27,20 @@
      horizontal-align: center;
  }
 
- .text-field {
+ .talonario{
+    color: #FFF;
+    padding-left: 50px;
+    z-index: 99;
+}
+
+.talonario-header{
+    padding-top: 12;
+    padding-left: 5;
+    padding-bottom: 12;
+    font-size: 18em;
+}
+
+.text-field {
     padding: 30px;
     margin-top: 20px;
     width: 80%;

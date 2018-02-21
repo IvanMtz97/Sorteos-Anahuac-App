@@ -1,7 +1,22 @@
 import { Component } from "@angular/core";
+import { SessionService } from "./services/session/session.services";
+import { Router } from "@angular/router";
 
 @Component({
     selector: "ns-app",
-    templateUrl: "app.component.html"
+    templateUrl: "app.component.html",
+    providers: [SessionService]
 })
-export class AppComponent { }
+export class AppComponent { 
+    constructor(private session: SessionService, private router: Router){
+        this.session = session;
+        this.router = router;
+        if (this.session.loggedIn()) {
+            this.router.navigate(["home"]);
+        }
+        else {
+            this.router.navigate([""]);
+        }
+    }
+    
+}
