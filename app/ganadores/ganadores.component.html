@@ -1,0 +1,61 @@
+<StackLayout>
+    <ActionBar class="action-bar">
+        <NavigationButton ios:visibility="collapsed" icon="res://menu" (tap)="onDrawerButtonTap()"></NavigationButton>
+        <ActionItem icon="res://navigation/menu" android:visibility="collapsed" (tap)="onDrawerButtonTap()" ios.position="left">
+        </ActionItem>
+        <Label class="action-bar-title" text="Sorteos Anahuac"></Label>
+    </ActionBar>
+
+    <StackLayout orientation="vertical">
+
+        <StackLayout orientation="horizontal" class="component-header">
+            <Label class="fa" text="&#xf091;"></Label>
+            <Label text="LISTADO DE GANADORES"></Label>
+        </StackLayout>
+            
+        <StackLayout class="container">
+            <StackLayout orientation="vertical" class="g-item">
+                <Label class="txtTitulo" text="Primer premio"></Label>
+                <StackLayout orientation="horizontal">
+                    <Label class="txtKey" text="Boleto:"></Label>
+                    <Label class="txtValue" text="152401"></Label>
+                </StackLayout>
+            </StackLayout>
+
+            <Image src="res://separador"></Image>
+            
+            <StackLayout orientation="vertical" class="g-item">
+                <Label class="txtTitulo" text="Segundo premio"></Label>
+                <StackLayout orientation="horizontal">
+                    <Label class="txtKey" text="Boleto:"></Label>
+                    <Label class="txtValue" text="006333"></Label>
+                </StackLayout>
+            </StackLayout>
+
+            <Image src="res://separador"></Image>
+            
+            <StackLayout orientation="vertical" class="g-item">
+                <Label class="txtTitulo" text="Tercer premio"></Label>
+                <StackLayout orientation="horizontal">
+                    <Label class="txtKey" text="Boleto:"></Label>
+                    <Label class="txtValue" text="049105"></Label>
+                </StackLayout>
+            </StackLayout>
+
+            <Image src="res://separador"></Image>
+
+            <StackLayout orientation="vertical" class="g-item">
+                <StackLayout orientation="vertical">
+                    <Label text="Ingresa el número de boleto para"></Label>
+                    <Label text="conocer si es uno de los ganadores:"></Label>
+                </StackLayout>
+                <TextField class="text-field" hint="Folio de boleto"></TextField>
+            </StackLayout>
+
+            <StackLayout class="g-item">
+                <Button text="buscar"></Button>
+            </StackLayout>
+        </StackLayout>
+    </StackLayout>
+
+</StackLayout>
