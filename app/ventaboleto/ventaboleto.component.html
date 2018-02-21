@@ -1,0 +1,102 @@
+<StackLayout>
+<ActionBar class="action-bar">
+    <NavigationButton ios:visibility="collapsed" icon="res://menu" (tap)="onDrawerButtonTap()"></NavigationButton>
+    <ActionItem icon="res://navigation/menu" android:visibility="collapsed" (tap)="onDrawerButtonTap()" ios.position="left">
+    </ActionItem>
+    <Label class="action-bar-title" text="Sorteos Anahuac"></Label>
+</ActionBar>
+
+
+<!--<Page xmlns="http://www.nativescript.org/tns.xsd" xmlns:CheckBox="nativescript-checkbox" loaded="pageLoaded">-->
+    <StackLayout orientation="vertical">
+
+        <StackLayout orientation="horizontal" class="component-header-2">
+            <Label class="fa icon" text="&#xf01c;"></Label>
+            <Label text="TALONARIO"></Label>
+            <Label class="txtorange" text="00001"></Label>
+        </StackLayout>
+
+        <StackLayout orientation="horizontal" class="component-header-3">
+            <Label text="VENDER BOLETO"></Label>
+            <Label class="txtorange" text="0046560"></Label>
+        </StackLayout>
+
+        <ScrollView>
+                <StackLayout class="container" orientation="vertical">
+
+                        <StackLayout class="vb-item">
+                            <Label text="Nombre"></Label>
+                            <TextField></TextField>
+                        </StackLayout>
+                
+                        <StackLayout class="vb-item">
+                            <Label text="Apellido paterno"></Label>
+                            <TextField></TextField>
+                        </StackLayout>
+                
+                        <StackLayout class="vb-item">
+                            <Label text="Apellido materno"></Label>
+                            <TextField></TextField>
+                        </StackLayout>
+                
+                        <StackLayout class="vb-item">
+                            <Label text="Calle"></Label>
+                            <TextField></TextField>
+                        </StackLayout>
+                
+                        <StackLayout class="vb-item">
+                            <Label text="Número"></Label>
+                            <TextField></TextField>
+                        </StackLayout>
+                
+                        <StackLayout class="vb-item">
+                            <Label text="Código Postal"></Label>
+                            <TextField></TextField>
+                        </StackLayout>
+                
+                        <StackLayout class="vb-item">
+                            <Label text="Colonia"></Label>
+                            <TextField editable="false"></TextField>
+                        </StackLayout>
+                
+                        <StackLayout class="vb-item">
+                            <Label text="Estado"></Label>
+                            <TextField editable="false"></TextField>
+                        </StackLayout>
+                
+                        <StackLayout class="vb-item">
+                            <Label text="Municipio/Delegación"></Label>
+                            <TextField editable="false"></TextField>
+                        </StackLayout>
+                
+                        <StackLayout class="vb-item">
+                            <Label text="Teléfono fijo"></Label>
+                            <TextField keyboardType="number"></TextField>
+                        </StackLayout>
+                
+                        <StackLayout class="vb-item">
+                            <Label text="Teléfono móvil"></Label>
+                            <TextField></TextField>
+                        </StackLayout>
+                
+                        <StackLayout class="vb-item">
+                            <Label text="Correo electrónico"></Label>
+                            <TextField></TextField>
+                        </StackLayout>
+                        
+                        <StackLayout class="vb-item">
+                            <CheckBox #CB1 (tap)="toggleCheck()" text="Aplicar a todos" checked="false"></CheckBox>
+                        </StackLayout>
+                
+                        <StackLayout class="vb-item">
+                            <Button class="vb-btn" [text]="txtBtnVender"></Button>
+                        </StackLayout>
+                
+                    </StackLayout>
+        </ScrollView>
+        
+    </StackLayout>
+    
+<!--</Page>-->
+    
+</StackLayout>

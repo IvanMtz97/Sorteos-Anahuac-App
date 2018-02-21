@@ -26,3 +26,72 @@
  ActionBar .action-bar-title {
      horizontal-align: center;
  }
+
+ .talonario{
+    color: #FFF;
+    padding-left: 50px;
+    z-index: 99;
+}
+
+.talonario-header{
+    padding-top: 12;
+    padding-left: 5;
+    padding-bottom: 12;
+    font-size: 18em;
+}
+
+.text-field {
+    padding: 30px;
+    margin-top: 20px;
+    width: 80%;
+    border-style: solid;
+    border-width: 1em;
+    border-color: #CCC;
+}
+
+.separador{
+    margin-top: 4%;
+    margin-bottom: 4%;
+    width: 500px;
+}
+
+.btn-img{
+    border-radius: 5;
+    border-width: 1;
+    color: white;
+    margin: 5;
+    font-size: 16em;
+    border-color: rgb(255, 133, 32);
+    background-color: rgb(255, 133, 32);
+    padding-left: 25;
+}
+
+.page-text {
+    vertical-align: center;
+    text-align: center;
+ }
+ 
+.page-text-aling-left {
+     text-align: left;
+ }
+ 
+.page-text-aling-right {
+     text-align: right;
+ }
+
+.underline {
+    text-decoration: underline;
+}
+
+.ligas-aviso {
+    color: #ea7200;
+}
+
+.font-ligas-aviso {
+    font-size: 13em;
+}
+
+.payOr {
+    color: rgb(31, 33, 48);
+    font-size: 13em;
+}
