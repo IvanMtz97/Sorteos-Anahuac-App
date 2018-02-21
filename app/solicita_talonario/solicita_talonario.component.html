@@ -9,7 +9,7 @@
                 <Image order="1" width="30" src="res://icono_nuevotalonario"></Image>
                 <Label order="2" text="SOLICITA UN TALONARIO"></Label>
             </FlexboxLayout> 
-            <StackLayout  style="padding-top: 100%;padding-bottom: 10%">  
+            <StackLayout  style="padding-top: 100%;padding-bottom: 10%" visibility="collapsed">  
                 <Label
                     class="page-text-1"
                     [text]="text1"
@@ -36,6 +36,20 @@
                     style="background-color: orange;color:white;"
                     width= "85%">
                 </Button>
+            </StackLayout>
+            <StackLayout  style="padding-top: 100%;padding-bottom: 10%" visibility="visible">  
+                    <Label
+                        class="page-text-1"
+                        [text]="text1"
+                        textWrap="true"
+                        style="color:black;font-size:30px;text-align: center;padding-bottom: 10%">
+                    </Label>
+                    <Label
+                        class="page-text-2"
+                        [text]="text2"
+                        textWrap="true"
+                        style="color:gray;font-size:15px;text-align: center;padding-left: 10%;padding-right: 10%;padding-bottom: 30%">
+                    </Label>                    
             </StackLayout>
         </StackLayout>
     </ScrollView>
