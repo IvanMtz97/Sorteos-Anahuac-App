@@ -1,0 +1,102 @@
+<ActionBar class="action-bar">
+    <NavigationButton ios:visibility="collapsed" icon="res://menu" (tap)="onDrawerButtonTap()"></NavigationButton>
+    <ActionItem icon="res://navigation/menu" android:visibility="collapsed" (tap)="onDrawerButtonTap()" ios.position="left"></ActionItem>
+    <Image class="logo-header" src="res://icono_logo_encabezado"></Image>
+</ActionBar>
+
+<RadSideDrawer #drawer showOverNavigation="true" [drawerTransition]="sideDrawerTransition">
+    <StackLayout tkDrawerContent>
+        <MyDrawer [selectedPage]="'Home'"></MyDrawer>
+    </StackLayout>
+    <StackLayout class="page page-content" orientation="vertical" height="15%" backgroundColor="lightgray">
+            
+    </StackLayout>
+    <StackLayout tkMainContent>
+        <FlexboxLayout class="tituloComponent" justifyContent="center" flexDirection="row">
+            <Image order="1" width="30" src="res://icono_perfil"></Image>
+            <Label order="2" text="ESTADO DE CUENTA"></Label>
+        </FlexboxLayout>
+        <ScrollView orientation="vertical">
+            <StackLayout class="contenedor" orientation="vertical">
+
+                <Label class="key txtbig" text="Juan José"></Label>
+                <Label class="key txtbig" style="margin-bottom:20px;" text="Martínez González";></Label>
+
+                <StackLayout style="margin-bottom:50px;" orientation="horizontal">
+                    <Label class="data" text="Talonarios asignados: "></Label>
+                    <Label class="value" text="2"></Label>
+                </StackLayout>
+
+                <Image style="margin-bottom:50px;" src="res://separador"></Image>
+
+                <GridLayout columns="*, *" rows="*, *, 100%">
+                    <Label class="data" col="0" row="0" text="Total a pagar: "></Label>
+                    <Label class="value" col="1" row="0" text="$10,000.00"></Label>
+                    <Label class="data" col="0" row="1" text="Pagado: "></Label>
+                    <Label class="value" col="1" row="1" text="$3,200.00"></Label>
+                    <Label class="data" col="0" row="2" text="Saldo pendiente: "></Label>
+                    <Label class="key" col="1" row="2" text="$6,800.00"></Label>
+                </GridLayout>
+
+                <Image style="margin-bottom:30px;" src="res://separador"></Image>
+
+                <Label class="data titulo" text="Cuenta para depósito:"></Label>
+                
+                <Image style="width:1000px;" src="res://cuenta_prueba"></Image>
+
+            </StackLayout>   
+        </ScrollView>
+    </StackLayout>
+</RadSideDrawer>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- <side-drawer-page>
+    <FlexboxLayout class="tituloComponent" justifyContent="center" flexDirection="row">
+        <Image order="1" width="30" src="res://icono_perfil"></Image>
+        <Label order="2" text="ESTADO DE CUENTA"></Label>
+    </FlexboxLayout>
+    <ScrollView orientation="vertical">
+        <StackLayout class="contenedor" orientation="vertical">
+
+            <Label class="key txtbig" text="Juan José"></Label>
+            <Label class="key txtbig" style="margin-bottom:20px;" text="Martínez González";></Label>
+
+            <StackLayout style="margin-bottom:50px;" orientation="horizontal">
+                <Label class="data" text="Talonarios asignados: "></Label>
+                <Label class="value" text="2"></Label>
+            </StackLayout>
+
+            <Image style="margin-bottom:50px;" src="res://separador"></Image>
+
+            <GridLayout columns="*, *" rows="*, *, 100%">
+                <Label class="data" col="0" row="0" text="Total a pagar: "></Label>
+                <Label class="value" col="1" row="0" text="$10,000.00"></Label>
+                <Label class="data" col="0" row="1" text="Pagado: "></Label>
+                <Label class="value" col="1" row="1" text="$3,200.00"></Label>
+                <Label class="data" col="0" row="2" text="Saldo pendiente: "></Label>
+                <Label class="key" col="1" row="2" text="$6,800.00"></Label>
+            </GridLayout>
+
+            <Image style="margin-bottom:30px;" src="res://separador"></Image>
+
+            <Label class="data titulo" text="Cuenta para depósito:"></Label>
+            
+            <Image style="width:1000px;" src="res://cuenta_prueba"></Image>
+
+
+
+        </StackLayout>
+    </ScrollView>
+</side-drawer-page> -->

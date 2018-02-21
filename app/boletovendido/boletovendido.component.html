@@ -1,48 +1,50 @@
 <ActionBar class="action-bar">
     <Label class="action-bar-title" text="Sorteos Anahuac"></Label>
 </ActionBar>
-    
-<StackLayout class="page page-content" orientation="vertical">
-        <StackLayout class="page page-content" orientation="vertical" height="15%" backgroundColor="lightgray">
 
-        </StackLayout>
+<RadSideDrawer #drawer showOverNavigation="true" [drawerTransition]="sideDrawerTransition">
+
+<StackLayout tkDrawerContent>
+    <MyDrawer [selectedPage]="'BoletoVendido'"></MyDrawer>
+</StackLayout>
+
+<StackLayout class="page page-content" orientation="vertical" tkMainContent>
     <!-- <ScrollView orientation="vertical" sdkExampleTitle sdkToggleNavButton> -->
         <StackLayout class="talonario" orientation="horizontal">
             <Image width="50" src="res://icono_talonario"></Image>
             <Label class="talonario-header" text="TALONARIO"></Label>
             <Label class="talonario-header orange" text="{{Talonario}}"></Label>
         </StackLayout>
-        <!-- <StackLayout>
-            <StackLayout *ngFor="let boleto of boletoList; let i = index">
-                <StackLayout (tap)="toggle(i)" backgroundColor="#e9e9e9" class="talonario" orientation="horizontal">
-                    <Label class="talonario-header font-bold" text="BOLETO" color="#888888" width="20%"></Label>
-                    <Label class="talonario-header font-bold orange" [text]="boleto.numero" width="68%"></Label>
-                    <Label class="drop" text="x" width="12%" visibility="{{ selectBoleto[i] ? 'visible' : 'collapsed' }}"></Label>
-                </StackLayout>
-                <StackLayout class="arrow-down" visibility="{{ selectBoleto[i] ? 'visible' : 'collapsed' }}"></StackLayout>
-                <StackLayout visibility="{{ selectBoleto[i] ? 'visible' : 'collapsed' }}">
-                    <ScrollView orientation="vertical" sdkExampleTitle sdkToggleNavButton>
-                        <StackLayout orientation="vertical">
-                            <Label class="p informacion-boleto font font-bold" text="Dueño:"></Label>
-                            <Label class="h2 informacion-boleto font font-bold orange" text="Rogelio"></Label>
-                            <Label class="h2 informacion-boleto font font-bold orange" text="Andrés"></Label>
-                            <StackLayout height="20"></StackLayout>
-                            <Label class="p informacion-boleto font font-bold" text="Dirección:"></Label>
-                            <Label class="h4 informacion-boleto font" text="revolucion 12"></Label>
-                            <Label class="h4 informacion-boleto font" text="Los Cabos, Baja California"></Label>
-                            <StackLayout height="20"></StackLayout>
-                            <Label class="p informacion-boleto font font-bold" text="Contacto:"></Label>
-                            <Label class="h4 informacion-boleto font" text="Teléfono fijo: 5500002222"></Label>
-                            <Label class="h4 informacion-boleto font" text="Teléfono móvil: 5585691234"></Label>
-                            <Label class="h4 informacion-boleto font" text="Correo electrónico:"></Label>
-                            <Label class="h4 informacion-boleto font" text="rogelio.andres@anahuac.mx"></Label>
-                            <Image src="res://qr" width="60%"></Image>
-                            <Label class="url-text p font font-bold" textWrap="true" horizontalAlignment="stretch" text="http://anahuac.edu?Boleto=lokem/fff/gfsjdg46546jh(ahgsdfghsaf54)"></Label>
-                            <Image class="image-mail" src="res://icono_mail" width="12%"></Image>
-                        </StackLayout>
-                    </ScrollView>
-                </StackLayout>
+        <StackLayout>            
+            <StackLayout (tap)="toggle()" backgroundColor="#e9e9e9" class="talonario" orientation="horizontal" height="12%">
+                <Label class="text-black" text="BOLETO" color="#888888" width="30%" style="font-weight: bold;padding-left: 1%;vertical-align:center;"></Label>
+                <Label class="text-orange" text="123456" width="58%" style="font-weight: bold;vertical-align:center;"></Label>
+                <Label class="drop" text="x" width="12%" visibility="{{ selectBoleto ? 'visible' : 'collapsed' }}" color="#1D1D1D"></Label>
             </StackLayout>
-        </StackLayout> -->
+            <StackLayout class="arrow-down" visibility="{{ selectBoleto ? 'visible' : 'collapsed' }}"></StackLayout>
+            <StackLayout visibility="{{ selectBoleto ? 'visible' : 'collapsed' }}">
+                <ScrollView orientation="vertical" sdkExampleTitle sdkToggleNavButton>
+                    <StackLayout orientation="vertical">
+                        <Label class="text-black" text="Dueño:" style="padding-left: 45%;font-size: 18%;"></Label>
+                        <Label class="text-orange" text="Rogelio" style="padding-left: 45%;font-size: 28%;"></Label>
+                        <Label class="text-orange" text="Andrés" style="padding-left: 45%;font-size: 28%;"></Label>
+                        <StackLayout height="20"></StackLayout>
+                        <Label class="text-black" text="Dirección:" style="padding-left: 45%;font-size: 18%;"></Label>
+                        <Label color="gray" text="Revolucion 12" style="padding-left: 45%;font-size: 18%;"></Label>
+                        <Label color="gray" text="Los Cabos, Baja California" style="padding-left: 45%;font-size: 18%;"></Label>
+                        <StackLayout height="20"></StackLayout>
+                        <Label class="text-black" text="Contacto:" style="padding-left: 45%;font-size: 18%;"></Label>
+                        <Label color="gray" text="Teléfono fijo: 5500002222" style="padding-left: 45%;font-size: 18%;"></Label>
+                        <Label color="gray" text="Teléfono móvil: 5585691234" style="padding-left: 45%;font-size: 18%;"></Label>
+                        <Label color="gray" text="Correo electrónico:" style="padding-left: 45%;font-size: 18%;"></Label>
+                        <Label color="gray" text="rogelio.andres@anahuac.mx" style="padding-left: 45%;font-size: 18%;"></Label>
+                        <Image src="res://qr" width="60%"></Image>
+                        <Label color="gray" textWrap="true" horizontalAlignment="stretch" style="padding-left: 45%;font-size: 18%;" text="http://anahuac.edu?Boleto=lokem/fff/gfsjdg46546jh(ahgsdfghsaf54)"></Label>
+                        <Image class="image-mail" src="res://icono_mail" width="12%"></Image>
+                    </StackLayout>
+                </ScrollView>
+            </StackLayout>
+        </StackLayout>
     <!-- </ScrollView> -->
 </StackLayout>
+</RadSideDrawer>

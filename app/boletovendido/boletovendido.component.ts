@@ -6,7 +6,19 @@ import { Component, OnInit, ViewChild } from "@angular/core";
     templateUrl: "./boletovendido.component.html"
 })
 export class BoletoVendidoComponent implements OnInit {
-    ngOnInit(): void {
-        
+    public selectBoleto: boolean = true;
+    constructor()
+    {
+
+    }
+    
+    ngOnInit(): void 
+    {
+        console.log("BOLETOVENDIDO");
+    }
+
+    public toggle()
+    {
+        this.selectBoleto = !this.selectBoleto;
     }
 }
