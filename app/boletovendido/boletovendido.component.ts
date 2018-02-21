@@ -1,4 +1,6 @@
 import { Component, OnInit, ViewChild } from "@angular/core";
+import { RadSideDrawerComponent } from "nativescript-pro-ui/sidedrawer/angular";
+import { DrawerTransitionBase, SlideInOnTopTransition } from "nativescript-pro-ui/sidedrawer";
 
 @Component({
     selector: "BoletoVendido",
@@ -6,7 +8,27 @@ import { Component, OnInit, ViewChild } from "@angular/core";
     templateUrl: "./boletovendido.component.html"
 })
 export class BoletoVendidoComponent implements OnInit {
-    ngOnInit(): void {
-        
+    public selectBoleto: boolean = true;
+    @ViewChild("drawer") drawerComponent: RadSideDrawerComponent;
+
+    private _sideDrawerTransition: DrawerTransitionBase;
+
+    constructor()
+    {
+
+    }
+    
+    ngOnInit(): void 
+    {
+        console.log("BOLETOVENDIDO");
+        this._sideDrawerTransition = new SlideInOnTopTransition();
+    }
+
+    public toggle()
+    {
+        this.selectBoleto = !this.selectBoleto;
+    }
+    onDrawerButtonTap(): void {
+        this.drawerComponent.sideDrawer.showDrawer();
     }
 }
