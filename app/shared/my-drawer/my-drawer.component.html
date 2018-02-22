@@ -3,27 +3,33 @@ The MyDrawer custom component view is where you define what will be displayed in
 Feel free to customize layouts and components to change how your app drawer looks.
 -->
 <GridLayout rows="auto, *" class="sidedrawer sidedrawer-left">
-    <StackLayout row="0" class="sidedrawer-header">
-        <Label class="sidedrawer-header-image fa" text="&#xf2bd;"></Label>
-        <Label class="sidedrawer-header-brand" text="User Name"></Label>
-        <Label class="footnote" text="username@mail.com"></Label>
+    <StackLayout row="0" class="component-menu-header">        
+        <Label text="MENU"></Label>
     </StackLayout>
 
-    <ScrollView row="1">
-        <StackLayout class="sidedrawer-content">
-            <MyDrawerItem title="Home" route="/home" icon="&#xf015;" [isSelected]="isPageSelected('Home')">
+    <ScrollView row="1"> 
+        <StackLayout class="sidedrawer-content"> 
+            <MyDrawerItem title="VENTA DE BOLETOS" route="/solicita_talonario" icon="&#xf155;" [isSelected]="isPageSelected('talonarios')">
             </MyDrawerItem>
-            <MyDrawerItem title="Browse" route="/browse" icon="&#xf1ea;" [isSelected]="isPageSelected('Browse')">
+            <MyDrawerItem title="ESTADO DE CUENTA" route="/estadocuenta" icon="&#xf1ea;" [isSelected]="isPageSelected('Estado_Cuenta')">
             </MyDrawerItem>
-            <MyDrawerItem title="Search" route="/search" icon="&#xf002;" [isSelected]="isPageSelected('Search')">
+            <MyDrawerItem title="CONOCE TU SORTEO" route="/conocesorteo" icon="&#xf41c;" [isSelected]="isPageSelected('ConoceSorteo')">
             </MyDrawerItem>
-            <MyDrawerItem title="Featured" route="/featured" icon="&#xf005;" [isSelected]="isPageSelected('Featured')">
+            <MyDrawerItem title="SOLICITA UN TALONARIO" route="/solicitatalonario" icon="&#xf055;" [isSelected]="isPageSelected('solicitatalonario')">
+            </MyDrawerItem>
+            <MyDrawerItem title="LISTADO DE GANADORES" route="/ganadores" icon="&#xf091;" [isSelected]="isPageSelected('Ganadores')">
+            </MyDrawerItem>
+            <MyDrawerItem title="MENSAJES" route="/ganadores" icon="&#xf0e0;" [isSelected]="isPageSelected('Ganadores')">
+            </MyDrawerItem>
+            <MyDrawerItem title="REDES SOCIALES" route="/ganadores" icon="&#xf1e1;" [isSelected]="isPageSelected('Ganadores')">
+            </MyDrawerItem>
+            <MyDrawerItem title="CERRAR SESION" route="/ganadores" icon="&#xf2f5;" [isSelected]="isPageSelected('Ganadores')">
             </MyDrawerItem>
 
             <StackLayout class="hr-light"></StackLayout>
 
-            <MyDrawerItem title="Settings" route="/settings" icon="&#xf013;" [isSelected]="isPageSelected('Settings')">
-            </MyDrawerItem>
+           <MyDrawerItem title="Settings" route="/settings" icon="&#xf013;" [isSelected]="isPageSelected('Settings')">
+           </MyDrawerItem>
         </StackLayout>
     </ScrollView>
 </GridLayout>

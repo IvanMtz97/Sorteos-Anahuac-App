@@ -1,4 +1,4 @@
-import { Component, ChangeDetectionStrategy, ViewChild, OnInit } from '@angular/core';
+import { Component, ViewChild, OnInit } from '@angular/core';
 import * as dialogs from "ui/dialogs";
 import { RadSideDrawerComponent } from "nativescript-pro-ui/sidedrawer/angular";
 import { DrawerTransitionBase, SlideInOnTopTransition } from "nativescript-pro-ui/sidedrawer";
@@ -6,8 +6,7 @@ import { DrawerTransitionBase, SlideInOnTopTransition } from "nativescript-pro-u
 @Component({
   selector: 'solicitatalonario',
   moduleId: module.id,
-  templateUrl: './solicita_talonario/solicita_talonario.component.html',
-  changeDetection: ChangeDetectionStrategy.OnPush
+  templateUrl: './solicita_talonario.component.html'
 })
 export class SolicitaTalonarioComponent {
   text1: string = '¡Apreciamos mucho tu apoyo!';

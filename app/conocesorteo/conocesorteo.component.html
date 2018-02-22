@@ -1,4 +1,3 @@
-<StackLayout>
 <ActionBar class="action-bar">
     <NavigationButton ios:visibility="collapsed" icon="res://menu" (tap)="onDrawerButtonTap()"></NavigationButton>
     <ActionItem icon="res://navigation/menu" android:visibility="collapsed" (tap)="onDrawerButtonTap()" ios.position="left">
@@ -6,19 +5,23 @@
     <Label class="action-bar-title" text="Sorteos Anahuac"></Label>
 </ActionBar>
 
-    <StackLayout orientation="vertical">
-
-        <StackLayout orientation="horizontal" class="component-header">
-            <Label class="fa" text="&#xf007;"></Label>
-            <Label text="CONOCE TU SORTEO"></Label>
+    <RadSideDrawer #drawer showOverNavigation="true" [drawerTransition]="sideDrawerTransition">
+        <StackLayout tkDrawerContent>
+                <MyDrawer [selectedPage]="'solicitatalonario'"></MyDrawer>
         </StackLayout>
+        <StackLayout orientation="vertical" tkMainContent>
 
-        <ScrollView>
-            <StackLayout>
-                <WebView class="cs-iframe" src="https://docs.nativescript.org/"></WebView>
-                <WebView class="cs-iframe" src="https://www.npmjs.com/"></WebView>
+            <StackLayout orientation="horizontal" class="component-header">
+                <Label class="fa" text="&#xf007;"></Label>
+                <Label text="CONOCE TU SORTEO"></Label>
             </StackLayout>
-        </ScrollView>
 
-    </StackLayout>
-</StackLayout>
+            <ScrollView>
+                <StackLayout>
+                    <WebView class="cs-iframe" src="https://docs.nativescript.org/"></WebView>
+                    <WebView class="cs-iframe" src="https://www.npmjs.com/"></WebView>
+                </StackLayout>
+            </ScrollView>
+
+        </StackLayout>
+    </RadSideDrawer>
