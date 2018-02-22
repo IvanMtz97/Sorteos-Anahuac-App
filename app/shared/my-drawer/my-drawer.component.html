@@ -9,7 +9,7 @@ Feel free to customize layouts and components to change how your app drawer look
 
     <ScrollView row="1"> 
         <StackLayout class="sidedrawer-content"> 
-            <MyDrawerItem title="VENTA DE BOLETOS" route="/solicita_talonario" icon="&#xf155;" [isSelected]="isPageSelected('talonarios')">
+            <MyDrawerItem title="VENTA DE BOLETOS" route="/talonarios" icon="&#xf155;" [isSelected]="isPageSelected('talonarios')">
             </MyDrawerItem>
             <MyDrawerItem title="ESTADO DE CUENTA" route="/estadocuenta" icon="&#xf1ea;" [isSelected]="isPageSelected('Estado_Cuenta')">
             </MyDrawerItem>
@@ -23,9 +23,7 @@ Feel free to customize layouts and components to change how your app drawer look
             </MyDrawerItem>
             <MyDrawerItem title="REDES SOCIALES" route="/ganadores" icon="&#xf1e1;" [isSelected]="isPageSelected('Ganadores')">
             </MyDrawerItem>
-            <MyDrawerItem title="CERRAR SESION" route="/ganadores" icon="&#xf2f5;" [isSelected]="isPageSelected('Ganadores')">
-            </MyDrawerItem>
-            <MyDrawerItem title="Venta Boletos" route="/talonarios" icon="&#xf005;" [isSelected]="isPageSelected('Talonarios')">
+            <MyDrawerItem title="CERRAR SESION" route="/login" icon="&#xf2f5;" [isSelected]="isPageSelected('Login')">
             </MyDrawerItem>
 
             <StackLayout class="hr-light"></StackLayout>
