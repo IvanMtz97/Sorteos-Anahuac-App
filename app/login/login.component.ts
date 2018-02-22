@@ -1,4 +1,4 @@
-import { Component, ViewChild } from "@angular/core";
+import { Component, ViewChild, OnInit } from "@angular/core";
 import { TextField } from "ui/text-field";
 import { Page } from "ui/page";
 import * as dialogs from "ui/dialogs";
@@ -13,34 +13,60 @@ import { RouterExtensions } from "nativescript-angular/router";
     templateUrl: "./login.component.html",
     providers: [MyHttpGetService, SessionService]
 })
-export class LoginComponent {
+export class LoginComponent implements OnInit {
     public Correo: string = "";
     public Clave: string = "";
+    public nextLibAvailable: boolean = false;
     public avisoPrivacidad: string = "http://www.sorteoanahuac.mx/aviso-de-privacidad.pdf"; 
 
     constructor(page: Page, private router: RouterExtensions, private myGetService: MyHttpGetService, private session: SessionService) {
         page.actionBarHidden = true; 
     }
 
-    //GET -------->
+    ngOnInit() {
+        this.SorteoActivo();
+    }
+
+
+    //GET INICIO SESION-------->
     private IniciarSesion() {
         //this.loader.display(true);
         this.myGetService
             .getLogin({ email: this.Correo, password: this.Clave }, 'api/Colaborador')
             .subscribe((result) => {
                 console.log("RESULTADO RESPUESTA -----> ", result);
-                this.onGetData(result);
+                this.onGetDataSesion(result);
             }, (error) => {
                 //this.loader.display(false);
                 this.mostrarMensaje('Autenticación', 'Usuario o contraseña invalidos. Recuerda que esta aplicación es únicamente para colaboradores de Sorteos Anáhuac.');
             });
     }
 
-    private onGetData(data: Response | any) {
+    private onGetDataSesion(data: Response | any) {
         if(data.json().talonarios.length > 0) this.setInfo(data);
         else this.solicitaTalonario(data);
     }
     //END GET --------->
+
+    //GET SORTEO -------->
+    private SorteoActivo() {
+        //this.loader.display(true);
+        this.myGetService
+            .getData('api/Sorteo/Activo')
+            .subscribe((result) => {
+                this.session.setSorteoActivo(JSON.stringify(result.json()));
+                this.session.setPoliticas(JSON.stringify(result.json().url_terminos));
+                this.session.setReglamento(JSON.stringify(result.json().url_aviso));
+                this.session.setAceptacionTalonarios(JSON.stringify(result.json().url_tips));
+                this.session.setGanadores(JSON.stringify(result.json().ganadores));
+                this.session.setConoceSorteo(JSON.stringify(result.json().url_conoce));
+            }, (error) => {
+                //this.loader.display(false);
+                this.mostrarMensaje('Error', 'Falló al tratar obtener el sorteo activo.');
+            });
+    }
+    //END GET --------->
+
     public setInfo(data) { 
         this.session.setLoggedIn(true);
         this.session.setInformation(JSON.stringify(data.json()));
@@ -54,7 +80,7 @@ export class LoginComponent {
 
     public ConoceSorteo() {
         console.log("CONOCE TU SORTEO");
-        this.router.navigate(["consorteo"]);
+        this.router.navigate(["conocesorteo"]);
     }
 
     public ListaGanadores() {

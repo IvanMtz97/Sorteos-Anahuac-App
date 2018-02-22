@@ -34,6 +34,7 @@ export class TalonariosComponent implements OnInit {
 
     constructor(private session: SessionService, private route: ActivatedRoute,  private router: Router){
         console.log("TALONARIOS");
+        this.tieneTalonarios = false;
     }
     @ViewChild("drawer") drawerComponent: RadSideDrawerComponent;
 
@@ -41,7 +42,6 @@ export class TalonariosComponent implements OnInit {
 
     ngOnInit(): void {
         this._sideDrawerTransition = new SlideInOnTopTransition();
-        this.tieneTalonarios = true;
         var Data = JSON.parse(this.session.getInformation());
         this.contador = Array(Data.talonarios.length).fill(0); 
         if(Data.talonarios.length > 0) {
