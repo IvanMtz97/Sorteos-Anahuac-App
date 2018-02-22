@@ -32,7 +32,7 @@
                                 </StackLayout>
                                 <GridLayout class="component-header-4" columns="auto, auto, *" rows="auto, auto, auto" *ngFor="let boletoPendiente of talonario.pendientes; let i_pendiente = index">
                                     <StackLayout class="vb-item" col="0" [row]="i_pendiente">
-                                        <CheckBox #makeup (checkedChange)="toggleCheck(makeup)" checked="false"></CheckBox>
+                                        <CheckBox #makeup (checkedChange)="toggleCheck(makeup, boletoPendiente, index)" checked="false"></CheckBox>
                                     </StackLayout>
                                     <Label col="1" [row]="i_pendiente" [text]="boletoPendiente.numero"></Label>  
                                     <Label col="2" [row]="i_pendiente" class="text2" style="text-align:right;" row="0" text="Vender >" (tap)="VentaBoleto(boletoPendiente, talonario)" *ngIf="!hideBottonSales"></Label>
@@ -70,7 +70,7 @@
                 </StackLayout>
             </ScrollView>
             <StackLayout height="10%" *ngIf="hideBottonSales">
-                <StackLayout class="btn-img"  orientation="horizontal" (tap)="ListaGanadores()" width="100%">
+                <StackLayout class="btn-img"  orientation="horizontal" (tap)="VenderBoletos()" width="100%">
                     <Image src="res://icono_boleto"  width="10%" height="100%" marginRight="10"></Image>
                     <Label text="VENDER VARIOS BOLETOS >" verticalAlignment="center"></Label>
                 </StackLayout>

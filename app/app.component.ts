@@ -11,12 +11,20 @@ export class AppComponent {
     constructor(private session: SessionService, private router: Router){
         this.session = session;
         this.router = router;
-        if (this.session.loggedIn()) {
-            this.router.navigate(["talonarios"]);
+        //this.session.setLoggedIn(false);
+        console.log("FIRST RUN", this.session.getFirstRun());
+        if(this.session.getFirstRun() == true){
+            this.router.navigate(["privacidad"]);
+        }else{
+            if (this.session.loggedIn()) {
+                this.router.navigate(["talonarios"]);
+            }
+            else {
+                this.router.navigate([""]);
+            }
+
         }
-        else {
-            this.router.navigate([""]);
-        }
+        
     }
     
 }

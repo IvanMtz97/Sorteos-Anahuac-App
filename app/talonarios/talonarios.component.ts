@@ -30,6 +30,7 @@ export class TalonariosComponent implements OnInit {
     public cantBolAsignados: Array<number> = [];
     public cantBolVendidos: Array<number> = [];
     private talonarios: Array<object> = [];
+    private PilaBoletos: Array<object> = [];
 
     constructor(private session: SessionService, private route: ActivatedRoute,  private router: Router){
         console.log("TALONARIOS");
@@ -75,10 +76,18 @@ export class TalonariosComponent implements OnInit {
         }     
     } 
 
-    public toggleCheck(eventData){
+    public toggleCheck(eventData, boleto, index){
         if(this.countCheck(eventData.checked)) this.hideBottonSales = true;
         else this.hideBottonSales = false;
-        console.log("CHECKED --->", eventData.checked);
+        if(eventData.checked){
+            this.PilaBoletos.push(boleto);
+        }else{
+            this.PilaBoletos.splice(index, 1);
+        }
+    }
+
+    public VenderBoletos(){
+        this.router.navigate(["ventaboleto", JSON.stringify({Tipo: "Dos", Talonario: 1000002, Boletos: this.PilaBoletos})]);
     }
 
     public setInitialSelected (i) {
@@ -126,6 +135,7 @@ export class TalonariosComponent implements OnInit {
 
     public VentaBoleto(boleto, talonario){
         var Data = {
+            Tipo: "Uno",
             Boleto: boleto.numero,
             Talonario: talonario.talonario
         };

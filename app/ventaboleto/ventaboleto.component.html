@@ -13,12 +13,19 @@
         <StackLayout orientation="horizontal" class="component-header-2">
             <Label class="fa icon" text="&#xf01c;"></Label>
             <Label text="TALONARIO"></Label>
-            <Label class="txtorange" text="00001"></Label>
+            <Label class="txtorange" [text]="Datos.Talonario"></Label>
         </StackLayout>
 
-        <StackLayout orientation="horizontal" class="component-header-3">
+        <StackLayout [visibility]="Datos.Tipo == 'Uno'? 'visible' : 'collapsed'" orientation="horizontal" class="component-header-3">
             <Label text="VENDER BOLETO"></Label>
-            <Label class="txtorange" text="0046560"></Label>
+            <Label class="txtorange" [text]="Datos.Boleto"></Label>
+        </StackLayout>
+
+        <StackLayout [visibility]="Datos.Tipo == 'Dos'? 'visible' : 'collapsed'" orientation="horizontal" class="component-header-3">
+            <Label text="VENDER BOLETOS"></Label>
+            <StackLayout orientation="horizontal">
+                <Label *ngFor="let Boleto of Datos.Boletos" class="txtorange" [text]="Boleto.numero"></Label>
+            </StackLayout>
         </StackLayout>
 
         <ScrollView>

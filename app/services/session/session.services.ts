@@ -110,4 +110,12 @@ export class SessionService {
     {
         return getBoolean("tieneTalonarios");
     }
+
+    setFirstRun(boolean){
+        setBoolean("firstrun", boolean);
+    }
+
+    getFirstRun(){
+        return getBoolean("firstrun", true);
+    }
 }

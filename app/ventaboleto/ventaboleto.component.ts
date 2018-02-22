@@ -1,4 +1,5 @@
 import { Component, ViewChild, ElementRef, OnInit } from "@angular/core";
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
     selector: "VentaBoleto",
@@ -10,14 +11,18 @@ import { Component, ViewChild, ElementRef, OnInit } from "@angular/core";
 export class VentaBoletoComponent implements OnInit {
     @ViewChild("CB1") ATodos: ElementRef;
     private txtBtnVender: string;
+    private Datos: Object;
 
-    constructor(){
-        console.log("VENTA BOLETO");
+    constructor(private route: ActivatedRoute){
+        
     }
 
     ngOnInit(){
         this.ATodos.nativeElement.checked = false;
         this.txtBtnVender = "siguiente";
+        this.route.params.subscribe(params => {
+            this.Datos = JSON.parse(params["data"]);
+        });
     }
 
     public toggleCheck(){
@@ -26,7 +31,5 @@ export class VentaBoletoComponent implements OnInit {
         }else{
             this.txtBtnVender = "vender boletos";
         }
-        //this.ATodos.nativeElement.toggle();
-        console.log(this.ATodos.nativeElement.checked);
     }
 }
