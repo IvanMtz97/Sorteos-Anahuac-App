@@ -1,42 +1,55 @@
-<ActionBar class="header">
+<ActionBar class="action-bar">
+    <NavigationButton ios:visibility="collapsed" icon="res://menu" (tap)="onDrawerButtonTap()"></NavigationButton>
+    <ActionItem icon="res://navigation/menu" android:visibility="collapsed" (tap)="onDrawerButtonTap()" ios.position="left"></ActionItem>
     <Image class="logo-header" src="res://icono_logo_encabezado"></Image>
 </ActionBar>
 
-<side-drawer-page>
-    <ScrollView orientation="vertical" sdkExampleTitle sdkToggleNavButton>
-        <StackLayout>
-            <FlexboxLayout class="tituloComponent" justifyContent="center" flexDirection="row">
-                <Image order="1" width="30" src="res://icono_nuevotalonario"></Image>
-                <Label order="2" text="SOLICITA UN TALONARIO"></Label>
-            </FlexboxLayout> 
-            <StackLayout  style="padding-top: 100%;padding-bottom: 10%">  
-                <Label
-                    class="page-text-1"
+<RadSideDrawer #drawer showOverNavigation="true" [drawerTransition]="sideDrawerTransition">
+    <StackLayout tkDrawerContent>
+            <MyDrawer [selectedPage]="'solicitatalonario'"></MyDrawer>
+    </StackLayout>     
+    <!-- <ScrollView orientation="vertical" sdkExampleTitle sdkToggleNavButton> -->
+        <StackLayout tkMainContent>
+            <StackLayout orientation="horizontal" class="component-header center">
+                <Label class="fa" text="&#xf055;"></Label>
+                <Label text="SOLICITA UN TALONARIO"></Label>
+            </StackLayout>
+            <StackLayout class="container center" visibility="visible">  
+                <Label 
+                    class="txtblack txtlarge"
                     [text]="text1"
-                    textWrap="true"
-                    style="color:black;font-size:30px;text-align: center;padding-bottom: 10%">
-                </Label>
+                    textWrap="true">
+                </Label> 
                 <Label
-                    class="page-text-2"
+                    class="txtgray txtsmall"
                     [text]="text2"
-                    textWrap="true"
-                    style="color:gray;font-size:15px;text-align: center;padding-left: 10%;padding-right: 10%;padding-bottom: 30%">
+                    textWrap="true">
                 </Label>        
                 <Label
-                    class="page-text-3"
+                    class="txtorange txtmedium container"
                     [text]="text3"
-                    textWrap="true"
-                    style="color:orange;font-size:25px;text-align: center;padding-bottom: 30%">
+                    textWrap="true">
                 </Label>        
                 <Button
-                    class="btn-solicitar"
+                    class="btn-orange"
                     [text]="text4"
                     (tap)="solicitaTalonario()"
                     textwrap="true"
-                    style="background-color: orange;color:white;"
                     width= "85%">
                 </Button>
             </StackLayout>
+            <StackLayout class="container center" visibility="collapsed">  
+                    <Label
+                        class="txtblack txtlarge container"
+                        [text]="text1"
+                        textWrap="true">
+                    </Label>
+                    <Label
+                        class="txtgray txtmedium"
+                        [text]="text2"
+                        textWrap="true">
+                    </Label>                                       
+            </StackLayout>
         </StackLayout>
-    </ScrollView>
-</side-drawer-page>
+    <!-- </ScrollView>     -->
+</RadSideDrawer>

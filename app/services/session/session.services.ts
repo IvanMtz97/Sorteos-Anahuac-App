@@ -56,6 +56,6 @@ export class SessionService {
     }
 
     getFirstRun(){
-        return getBoolean("firstrun");
+        return getBoolean("firstrun", true);
     }
 }

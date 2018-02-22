@@ -1,4 +1,6 @@
-import { Component } from "@angular/core";
+import { Component, OnInit, ViewChild } from "@angular/core";
+import { RadSideDrawerComponent } from "nativescript-pro-ui/sidedrawer/angular";
+import { DrawerTransitionBase, SlideInOnTopTransition } from "nativescript-pro-ui/sidedrawer";
 
 @Component({
     selector: "ConoceSorteo",
@@ -8,7 +10,13 @@ import { Component } from "@angular/core";
 })
 
 export class ConoceSorteoComponent {
+    @ViewChild("drawer") drawerComponent: RadSideDrawerComponent;    
+    private _sideDrawerTransition: DrawerTransitionBase;
+
     constructor(){
         console.log("CONOCE SORTEO");
+    }
+    onDrawerButtonTap(): void {
+        this.drawerComponent.sideDrawer.showDrawer();
     }
 }
