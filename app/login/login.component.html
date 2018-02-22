@@ -5,7 +5,7 @@
 Use the tkMainContent directive to display the content of the page when you have an app drawer.
 -->
 <StackLayout class="page page-content" orientation="vertical">
-    <StackLayout class="page page-content" orientation="vertical" height="15%" backgroundColor="lightgray">
+    <StackLayout class="page page-content" orientation="vertical" height="13%" backgroundColor="lightgray">
 
     </StackLayout>
     <StackLayout class="page page-content" orientation="vertical" height="85%">
@@ -24,11 +24,10 @@ Use the tkMainContent directive to display the content of the page when you have
                 <Label text="LISTADO DE GANADORES" verticalAlignment="center"></Label>
             </StackLayout>
         </StackLayout>
-        <StackLayout height="10"></StackLayout>
-        <StackLayout orientation="horizontal" width="100%">
-            <Label class="h5 page-text-aling-right ligas-aviso underline font-ligas-aviso" text="Política de manejo de datos" width="48%" (tap)="Avisos()"></Label>
-            <Label class="h5 page-text payOr" text="|" width="4%"></Label>
-            <Label class="h5 page-text-aling-left ligas-aviso underline font-ligas-aviso" text="Reglamento del sorteo" width="48%" (tap)="Avisos()"></Label>
+        <StackLayout height="8"></StackLayout>
+        <StackLayout class="page page-content" orientation="vertical">
+            <Label class="h5 ligas-aviso underline font-ligas-aviso" text="Política de manejo de datos" (tap)="Avisos()"></Label>
+            <Label class="h5 ligas-aviso underline font-ligas-aviso" text="Reglamento del sorteo" (tap)="Avisos()"></Label>
         </StackLayout>
     </StackLayout>
 </StackLayout>
