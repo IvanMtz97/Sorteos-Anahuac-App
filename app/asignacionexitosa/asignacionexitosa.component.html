@@ -1,0 +1,64 @@
+<StackLayout>
+    <ActionBar class="action-bar">
+        <NavigationButton ios:visibility="collapsed" icon="res://menu" (tap)="onDrawerButtonTap()"></NavigationButton>
+        <ActionItem icon="res://navigation/menu" android:visibility="collapsed" (tap)="onDrawerButtonTap()" ios.position="left">
+        </ActionItem>
+        <Label class="action-bar-title" text="Sorteos Anahuac"></Label>
+    </ActionBar>
+
+    <StackLayout>
+        
+        <StackLayout orientation="horizontal" class="component-header-2">
+            <Label class="fa icon" text="&#xf01c;"></Label>
+            <Label text="TALONARIO"></Label>
+            <Label class="txtorange" text="00001"></Label>
+        </StackLayout>
+
+        <ScrollView>
+
+            <!-- DROPDOWN -->
+            <StackLayout *ngFor="let boleto of DataBoletos" orientation="vertical">
+
+                <!-- HEADER DE DROPDOWN -->
+                <!-- <StackLayout (tap)="toggle()" orientation="horizontal" class="component-header-3">
+                    <Label text="BOLETO"></Label>
+                    <Label class="txtorange" [text]="boleto.numero"></Label>
+                </StackLayout> -->
+                <!-- HEADER DE DROPDOWN -->
+
+
+                <!-- CUERPO DE DROPDOWN -->
+                <StackLayout class="container center" orientation="vertical">
+                    <Label class="container-item txtlarge txtorange" text="¡FELICIDADES!"></Label>
+
+                    <StackLayout class="container-item" orientation="vertical">
+                        <Label class="txtlarge txtblack" [text]="boleto.nombres"></Label>
+                        <Label class="txtlarge txtblack" [text]="boleto.apellidos"></Label>
+                    </StackLayout>
+
+                    <Label text="Eres dueño del boleto:"></Label>
+                    <Label class="txtlarge txtorange" [text]="boleto.numero"></Label>
+                    <Image class="imgmedium" src="res://qr"></Image>
+                    <Label class="container-item" text="http://anahuac.edu?boleto=!osmdp2m1osamkasd_ampdqadw1amsp$asmp"></Label>
+
+                    <StackLayout class="btn-orange container-item" orientation="horizontal">
+                        <Image src="res://icono_dolar"></Image>
+                        <Label text="PAGAR AHORA"></Label>
+                    </StackLayout>
+
+                    <StackLayout class="btn-orange container-item" orientation="horizontal">
+                        <Image src="res://icono_boleto"></Image>
+                        <Label text="ENVIAR POR CORREO"></Label>
+                    </StackLayout>
+
+                </StackLayout>
+                <!-- CUERPO DE DROPDOWN -->
+
+
+            </StackLayout>
+            <!-- DROPDOWN -->  
+
+        </ScrollView>
+
+    </StackLayout>
+</StackLayout>

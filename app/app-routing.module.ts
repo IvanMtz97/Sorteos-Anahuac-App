@@ -12,9 +12,11 @@ const routes: Routes = [
     { path: "featured", loadChildren: "./featured/featured.module#FeaturedModule" },
     { path: "settings", loadChildren: "./settings/settings.module#SettingsModule" },
     { path: "ventaboleto", loadChildren: "./ventaboleto/ventaboleto.module#VentaBoletoModule"},
+    { path: "conocesorteo", loadChildren: "./conocesorteo/conocesorteo.module#ConoceSorteoModule"},
     { path: "ganadores", loadChildren: "./ganadores/ganadores.module#GanadoresModule"},
     { path: "conocesorteo", loadChildren: "./conocesorteo/conocesorteo.module#ConoceSorteoModule"},
-    { path: "talonarios", loadChildren: "./talonarios/talonarios.module#TalonariosModule"}
+    { path: "talonarios", loadChildren: "./talonarios/talonarios.module#TalonariosModule"},
+    { path: "asignacionexitosa", loadChildren: "./asignacionexitosa/asignacionexitosa.module#AsignacionExitosaModule"}
 ];
 
 @NgModule({

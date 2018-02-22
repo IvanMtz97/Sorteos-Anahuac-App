@@ -25,67 +25,109 @@
                 <StackLayout class="container" orientation="vertical">
 
                         <StackLayout class="vb-item">
-                            <Label text="Nombre"></Label>
+                            <StackLayout orientation="horizontal">
+                                <Label text="Nombre"></Label>
+                                <Label class="txtorange" text="*"></Label>
+                            </StackLayout>
                             <TextField></TextField>
                         </StackLayout>
                 
                         <StackLayout class="vb-item">
-                            <Label text="Apellido paterno"></Label>
+                            <StackLayout orientation="horizontal">
+                                <Label text="Apellido paterno"></Label>
+                                <Label class="txtorange" text="*"></Label>
+                            </StackLayout>
                             <TextField></TextField>
                         </StackLayout>
                 
                         <StackLayout class="vb-item">
-                            <Label text="Apellido materno"></Label>
+                            <StackLayout orientation="horizontal">
+                                <Label text="Apellido materno"></Label>
+                                <Label class="txtorange" text="*"></Label>
+                            </StackLayout>
                             <TextField></TextField>
                         </StackLayout>
                 
                         <StackLayout class="vb-item">
-                            <Label text="Calle"></Label>
+                            <StackLayout orientation="horizontal">
+                                <Label text="Calle"></Label>
+                                <Label class="txtorange" text="*"></Label>
+                            </StackLayout>
                             <TextField></TextField>
                         </StackLayout>
                 
                         <StackLayout class="vb-item">
-                            <Label text="Número"></Label>
+                            <StackLayout orientation="horizontal">
+                                <Label text="Número"></Label>
+                                <Label class="txtorange" text="*"></Label>
+                            </StackLayout>
                             <TextField></TextField>
                         </StackLayout>
                 
                         <StackLayout class="vb-item">
-                            <Label text="Código Postal"></Label>
-                            <TextField></TextField>
+                            <StackLayout orientation="horizontal">
+                                <Label text="Código Postal"></Label>
+                                <Label class="txtorange" text="*"></Label>
+                            </StackLayout>
+                            <TextField keyboardType="number" maxLength="5"></TextField>
                         </StackLayout>
                 
                         <StackLayout class="vb-item">
-                            <Label text="Colonia"></Label>
+                            <StackLayout orientation="horizontal">
+                                <Label text="Colonia"></Label>
+                                <Label class="txtorange" text="*"></Label>
+                            </StackLayout>
                             <TextField editable="false"></TextField>
                         </StackLayout>
                 
                         <StackLayout class="vb-item">
-                            <Label text="Estado"></Label>
+                            <StackLayout orientation="horizontal">
+                                <Label text="Estado"></Label>
+                                <Label class="txtorange" text="*"></Label>
+                            </StackLayout>
                             <TextField editable="false"></TextField>
                         </StackLayout>
                 
                         <StackLayout class="vb-item">
-                            <Label text="Municipio/Delegación"></Label>
+                            <StackLayout orientation="horizontal">
+                                <Label text="Municipio/Delegación"></Label>
+                                <Label class="txtorange" text="*"></Label>
+                            </StackLayout>
                             <TextField editable="false"></TextField>
                         </StackLayout>
                 
                         <StackLayout class="vb-item">
                             <Label text="Teléfono fijo"></Label>
-                            <TextField keyboardType="number"></TextField>
+                            <TextField keyboardType="number" maxLength="8"></TextField>
                         </StackLayout>
                 
                         <StackLayout class="vb-item">
-                            <Label text="Teléfono móvil"></Label>
-                            <TextField></TextField>
+                            <StackLayout orientation="horizontal">
+                                <Label text="Teléfono móvil"></Label>
+                                <Label class="txtorange" text="*"></Label>
+                            </StackLayout>
+                            <TextField keyboardType="number" maxLength="10"></TextField>
                         </StackLayout>
                 
                         <StackLayout class="vb-item">
-                            <Label text="Correo electrónico"></Label>
-                            <TextField></TextField>
+                            <StackLayout orientation="horizontal">
+                                <Label text="Correo electrónico"></Label>
+                                <Label class="txtorange" text="*"></Label>
+                            </StackLayout>
+                            <TextField keyboardType="email"></TextField>
+                        </StackLayout>
+                
+                        <StackLayout class="vb-item">
+                            <Label text="Correo electrónico alterativo"></Label>
+                            <TextField keyboardType="email"></TextField>
                         </StackLayout>
                         
                         <StackLayout class="vb-item">
                             <CheckBox #CB1 (tap)="toggleCheck()" text="Aplicar a todos" checked="false"></CheckBox>
+                        </StackLayout>
+
+                        <StackLayout class="vb-item center">
+                            <Label class="txtorange" text="* Datos obligatorios"></Label>
                         </StackLayout>
                 
                         <StackLayout class="vb-item">
