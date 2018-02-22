@@ -27,6 +27,21 @@ export class SessionService {
         return data;
     }
 
+    setSorteoActivo(Data){
+        if(Data.length > 0){
+            var data = JSON.stringify(Data);
+            setString("SorteoActivo", data);
+        }else{
+            throw("Debes especificar un parametro no vacio");
+        }
+    }
+
+    getSorteoActivo(){
+        var data = JSON.parse(getString("SorteoActivo"));
+        console.log("INFORMACION", data.length);
+        return data;
+    }
+
     setToken(Token){
         console.log("TOKEN", Token);
         setString("Token", Token);
@@ -39,6 +54,51 @@ export class SessionService {
 
     getToken(){
         return getString("Token");
+    }
+
+    setGanadores(Ganadores){
+        console.log("Ganadores", Ganadores);
+        setString("Ganadores", Ganadores);
+    }
+
+    getGanadores(){
+        return getString("Ganadores");
+    }
+
+    setPoliticas(Politicas){
+        console.log("Politicas", Politicas);
+        setString("Politicas", Politicas);
+    }
+
+    getPoliticas(){
+        return getString("Politicas");
+    }
+
+    setReglamento(Reglamento){
+        console.log("Reglamento", Reglamento);
+        setString("Reglamento", Reglamento);
+    }
+
+    getReglamento(){
+        return getString("Reglamento");
+    }
+
+    setAceptacionTalonarios(AceptacionTalonarios){
+        console.log("AceptacionTalonarios", AceptacionTalonarios);
+        setString("AceptacionTalonarios", AceptacionTalonarios);
+    }
+
+    getAceptacionTalonarios(){
+        return getString("AceptacionTalonarios");
+    }
+
+    setConoceSorteo(ConoceSorteo){
+        console.log("ConoceSorteo", ConoceSorteo);
+        setString("ConoceSorteo", ConoceSorteo);
+    }
+
+    getConoceSorteo(){
+        return getString("ConoceSorteo");
     }
 
     setTalonarios(tieneTalonarios)

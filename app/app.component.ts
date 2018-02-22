@@ -11,7 +11,7 @@ export class AppComponent {
     constructor(private session: SessionService, private router: Router){
         this.session = session;
         this.router = router;
-        //this.session.setLoggedIn(false);
+        this.session.setLoggedIn(false);
         if (this.session.loggedIn()) {
             this.router.navigate(["talonarios"]);
         }
