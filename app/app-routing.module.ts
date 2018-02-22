@@ -2,8 +2,8 @@ import { NgModule } from "@angular/core";
 import { Routes } from "@angular/router";
 import { NativeScriptRouterModule } from "nativescript-angular/router";
 
-const routes: Routes = [    
-    { path: "",  redirectTo: "/boletovendido", pathMatch: "full"},
+const routes: Routes = [
+    { path: "", redirectTo: "/login", pathMatch: "full" },
     { path: "login", loadChildren: "./login/login.module#LoginModule" },
     { path: "boletovendido", loadChildren: "./boletovendido/boletovendido.module#BoletoVendidoModule" },
     { path: "home", loadChildren: "./home/home.module#HomeModule" },
@@ -16,7 +16,9 @@ const routes: Routes = [
     { path: "ganadores", loadChildren: "./ganadores/ganadores.module#GanadoresModule"},
     { path: "asignacionexitosa", loadChildren: "./asignacionexitosa/asignacionexitosa.module#AsignacionExitosaModule"},
     { path: "solicitatalonario", loadChildren: "./solicita_talonario/solicita_talonario.module#SolicitaTalonarioModule"},
+    { path: "talonarios", loadChildren: "./talonarios/talonarios.module#TalonariosModule"},
     { path: "estadocuenta", loadChildren: "./estado_cuenta/estado_cuenta.module#EstadoCuentaModule"}
+    
 ];
 
 @NgModule({

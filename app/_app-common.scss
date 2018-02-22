@@ -27,7 +27,9 @@
      horizontal-align: center;
  }
 
-.talonario{
+ .txtgray{color: #333}
+
+ .talonario{
     background-color: $black;
     color: #FFF;
     padding-left: 50px;
@@ -86,6 +88,7 @@
 
 .ligas-aviso {
     color: #ea7200;
+    text-align: center;
 }
 
 .font-ligas-aviso {
@@ -97,59 +100,18 @@
     font-size: 13em;
 }
 
-.arrow-down{
-    width: 30;
-    height: 30;
-    border-style: solid;
-    border-width: 60px 30px 0 55px;
-    border-color: #e9e9e9 transparent transparent transparent;
-    margin-left: 70%;
-}  
-
-.drop{
-    background: #e9e9e9;
-    border: 1em solid;
-    border-color: #e9e9e9;
-    font-size: 18em;
-    padding-left: 0;
-    padding-top: 0;
-    height:30;
-    color: #888888;
-    transform: scale(1.2,1);
+.text1{
     font-weight: 500;
+    color: #555759;
 }
 
-.text-orange
-{
-    color: $orange;
+.text2{
+    color: #ea7200;
+    font-weight: 600;
 }
 
-.text-principal
-{
-    color: $principal;
+.text3{
+    color: #a0a1a2;
 }
 
-.text-secundario
-{
-   color: $secundario; 
-}
-
-.text-secundario2
-{
-    color: $secundario2;
-}
-
-.text-whitegrey
-{
-    color: $whitegrey;
-}
-
-.text-white
-{
-    color: $white;
-}
-
-.text-black
-{
-    color: $black;
-}
+.component-header-4{background-color:#fff;color:#333;padding:20;width:100%;text-align:center;}.component-header-4 Label{margin-left:5}
