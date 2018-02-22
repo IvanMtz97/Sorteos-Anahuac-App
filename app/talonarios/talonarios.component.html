@@ -13,7 +13,7 @@
         <StackLayout width="100%" height="100%" *ngIf="tieneTalonarios">
             <ScrollView height="90%" orientation="vertical" sdkExampleTitle sdkToggleNavButton>
                 <StackLayout>
-                    <StackLayout *ngFor="let talonario of listaTalonarios; let i = index;" [ngInit]="setInitialValue(i)">
+                    <StackLayout *ngFor="let talonario of listaTalonarios; let i = index;" [ngInit]="setInitialValue(i, listaTalonarios)">
                         <StackLayout>
                             <StackLayout (tap)="toggle(i)" orientation="horizontal" class="component-header-2">
                                 <Image class="fa icon" width="6%" [src]="srcIconoTalonario[i]"></Image> 

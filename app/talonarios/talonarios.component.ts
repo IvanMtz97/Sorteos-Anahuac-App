@@ -29,10 +29,10 @@ export class TalonariosComponent implements OnInit {
     public cantBolPendientes: Array<number> = [];
     public cantBolAsignados: Array<number> = [];
     public cantBolVendidos: Array<number> = [];
+    private talonarios: Array<object> = [];
 
     constructor(private session: SessionService, private route: ActivatedRoute,  private router: Router){
         console.log("TALONARIOS");
-        this.contador = Array(this.talonarios.length).fill(0); 
     }
     @ViewChild("drawer") drawerComponent: RadSideDrawerComponent;
 
@@ -40,11 +40,12 @@ export class TalonariosComponent implements OnInit {
 
     ngOnInit(): void {
         this._sideDrawerTransition = new SlideInOnTopTransition();
-
-        if(this.talonarios.length > 0) {
+        this.tieneTalonarios = true;
+        var Data = JSON.parse(this.session.getInformation());
+        this.contador = Array(Data.talonarios.length).fill(0); 
+        if(Data.talonarios.length > 0) {
             this.tieneTalonarios = true;
-            this.listaTalonarios = this.talonarios;
-            //this.listaTalonarios = Data.talonarios;
+            this.listaTalonarios = Data.talonarios;
         } 
     }
 
@@ -75,7 +76,6 @@ export class TalonariosComponent implements OnInit {
     } 
 
     public toggleCheck(eventData){
-        //this.ATodos.nativeElement.toggle();
         if(this.countCheck(eventData.checked)) this.hideBottonSales = true;
         else this.hideBottonSales = false;
         console.log("CHECKED --->", eventData.checked);
@@ -85,16 +85,16 @@ export class TalonariosComponent implements OnInit {
 
     }
 
-    public setInitialValue(i)
-    {    
+    public setInitialValue(i, talonarios)
+    {
         if(this.contador[i] == 0) {
             this.srcFlecha[i] = "res://arrow_down";   
         }
         this.contador[i] = (this.contador[i]+1);
 
-        if(this.talonarios.length > 0) {
+        if(talonarios.length > 0) {
             //BOLETOS PENDIENTES
-            if(this.talonarios[i].pendientes.length == 0) {
+            if(talonarios[i].pendientes.length == 0) {
                 this.srcIconoTalonario[i] = "res://icono_talonario_gris";
                 this.validaStackBolPen[i] = false;
                 this.tienePendientes[i] = false;
@@ -102,23 +102,23 @@ export class TalonariosComponent implements OnInit {
                 this.srcIconoTalonario[i] = "res://icono_talonario";
                 this.validaStackBolPen[i] = true;
                 this.tienePendientes[i] = true;
-                this.cantBolPendientes[i] = this.talonarios[i].pendientes.length;
+                this.cantBolPendientes[i] = talonarios[i].pendientes.length;
                 this.session.setTalonarios(true);
             }
 
             //BOLETOS ASIGNADOS
-            if(this.talonarios[i].asignados.length == 0) {
+            if(talonarios[i].asignados.length == 0) {
                 this.validaStackBolAsig[i] = false;
             } else {
-                this.cantBolAsignados[i] = this.talonarios[i].asignados.length;
+                this.cantBolAsignados[i] = talonarios[i].asignados.length;
                 this.validaStackBolAsig[i] = true;            
             }
 
             //BOLETOS VENDIDOS
-            if(this.talonarios[i].vendidos.length == 0) {
+            if(talonarios[i].vendidos.length == 0) {
                 this.validaStackBolVen[i] = false;
             } else {
-                this.cantBolVendidos[i] = this.talonarios[i].vendidos.length;
+                this.cantBolVendidos[i] = talonarios[i].vendidos.length;
                 this.validaStackBolVen[i] = true;            
             }
         }
@@ -141,230 +141,4 @@ export class TalonariosComponent implements OnInit {
         this.router.navigate(['detalleboletovendido', JSON.stringify(InfoBoleto)]);
     }
 
-    private talonarios = [
-        {    
-        "talonario": "1000001",
-        "vendidos": [{
-            "numero": "4564",
-            "info": {
-                "clave" : "203191034955920686909046938123",
-                "folio" : "032140",
-                "token" : "ax129xcxa191m0234mpsdPMAdqmwd10",
-                "folio_digital" : "00FA2E23",
-                "vendido": true,
-                "costo" : "2900.00",
-                "comprador" : {
-                    "nombre" : "Milton Ivan",
-                    "apellidos" : "Martinez Gonzalez",
-                    "nombre_completo" : "Milton Ivan Martinez Gonzalez",
-                    "correo" : "ivanmartinez.gonzalez97@gmail.com",
-                    "celular" : "8126522105",
-                    "direccion" : {
-                        "calle" : "Mina de cobre",
-                        "numero" : "306",
-                        "colonia" : "Estancia",
-                        "codigo_postal" : "66087",
-                        "estado" : "Nuevo Leon",
-                        "municipio" : "San Nicolas",
-                        "telefono" : "83340359"
-                    }
-                },
-                "folio_talonario" : "190fas113",
-                "clave_sorteo" : "9550680383193521",
-                "clave_colaborador" : "1845392834951",
-                "_conToken" : true
-            }
-        },{
-            "numero" : "4565",
-            "info" : {
-                "clave" : "27663524215676867845",
-                "folio" : "562346",
-                "token" : "AxC0E2e9M230R0F3df2",
-                "folio_digital" : "0FAMP2",
-                "vendido": true,
-                "costo" : "1200.00",
-                "comprador" : {
-                    "nombre" : "Jose",
-                    "apellidos" : "Perez Perez",
-                    "nombre_completo" : "Jose Perez Perez",
-                    "correo" : "joseperez.perez@gmail.com",
-                    "celular" : "812313452",
-                    "direccion" : {
-                        "calle" : "Mina de cobre",
-                        "numero" : "306",
-                        "colonia" : "Estancia",
-                        "codigo_postal" : "66087",
-                        "estado" : "Nuevo Leon",
-                        "municipio" : "San Nicolas",
-                        "telefono" : "83340359"
-                    }
-                },
-                "folio_talonario" : "190fas113",
-                "clave_sorteo" : "9550680383193521",
-                "clave_colaborador" : "1845392834951",
-                "_conToken" : false
-            }
-        }],
-        "pendientes" : [],
-        "asignados" : [
-            {
-                "numero": "4564",
-                "info": {
-                    "clave" : "203191034955920686909046938123",
-                    "folio" : "032140",
-                    "token" : "ax129xcxa191m0234mpsdPMAdqmwd10",
-                    "folio_digital" : "00FA2E23",
-                    "vendido": true,
-                    "costo" : "2900.00",
-                    "comprador" : {
-                        "nombre" : "Milton Ivan",
-                        "apellidos" : "Martinez Gonzalez",
-                        "nombre_completo" : "Milton Ivan Martinez Gonzalez",
-                        "correo" : "ivanmartinez.gonzalez97@gmail.com",
-                        "celular" : "8126522105",
-                        "direccion" : {
-                            "calle" : "Mina de cobre",
-                            "numero" : "306",
-                            "colonia" : "Estancia",
-                            "codigo_postal" : "66087",
-                            "estado" : "Nuevo Leon",
-                            "municipio" : "San Nicolas",
-                            "telefono" : "83340359"
-                        }
-                    },
-                    "folio_talonario" : "190fas113",
-                    "clave_sorteo" : "9550680383193521",
-                    "clave_colaborador" : "1845392834951",
-                    "_conToken" : true
-                }
-            }
-        ]
-    },
-    {
-        "talonario": "1000002",
-        "vendidos": [{
-            "numero": "4564",
-            "info": {
-                "clave" : "203191034955920686909046938123",
-                "folio" : "032140",
-                "token" : "ax129xcxa191m0234mpsdPMAdqmwd10",
-                "folio_digital" : "00FA2E23",
-                "vendido": true,
-                "costo" : "2900.00",
-                "comprador" : {
-                    "nombre" : "Milton Ivan",
-                    "apellidos" : "Martinez Gonzalez",
-                    "nombre_completo" : "Milton Ivan Martinez Gonzalez",
-                    "correo" : "ivanmartinez.gonzalez97@gmail.com",
-                    "celular" : "8126522105",
-                    "direccion" : {
-                        "calle" : "Mina de cobre",
-                        "numero" : "306",
-                        "colonia" : "Estancia",
-                        "codigo_postal" : "66087",
-                        "estado" : "Nuevo Leon",
-                        "municipio" : "San Nicolas",
-                        "telefono" : "83340359"
-                    }
-                },
-                "folio_talonario" : "190fas113",
-                "clave_sorteo" : "9550680383193521",
-                "clave_colaborador" : "1845392834951",
-                "_conToken" : true
-            }
-        },{
-            "numero" : "4565",
-            "info" : {
-                "clave" : "27663524215676867845",
-                "folio" : "562346",
-                "token" : "AxC0E2e9M230R0F3df2",
-                "folio_digital" : "0FAMP2",
-                "vendido": true,
-                "costo" : "1200.00",
-                "comprador" : {
-                    "nombre" : "Jose",
-                    "apellidos" : "Perez Perez",
-                    "nombre_completo" : "Jose Perez Perez",
-                    "correo" : "joseperez.perez@gmail.com",
-                    "celular" : "812313452",
-                    "direccion" : {
-                        "calle" : "Mina de cobre",
-                        "numero" : "306",
-                        "colonia" : "Estancia",
-                        "codigo_postal" : "66087",
-                        "estado" : "Nuevo Leon",
-                        "municipio" : "San Nicolas",
-                        "telefono" : "83340359"
-                    }
-                },
-                "folio_talonario" : "190fas113",
-                "clave_sorteo" : "9550680383193521",
-                "clave_colaborador" : "1845392834951",
-                "_conToken" : false
-            }
-        }],
-        "pendientes" : [{
-            "numero" : "4664",
-            "info" : {
-                "clave" : "845623584245589",
-                "folio" : "F3246ER2",
-                "token" : "axcmp0WDQm00qmspdQ23Sq",
-                "folio_digital" : "03123SF",
-                "vendido": false,
-                "costo" : "5600.00",
-                "comprador" : {
-                    "nombre" : "Pedro",
-                    "apellidos" : "Perez Perez",
-                    "nombre_completo" : "Pedro Perez Perez",
-                    "correo" : "pedroperez.perez@gmail.com",
-                    "celular" : "812313452",
-                    "direccion" : {
-                        "calle" : "Mina de cobre",
-                        "numero" : "306",
-                        "colonia" : "Estancia",
-                        "codigo_postal" : "66087",
-                        "estado" : "Nuevo Leon",
-                        "municipio" : "San Nicolas",
-                        "telefono" : "83340359"
-                    }
-                },
-                "folio_talonario" : "190fas113",
-                "clave_sorteo" : "9550680383193521",
-                "clave_colaborador" : "1845392834951",
-                "_conToken" : false
-            }
-        },{
-            "numero" : "4665",
-            "info" : {
-                "clave" : "154674834142153142",
-                "folio" : "F131TWE",
-                "token" : "axcmp0WDQm00qmspdQ23Sq",
-                "folio_digital" : "3425GS",
-                "vendido": false,
-                "costo" : "7600.00",
-                "comprador" : {
-                    "nombre" : "Pepe",
-                    "apellidos" : "Perez Perez",
-                    "nombre_completo" : "Pepe Perez Perez",
-                    "correo" : "Pepeperez.perez@gmail.com",
-                    "celular" : "83527862",
-                    "direccion" : {
-                        "calle" : "Mina de cobre",
-                        "numero" : "306",
-                        "colonia" : "Estancia",
-                        "codigo_postal" : "66087",
-                        "estado" : "Nuevo Leon",
-                        "municipio" : "San Nicolas",
-                        "telefono" : "83340359"
-                    }
-                },
-                "folio_talonario" : "190fas113",
-                "clave_sorteo" : "9550680383193521",
-                "clave_colaborador" : "1845392834951",
-                "_conToken" : false
-            }
-        }],
-        "asignados" : []
-    }
-    ];
 }
