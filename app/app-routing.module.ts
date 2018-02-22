@@ -14,8 +14,11 @@ const routes: Routes = [
     { path: "ventaboleto", loadChildren: "./ventaboleto/ventaboleto.module#VentaBoletoModule"},
     { path: "conocesorteo", loadChildren: "./conocesorteo/conocesorteo.module#ConoceSorteoModule"},
     { path: "ganadores", loadChildren: "./ganadores/ganadores.module#GanadoresModule"},
+    { path: "asignacionexitosa", loadChildren: "./asignacionexitosa/asignacionexitosa.module#AsignacionExitosaModule"},
+    { path: "solicitatalonario", loadChildren: "./solicita_talonario/solicita_talonario.module#SolicitaTalonarioModule"},
     { path: "talonarios", loadChildren: "./talonarios/talonarios.module#TalonariosModule"},
-    { path: "asignacionexitosa", loadChildren: "./asignacionexitosa/asignacionexitosa.module#AsignacionExitosaModule"}
+    { path: "estadocuenta", loadChildren: "./estado_cuenta/estado_cuenta.module#EstadoCuentaModule"}
+    
 ];
 
 @NgModule({
