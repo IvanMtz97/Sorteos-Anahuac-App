@@ -6,37 +6,46 @@ import "rxjs/add/operator/map";
 import "rxjs/add/operator/do";
 import * as  base64 from "base-64";
 import * as utf8 from "utf8";
+import { SessionService } from "../session/session.services"
 
 @Injectable()
 export class MyHttpGetService {
-    private serverUrl = "http://web-clara-p1.azurewebsites.net/";
+    private serverUrl = "https://web-clara-p1.azurewebsites.net/";
+    //private serverUrl = "https://sorteoanahuac-servicios-mobile-p.azurewebsites.net/";
 
-    constructor(private http: Http) { }
+    constructor(private http: Http, private session: SessionService) { }
 
     getData(path) {
         let headers = this.createRequestHeader();
-        return this.http.get((this.serverUrl + path), { headers: headers })
+        return this.http.get((encodeURI(this.serverUrl + path)), { headers: headers })
             .map(res => res);
     }
 
     getLogin(data: any, path) {
         let options = this.createRequestOptionsLogin(data);
-        return this.http.get((this.serverUrl + path), { headers: options })
+        return this.http.get((encodeURI(this.serverUrl + path)), { headers: options })
             .map(res => res);
     }
 
-    getResponseInfo(path) {
-        let headers = this.createRequestHeader();
-        return this.http.get((this.serverUrl + path), { headers: headers })
-            .do(res =>  res);
+    getDataAuthorization(path) {
+        let headers = this.createRequestHeaderAuthorization();
+        return this.http.get((encodeURI(this.serverUrl + path)), { headers: headers })
+            .map(res =>  res);
+    }
+
+    private createRequestHeaderAuthorization() {
+        let headers = new Headers();
+        // set headers here e.g.
+        headers.set("Authorization", "Bearer " + this.session.getToken());
+        headers.set("Content-Type", "application/json");
+
+        return headers;
     }
 
     private createRequestHeader() {
         let headers = new Headers();
         // set headers here e.g.
-        headers.append("AuthKey", "my-key");
-        headers.append("AuthToken", "my-token");
-        headers.append("Content-Type", "application/json");
+        headers.set("Content-Type", "application/json");
 
         return headers;
     }

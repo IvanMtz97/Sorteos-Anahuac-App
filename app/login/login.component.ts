@@ -24,6 +24,7 @@ export class LoginComponent implements OnInit {
     }
 
     ngOnInit() {
+        if (this.session.loggedIn()) { this.session.setLoggedIn(false); }
         this.SorteoActivo();
     }
 
@@ -63,8 +64,7 @@ export class LoginComponent implements OnInit {
                 this.session.setConoceSorteo(JSON.stringify(result.json().url_conoce));
             }, (error) => {
                 //this.loader.display(false);
-                console.log("ERROR SORTEOS", error);
-                this.mostrarMensaje('Error', 'Falló al tratar obtener el sorteo activo.');
+                this.mostrarMensaje('Error', 'Falló al tratar obtener el sorteo activo.');  
             });
     }
     //END GET --------->

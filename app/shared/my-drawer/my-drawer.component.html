@@ -4,34 +4,27 @@ Feel free to customize layouts and components to change how your app drawer look
 -->
 <GridLayout rows="auto, *" class="sidedrawer sidedrawer-left">
     <StackLayout row="0" class="component-menu-header">        
-        <Label text="MENU"></Label>
+        <Label text="MENÚ"></Label>
     </StackLayout>
 
     <ScrollView row="1"> 
         <StackLayout class="sidedrawer-content"> 
-            <MyDrawerItem title="VENTA DE BOLETOS" route="/solicita_talonario" icon="&#xf155;" [isSelected]="isPageSelected('talonarios')">
+            <MyDrawerItem title="VENTA DE BOLETOS" route="/talonarios" icon="talonario">
             </MyDrawerItem>
-            <MyDrawerItem title="ESTADO DE CUENTA" route="/estadocuenta" icon="&#xf1ea;" [isSelected]="isPageSelected('Estado_Cuenta')">
+            <MyDrawerItem title="ESTADO DE CUENTA" route="/estadocuenta" icon="perfil">
             </MyDrawerItem>
-            <MyDrawerItem title="CONOCE TU SORTEO" route="/conocesorteo" icon="&#xf41c;" [isSelected]="isPageSelected('ConoceSorteo')">
+            <MyDrawerItem title="CONOCE TU SORTEO" route="/conocesorteo" icon="conoce_sorteo">
             </MyDrawerItem>
-            <MyDrawerItem title="SOLICITA UN TALONARIO" route="/solicitatalonario" icon="&#xf055;" [isSelected]="isPageSelected('solicitatalonario')">
+            <MyDrawerItem title="SOLICITA UN TALONARIO" route="/solicitatalonario" icon="nuevotalonario">
             </MyDrawerItem>
-            <MyDrawerItem title="LISTADO DE GANADORES" route="/ganadores" icon="&#xf091;" [isSelected]="isPageSelected('Ganadores')">
+            <MyDrawerItem title="LISTADO DE GANADORES" route="/ganadores" icon="ganadores">
             </MyDrawerItem>
-            <MyDrawerItem title="MENSAJES" route="/ganadores" icon="&#xf0e0;" [isSelected]="isPageSelected('Ganadores')">
+            <MyDrawerItem title="NOTIFICACIONES" route="/ganadores" icon="mail">
             </MyDrawerItem>
-            <MyDrawerItem title="REDES SOCIALES" route="/ganadores" icon="&#xf1e1;" [isSelected]="isPageSelected('Ganadores')">
+            <MyDrawerItem title="REDES SOCIALES" route="/ganadores" icon="compartir">
             </MyDrawerItem>
-            <MyDrawerItem title="CERRAR SESION" route="/ganadores" icon="&#xf2f5;" [isSelected]="isPageSelected('Logout')">
-            </MyDrawerItem>
-            <MyDrawerItem title="Venta Boletos" route="/talonarios" icon="&#xf005;" [isSelected]="isPageSelected('Talonarios')">
-            </MyDrawerItem>
-
-            <StackLayout class="hr-light"></StackLayout>
-
-           <MyDrawerItem title="Settings" route="/settings" icon="&#xf013;" [isSelected]="isPageSelected('Settings')">
-           </MyDrawerItem>
+            <MyDrawerItem title="CERRAR SESION" route="/ganadores" icon="logout">
+            </MyDrawerItem>            
         </StackLayout>
     </ScrollView>
 </GridLayout>
