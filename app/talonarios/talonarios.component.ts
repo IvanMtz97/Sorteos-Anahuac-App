@@ -3,6 +3,8 @@ import { DrawerTransitionBase, SlideInOnTopTransition } from "nativescript-pro-u
 import { RadSideDrawerComponent } from "nativescript-pro-ui/sidedrawer/angular";
 import { ActivatedRoute, Router } from "@angular/router";
 import { SessionService } from "../services/session/session.services";
+import statusBar = require("nativescript-status-bar");
+
 
 @Component({
     selector: "Talonarios",
@@ -31,15 +33,16 @@ export class TalonariosComponent implements OnInit {
     public cantBolVendidos: Array<number> = [];
     private talonarios: Array<object> = [];
     private PilaBoletos: Array<object> = [];
+    public statusBarState: boolean=true;
 
     constructor(private session: SessionService, private route: ActivatedRoute,  private router: Router){
         console.log("TALONARIOS");
-        this.tieneTalonarios = false;
+        this.tieneTalonarios = false;          
     }
     @ViewChild("drawer") drawerComponent: RadSideDrawerComponent;
 
     private _sideDrawerTransition: DrawerTransitionBase;
-
+    
     ngOnInit(): void {
         this._sideDrawerTransition = new SlideInOnTopTransition();
         var Data = JSON.parse(this.session.getInformation());
@@ -50,11 +53,25 @@ export class TalonariosComponent implements OnInit {
         } 
     }
 
-    get sideDrawerTransition(): DrawerTransitionBase {
+    hideStatusBar()
+    {        
+        if(this.statusBarState == true)
+        {
+            statusBar.hide();
+            this.statusBarState = false;
+        }
+        else if(this.statusBarState == false)
+        {
+            statusBar.show();
+            this.statusBarState = true;
+        }
+    }
+
+    get sideDrawerTransition(): DrawerTransitionBase {              
         return this._sideDrawerTransition;
     }
 
-    onDrawerButtonTap(): void {
+    onDrawerButtonTap(): void {        
         this.drawerComponent.sideDrawer.showDrawer();
     }
 

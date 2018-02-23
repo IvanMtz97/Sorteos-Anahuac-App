@@ -1,15 +1,23 @@
 <ActionBar class="action-bar">
-    <NavigationButton ios:visibility="collapsed" icon="res://menu" (tap)="onDrawerButtonTap()"></NavigationButton>
-    <ActionItem icon="res://navigation/menu" android:visibility="collapsed" (tap)="onDrawerButtonTap()" ios.position="left"></ActionItem>
-    <Image class="logo-header" src="res://icono_logo_encabezado"></Image>
-</ActionBar>
+        <NavigationButton ios:visibility="collapsed" icon="res://menu" (tap)="onDrawerButtonTap()"></NavigationButton>
+        <ActionItem icon="res://navigation/menu" android:visibility="collapsed" (tap)="onDrawerButtonTap()" ios.position="left"></ActionItem>
+        <!-- <Label class="action-bar-title" text="Sorteos Anahuac"></Label> -->
+        <StackLayout orientation="horizontal"
+                   ios:horizontalAlignment="center"
+                   android:horizontalAlignment="center">
+            <Image src="res://icono_logo_encabezado" class="img"></Image>   
+        </StackLayout>
+    </ActionBar>
 
-<RadSideDrawer #drawer showOverNavigation="true" [drawerTransition]="sideDrawerTransition">
+<RadSideDrawer #drawer showOverNavigation="true" [drawerTransition]="sideDrawerTransition" drawerContentSize="360" (swipe)="hideStatusBar()">
     <StackLayout tkDrawerContent>
             <MyDrawer [selectedPage]="'solicitatalonario'"></MyDrawer>
     </StackLayout>     
     <!-- <ScrollView orientation="vertical" sdkExampleTitle sdkToggleNavButton> -->
         <StackLayout tkMainContent>
+            <StackLayout class="page page-content" orientation="vertical" height="13%" backgroundColor="lightgray">
+                    
+            </StackLayout>
             <StackLayout orientation="horizontal" class="component-header center">
                 <Label class="fa" text="&#xf055;"></Label>
                 <Label text="SOLICITA UN TALONARIO"></Label>

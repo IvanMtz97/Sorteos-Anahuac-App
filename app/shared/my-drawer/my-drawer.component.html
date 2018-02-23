@@ -2,13 +2,15 @@
 The MyDrawer custom component view is where you define what will be displayed in the app drawer.
 Feel free to customize layouts and components to change how your app drawer looks.
 -->
-<GridLayout rows="auto, *" class="sidedrawer sidedrawer-left">
-    <StackLayout row="0" class="component-menu-header">        
-        <Label text="MENÚ"></Label>
+<GridLayout rows="auto, auto, *" class="sidedrawer sidedrawer-left">
+    <StackLayout row="0" class="page page-content" orientation="vertical" height="13%" backgroundColor="lightgray">
+            
     </StackLayout>
-
-    <ScrollView row="1"> 
-        <StackLayout class="sidedrawer-content"> 
+    <StackLayout row="1" class="component-menu-header">        
+        <Label text="MENÚ"></Label>
+    </StackLayout> 
+    <ScrollView row="2"> 
+        <StackLayout class="sidedrawer-content">            
             <MyDrawerItem title="VENTA DE BOLETOS" route="/talonarios" icon="talonario">
             </MyDrawerItem>
             <MyDrawerItem title="ESTADO DE CUENTA" route="/estadocuenta" icon="perfil">
@@ -23,7 +25,7 @@ Feel free to customize layouts and components to change how your app drawer look
             </MyDrawerItem>
             <MyDrawerItem title="REDES SOCIALES" route="/ganadores" icon="compartir">
             </MyDrawerItem>
-            <MyDrawerItem title="CERRAR SESION" route="/ganadores" icon="logout">
+            <MyDrawerItem title="CERRAR SESION" route="/login" icon="logout">
             </MyDrawerItem>            
         </StackLayout>
     </ScrollView>
