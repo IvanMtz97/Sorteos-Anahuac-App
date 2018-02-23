@@ -10,13 +10,13 @@
     </ActionBar>
 
 
-    <RadSideDrawer #drawer showOverNavigation="true" [drawerTransition]="sideDrawerTransition" drawerContentSize="360" (swipe)="hideStatusBar()">
+    <RadSideDrawer #drawer showOverNavigation="true" [drawerTransition]="sideDrawerTransition" drawerContentSize="360">
         <StackLayout tkDrawerContent>
                 <MyDrawer [selectedPage]="'solicitatalonario'"></MyDrawer>
         </StackLayout>
     <StackLayout orientation="vertical" tkMainContent>
         <StackLayout class="page page-content" orientation="vertical" height="13%" backgroundColor="lightgray">
-                
+                <Image src="http://sorteoanahuac.mx/app/banner_1.jpg"></Image>   
         </StackLayout>
         <StackLayout orientation="horizontal" class="component-header">
             <Label class="fa" text="&#xf091;"></Label>
