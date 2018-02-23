@@ -3,13 +3,21 @@
     <ActionItem icon="res://navigation/menu" android:visibility="collapsed" (tap)="onDrawerButtonTap()"
         ios.position="left">
     </ActionItem>
-    <Label class="action-bar-title" text="Sorteos Anahuac"></Label>
+    <!-- <Label class="action-bar-title" text="Sorteos Anahuac"></Label> -->
+    <StackLayout orientation="horizontal"
+               ios:horizontalAlignment="center"
+               android:horizontalAlignment="center">
+        <Image src="res://icono_logo_encabezado" class="img"></Image>   
+    </StackLayout>
 </ActionBar>
 <RadSideDrawer #drawer showOverNavigation="true" [drawerTransition]="sideDrawerTransition">
     <StackLayout tkDrawerContent>
         <MyDrawer [selectedPage]="'Talonarios'"></MyDrawer>
     </StackLayout>
     <StackLayout orientation="vertical" tkMainContent>
+        <StackLayout class="page page-content" orientation="vertical" height="13%" backgroundColor="lightgray">
+        
+        </StackLayout>
         <StackLayout width="100%" height="100%" *ngIf="tieneTalonarios">
             <ScrollView height="90%" orientation="vertical" sdkExampleTitle sdkToggleNavButton>
                 <StackLayout>
