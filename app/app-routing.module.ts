@@ -18,7 +18,8 @@ const routes: Routes = [
     { path: "privacidad", loadChildren: "./privacidad/privacidad.module#PrivacidadModule"},
     { path: "solicitatalonario", loadChildren: "./solicita_talonario/solicita_talonario.module#SolicitaTalonarioModule"},
     { path: "talonarios", loadChildren: "./talonarios/talonarios.module#TalonariosModule"},
-    { path: "estadocuenta", loadChildren: "./estado_cuenta/estado_cuenta.module#EstadoCuentaModule"}
+    { path: "estadocuenta", loadChildren: "./estado_cuenta/estado_cuenta.module#EstadoCuentaModule"},
+    { path: "redessociales", loadChildren: "./redes_sociales/redes_sociales.module#RedesSocialesModule"}
     
 ];
 
