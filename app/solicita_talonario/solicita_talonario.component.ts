@@ -2,6 +2,7 @@ import { Component, ViewChild, OnInit } from '@angular/core';
 import * as dialogs from "ui/dialogs";
 import { RadSideDrawerComponent } from "nativescript-pro-ui/sidedrawer/angular";
 import { DrawerTransitionBase, SlideInOnTopTransition } from "nativescript-pro-ui/sidedrawer";
+import statusBar = require("nativescript-status-bar");
 
 @Component({
   selector: 'solicitatalonario',
@@ -14,6 +15,7 @@ export class SolicitaTalonarioComponent {
   text3: string = '¡GRACIAS!';
   text4: string = 'SOLICITAR TALONARIO';
   
+
   @ViewChild("drawer") drawerComponent: RadSideDrawerComponent;
   private _sideDrawerTransition: DrawerTransitionBase;
 
@@ -39,4 +41,17 @@ export class SolicitaTalonarioComponent {
   onDrawerButtonTap(): void {
     this.drawerComponent.sideDrawer.showDrawer();
   }
+// public statusBarState: boolean=true;// statusBar.show();(swipe)="hideStatusBar()"
+  // {        
+  //     if(this.statusBarState == true)
+  //     {
+  //         statusBar.hide();
+  //         this.statusBarState = false;
+  //     }
+  //     else if(this.statusBarState == false)
+  //     {
+  //         statusBar.show();
+  //         this.statusBarState = true;
+  //     }
+  // }
 }

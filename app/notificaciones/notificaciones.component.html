@@ -1,0 +1,39 @@
+<ActionBar class="action-bar">
+    <NavigationButton ios:visibility="collapsed" icon="res://menu" (tap)="onDrawerButtonTap()"></NavigationButton>
+    <ActionItem icon="res://navigation/menu" android:visibility="collapsed" (tap)="onDrawerButtonTap()" ios.position="left"></ActionItem>
+    <!-- <Label class="action-bar-title" text="Sorteos Anahuac"></Label> -->
+    <StackLayout orientation="horizontal"
+                ios:horizontalAlignment="center"
+                android:horizontalAlignment="center">
+        <Image src="res://icono_logo_encabezado" class="img"></Image>   
+    </StackLayout>
+</ActionBar>
+<RadSideDrawer #drawer showOverNavigation="true" [drawerTransition]="sideDrawerTransition" drawerContentSize="360">
+    <StackLayout tkDrawerContent>
+        <MyDrawer [selectedPage]="'notificaciones'"></MyDrawer>
+    </StackLayout>
+    <StackLayout orientation="vertical" tkMainContent>
+        <StackLayout class="page page-content" orientation="vertical" height="13%" backgroundColor="lightgray">
+            <Image src="http://sorteoanahuac.mx/app/banner_1.jpg"></Image>
+        </StackLayout>
+        <StackLayout width="100%" height="100%">
+            <ScrollView height="90%" orientation="vertical" sdkExampleTitle sdkToggleNavButton>
+                <StackLayout>
+                    <StackLayout backgroundColor="#f7f7f7" height="1em"></StackLayout>
+                        <GridLayout class="component-header-4" columns="auto, auto, *" rows="auto, auto" *ngFor="let mensaje of mensajes; let i_mensaje = index">
+                            <StackLayout class="vb-item" col="0" [row]="i_mensaje">
+                                <CheckBox #makeup (checkedChange)="toggleCheck(makeup, mensaje, index)" checked="false"></CheckBox>
+                            </StackLayout>
+                            <Label col="1" [row]="i_mensaje" text="{{mensaje.from}} - {{mensaje.message}}"></Label>                              
+                        </GridLayout>                            
+                </StackLayout>
+            </ScrollView>
+        </StackLayout>  
+        <StackLayout height="10%" *ngIf="hideButtonDelete">
+            <StackLayout class="btn-img"  orientation="horizontal" (tap)="eliminarSeleccion()" width="100%">
+                <Image src="res://icono_boleto"  width="10%" height="100%" marginRight="10"></Image>
+                <Label text="ELIMINAR SELECCION" verticalAlignment="center"></Label>
+            </StackLayout>
+        </StackLayout>          
+    </StackLayout>
+</RadSideDrawer>
