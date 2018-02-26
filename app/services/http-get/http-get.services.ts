@@ -10,8 +10,8 @@ import { SessionService } from "../session/session.services"
 
 @Injectable()
 export class MyHttpGetService {
-    private serverUrl = "https://web-clara-p1.azurewebsites.net/";
-    //private serverUrl = "https://sorteoanahuac-servicios-mobile-p.azurewebsites.net/";
+    //private serverUrl = "https://web-clara-p1.azurewebsites.net/";
+    private serverUrl = "https://sorteoanahuac-servicios-mobile-p.azurewebsites.net/";
 
     constructor(private http: Http, private session: SessionService) { }
 
