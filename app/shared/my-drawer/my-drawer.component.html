@@ -10,7 +10,7 @@ Feel free to customize layouts and components to change how your app drawer look
         <Label text="MENÚ"></Label>
     </StackLayout> 
     <ScrollView row="2"> 
-        <StackLayout class="sidedrawer-content">            
+        <StackLayout class="sidedrawer-content" *ngIf="menuAUX">            
             <MyDrawerItem title="VENTA DE BOLETOS" route="/talonarios" icon="talonario">
             </MyDrawerItem>
             <MyDrawerItem title="ESTADO DE CUENTA" route="/estadocuenta" icon="perfil">
@@ -26,6 +26,10 @@ Feel free to customize layouts and components to change how your app drawer look
             <MyDrawerItem title="REDES SOCIALES" route="/redessociales" icon="compartir">
             </MyDrawerItem>
             <MyDrawerItem title="CERRAR SESION" route="/login" icon="logout">
+            </MyDrawerItem>            
+        </StackLayout>
+        <StackLayout class="sidedrawer-content" *ngIf="!menuAUX">                            
+            <MyDrawerItem title="INICIO" route="/login" icon="perfil">
             </MyDrawerItem>            
         </StackLayout>
     </ScrollView>

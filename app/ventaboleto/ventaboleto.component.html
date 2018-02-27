@@ -19,19 +19,19 @@
 
         <StackLayout orientation="horizontal" class="component-header-2">
             <Label class="fa icon" text="&#xf01c;"></Label>
-            <Label text="TALONARIO"></Label>
-            <Label class="txtorange" [text]="Datos.Talonario"></Label>
+            <Label class="letter-spacing" text="TALONARIO"></Label>
+            <Label class="txtorange letter-spacing" [text]="Datos.Talonario"></Label>
         </StackLayout>
 
         <StackLayout *ngIf="Datos.Tipo == 'Uno'" orientation="horizontal" class="component-header-3">
-            <Label text="VENDER BOLETO"></Label>
-            <Label class="txtorange" [text]="Datos.Boleto.folio"></Label>
+            <Label class="letter-spacing" text="VENDER BOLETO"></Label>
+            <Label class="txtorange letter-spacing" [text]="Datos.Boleto.folio"></Label>
         </StackLayout>
 
         <StackLayout *ngIf="Datos.Tipo == 'Varios'" orientation="horizontal" class="component-header-3">
-            <Label text="VENDER BOLETOS"></Label>
+            <Label class="letter-spacing" text="VENDER BOLETOS"></Label>
             <StackLayout orientation="horizontal">
-                <Label *ngFor="let Boleto of Datos.Boletos" class="txtorange" [text]="Boleto.folio"></Label>
+                <Label *ngFor="let Boleto of Datos.Boletos" class="txtorange letter-spacing" [text]="Boleto.folio"></Label>
             </StackLayout>
         </StackLayout>
 
@@ -40,39 +40,39 @@
 
                         <StackLayout class="vb-item">
                             <StackLayout orientation="horizontal">
-                                <Label text="Nombre"></Label>
-                                <Label class="txtorange" text="*"></Label>
+                                <Label class="letter-spacing" text="Nombre"></Label>
+                                <Label class="txtorange letter-spacing" text="*"></Label>
                             </StackLayout>
                             <TextField id="txtNombre" (textChange)="handleInputChanged($event)"></TextField>
                         </StackLayout>
                 
                         <StackLayout class="vb-item">
                             <StackLayout orientation="horizontal">
-                                <Label text="Apellido paterno"></Label>
-                                <Label class="txtorange" text="*"></Label>
+                                <Label class="letter-spacing" text="Apellido paterno"></Label>
+                                <Label class="txtorange letter-spacing" text="*"></Label>
                             </StackLayout>
                             <TextField id="txtAppat" (textChange)="handleInputChanged($event)"></TextField>
                         </StackLayout>
                 
                         <StackLayout class="vb-item">
                             <StackLayout orientation="horizontal">
-                                <Label text="Apellido materno"></Label>
-                                <Label class="txtorange" text="*"></Label>
+                                <Label class="letter-spacing" text="Apellido materno"></Label>
+                                <Label class="txtorange letter-spaccing" text="*"></Label>
                             </StackLayout>
                             <TextField id="txtApmat" (textChange)="handleInputChanged($event)"></TextField>
                         </StackLayout>
                 
                         <StackLayout class="vb-item">
                             <StackLayout orientation="horizontal">
-                                <Label text="Calle"></Label>
-                                <Label class="txtorange" text="*"></Label>
+                                <Label class="letter-spacing" text="Calle"></Label>
+                                <Label class="txtorange letter-spacing" text="*"></Label>
                             </StackLayout>
                             <TextField id="txtCalle" (textChange)="handleInputChanged($event)"></TextField>
                         </StackLayout>
                 
                         <StackLayout class="vb-item">
                             <StackLayout orientation="horizontal">
-                                <Label text="Número"></Label>
+                                <Label class="letter-spacing" text="Número"></Label>
                                 <Label class="txtorange" text="*"></Label>
                             </StackLayout>
                             <TextField id="txtNumero" (textChange)="handleInputChanged($event)"></TextField>
@@ -80,64 +80,64 @@
                 
                         <StackLayout class="vb-item">
                             <StackLayout orientation="horizontal">
-                                <Label text="Código Postal"></Label>
-                                <Label class="txtorange" text="*"></Label>
+                                <Label class="letter-spacing" text="Código Postal"></Label>
+                                <Label class="txtorange letter-spacing" text="*"></Label>
                             </StackLayout>
                             <TextField id="txtCodigopostal" (textChange)="handleInputChanged($event)" keyboardType="number" maxLength="5"></TextField>
                         </StackLayout>
                 
                         <StackLayout class="vb-item">
                             <StackLayout orientation="horizontal">
-                                <Label text="Colonia"></Label>
-                                <Label class="txtorange" text="*"></Label>
+                                <Label class="letter-spacing" text="Colonia"></Label>
+                                <Label class="txtorange letter-spacing" text="*"></Label>
                             </StackLayout>
                             <TextField id="txtColonia" (textChange)="handleInputChanged($event)"></TextField>
                         </StackLayout>
                 
                         <StackLayout class="vb-item">
                             <StackLayout orientation="horizontal">
-                                <Label text="Estado"></Label>
-                                <Label class="txtorange" text="*"></Label>
+                                <Label class="letter-spacing" text="Estado"></Label>
+                                <Label class="txtorange letter-spaccing" text="*"></Label>
                             </StackLayout>
                             <TextField id="txtEstado" (textChange)="handleInputChanged($event)"></TextField>
                         </StackLayout>
                 
                         <StackLayout class="vb-item">
                             <StackLayout orientation="horizontal">
-                                <Label text="Municipio/Delegación"></Label>
-                                <Label class="txtorange" text="*"></Label>
+                                <Label class="letter-spacing" text="Municipio/Delegación"></Label>
+                                <Label class="txtorange letter-spacing" text="*"></Label>
                             </StackLayout>
                             <TextField id="txtMunicipio" (textChange)="handleInputChanged($event)"></TextField>
                         </StackLayout>
                 
                         <StackLayout class="vb-item">
-                            <Label text="Teléfono fijo"></Label>
+                            <Label class="letter-spacing" text="Teléfono fijo"></Label>
                             <TextField id="txtTelefonofijo" (textChange)="handleInputChanged($event)" keyboardType="number" maxLength="8"></TextField>
                         </StackLayout>
                 
                         <StackLayout class="vb-item">
                             <StackLayout orientation="horizontal">
-                                <Label text="Teléfono móvil"></Label>
-                                <Label class="txtorange" text="*"></Label>
+                                <Label class="letter-spacing" text="Teléfono móvil"></Label>
+                                <Label class="txtorange letter-spacing" text="*"></Label>
                             </StackLayout>
                             <TextField id="txtTelefonomovil" (textChange)="handleInputChanged($event)" keyboardType="number" maxLength="10"></TextField>
                         </StackLayout>
                 
                         <StackLayout class="vb-item">
                             <StackLayout orientation="horizontal">
-                                <Label text="Correo electrónico"></Label>
-                                <Label class="txtorange" text="*"></Label>
+                                <Label class="letter-spacing" text="Correo electrónico"></Label>
+                                <Label class="txtorange letter-spacing" text="*"></Label>
                             </StackLayout>
                             <TextField id="txtCorreoelectronico" (textChange)="handleInputChanged($event)" keyboardType="email"></TextField>
                         </StackLayout>
                 
                         <StackLayout class="vb-item">
-                            <Label text="Correo electrónico alterativo"></Label>
+                            <Label class="letter-spacing" text="Correo electrónico alterativo"></Label>
                             <TextField id="txtCorreoalternativo" (textChange)="handleInputChanged($event)" keyboardType="email"></TextField>
                         </StackLayout>
 
                         <StackLayout class="vb-item center">
-                            <Label class="txtorange" text="* Datos obligatorios"></Label>
+                            <Label class="txtorange letter-spacing" text="* Datos obligatorios"></Label>
                         </StackLayout>
 
 
