@@ -9,7 +9,11 @@
         </StackLayout>
     </ActionBar>
 
-    <StackLayout orientation="vertical">
+    <RadSideDrawer #drawer showOverNavigation="true" [drawerTransition]="sideDrawerTransition" drawerContentSize="360">
+        <StackLayout tkDrawerContent>
+            <MyDrawer [selectedPage]="'notificaciones'"></MyDrawer>
+        </StackLayout>
+    <StackLayout orientation="vertical" tkMainContent>
 
         <StackLayout class="page page-content" orientation="vertical" height="13%" backgroundColor="lightgray">
             <Image src="http://sorteoanahuac.mx/app/banner_1.jpg"></Image>  
@@ -32,7 +36,7 @@
 
             <StackLayout orientation="vertical" class="container-item">
                 
-                <StackLayout [visibility]="Datos.Tipo == 'Uno' ? 'visible' : 'collapsed'" orientation="vertical">
+                <StackLayout *ngIf="Datos.Tipo == 'Uno'" orientation="vertical">
                     <Label class="txtorange" text="02143"></Label>
                     <Label [text]="Datos.Info.Correoelectronico"></Label>
                 </StackLayout>                
@@ -64,3 +68,4 @@
         </ScrollView>
 
     </StackLayout>
+    </RadSideDrawer>

@@ -24,7 +24,7 @@ export class ModalComponent {
     public compartir()
     {
         console.log("compartir()");
-        this.router.navigate(["talonarios"], { clearHistory: true });
+        this.router.navigate(["compradores"], { clearHistory: true });
         this.close();        
     }
 
