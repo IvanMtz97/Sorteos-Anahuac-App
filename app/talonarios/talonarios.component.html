@@ -36,13 +36,16 @@
                                     <Label class="txt-header-title" text="BOLETOS POR VENDER:"></Label>
                                     <Label class="txtorange txt-header-title" [text]="cantBolPendientes[i]"></Label>
                                 </StackLayout>
-                                <GridLayout class="component-header-4" columns="auto, auto, *" rows="auto, auto, auto" *ngFor="let boletoPendiente of talonario.Boletos.pendientes; let i_pendiente = index">
-                                    <StackLayout class="vb-item" col="0" [row]="i_pendiente">
-                                        <CheckBox #makeup (checkedChange)="toggleCheck(makeup, boletoPendiente, index)" checked="false"></CheckBox>
-                                    </StackLayout>
-                                    <Label col="1" [row]="i_pendiente" [text]="boletoPendiente.folio" class="text1"></Label>  
-                                    <Label col="2" [row]="i_pendiente" class="text2" style="text-align:right;" row="0" text="Vender >" (tap)="VentaBoleto(boletoPendiente, talonario)" *ngIf="!hideBottonSales"></Label>
-                                </GridLayout>
+                                <StackLayout *ngFor="let boletoPendiente of talonario.Boletos.pendientes; let i_pendiente = index">
+                                    <GridLayout class="component-header-4" columns="auto, auto, *" rows="auto, auto, auto" height="65">
+                                        <StackLayout class="vb-item" col="0" [row]="i_pendiente">
+                                            <CheckBox #makeup (checkedChange)="toggleCheck(makeup, boletoPendiente, index)" checked="false"></CheckBox>
+                                        </StackLayout>
+                                        <Label col="1" [row]="i_pendiente" [text]="boletoPendiente.folio" class="text1"></Label>  
+                                        <Label col="2" [row]="i_pendiente" class="text2" style="text-align:right;" row="0" text="Vender >" (tap)="VentaBoleto(boletoPendiente, talonario)" *ngIf="!hideBottonSales"></Label>
+                                    </GridLayout>
+                                    <StackLayout class="delimitador"></StackLayout>
+                                </StackLayout>
                             </StackLayout>
                             <!--FIN BOLETOS PENDIENTES-->
                             <!--BOLETOS ASIGNADOS-->
@@ -51,11 +54,14 @@
                                     <Label text="PAGADOS"></Label>
                                     <Label class="txtorange" [text]="cantBolAsignados[i]"></Label>
                                 </StackLayout>
-                                <GridLayout class="component-header-4" columns="auto, auto, *" rows="auto, auto, auto" *ngFor="let boletoAsignado of talonario.asignados; let i_asignado = index">
-                                    <Label col="0" [row]="i_asignado" [text]="boletoAsignado.numero"></Label>
-                                    <Label col="1" [row]="i_asignado" class="text3" text="- Eduardo Vazquez"></Label>
-                                    <Label col="2" [row]="i_asignado" class="text2" style="text-align:right;" row="0" (tap)="ConsultaPagado(boletoAsignado, talonario)" text="Consultar >"></Label>
-                                </GridLayout>
+                                <StackLayout *ngFor="let boletoAsignado of talonario.asignados; let i_asignado = index">
+                                    <GridLayout class="component-header-4" columns="auto, auto, *" rows="auto, auto, auto" height="65">
+                                        <Label col="0" [row]="i_asignado" [text]="boletoAsignado.numero"></Label>
+                                        <Label col="1" [row]="i_asignado" class="text3" text="- Eduardo Vazquez"></Label>
+                                        <Label col="2" [row]="i_asignado" class="text2" style="text-align:right;" row="0" (tap)="ConsultaPagado(boletoAsignado, talonario)" text="Consultar >"></Label>
+                                    </GridLayout>
+                                    <StackLayout class="delimitador"></StackLayout>
+                                </StackLayout>
                             </StackLayout>
                             <!--FIN BOLETOS ASIGNADOS-->
                             <!--BOLETOS VENDIDOS-->
@@ -63,12 +69,15 @@
                                 <StackLayout orientation="horizontal" class="component-header-3">
                                     <Label text="BOLETOS VENDIDOS POR PAGAR:"></Label>
                                     <Label class="txtorange" [text]="cantBolVendidos[i]"></Label>
-                                </StackLayout> 
-                                <GridLayout class="component-header-4" columns="auto, auto, *" rows="auto, auto, auto" *ngFor="let boletoVendido of talonario.Boletos.vendidos; let i_vendido = index">                        
-                                    <Label col="0" [row]="i" [text]="boletoVendido.folio" class="text1"></Label>
-                                    <Label col="1" [row]="i" class="text3" text="- Eduardo Vazquez"></Label>
-                                    <Label col="2" [row]="i" class="text2" style="text-align:right;" row="0" text="Pagar >" (tap)="ConsultaBoleto(boletoVendido, talonario)"></Label>    
-                                </GridLayout>
+                                </StackLayout>
+                                <StackLayout *ngFor="let boletoVendido of talonario.Boletos.vendidos; let i_vendido = index">
+                                    <GridLayout class="component-header-4" columns="auto, auto, *" rows="auto, auto, auto" height="65">                        
+                                        <Label col="0" [row]="i" [text]="boletoVendido.folio" class="text1"></Label>
+                                        <Label col="1" [row]="i" class="text3" text="- Eduardo Vazquez"></Label>
+                                        <Label col="2" [row]="i" class="text2" style="text-align:right;" row="0" text="Pagar >" (tap)="ConsultaBoleto(boletoVendido, talonario)"></Label>    
+                                    </GridLayout>
+                                    <StackLayout class="delimitador"></StackLayout>
+                                </StackLayout>
                             </StackLayout> 
                             <!--FIN BOLETOS VENDIDOS--> 
                             <!--BOLETOS ASIGNADOS-->
