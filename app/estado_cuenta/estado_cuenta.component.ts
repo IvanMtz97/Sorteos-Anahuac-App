@@ -51,7 +51,6 @@ export class EstadoCuentaComponent implements OnInit {
     *************************************************************/
     ngOnInit(): void {
         this._sideDrawerTransition = new SlideInOnTopTransition();
-        statusBar.show();
         this.datosColaborador();
     }
 

@@ -27,7 +27,7 @@
             <Button
                 class="btn-orange"
                 text="COMPARTE SORTEO"
-                (tap)="comparteSorteo()"
+                (tap)="showModal()"
                 textwrap="true"
                 width= "85%">
             </Button>
@@ -35,11 +35,18 @@
             <Button
                 class="btn-orange"
                 text="COMPARTE MIS BOLETOS"
-                (tap)="comparteBoletos()"
+                (tap)="showModal()"
                 textwrap="true"
                 width= "85%">
             </Button>                                      
-        </StackLayout>
+        </StackLayout>        
     </StackLayout>
 <!-- </ScrollView>     -->
+
 </RadSideDrawer>
+
+
+<!-- <StackLayout class="container-item btn-orange" orientation="horizontal">
+    <Image src="res://icono_boleto"></Image>
+    <Label text="ENVIAR POR CORREO"></Label>
+</StackLayout> -->
