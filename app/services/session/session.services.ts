@@ -56,6 +56,15 @@ export class SessionService {
         return getString("Token");
     }
 
+    setIdColaborador(IdColaborador){
+        console.log("IdColaborador", IdColaborador);
+        setString("IdColaborador", IdColaborador);
+    }
+
+    getIdColaborador(){
+        return getString("IdColaborador");
+    }
+
     setGanadores(Ganadores){
         console.log("Ganadores", Ganadores);
         setString("Ganadores", Ganadores);

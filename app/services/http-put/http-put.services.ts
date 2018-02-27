@@ -7,16 +7,16 @@ import * as utf8 from "utf8";
 import { SessionService } from "../session/session.services"
 
 @Injectable()
-export class MyHttpPostService {
+export class MyHttpPutService {
     //private serverUrl = "https://web-clara-p1.azurewebsites.net/";
     private serverUrl = "https://sorteoanahuac-servicios-mobile-p.azurewebsites.net/";
 
     constructor(private http: Http, private session: SessionService) { }
 
-    postData(data: any, path) {
+    putData(data: any, path) {
         console.log("LLAMA A LA API ", path, data);
         let options = this.createRequestOptions();
-        return this.http.post((encodeURI(this.serverUrl + path)), { data }, { headers: options })
+        return this.http.put((this.serverUrl + path), { data }, { headers: options })
             .map(res => res);
     }
 

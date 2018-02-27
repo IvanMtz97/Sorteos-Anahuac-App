@@ -27,23 +27,23 @@
         <ScrollView orientation="vertical">
             <StackLayout class="container " orientation="vertical">
 
-                <Label class="txtlarge txtorange" text="Juan José"></Label>
-                <Label class="txtlarge txtorange" style="margin-bottom:20px;" text="Martínez González";></Label>
+                <Label class="txtlarge txtorange" [text]="infoColaborador.nombre"></Label>
+                <Label class="txtlarge txtorange" style="margin-bottom:20px;" [text]="infoColaborador.apellido_paterno"></Label>
 
                 <StackLayout style="margin-bottom:50px;" orientation="horizontal">
                     <Label class="txtmedium txtgray" text="Boletos asignados: "></Label>
-                    <Label class="txtmedium txtgray" text="2"></Label>
+                    <Label class="txtmedium txtgray" [text]="infoColaborador.talonarios.length"></Label>
                 </StackLayout>
 
                 <Image style="margin-bottom:50px;" src="res://separador"></Image>
 
                 <GridLayout columns="*, *" rows="*, *, 100%">
                     <Label class="txtmedium txtgray" col="0" row="0" text="Total a pagar: "></Label>
-                    <Label class="txtmedium txtgray" col="1" row="0" text="$10,000.00"></Label>
+                    <Label class="txtmedium txtgray" col="1" row="0" [text]="infoColaborador.monto_total"></Label>
                     <Label class="txtmedium txtgray" col="0" row="1" text="Pagado: "></Label>
-                    <Label class="txtmedium txtgray" col="1" row="1" text="$3,200.00"></Label>
+                    <Label class="txtmedium txtgray" col="1" row="1" [text]="infoColaborador.monto_abonado"></Label>
                     <Label class="txtmedium txtgray" col="0" row="2" text="Saldo pendiente: "></Label>
-                    <Label class="txtmedium txtgray" col="1" row="2" text="$6,800.00"></Label>
+                    <Label class="txtmedium txtgray" col="1" row="2" [text]="infoColaborador.monto_deudor"></Label>
                 </GridLayout>
 
                 <StackLayout class="container-item btn-orange" orientation="horizontal">

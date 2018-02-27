@@ -35,7 +35,7 @@ export class SolicitaTalonarioComponent {
 
   public solicitaTalonario()
   { 
-    console.log("ESPERE SOLICITANDO...........")
+    console.log("ESPERE SOLICITANDO...........>")
     this.makePostSolitarTalonario();
   }
 
