@@ -1,25 +1,27 @@
-<GridLayout backgroundColor="white" (tap)="close()">
-    <StackLayout class="container" orientation="vertical"> 
-        <StackLayout text="COMPARTIR EN:"></StackLayout>       
-        <StackLayout class="container-item btn-orange" orientation="horizontal" (tap)="compartir()">
-            <Image src="res://icono_whatsapp"></Image>
-            <Label text="WHATSAPP"></Label>
-        </StackLayout>
-        <StackLayout class="container-item btn-orange" orientation="horizontal" (tap)="compartir()">
-            <Image src="res://icono_facebook"></Image>
-            <Label text="FACEBOOK"></Label>
-        </StackLayout>
-        <StackLayout class="container-item btn-orange" orientation="horizontal" (tap)="compartir()">
-            <Image src="res://icono_twitter"></Image>
-            <Label text="TWITTER"></Label>
-        </StackLayout>
-        <StackLayout class="container-item btn-orange" orientation="horizontal" (tap)="compartir()">
-            <Image src="res://icono_compradores"></Image>
-            <Label text="MIS COMPRADORES"></Label>
-        </StackLayout>
-        <StackLayout class="container-item btn-orange" orientation="horizontal" (tap)="compartir()">
-            <Image src="res://icono_copiar"></Image>
-            <Label text="COPIAR"></Label>
+<GridLayout backgroundColor="transparent" (tap)="close()">
+    <StackLayout class="container" orientation="vertical" style="padding-top: 120%;"> 
+        <StackLayout style="vertical-align: center">   
+            <StackLayout style="padding-left: 90%;padding-bottom: 15%; color:red;"><Label text="COMPARTIR EN:"></Label></StackLayout>       
+            <StackLayout class="container-item btn-orange" orientation="horizontal" (tap)="compartir()">
+                <Image src="res://icono_whatsapp"></Image>
+                <Label text="WHATSAPP"></Label>
+            </StackLayout>
+            <StackLayout class="container-item btn-orange" orientation="horizontal" (tap)="compartir()">
+                <Image src="res://icono_facebook"></Image>
+                <Label text="FACEBOOK"></Label>
+            </StackLayout>
+            <StackLayout class="container-item btn-orange" orientation="horizontal" (tap)="compartir()">
+                <Image src="res://icono_twitter"></Image>
+                <Label text="TWITTER"></Label>
+            </StackLayout>
+            <StackLayout class="container-item btn-orange" orientation="horizontal" (tap)="compartir()">
+                <Image src="res://icono_compradores"></Image>
+                <Label text="MIS COMPRADORES"></Label>
+            </StackLayout>
+            <StackLayout class="container-item btn-orange" orientation="horizontal" (tap)="compartir()">
+                <Image src="res://icono_copiar"></Image>
+                <Label text="COPIAR"></Label>
+            </StackLayout>
         </StackLayout>
     </StackLayout>
 </GridLayout>
