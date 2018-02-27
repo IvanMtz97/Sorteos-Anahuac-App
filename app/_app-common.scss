@@ -64,9 +64,19 @@
     color: white;
     margin: 5;
     font-size: 16em;
-    border-color: rgb(255, 133, 32);
-    background-color: rgb(255, 133, 32);
+    border-color: #DD741D;
+    background-color: #DD741D;
     padding-left: 25;
+}
+
+.btn-img-v2{
+    color: white;
+    margin: 4;
+    font-size: 16em;
+    border-color: #DD741D;
+    background-color: #DD741D;
+    padding-left: 25;
+    height: 100%;
 }
 
 .page-text {
@@ -87,7 +97,7 @@
 }
 
 .ligas-aviso {
-    color: #ea7200;
+    color: #DD741D;
     text-align: center;
 }
 
@@ -101,13 +111,13 @@
 }
 
 .text1{
-    font-weight: 500;
-    color: #555759;
+    font-weight: bold;
+    color: #5E6F7C;
 }
 
 .text2{
-    color: #ea7200;
-    font-weight: 600;
+    color: #DD741D;
+    font-weight: 400;
 }
 
 .text3{
@@ -116,6 +126,20 @@
 
 .img {
     width: 700px;
+}
+
+.txt-header-title {
+    font-weight: bold;
+    letter-spacing: 0.1em;
+}
+
+.txt-header {
+    font-weight: 700;
+    letter-spacing: 0.1em;
+}
+
+.letter-spaccing {
+    letter-spacing: 1em;
 }
 
 .component-header-4{background-color:#fff;color:#333;padding:20;width:100%;text-align:center;}.component-header-4 Label{margin-left:5}

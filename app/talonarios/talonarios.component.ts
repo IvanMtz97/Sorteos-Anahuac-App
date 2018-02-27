@@ -18,7 +18,7 @@ export class TalonariosComponent implements OnInit {
     public tieneTalonarios: boolean = false; 
     public hideBottonSales: boolean = false; 
     public tienePendientes: Array<boolean> = [];
-    public noTieneTalonariosTexto: string = "No cuentas con talonarios asignados.";
+    public noTieneTalonariosTexto: string = "No existen talonarios asignados.";
     public listaTalonarios: Array<object> = [];
     public srcFlecha: Array<string> = [];
     public flecha: Array<boolean> = [];
@@ -46,7 +46,8 @@ export class TalonariosComponent implements OnInit {
     ngOnInit(): void {
         this._sideDrawerTransition = new SlideInOnTopTransition();
         var Data = JSON.parse(this.session.getInformation());
-        this.contador = Array(Data.talonarios.length).fill(0); 
+        this.contador = Array(Data.talonarios.length).fill(0);
+        console.log("DATOS ----> ", Data);
         if(Data.talonarios.length > 0) {
             this.tieneTalonarios = true;
             this.listaTalonarios = Data.talonarios;
@@ -120,7 +121,7 @@ export class TalonariosComponent implements OnInit {
 
         if(talonarios.length > 0) {
             //BOLETOS PENDIENTES
-            if(talonarios[i].pendientes.length == 0) {
+            if(talonarios[i].Boletos.pendientes.length == 0) {
                 this.srcIconoTalonario[i] = "res://icono_talonario_gris";
                 this.validaStackBolPen[i] = false;
                 this.tienePendientes[i] = false;
@@ -128,23 +129,23 @@ export class TalonariosComponent implements OnInit {
                 this.srcIconoTalonario[i] = "res://icono_talonario";
                 this.validaStackBolPen[i] = true;
                 this.tienePendientes[i] = true;
-                this.cantBolPendientes[i] = talonarios[i].pendientes.length;
+                this.cantBolPendientes[i] = talonarios[i].Boletos.pendientes.length;
                 this.session.setTalonarios(true);
             }
 
             //BOLETOS ASIGNADOS
-            if(talonarios[i].asignados.length == 0) {
+            if(talonarios[i].Boletos.asignados.length == 0) {
                 this.validaStackBolAsig[i] = false;
             } else {
-                this.cantBolAsignados[i] = talonarios[i].asignados.length;
+                this.cantBolAsignados[i] = talonarios[i].Boletos.asignados.length;
                 this.validaStackBolAsig[i] = true;            
             }
 
             //BOLETOS VENDIDOS
-            if(talonarios[i].vendidos.length == 0) {
+            if(talonarios[i].Boletos.vendidos.length == 0) {
                 this.validaStackBolVen[i] = false;
             } else {
-                this.cantBolVendidos[i] = talonarios[i].vendidos.length;
+                this.cantBolVendidos[i] = talonarios[i].Boletos.vendidos.length;
                 this.validaStackBolVen[i] = true;            
             }
         }
@@ -153,8 +154,8 @@ export class TalonariosComponent implements OnInit {
     public VentaBoleto(boleto, talonario){
         var Data = {
             Tipo: "Uno",
-            Boleto: boleto.numero,
-            Talonario: talonario.talonario
+            Boleto: boleto.clave,
+            Talonario: talonario.clave
         };
         this.router.navigate(['ventaboleto', JSON.stringify(Data)]);
     }
