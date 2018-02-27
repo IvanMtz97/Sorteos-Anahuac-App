@@ -1,8 +1,9 @@
-import { Component, ViewChild, OnInit } from '@angular/core';
+import { Component, ViewChild, OnInit, ViewContainerRef } from '@angular/core';
 import * as dialogs from "ui/dialogs";
 import { RadSideDrawerComponent } from "nativescript-pro-ui/sidedrawer/angular";
 import { DrawerTransitionBase, SlideInOnTopTransition } from "nativescript-pro-ui/sidedrawer";
-import statusBar = require("nativescript-status-bar");
+import { ModalComponent } from "./app.modal";
+import { ModalDialogService } from "nativescript-angular/directives/dialogs";
 
 @Component({
   selector: 'redessociales',
@@ -10,6 +11,22 @@ import statusBar = require("nativescript-status-bar");
   templateUrl: './redes_sociales.component.html'
 })
 export class RedesSocialesComponent {
+
+  public constructor(private modal: ModalDialogService, private vcRef: ViewContainerRef)
+  {
+
+  }
+  
+  public showModal() {
+    let options = {
+        context: {},
+        fullscreen: true,
+        viewContainerRef: this.vcRef
+    };
+    this.modal.showModal(ModalComponent, options).then(res => {
+        console.log(res);
+    });
+  } 
 
   @ViewChild("drawer") drawerComponent: RadSideDrawerComponent;
   private _sideDrawerTransition: DrawerTransitionBase;
@@ -33,17 +50,4 @@ export class RedesSocialesComponent {
   onDrawerButtonTap(): void {
     this.drawerComponent.sideDrawer.showDrawer();
   }
-  // public statusBarState: boolean=true;// statusBar.show();(swipe)="hideStatusBar()"
-  // {        
-  //     if(this.statusBarState == true)
-  //     {
-  //         statusBar.hide();
-  //         this.statusBarState = false;
-  //     }
-  //     else if(this.statusBarState == false)
-  //     {
-  //         statusBar.show();
-  //         this.statusBarState = true;
-  //     }
-  // }
 }

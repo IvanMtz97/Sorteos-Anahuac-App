@@ -1,6 +1,6 @@
-<GridLayout columns="auto, auto, *" class="sidedrawer-list-item" [class.selected]="isSelected" (tap)="onNavItemTap(route)">
+<GridLayout columns="auto, auto, *" class="sidedrawer-list-item" [class.selected]="isSelected" (tap)="onNavItemTap(route)">    
     <Image col="0" src="res://icono_{{icon}}" class="fa icon"></Image>
-    <Label col="1" [text]="title" class="p-r-10" style="font-size:20%;"></Label>
-    <Label col="2" text=">" style="font-size:20%"></Label>
+    <Label col="1" [text]="title" class="p-r-10"></Label>
+    <Label col="2" text=">"></Label>
 </GridLayout>
-<StackLayout><Label style="border: 3px solid white;border-radius: 10px;"></Label></StackLayout>
+<StackLayout class="delimitador"></StackLayout>

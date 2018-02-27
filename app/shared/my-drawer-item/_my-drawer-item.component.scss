@@ -3,18 +3,21 @@
 
 $sidedrawer-list-item-offset-left: 15;
 $sidedrawer-list-icon-offset: 10;
-$sidedrawer-list-icon-size: 40;
+$sidedrawer-list-icon-size: 20;
 
 .sidedrawer-list-item {
-    padding: 10;
-    color: $whitegrey;
+    padding-left: $sidedrawer-list-item-offset-left;
+    color: $whitegrey;    
     Label {
         vertical-align: center;
-        
+        font-size: 17%; 
+        letter-spacing:0.1%;
     }
     .fa {
-        width: $sidedrawer-list-icon-size;
+        // width: $sidedrawer-list-icon-size;
         margin-right: $sidedrawer-list-icon-offset;
+        width: 5%;
+        height: auto;
     }
     &.selected {
         background-color: $item-active-background;
@@ -22,4 +25,10 @@ $sidedrawer-list-icon-size: 40;
             color: $item-active-color;
         }
     }
+}
+
+.delimitador { 
+    border-bottom-color: #f7f7f7; 
+    border-bottom-width: 1%;
+    opacity: 0.1;
 }

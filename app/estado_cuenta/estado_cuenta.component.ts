@@ -13,6 +13,10 @@ export class EstadoCuentaComponent implements OnInit {
     * Use the @ViewChild decorator to get a reference to the drawer component.
     * It is used in the "onDrawerButtonTap" function below to manipulate the drawer.
     *************************************************************/
+    constructor()
+    {
+        console.log("ESTADO CUENTA");
+    }
     @ViewChild("drawer") drawerComponent: RadSideDrawerComponent;
 
     private _sideDrawerTransition: DrawerTransitionBase;
@@ -21,8 +25,7 @@ export class EstadoCuentaComponent implements OnInit {
     * Use the sideDrawerTransition property to change the open/close animation of the drawer.
     *************************************************************/
     ngOnInit(): void {
-        this._sideDrawerTransition = new SlideInOnTopTransition();
-        statusBar.show();
+        this._sideDrawerTransition = new SlideInOnTopTransition();                            
     }
 
     get sideDrawerTransition(): DrawerTransitionBase {
