@@ -10,9 +10,12 @@
             </StackLayout>
         </ActionBar>
 
-
+<RadSideDrawer #drawer showOverNavigation="true" [drawerTransition]="sideDrawerTransition" drawerContentSize="360">
+    <StackLayout tkDrawerContent>
+            <MyDrawer visibility="collapsed" [selectedPage]="'solicitatalonario'"></MyDrawer>
+    </StackLayout>
 <!--<Page xmlns="http://www.nativescript.org/tns.xsd" xmlns:CheckBox="nativescript-checkbox" loaded="pageLoaded">-->
-    <StackLayout orientation="vertical">
+    <StackLayout orientation="vertical" tkMainContent>
 
         <StackLayout orientation="horizontal" class="component-header-2">
             <Label class="fa icon" text="&#xf01c;"></Label>
@@ -20,15 +23,15 @@
             <Label class="txtorange" [text]="Datos.Talonario"></Label>
         </StackLayout>
 
-        <StackLayout [visibility]="Datos.Tipo == 'Uno'? 'visible' : 'collapsed'" orientation="horizontal" class="component-header-3">
+        <StackLayout *ngIf="Datos.Tipo == 'Uno'" orientation="horizontal" class="component-header-3">
             <Label text="VENDER BOLETO"></Label>
-            <Label class="txtorange" [text]="Datos.Boleto"></Label>
+            <Label class="txtorange" [text]="Datos.Boleto.folio"></Label>
         </StackLayout>
 
-        <StackLayout [visibility]="Datos.Tipo == 'Dos'? 'visible' : 'collapsed'" orientation="horizontal" class="component-header-3">
+        <StackLayout *ngIf="Datos.Tipo == 'Varios'" orientation="horizontal" class="component-header-3">
             <Label text="VENDER BOLETOS"></Label>
             <StackLayout orientation="horizontal">
-                <Label *ngFor="let Boleto of Datos.Boletos" class="txtorange" [text]="Boleto.numero"></Label>
+                <Label *ngFor="let Boleto of Datos.Boletos" class="txtorange" [text]="Boleto.folio"></Label>
             </StackLayout>
         </StackLayout>
 
@@ -40,7 +43,7 @@
                                 <Label text="Nombre"></Label>
                                 <Label class="txtorange" text="*"></Label>
                             </StackLayout>
-                            <TextField></TextField>
+                            <TextField id="txtNombre" (textChange)="handleInputChanged($event)"></TextField>
                         </StackLayout>
                 
                         <StackLayout class="vb-item">
@@ -48,7 +51,7 @@
                                 <Label text="Apellido paterno"></Label>
                                 <Label class="txtorange" text="*"></Label>
                             </StackLayout>
-                            <TextField></TextField>
+                            <TextField id="txtAppat" (textChange)="handleInputChanged($event)"></TextField>
                         </StackLayout>
                 
                         <StackLayout class="vb-item">
@@ -56,7 +59,7 @@
                                 <Label text="Apellido materno"></Label>
                                 <Label class="txtorange" text="*"></Label>
                             </StackLayout>
-                            <TextField></TextField>
+                            <TextField id="txtApmat" (textChange)="handleInputChanged($event)"></TextField>
                         </StackLayout>
                 
                         <StackLayout class="vb-item">
@@ -64,7 +67,7 @@
                                 <Label text="Calle"></Label>
                                 <Label class="txtorange" text="*"></Label>
                             </StackLayout>
-                            <TextField></TextField>
+                            <TextField id="txtCalle" (textChange)="handleInputChanged($event)"></TextField>
                         </StackLayout>
                 
                         <StackLayout class="vb-item">
@@ -72,7 +75,7 @@
                                 <Label text="Número"></Label>
                                 <Label class="txtorange" text="*"></Label>
                             </StackLayout>
-                            <TextField></TextField>
+                            <TextField id="txtNumero" (textChange)="handleInputChanged($event)"></TextField>
                         </StackLayout>
                 
                         <StackLayout class="vb-item">
@@ -80,7 +83,7 @@
                                 <Label text="Código Postal"></Label>
                                 <Label class="txtorange" text="*"></Label>
                             </StackLayout>
-                            <TextField keyboardType="number" maxLength="5"></TextField>
+                            <TextField id="txtCodigopostal" (textChange)="handleInputChanged($event)" keyboardType="number" maxLength="5"></TextField>
                         </StackLayout>
                 
                         <StackLayout class="vb-item">
@@ -88,7 +91,7 @@
                                 <Label text="Colonia"></Label>
                                 <Label class="txtorange" text="*"></Label>
                             </StackLayout>
-                            <TextField editable="false"></TextField>
+                            <TextField id="txtColonia" (textChange)="handleInputChanged($event)"></TextField>
                         </StackLayout>
                 
                         <StackLayout class="vb-item">
@@ -96,7 +99,7 @@
                                 <Label text="Estado"></Label>
                                 <Label class="txtorange" text="*"></Label>
                             </StackLayout>
-                            <TextField editable="false"></TextField>
+                            <TextField id="txtEstado" (textChange)="handleInputChanged($event)"></TextField>
                         </StackLayout>
                 
                         <StackLayout class="vb-item">
@@ -104,12 +107,12 @@
                                 <Label text="Municipio/Delegación"></Label>
                                 <Label class="txtorange" text="*"></Label>
                             </StackLayout>
-                            <TextField editable="false"></TextField>
+                            <TextField id="txtMunicipio" (textChange)="handleInputChanged($event)"></TextField>
                         </StackLayout>
                 
                         <StackLayout class="vb-item">
                             <Label text="Teléfono fijo"></Label>
-                            <TextField keyboardType="number" maxLength="8"></TextField>
+                            <TextField id="txtTelefonofijo" (textChange)="handleInputChanged($event)" keyboardType="number" maxLength="8"></TextField>
                         </StackLayout>
                 
                         <StackLayout class="vb-item">
@@ -117,7 +120,7 @@
                                 <Label text="Teléfono móvil"></Label>
                                 <Label class="txtorange" text="*"></Label>
                             </StackLayout>
-                            <TextField keyboardType="number" maxLength="10"></TextField>
+                            <TextField id="txtTelefonomovil" (textChange)="handleInputChanged($event)" keyboardType="number" maxLength="10"></TextField>
                         </StackLayout>
                 
                         <StackLayout class="vb-item">
@@ -125,31 +128,37 @@
                                 <Label text="Correo electrónico"></Label>
                                 <Label class="txtorange" text="*"></Label>
                             </StackLayout>
-                            <TextField keyboardType="email"></TextField>
+                            <TextField id="txtCorreoelectronico" (textChange)="handleInputChanged($event)" keyboardType="email"></TextField>
                         </StackLayout>
                 
                         <StackLayout class="vb-item">
                             <Label text="Correo electrónico alterativo"></Label>
-                            <TextField keyboardType="email"></TextField>
-                        </StackLayout>
-                        
-                        <StackLayout class="vb-item">
-                            <CheckBox #CB1 (tap)="toggleCheck()" text="Aplicar a todos" checked="false"></CheckBox>
+                            <TextField id="txtCorreoalternativo" (textChange)="handleInputChanged($event)" keyboardType="email"></TextField>
                         </StackLayout>
 
                         <StackLayout class="vb-item center">
                             <Label class="txtorange" text="* Datos obligatorios"></Label>
                         </StackLayout>
-                
-                        <StackLayout class="vb-item">
-                            <Button class="vb-btn" [text]="txtBtnVender"></Button>
+
+
+
+                        <StackLayout *ngIf="Datos.Tipo == 'Varios'" orientation="horizontal" class="vb-item center">
+                            <Button class="vb-btn" [isEnabled]="cont > 0 ? true : false" (tap)="Anterior()" text="< Anterior"></Button>
+                            <Button class="vb-btn" [isEnabled]="true" (tap)="Siguiente()" text="Siguiente >"></Button>
                         </StackLayout>
                 
+                        <StackLayout *ngIf="Datos.Tipo == 'Uno'" class="vb-item">
+                            <Button class="vb-btn" (tap)="VenderBoleto()" text="vender boleto"></Button>
+                        </StackLayout>
+                
+
+
                     </StackLayout>
         </ScrollView>
         
     </StackLayout>
     
+</RadSideDrawer>
 <!--</Page>-->
     
 </StackLayout>

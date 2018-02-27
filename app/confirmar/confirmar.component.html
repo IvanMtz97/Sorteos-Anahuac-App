@@ -1,0 +1,66 @@
+<ActionBar class="action-bar">
+        <NavigationButton ios:visibility="collapsed" icon="res://menu" (tap)="onDrawerButtonTap()"></NavigationButton>
+        <ActionItem icon="res://navigation/menu" android:visibility="collapsed" (tap)="onDrawerButtonTap()" ios.position="left"></ActionItem>
+        <!-- <Label class="action-bar-title" text="Sorteos Anahuac"></Label> -->
+        <StackLayout orientation="horizontal"
+                    ios:horizontalAlignment="center"
+                    android:horizontalAlignment="center">
+            <Image src="res://icono_logo_encabezado" class="img"></Image>   
+        </StackLayout>
+    </ActionBar>
+
+    <StackLayout orientation="vertical">
+
+        <StackLayout class="page page-content" orientation="vertical" height="13%" backgroundColor="lightgray">
+            <Image src="http://sorteoanahuac.mx/app/banner_1.jpg"></Image>  
+        </StackLayout>
+    
+        <StackLayout orientation="horizontal" class="component-header-2">
+            <Label class="fa icon" text="&#xf01c;"></Label>
+            <Label text="TALONARIO"></Label>
+            <Label class="txtorange" [text]="Datos.Talonario"></Label>
+        </StackLayout>
+
+        <ScrollView>
+        <StackLayout orientation="vertical" class="container center">
+
+            <StackLayout orientation="vertical" class="container-item">
+                <Image class="item imgsmall" src="res://icono_boletos_naranja"></Image>
+                <Label *ngIf="Datos.Tipo == 'Varios'" class="txtlarge" text="BOLETOS"></Label>
+                <Label *ngIf="Datos.Tipo == 'Uno'" class="txtlarge" text="BOLETO"></Label>
+            </StackLayout>
+
+            <StackLayout orientation="vertical" class="container-item">
+                
+                <StackLayout [visibility]="Datos.Tipo == 'Uno' ? 'visible' : 'collapsed'" orientation="vertical">
+                    <Label class="txtorange" text="02143"></Label>
+                    <Label [text]="Datos.Info.Correoelectronico"></Label>
+                </StackLayout>                
+                
+                <StackLayout *ngFor="let boleto of Datos.Boletos" [visibility]="Datos.Tipo == 'Varios'? 'visible' : 'collapsed'" orientation="vertical">
+                    <Label class="txtorange" [text]="boleto.Boleto.folio"></Label>
+                    <Label [text]="boleto.Info.Correoelectronico"></Label>
+                </StackLayout>
+            
+            </StackLayout>
+
+            <StackLayout orientation="vertical" class="container-item">
+                <Label text="El comprador está de acuerdo"></Label>
+                <Label text="con nuestras politicas de"></Label>
+                <Label text="protección y manejo de datos."></Label>
+            </StackLayout>
+
+            <StackLayout orientation="vertical" class="container-item">
+                <Label class="txtmedium" text="¿CONFIRMAR VENTA?"></Label>
+            </StackLayout>
+
+            <StackLayout orientation="horizontal">
+                <Button (tap)="Si()" class="btn-orange" width="100" text="SI"></Button>
+                <Label text=" "></Label>
+                <Button class="btn-orange" width="100" (tap)="Varios()"text="NO"></Button>
+            </StackLayout>
+
+        </StackLayout>
+        </ScrollView>
+
+    </StackLayout>

@@ -1,25 +1,24 @@
 import { NgModule, NO_ERRORS_SCHEMA } from "@angular/core";
 import { NativeScriptCommonModule } from "nativescript-angular/common";
 import { SharedModule } from "../shared/shared.module";
-import { VentaBoletoRoutingModule } from "./ventaboleto-routing.module";
+import { CompradoresRoutingModule } from "./compradores-roting.module";
 import { TNSCheckBoxModule } from "nativescript-checkbox/angular";
 
-import { VentaBoletoComponent } from "./ventaboleto.component";
-import { FormsModule } from "@angular/forms";
+import { CompradoresComponent } from "./compradores.component";
 
 @NgModule({
     imports: [
-        NativeScriptCommonModule,
-        VentaBoletoRoutingModule,
         SharedModule,
-        TNSCheckBoxModule,
-        FormsModule
+        NativeScriptCommonModule,
+        CompradoresRoutingModule,
+        TNSCheckBoxModule
     ],
     declarations: [
-        VentaBoletoComponent
+        CompradoresComponent
     ],
     schemas: [
         NO_ERRORS_SCHEMA
     ]
 })
-export class VentaBoletoModule { }
+
+export class CompradoresModule { }
