@@ -60,12 +60,12 @@
                             <Image src="res://qr" width="60%"></Image>
                             <Label class="txtsmall container-item" text="http://anahuac.edu?Boleto=lokem/fff/gfsjdg46546jh(ahgsdfghsaf54)"></Label>
 
-                            <StackLayout [visibility]="Datos.Tipo == 'Pagar'? 'visible' : 'collapsed'" class="container-item btn-orange" orientation="horizontal">
+                            <StackLayout visibility="{{ visibility ? 'visible' : 'collapsed' }}" class="container-item btn-orange" orientation="horizontal">
                                 <Image src="res://icono_boleto"></Image>
                                 <Label text="PAGAR"></Label>
                             </StackLayout>
 
-                            <StackLayout [visibility]="Datos.Tipo == 'Correo'? 'visible' : 'collapsed'" class="container-item btn-orange" orientation="horizontal">
+                            <StackLayout visibility="{{ visibility ? 'collapsed' : 'visible' }}" class="container-item btn-orange" orientation="horizontal">
                                 <Image src="res://icono_boleto"></Image>
                                 <Label text="ENVIAR POR CORREO"></Label>
                             </StackLayout>

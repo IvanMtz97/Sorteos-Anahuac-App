@@ -1,5 +1,6 @@
 import { Component } from "@angular/core";
 import { ModalDialogParams } from "nativescript-angular/directives/dialogs";
+import { RouterExtensions } from "nativescript-angular/router";
 
 @Component({
     selector: "app-modal",
@@ -10,7 +11,7 @@ export class ModalComponent {
 
     public frameworks: Array<string>;
 
-    public constructor(private params: ModalDialogParams) {
+    constructor(private router: RouterExtensions, private params: ModalDialogParams) {
         this.frameworks = [
             "NativeScript",
             "Xamarin",
@@ -23,7 +24,8 @@ export class ModalComponent {
     public compartir()
     {
         console.log("compartir()");
-        this.close();
+        this.router.navigate(["talonarios"], { clearHistory: true });
+        this.close();        
     }
 
     public close() {

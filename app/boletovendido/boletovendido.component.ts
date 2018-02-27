@@ -14,7 +14,8 @@ export class BoletoVendidoComponent implements OnInit {
     @ViewChild("drawer") drawerComponent: RadSideDrawerComponent;
 
     private _sideDrawerTransition: DrawerTransitionBase; 
-    private Datos: any = [];   
+    private Datos: any = [];  
+    private visibility: boolean = true; 
 
     constructor(private router: ActivatedRoute)
     {
@@ -29,6 +30,15 @@ export class BoletoVendidoComponent implements OnInit {
             this.Datos = JSON.parse(params["data"]);
             console.dir(this.Datos);
         });
+
+        if(this.Datos != undefined)
+        {
+            this.visibility = true;
+        }
+        else
+        {
+            this.visibility = false;
+        }
     }
 
     public toggle()
