@@ -23,12 +23,12 @@
             <StackLayout class="talonario" orientation="horizontal">
                 <Image width="50" src="res://icono_talonario"></Image>
                 <Label class="talonario-header" text="TALONARIO"></Label>
-                <Label class="talonario-header orange" text="{{Talonario}}"></Label>
+                <Label class="talonario-header orange" [text]="Datos.Talonario.talonario"></Label>
             </StackLayout>
             <StackLayout>            
                 <StackLayout (tap)="toggle()" backgroundColor="#e9e9e9" class="talonario" orientation="horizontal" height="12%">
                     <Label class="text-black" text="BOLETO" color="#888888" width="30%" style="font-weight: bold;padding-left: 1%;vertical-align:center;"></Label>
-                    <Label class="text-orange" text="123456" width="58%" style="font-weight: bold;vertical-align:center;"></Label>
+                    <Label class="txtorange" [text]="Datos.Boleto.numero" width="58%" style="font-weight: bold;vertical-align:center;"></Label>
                     <Label class="drop" text="x" width="12%" visibility="{{ selectBoleto ? 'visible' : 'collapsed' }}" color="#1D1D1D"></Label>
                 </StackLayout>
                 <StackLayout class="arrow-down" visibility="{{ selectBoleto ? 'visible' : 'collapsed' }}"></StackLayout>
@@ -38,32 +38,37 @@
 
                             <StackLayout orientation="vertical" class="container-item">
                                 <Label class="txtblack" text="Dueño:" ></Label>
-                                <Label class="txtorange txtlarge" text="Rogelio"></Label>
-                                <Label class="txtorange txtlarge" text="Andrés"></Label>
+                                <Label class="txtorange txtlarge" [text]="Datos.Boleto.info.comprador.nombre"></Label>
+                                <Label class="txtorange txtlarge" [text]="Datos.Boleto.info.comprador.apellidos"></Label>
                             </StackLayout>
                             
                             <StackLayout orientation="vertical" class="container-item">
                                 <Label class="txtblack txtmedium" text="Dirección:"></Label>
-                                <Label class="txtgray txtsmall" text="Revolucion 12"></Label>
-                                <Label class="txtgray txtsmall" text="Los Cabos, Baja California"></Label>
+                                <Label class="txtgray txtsmall" [text]="Datos.Boleto.info.comprador.direccion.calle"></Label>
+                                <Label class="txtgray txtsmall" [text]="Datos.Boleto.info.comprador.direccion.colonia"></Label>
+                                <Label class="txtgray txtsmall" [text]="Datos.Boleto.info.comprador.direccion.municipio"></Label>
                             </StackLayout>
                             
                             <StackLayout orientation="vertical" class="container-item">
                                 <Label class="txtblack txtmedium" text="Contacto:"></Label>
-                                <Label class="txtgray txtsmall" text="Teléfono fijo: 5500002222"></Label>
-                                <Label class="txtgray txtsmall" text="Teléfono móvil: 5585691234"></Label>
+                                <Label class="txtgray txtsmall" text="Teléfono fijo: {{Datos.Boleto.info.comprador.direccion.telefono}}"></Label>
+                                <Label class="txtgray txtsmall" text="Teléfono móvil: {{Datos.Boleto.info.comprador.celular}}"></Label>
                                 <Label class="txtgray txtsmall" text="Correo electrónico:"></Label>
-                                <Label class="txtgray txtsmall" text="rogelio.andres@anahuac.mx"></Label>
+                                <Label class="txtgray txtsmall" [text]="Datos.Boleto.info.comprador.correo"></Label>
                             </StackLayout>
 
                             <Image src="res://qr" width="60%"></Image>
                             <Label class="txtsmall container-item" text="http://anahuac.edu?Boleto=lokem/fff/gfsjdg46546jh(ahgsdfghsaf54)"></Label>
 
-                            <StackLayout class="container-item btn-orange" orientation="horizontal">
+                            <StackLayout [visibility]="Datos.Tipo == 'Pagar'? 'visible' : 'collapsed'" class="container-item btn-orange" orientation="horizontal">
+                                <Image src="res://icono_boleto"></Image>
+                                <Label text="PAGAR"></Label>
+                            </StackLayout>
+
+                            <StackLayout [visibility]="Datos.Tipo == 'Correo'? 'visible' : 'collapsed'" class="container-item btn-orange" orientation="horizontal">
                                 <Image src="res://icono_boleto"></Image>
                                 <Label text="ENVIAR POR CORREO"></Label>
                             </StackLayout>
-
 
                         </StackLayout>
                     </ScrollView>

@@ -2,23 +2,25 @@
     <StackLayout height="50"></StackLayout>
 
     <StackLayout class="container-item">
-        <Image src="res://icono_logo_login"></Image>
+        <Image src="res://logo_horizontal"></Image>
     </StackLayout>
 
     <StackLayout class="container-item">
-        <Label class="txtlarge txtwhite" text="Política de manejo de datos"></Label>
+        <Label class="txtlarge txtwhite" (tap)="btnPolitica()" text="Política de protección y"></Label>
+        <Label class="txtlarge txtwhite" (tap)="btnPolitica()" text="manejo de datos"></Label>
     </StackLayout>
 
     <StackLayout class="container-item">
-        <Label class="txtlarge txtwhite" text="Reglamento del sorteo"></Label>
+        <Label class="txtlarge txtwhite" (tap)="btnCondiciones()" text="Condiciones de uso"></Label>
     </StackLayout>
 
     <StackLayout class="container-item">
-        <Label class="txtlarge txtwhite" text="Política de manejo de datos"></Label>
+        <Label class="txtlarge txtwhite" (tap)="btnReglamento()" text="Reglamento del sorteo"></Label>
     </StackLayout>
 
     <StackLayout class="container-item">
-        <Label class="txtlarge txtwhite" text="Aceptación de talonarios"></Label>
+        <Label class="txtlarge txtwhite" (tap)="btnAceptacion()" text="Aceptación de talonarios"></Label>
+        <Label class="txtlarge txtwhite" (tap)="btnAceptacion()" text="para venta"></Label>
     </StackLayout>
 
     <StackLayout class="container-item">

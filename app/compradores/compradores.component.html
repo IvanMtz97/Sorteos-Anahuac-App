@@ -1,0 +1,44 @@
+<ActionBar class="action-bar">
+    <NavigationButton ios:visibility="collapsed" icon="res://menu" (tap)="onDrawerButtonTap()"></NavigationButton>
+    <ActionItem icon="res://navigation/menu" android:visibility="collapsed" (tap)="onDrawerButtonTap()" ios.position="left"></ActionItem>
+    <!-- <Label class="action-bar-title" text="Sorteos Anahuac"></Label> -->
+    <StackLayout orientation="horizontal"
+                ios:horizontalAlignment="center"
+                android:horizontalAlignment="center">
+        <Image src="res://icono_logo_encabezado" class="img"></Image>   
+    </StackLayout>
+</ActionBar>
+
+<StackLayout orientation="vertical">
+
+    <StackLayout class="page page-content" orientation="vertical" height="13%" backgroundColor="lightgray">
+        <Image src="http://sorteoanahuac.mx/app/banner_1.jpg"></Image>  
+    </StackLayout>
+
+    <StackLayout orientation="horizontal" class="component-header">
+        <Label class="fa" text="&#xf0c0;"></Label>
+        <Label text="MIS COMPRADORES"></Label>
+    </StackLayout>
+
+    <StackLayout>
+        <StackLayout class="container" orientation="horizontal">
+            <CheckBox checked="false"></CheckBox>
+            <Label text="José Hernandez"></Label>
+        </StackLayout>
+    </StackLayout>
+
+    <StackLayout>
+        <StackLayout class="container" orientation="horizontal">
+            <CheckBox checked="false"></CheckBox>
+            <Label text="Sorteo Anahuac"></Label>
+        </StackLayout>
+    </StackLayout>
+
+    <StackLayout>
+        <StackLayout class="container" orientation="horizontal">
+            <CheckBox checked="true"></CheckBox>
+            <Label text="Ana González"></Label>
+        </StackLayout>
+    </StackLayout>
+    
+</StackLayout>
