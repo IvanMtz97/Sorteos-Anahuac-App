@@ -43,13 +43,6 @@ export class TalonariosComponent implements OnInit {
     private _sideDrawerTransition: DrawerTransitionBase;
 
     ngOnInit(): void {
-        // this._sideDrawerTransition = new SlideInOnTopTransition();
-        // var Data = JSON.parse(this.session.getInformation());
-        // this.contador = Array(Data.talonarios.length).fill(0); 
-        // if(Data.talonarios.length > 0) {
-        //     this.tieneTalonarios = true;
-        //     this.listaTalonarios = Data.talonarios;
-        // }
         this._sideDrawerTransition = new SlideInOnTopTransition();
         var Data = JSON.parse(this.session.getInformation());
         this.contador = Array(Data.talonarios.length).fill(0);

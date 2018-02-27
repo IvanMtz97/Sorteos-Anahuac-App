@@ -5,7 +5,7 @@ import * as dialogs from "ui/dialogs";
 import * as utils from "utils/utils";
 import { MyHttpGetService } from "../services/http-get/http-get.services";
 import { SessionService } from "../services/session/session.services";
-import { RouterExtensions } from "nativescript-angular/router";
+import { ActivatedRoute, Router } from "@angular/router";
 
 @Component({
     selector: "Login",
@@ -19,7 +19,7 @@ export class LoginComponent implements OnInit {
     public nextLibAvailable: boolean = false;
     public avisoPrivacidad: string = "http://www.sorteoanahuac.mx/aviso-de-privacidad.pdf"; 
 
-    constructor(page: Page, private router: RouterExtensions, private myGetService: MyHttpGetService, private session: SessionService) {
+    constructor(page: Page, private router: Router, private myGetService: MyHttpGetService, private session: SessionService) {
         page.actionBarHidden = true; 
     }
 
@@ -73,7 +73,8 @@ export class LoginComponent implements OnInit {
         this.session.setInformation(JSON.stringify(data.json()));
         //this.loader.display(false);  
         this.session.setToken(data.json().token);
-        this.router.navigate(["talonarios"], { clearHistory: true });
+        this.session.setIdColaborador(data.json().identificador);
+        this.router.navigate(["talonarios"]);
     }
     public Avisos() {
         utils.openUrl(this.avisoPrivacidad);
