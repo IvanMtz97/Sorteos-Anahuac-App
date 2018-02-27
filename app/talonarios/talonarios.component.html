@@ -24,7 +24,7 @@
                             <StackLayout (tap)="toggle(i)" orientation="horizontal" class="component-header-2">
                                 <Image class="fa icon" width="6%" [src]="srcIconoTalonario[i]"></Image> 
                                 <Label class="txt-header" text="TALONARIO"></Label>
-                                <Label class="txtorange txt-header" style="text-align: left;" [text]="talonario.clave" width="30%"></Label>
+                                <Label class="txtorange txt-header" style="text-align: left;" [text]="talonario.clave" width="37%"></Label>
                                 <Image style="margin-left:12%;" width="6%" [src]="srcFlecha[i]"></Image>
                             </StackLayout>
                         </StackLayout>
@@ -57,7 +57,7 @@
                                 <StackLayout *ngFor="let boletoAsignado of talonario.asignados; let i_asignado = index">
                                     <GridLayout class="component-header-4" columns="auto, auto, *" rows="auto, auto, auto" height="65">
                                         <Label col="0" [row]="i_asignado" [text]="boletoAsignado.numero"></Label>
-                                        <Label col="1" [row]="i_asignado" class="text3" text="- Eduardo Vazquez"></Label>
+                                        <Label col="1" [row]="i_asignado" class="text3" text="- Eduardo Vazquez"></Label>  
                                         <Label col="2" [row]="i_asignado" class="text2" style="text-align:right;" row="0" (tap)="ConsultaPagado(boletoAsignado, talonario)" text="Consultar >"></Label>
                                     </GridLayout>
                                     <StackLayout class="delimitador"></StackLayout>
