@@ -9,36 +9,41 @@
     </StackLayout>
 </ActionBar>
 
-<StackLayout orientation="vertical">
-
-    <StackLayout class="page page-content" orientation="vertical" height="13%" backgroundColor="lightgray">
-        <Image src="http://sorteoanahuac.mx/app/banner_1.jpg"></Image>  
+<RadSideDrawer #drawer showOverNavigation="true" [drawerTransition]="sideDrawerTransition" drawerContentSize="360">
+    <StackLayout tkDrawerContent>
+        <MyDrawer [selectedPage]="'notificaciones'"></MyDrawer>
     </StackLayout>
+    <StackLayout orientation="vertical" tkMainContent>
 
-    <StackLayout orientation="horizontal" class="component-header">
-        <Label class="fa" text="&#xf0c0;"></Label>
-        <Label text="MIS COMPRADORES"></Label>
-    </StackLayout>
-
-    <StackLayout>
-        <StackLayout class="container" orientation="horizontal">
-            <CheckBox checked="false"></CheckBox>
-            <Label text="José Hernandez"></Label>
+        <StackLayout class="page page-content" orientation="vertical" height="13%" backgroundColor="lightgray">
+            <Image src="http://sorteoanahuac.mx/app/banner_1.jpg"></Image>  
         </StackLayout>
-    </StackLayout>
 
-    <StackLayout>
-        <StackLayout class="container" orientation="horizontal">
-            <CheckBox checked="false"></CheckBox>
-            <Label text="Sorteo Anahuac"></Label>
+        <StackLayout orientation="horizontal" class="component-header">
+            <Label class="fa" text="&#xf0c0;"></Label>
+            <Label text="MIS COMPRADORES"></Label>
         </StackLayout>
-    </StackLayout>
 
-    <StackLayout>
-        <StackLayout class="container" orientation="horizontal">
-            <CheckBox checked="true"></CheckBox>
-            <Label text="Ana González"></Label>
+        <StackLayout>
+            <StackLayout class="container" orientation="horizontal">
+                <CheckBox checked="false"></CheckBox>
+                <Label text="José Hernandez"></Label>
+            </StackLayout>
         </StackLayout>
+
+        <StackLayout>
+            <StackLayout class="container" orientation="horizontal">
+                <CheckBox checked="false"></CheckBox>
+                <Label text="Sorteo Anahuac"></Label>
+            </StackLayout>
+        </StackLayout>
+
+        <StackLayout>
+            <StackLayout class="container" orientation="horizontal">
+                <CheckBox checked="true"></CheckBox>
+                <Label text="Ana González"></Label>
+            </StackLayout>
+        </StackLayout>
+        
     </StackLayout>
-    
-</StackLayout>
+</RadSideDrawer>

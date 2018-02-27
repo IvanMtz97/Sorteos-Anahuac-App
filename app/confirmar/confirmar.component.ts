@@ -1,7 +1,9 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, ViewChild } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
 import { RouterExtensions } from "nativescript-angular/router/router-extensions";
 import { MyHttpPostService } from "../services/http-post/http-post.services";
+import { RadSideDrawerComponent } from "nativescript-pro-ui/sidedrawer/angular";
+import { DrawerTransitionBase, SlideInOnTopTransition } from "nativescript-pro-ui/sidedrawer";
 
 @Component({
     selector: "Confirmar",
@@ -13,6 +15,8 @@ import { MyHttpPostService } from "../services/http-post/http-post.services";
 
 export class ConfirmarComponent implements OnInit{
     private Datos: any = [];
+    @ViewChild("drawer") drawerComponent: RadSideDrawerComponent;
+    private _sideDrawerTransition: DrawerTransitionBase;
 
     constructor(private route: ActivatedRoute, private router: RouterExtensions, private API: MyHttpPostService){
         console.log("CONFIRMAR COMPONENT");
@@ -38,5 +42,9 @@ export class ConfirmarComponent implements OnInit{
 
     Varios(){
         this.router.navigate(["talonarios"], { clearHistory: true });
+    }
+
+    onDrawerButtonTap(): void {
+      this.drawerComponent.sideDrawer.showDrawer();
     }
 }
