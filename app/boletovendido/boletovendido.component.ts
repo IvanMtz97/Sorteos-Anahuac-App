@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild } from "@angular/core";
 import { RadSideDrawerComponent } from "nativescript-pro-ui/sidedrawer/angular";
 import { DrawerTransitionBase, SlideInOnTopTransition } from "nativescript-pro-ui/sidedrawer";
+import { ActivatedRoute } from "@angular/router";
 import statusBar = require("nativescript-status-bar");
     
 @Component({
@@ -12,17 +13,22 @@ export class BoletoVendidoComponent implements OnInit {
     public selectBoleto: boolean = true;
     @ViewChild("drawer") drawerComponent: RadSideDrawerComponent;
 
-    private _sideDrawerTransition: DrawerTransitionBase;    
+    private _sideDrawerTransition: DrawerTransitionBase; 
+    private Datos: any = [];   
 
-    constructor()
+    constructor(private router: ActivatedRoute)
     {
-
+        console.log("BOLETO VENDIDO COMPONENT");
     }
     
     ngOnInit(): void 
     {
         console.log("BOLETOVENDIDO");
-        this._sideDrawerTransition = new SlideInOnTopTransition();        
+        this._sideDrawerTransition = new SlideInOnTopTransition();
+        this.router.params.subscribe((params) => {
+            this.Datos = JSON.parse(params["data"]);
+            console.dir(this.Datos);
+        });
     }
 
     public toggle()

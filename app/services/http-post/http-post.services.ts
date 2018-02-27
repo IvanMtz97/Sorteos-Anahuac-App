@@ -14,8 +14,9 @@ export class MyHttpPostService {
     constructor(private http: Http, private session: SessionService) { }
 
     postData(data: any, path) {
+        console.log("LLAMA A LA API ", path, data);
         let options = this.createRequestOptions();
-        return this.http.post((encodeURI(this.serverUrl + path)), { data }, { headers: options })
+        return this.http.post((this.serverUrl + path), { data }, { headers: options })
             .map(res => res);
     }
 

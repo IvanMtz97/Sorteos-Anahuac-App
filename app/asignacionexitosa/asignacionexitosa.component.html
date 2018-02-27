@@ -10,18 +10,22 @@
             </StackLayout>
         </ActionBar>
 
-    <StackLayout>
-        
+    <RadSideDrawer #drawer showOverNavigation="true" [drawerTransition]="sideDrawerTransition" drawerContentSize="360">
+        <StackLayout tkDrawerContent>
+                <MyDrawer [selectedPage]="'solicitatalonario'"></MyDrawer>
+        </StackLayout>
+    <StackLayout tkMainContent>
+
         <StackLayout orientation="horizontal" class="component-header-2">
             <Label class="fa icon" text="&#xf01c;"></Label>
             <Label text="TALONARIO"></Label>
-            <Label class="txtorange" text="00001"></Label>
+            <Label class="txtorange" [text]="Datos.Boletos.Talonario"></Label>
         </StackLayout>
 
         <ScrollView>
 
             <!-- DROPDOWN -->
-            <StackLayout *ngFor="let boleto of DataBoletos" orientation="vertical">
+            <StackLayout orientation="vertical">
 
                 <!-- HEADER DE DROPDOWN -->
                 <!-- <StackLayout (tap)="toggle()" orientation="horizontal" class="component-header-3">
@@ -36,12 +40,13 @@
                     <Label class="container-item txtlarge txtorange" text="¡FELICIDADES!"></Label>
 
                     <StackLayout class="container-item" orientation="vertical">
-                        <Label class="txtlarge txtblack" [text]="boleto.nombres"></Label>
-                        <Label class="txtlarge txtblack" [text]="boleto.apellidos"></Label>
+                        <Label class="txtlarge txtblack" [text]="Datos.Boletos.Info.Nombre"></Label>
+                        <Label class="txtlarge txtblack" [text]="Datos.Boletos.Info.Appat"></Label>
                     </StackLayout>
 
                     <Label text="Eres dueño del boleto:"></Label>
-                    <Label class="txtlarge txtorange" [text]="boleto.numero"></Label>
+                    <Label class="txtlarge txtorange" [text]="Datos.Boletos.Boleto.Boleto.folio"></Label>
+
                     <Image class="imgmedium" src="res://qr"></Image>
                     <Label class="container-item" text="http://anahuac.edu?boleto=!osmdp2m1osamkasd_ampdqadw1amsp$asmp"></Label>
 
@@ -65,4 +70,5 @@
         </ScrollView>
 
     </StackLayout>
+    </RadSideDrawer>
 </StackLayout>

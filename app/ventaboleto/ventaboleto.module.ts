@@ -5,13 +5,15 @@ import { VentaBoletoRoutingModule } from "./ventaboleto-routing.module";
 import { TNSCheckBoxModule } from "nativescript-checkbox/angular";
 
 import { VentaBoletoComponent } from "./ventaboleto.component";
+import { FormsModule } from "@angular/forms";
 
 @NgModule({
     imports: [
         NativeScriptCommonModule,
         VentaBoletoRoutingModule,
         SharedModule,
-        TNSCheckBoxModule
+        TNSCheckBoxModule,
+        FormsModule
     ],
     declarations: [
         VentaBoletoComponent
