@@ -51,6 +51,6 @@ export class PrivacidadComponent implements OnInit {
 
     Aceptar(){
         this.session.setFirstRun(false);
-        this.router.navigate(["login"]);
+        this.router.navigate(["talonarios"]);
     }
 }
