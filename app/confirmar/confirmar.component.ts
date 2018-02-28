@@ -31,7 +31,7 @@ export class ConfirmarComponent implements OnInit{
 
     Si(){
         if(this.Datos.Tipo == "Uno"){
-            this.router.navigate(["asignacionexitosa", JSON.stringify({ Tipo: "Uno", Boletos: this.Datos } )]);
+            this.router.navigate(["asignacionexitosa", JSON.stringify({ Tipo: "Uno", Boletos: this.Datos } )], { clearHistory: true });
             this.API.postData(this.Datos.Boleto.Boletos.Info.comprador, "api/Boleto/Vender").subscribe((response) => {
                 console.log(response);
             });

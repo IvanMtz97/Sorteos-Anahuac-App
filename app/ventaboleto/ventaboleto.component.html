@@ -1,4 +1,4 @@
-<StackLayout>
+
         <ActionBar class="action-bar">
             <NavigationButton ios:visibility="collapsed" icon="res://menu" (tap)="onDrawerButtonTap()"></NavigationButton>
             <ActionItem icon="res://navigation/menu" android:visibility="collapsed" (tap)="onDrawerButtonTap()" ios.position="left"></ActionItem>
@@ -14,12 +14,12 @@
     <StackLayout tkDrawerContent>
             <MyDrawer visibility="collapsed" [selectedPage]="'solicitatalonario'"></MyDrawer>
     </StackLayout>
-    <StackLayout class="page page-content" orientation="vertical" height="13%" backgroundColor="lightgray">
-        <Image src="https://sorteoanahuac.mx/app/banner_1.jpg"></Image>
-    </StackLayout>
 <!--<Page xmlns="http://www.nativescript.org/tns.xsd" xmlns:CheckBox="nativescript-checkbox" loaded="pageLoaded">-->
     <StackLayout orientation="vertical" tkMainContent>
 
+        <StackLayout class="page page-content" orientation="vertical" height="13%" backgroundColor="lightgray">
+            <Image src="https://sorteoanahuac.mx/app/banner_1.jpg"></Image>
+        </StackLayout>
         <StackLayout orientation="horizontal" class="component-header-2">
             <Label class="fa icon" text="&#xf01c;"></Label>
             <Label class="letter-spacing" text="TALONARIO"></Label>
@@ -166,5 +166,3 @@
     
 </RadSideDrawer>
 <!--</Page>-->
-    
-</StackLayout>

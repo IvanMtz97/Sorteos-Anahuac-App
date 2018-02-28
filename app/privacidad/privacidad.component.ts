@@ -23,10 +23,10 @@ export class PrivacidadComponent implements OnInit {
     }
 
     ngOnInit(){
-        this.Politicas = "https://www.facebook.com/";
-        this.Aceptacion = "https://www.npmjs.com/package/nativescript-openurl";
-        this.Reglamento = "https://web.skype.com/en/";
-        this.Condiciones = "https://google.com/";
+        this.Politicas = this.session.getPoliticas();
+        this.Aceptacion = this.session.getAceptacionTalonarios();
+        this.Reglamento = this.session.getReglamento();
+        this.Condiciones = this.session.getReglamento();
         console.log(this.Politicas);
         console.log(this.Aceptacion);
         console.log(this.Reglamento);

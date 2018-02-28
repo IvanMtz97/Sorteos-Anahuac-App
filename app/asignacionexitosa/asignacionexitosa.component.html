@@ -1,4 +1,3 @@
-<StackLayout>
         <ActionBar class="action-bar">
             <NavigationButton ios:visibility="collapsed" icon="res://menu" (tap)="onDrawerButtonTap()"></NavigationButton>
             <ActionItem icon="res://navigation/menu" android:visibility="collapsed" (tap)="onDrawerButtonTap()" ios.position="left"></ActionItem>
@@ -26,18 +25,7 @@
 
         <ScrollView>
 
-            <!-- DROPDOWN -->
             <StackLayout orientation="vertical">
-
-                <!-- HEADER DE DROPDOWN -->
-                <!-- <StackLayout (tap)="toggle()" orientation="horizontal" class="component-header-3">
-                    <Label text="BOLETO"></Label>
-                    <Label class="txtorange" [text]="boleto.numero"></Label>
-                </StackLayout> -->
-                <!-- HEADER DE DROPDOWN -->
-
-
-                <!-- CUERPO DE DROPDOWN -->
                 <StackLayout class="container center" orientation="vertical">
                     <Label class="container-item txtlarge txtorange" text="¡FELICIDADES!"></Label>
 
@@ -63,14 +51,10 @@
                     </StackLayout>
 
                 </StackLayout>
-                <!-- CUERPO DE DROPDOWN -->
-
 
             </StackLayout>
-            <!-- DROPDOWN -->  
 
         </ScrollView>
 
     </StackLayout>
     </RadSideDrawer>
-</StackLayout>

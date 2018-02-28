@@ -5,6 +5,7 @@ import { confirm } from "ui/dialogs";
 import * as dialogs from "ui/dialogs";
 import { RadSideDrawerComponent } from "nativescript-pro-ui/sidedrawer/angular";
 import { DrawerTransitionBase, SlideInOnTopTransition } from "nativescript-pro-ui/sidedrawer";
+import * as Toast from "nativescript-toast";
 
 @Component({
     selector: "VentaBoleto",
@@ -78,7 +79,7 @@ export class VentaBoletoComponent implements OnInit {
                 Boleto: this.Datos,
                 Info: this.Info,
                 Tipo: "Uno"
-            })]);
+            })], { clearHistory: true });
         }else{
             dialogs.alert({
                 title: "AVISO",
@@ -98,6 +99,7 @@ export class VentaBoletoComponent implements OnInit {
     private Siguiente(){
         if(this.ValidarCampos()){
             this.PilaBoletos.push({Boleto: this.Datos.Boletos[this.cont], Info: this.Info});
+            Toast.makeText("Boleto asignado", "short").show();
             this.cont++;
             if(this.cont == this.Datos.Boletos.length){
 
@@ -107,7 +109,7 @@ export class VentaBoletoComponent implements OnInit {
                     Talonario: this.Datos.Talonario
                 }
 
-                this.router.navigate(["confirmar", JSON.stringify(Param)]);
+                this.router.navigate(["confirmar", JSON.stringify(Param)],  { clearHistory: true } );
 
             }
         }else{
