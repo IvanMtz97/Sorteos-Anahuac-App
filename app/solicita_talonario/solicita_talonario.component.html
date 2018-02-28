@@ -1,13 +1,13 @@
 <ActionBar class="action-bar">
-        <NavigationButton ios:visibility="collapsed" icon="res://menu" (tap)="onDrawerButtonTap()"></NavigationButton>
-        <ActionItem icon="res://navigation/menu" android:visibility="collapsed" (tap)="onDrawerButtonTap()" ios.position="left"></ActionItem>
-        <!-- <Label class="action-bar-title" text="Sorteos Anahuac"></Label> -->
-        <StackLayout orientation="horizontal"
-                   ios:horizontalAlignment="center"
-                   android:horizontalAlignment="center">
-            <Image src="res://icono_logo_encabezado" class="img"></Image>   
-        </StackLayout>
-    </ActionBar>
+    <NavigationButton ios:visibility="collapsed" icon="res://menu" (tap)="onDrawerButtonTap()"></NavigationButton>
+    <ActionItem icon="res://navigation/menu" android:visibility="collapsed" (tap)="onDrawerButtonTap()" ios.position="left"></ActionItem>
+    <!-- <Label class="action-bar-title" text="Sorteos Anahuac"></Label> -->
+    <StackLayout orientation="horizontal"
+                ios:horizontalAlignment="center"
+                android:horizontalAlignment="center">
+        <Image src="res://icono_logo_encabezado" class="img"></Image>   
+    </StackLayout>
+</ActionBar>
 
 <RadSideDrawer #drawer showOverNavigation="true" [drawerTransition]="sideDrawerTransition" drawerContentSize="360">
     <StackLayout tkDrawerContent>
@@ -22,7 +22,7 @@
                 <Label class="fa" text="&#xf055;"></Label>
                 <Label text="SOLICITA UN TALONARIO"></Label>
             </StackLayout>
-            <StackLayout class="container center" visibility="visible">  
+            <StackLayout class="container center" *ngIf="validaPagina">  
                 <Label 
                     class="txtblack txtlarge"
                     [text]="text1"
@@ -46,7 +46,7 @@
                     textWrap="true">
                 </Label>                        
             </StackLayout>
-            <StackLayout class="container center" visibility="collapsed">  
+            <StackLayout class="container center" *ngIf="!validaPagina">  
                     <Label
                         class="txtblack txtlarge container"
                         [text]="text1"
