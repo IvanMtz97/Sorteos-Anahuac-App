@@ -1,8 +1,6 @@
 import { Component } from "@angular/core";
 import { ModalDialogParams } from "nativescript-angular/directives/dialogs";
 import { RouterExtensions } from "nativescript-angular/router";
-import * as Clipboard from "nativescript-clipboard";
-import * as Toast from "nativescript-toast";
 import * as SocialShare from "nativescript-social-share";
 
 @Component({
@@ -13,12 +11,8 @@ import * as SocialShare from "nativescript-social-share";
 export class ModalComponent {
 
     public frameworks: Array<string>;
-    public url: string;
 
-    constructor(private router: RouterExtensions, private params: ModalDialogParams) {        
-        this.url = "https://jaja.com/";
-        console.log("queCompartir -> " + params.context.queCompartir);
-    }
+    constructor(private router: RouterExtensions, private params: ModalDialogParams) { }
 
     public compartir()
     {
@@ -31,13 +25,7 @@ export class ModalComponent {
             SocialShare.shareUrl("https://angular.io/", "Home of Angular", "¿Como te gustaria compartir tu boleto?");
         }        
         this.close();        
-    }
-
-    copiar(){
-        console.log("COPIAR CLIPBOARD", this.url);
-        Clipboard.setText(this.url).then(function() {});
-        Toast.makeText("Copiado al portapapeles", "long").show();
-    }
+    }    
 
     compradores(){
         console.log("compradores");
