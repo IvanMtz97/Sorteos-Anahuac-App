@@ -46,7 +46,7 @@
                                 <Label class="letter-spacing" text="Nombre"></Label>
                                 <Label class="txtorange letter-spacing" text="*"></Label>
                             </StackLayout>
-                            <TextField id="txtNombre" (textChange)="handleInputChanged($event)"></TextField>
+                            <TextField class="txtCampo" id="txtNombre" (textChange)="handleInputChanged($event)"></TextField>
                         </StackLayout>
                 
                         <StackLayout class="vb-item">
@@ -54,7 +54,7 @@
                                 <Label class="letter-spacing" text="Apellido paterno"></Label>
                                 <Label class="txtorange letter-spacing" text="*"></Label>
                             </StackLayout>
-                            <TextField id="txtAppat" (textChange)="handleInputChanged($event)"></TextField>
+                            <TextField class="txtCampo" id="txtAppat" (textChange)="handleInputChanged($event)"></TextField>
                         </StackLayout>
                 
                         <StackLayout class="vb-item">
@@ -62,7 +62,7 @@
                                 <Label class="letter-spacing" text="Apellido materno"></Label>
                                 <Label class="txtorange letter-spaccing" text="*"></Label>
                             </StackLayout>
-                            <TextField id="txtApmat" (textChange)="handleInputChanged($event)"></TextField>
+                            <TextField class="txtCampo" id="txtApmat" (textChange)="handleInputChanged($event)"></TextField>
                         </StackLayout>
                 
                         <StackLayout class="vb-item">
@@ -70,7 +70,7 @@
                                 <Label class="letter-spacing" text="Calle"></Label>
                                 <Label class="txtorange letter-spacing" text="*"></Label>
                             </StackLayout>
-                            <TextField id="txtCalle" (textChange)="handleInputChanged($event)"></TextField>
+                            <TextField class="txtCampo" id="txtCalle" (textChange)="handleInputChanged($event)"></TextField>
                         </StackLayout>
                 
                         <StackLayout class="vb-item">
@@ -78,7 +78,7 @@
                                 <Label class="letter-spacing" text="Número"></Label>
                                 <Label class="txtorange" text="*"></Label>
                             </StackLayout>
-                            <TextField id="txtNumero" (textChange)="handleInputChanged($event)"></TextField>
+                            <TextField class="txtCampo" id="txtNumero" (textChange)="handleInputChanged($event)"></TextField>
                         </StackLayout>
                 
                         <StackLayout class="vb-item">
@@ -86,7 +86,7 @@
                                 <Label class="letter-spacing" text="Código Postal"></Label>
                                 <Label class="txtorange letter-spacing" text="*"></Label>
                             </StackLayout>
-                            <TextField id="txtCodigopostal" (textChange)="handleInputChanged($event)" keyboardType="number" maxLength="5"></TextField>
+                            <TextField class="txtCampo" id="txtCodigopostal" (textChange)="handleInputChanged($event)" keyboardType="number" maxLength="5"></TextField>
                         </StackLayout>
                 
                         <StackLayout class="vb-item">
@@ -94,7 +94,7 @@
                                 <Label class="letter-spacing" text="Colonia"></Label>
                                 <Label class="txtorange letter-spacing" text="*"></Label>
                             </StackLayout>
-                            <TextField id="txtColonia" (textChange)="handleInputChanged($event)"></TextField>
+                            <TextField class="txtCampo" id="txtColonia" (textChange)="handleInputChanged($event)"></TextField>
                         </StackLayout>
                 
                         <StackLayout class="vb-item">
@@ -102,7 +102,7 @@
                                 <Label class="letter-spacing" text="Estado"></Label>
                                 <Label class="txtorange letter-spaccing" text="*"></Label>
                             </StackLayout>
-                            <TextField id="txtEstado" (textChange)="handleInputChanged($event)"></TextField>
+                            <TextField class="txtCampo" id="txtEstado" (textChange)="handleInputChanged($event)"></TextField>
                         </StackLayout>
                 
                         <StackLayout class="vb-item">
@@ -110,12 +110,15 @@
                                 <Label class="letter-spacing" text="Municipio/Delegación"></Label>
                                 <Label class="txtorange letter-spacing" text="*"></Label>
                             </StackLayout>
-                            <TextField id="txtMunicipio" (textChange)="handleInputChanged($event)"></TextField>
+                            <TextField class="txtCampo" id="txtMunicipio" (textChange)="handleInputChanged($event)"></TextField>
                         </StackLayout>
                 
                         <StackLayout class="vb-item">
-                            <Label class="letter-spacing" text="Teléfono fijo"></Label>
-                            <TextField id="txtTelefonofijo" (textChange)="handleInputChanged($event)" keyboardType="number" maxLength="8"></TextField>
+                            <StackLayout orientation="horizontal">
+                                <Label class="letter-spacing" text="Teléfono fijo"></Label>
+                                <Label class="txtorange letter-spacing" text="*"></Label>
+                            </StackLayout>
+                            <TextField class="txtCampo" id="txtTelefonofijo" (textChange)="handleInputChanged($event)" keyboardType="number" maxLength="8"></TextField>
                         </StackLayout>
                 
                         <StackLayout class="vb-item">
@@ -123,7 +126,7 @@
                                 <Label class="letter-spacing" text="Teléfono móvil"></Label>
                                 <Label class="txtorange letter-spacing" text="*"></Label>
                             </StackLayout>
-                            <TextField id="txtTelefonomovil" (textChange)="handleInputChanged($event)" keyboardType="number" maxLength="10"></TextField>
+                            <TextField class="txtCampo" id="txtTelefonomovil" (textChange)="handleInputChanged($event)" keyboardType="number" maxLength="10"></TextField>
                         </StackLayout>
                 
                         <StackLayout class="vb-item">
@@ -131,12 +134,12 @@
                                 <Label class="letter-spacing" text="Correo electrónico"></Label>
                                 <Label class="txtorange letter-spacing" text="*"></Label>
                             </StackLayout>
-                            <TextField id="txtCorreoelectronico" (textChange)="handleInputChanged($event)" keyboardType="email"></TextField>
+                            <TextField class="txtCampo" id="txtCorreoelectronico" (textChange)="handleInputChanged($event)" keyboardType="email"></TextField>
                         </StackLayout>
                 
                         <StackLayout class="vb-item">
                             <Label class="letter-spacing" text="Correo electrónico alterativo"></Label>
-                            <TextField id="txtCorreoalternativo" (textChange)="handleInputChanged($event)" keyboardType="email"></TextField>
+                            <TextField class="txtCampo" id="txtCorreoalternativo" (textChange)="handleInputChanged($event)" keyboardType="email"></TextField>
                         </StackLayout>
 
                         <StackLayout class="vb-item center">
