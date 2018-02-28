@@ -4,6 +4,7 @@ import { RadSideDrawerComponent } from "nativescript-pro-ui/sidedrawer/angular";
 import { DrawerTransitionBase, SlideInOnTopTransition } from "nativescript-pro-ui/sidedrawer";
 import statusBar = require("nativescript-status-bar");
 import { MyHttpPostService } from "../services/http-post/http-post.services";
+import { SessionService } from "../services/session/session.services";
 
 @Component({
   selector: 'solicitatalonario',
@@ -16,9 +17,30 @@ export class SolicitaTalonarioComponent {
   text2: string = 'Haz click en el boton para solicitar un nuevo talonario.';
   text3: string = '¡GRACIAS!';
   text4: string = 'SOLICITAR TALONARIO';
-  message : string = "";
+  message : string = "";  
+  contador: number = 0;
+  validaPagina: boolean = true;
 
-  constructor(private myPostService: MyHttpPostService) { }
+  constructor(private myPostService: MyHttpPostService, private session: SessionService) 
+  { 
+    var data = JSON.parse(this.session.getInformation());    
+    if(data.talonarios.length > 0)    
+    {
+      for(let i in data.talonarios) 
+      {
+          if(data.talonarios[i].Boletos.pendientes.length == 0)
+          {
+            this.contador = this.contador + 1;
+          }
+
+          if(this.contador == data.talonarios.length)
+          {
+            this.validaPagina = false;
+          }
+      }
+    }
+    console.log("validaPagina123 -> " + this.validaPagina);
+  }
   
   @ViewChild("drawer") drawerComponent: RadSideDrawerComponent;
   private _sideDrawerTransition: DrawerTransitionBase;
@@ -48,17 +70,20 @@ export class SolicitaTalonarioComponent {
   onDrawerButtonTap(): void {
     this.drawerComponent.sideDrawer.showDrawer();
   }
-// public statusBarState: boolean=true;// statusBar.show();(swipe)="hideStatusBar()"
-  // {        
-  //     if(this.statusBarState == true)
-  //     {
-  //         statusBar.hide();
-  //         this.statusBarState = false;
-  //     }
-  //     else if(this.statusBarState == false)
-  //     {
-  //         statusBar.show();
-  //         this.statusBarState = true;
-  //     }
-  // }
+//   if(this.talonarios.length > 0) {
+//     //BOLETOS PENDIENTES
+//     if(this.talonarios[i].pendientes.length == 0)
+//     {
+//         this.srcIconoTalonario[i] = "res://icono_talonario_gris";
+//         this.validaStackBolPen[i] = false;
+//     }
+//     else
+//     {
+//         this.srcIconoTalonario[i] = "res://icono_talonario";
+//         this.validaStackBolPen[i] = true;
+//         this.cantBolPendientes[i] = this.talonarios[i].pendientes.length;
+//         console.log("ENTRO AQUI");
+//         this.session.setTalonarios(true);
+//     }
+
 }

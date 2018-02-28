@@ -1,5 +1,7 @@
 import { Component, Input, OnInit } from "@angular/core";
 import { RouterExtensions } from "nativescript-angular/router";
+import { DrawerTransitionBase, SlideInOnTopTransition } from "nativescript-pro-ui/sidedrawer";
+import { RadSideDrawerComponent } from "nativescript-pro-ui/sidedrawer/angular";
 
 /* ***********************************************************
 * Keep data that is displayed as drawer items in the MyDrawer component class.
@@ -16,7 +18,7 @@ export class MyDrawerItemComponent implements OnInit {
     @Input() icon: string;
     @Input() isSelected: boolean;
 
-    constructor(private routerExtensions: RouterExtensions) {
+    constructor(private routerExtensions: RouterExtensions, private drawer: RadSideDrawerComponent) {
 
     }
 
@@ -32,6 +34,7 @@ export class MyDrawerItemComponent implements OnInit {
     * based on the tapped navigationItem's route.
     *************************************************************/
     onNavItemTap(navItemRoute: string): void {
+        this.drawer.sideDrawer.toggleDrawerState();        
         this.routerExtensions.navigate([navItemRoute], {
             transition: {
                 name: "fade"

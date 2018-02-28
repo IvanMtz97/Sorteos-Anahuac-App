@@ -75,14 +75,17 @@ export class LoginComponent implements OnInit {
         //this.loader.display(false);  
         this.session.setToken(data.json().token);
         this.session.setIdColaborador(data.json().identificador);
-        this.router.navigate(["talonarios"], { clearHistory: true });
+        if(this.session.getFirstRun() == true){
+            this.router.navigate(["privacidad"], { clearHistory: true });
+        }else{
+            this.router.navigate(["talonarios"], { clearHistory: true });
+        }
     }
     public Avisos() {
         utils.openUrl(this.avisoPrivacidad);
     }
 
     public ConoceSorteo() {
-        console.log("CONOCE TU SORTEO");
         this.router.navigate(["conocesorteo"]);
     }
 

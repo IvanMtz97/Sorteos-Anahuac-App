@@ -41,7 +41,7 @@ var PrivacidadComponent = /** @class */ (function () {
     };
     PrivacidadComponent.prototype.Aceptar = function () {
         this.session.setFirstRun(false);
-        this.router.navigate(["login"]);
+        this.router.navigate(["talonarios"]);
     };
     PrivacidadComponent = __decorate([
         core_1.Component({

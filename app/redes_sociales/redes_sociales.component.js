@@ -10,21 +10,15 @@ var RedesSocialesComponent = /** @class */ (function () {
         this.modal = modal;
         this.vcRef = vcRef;
     }
-    RedesSocialesComponent.prototype.showModal = function () {
+    RedesSocialesComponent.prototype.showModal = function (queCompartir) {
         var options = {
-            context: {},
+            context: { queCompartir: queCompartir },
             fullscreen: true,
             viewContainerRef: this.vcRef
         };
         this.modal.showModal(app_modal_1.ModalComponent, options).then(function (res) {
             console.log(res);
         });
-    };
-    RedesSocialesComponent.prototype.comparteSorteo = function () {
-        console.log("comparteSorteo()");
-    };
-    RedesSocialesComponent.prototype.comparteBoletos = function () {
-        console.log("comparteBoletos()");
     };
     RedesSocialesComponent.prototype.ngOnInit = function () {
         console.log("REDES SOCIALES");

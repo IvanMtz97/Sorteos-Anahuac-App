@@ -3,21 +3,33 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
 var dialogs_1 = require("nativescript-angular/directives/dialogs");
 var router_1 = require("nativescript-angular/router");
+var Clipboard = require("nativescript-clipboard");
+var Toast = require("nativescript-toast");
+var SocialShare = require("nativescript-social-share");
 var ModalComponent = /** @class */ (function () {
     function ModalComponent(router, params) {
         this.router = router;
         this.params = params;
-        this.frameworks = [
-            "NativeScript",
-            "Xamarin",
-            "Onsen UI",
-            "Ionic Framework",
-            "React Native"
-        ];
+        this.url = "https://jaja.com/";
+        console.log("queCompartir -> " + params.context.queCompartir);
     }
     ModalComponent.prototype.compartir = function () {
-        console.log("compartir()");
-        this.router.navigate(["compradores"], { clearHistory: true });
+        if (this.params.context.queCompartir == 'sorteo') {
+            SocialShare.shareUrl("https://www.nativescript.org/", "Home of NativeScript", "¿Como te gustaria compartir tu sorteo?");
+        }
+        else if (this.params.context.queCompartir == 'boleto') {
+            SocialShare.shareUrl("https://angular.io/", "Home of Angular", "¿Como te gustaria compartir tu boleto?");
+        }
+        this.close();
+    };
+    ModalComponent.prototype.copiar = function () {
+        console.log("COPIAR CLIPBOARD", this.url);
+        Clipboard.setText(this.url).then(function () { });
+        Toast.makeText("Copiado al portapapeles", "long").show();
+    };
+    ModalComponent.prototype.compradores = function () {
+        console.log("compradores");
+        this.router.navigate(["compradores"]);
         this.close();
     };
     ModalComponent.prototype.close = function () {

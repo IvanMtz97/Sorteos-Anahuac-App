@@ -4,14 +4,30 @@ var core_1 = require("@angular/core");
 var angular_1 = require("nativescript-pro-ui/sidedrawer/angular");
 var sidedrawer_1 = require("nativescript-pro-ui/sidedrawer");
 var http_post_services_1 = require("../services/http-post/http-post.services");
+var session_services_1 = require("../services/session/session.services");
 var SolicitaTalonarioComponent = /** @class */ (function () {
-    function SolicitaTalonarioComponent(myPostService) {
+    function SolicitaTalonarioComponent(myPostService, session) {
         this.myPostService = myPostService;
+        this.session = session;
         this.text1 = '¡Apreciamos mucho tu apoyo!';
         this.text2 = 'Haz click en el boton para solicitar un nuevo talonario.';
         this.text3 = '¡GRACIAS!';
         this.text4 = 'SOLICITAR TALONARIO';
         this.message = "";
+        this.contador = 0;
+        this.validaPagina = true;
+        var data = JSON.parse(this.session.getInformation());
+        if (data.talonarios.length > 0) {
+            for (var i in data.talonarios) {
+                if (data.talonarios[i].Boletos.pendientes.length == 0) {
+                    this.contador = this.contador + 1;
+                }
+                if (this.contador == data.talonarios.length) {
+                    this.validaPagina = false;
+                }
+            }
+        }
+        console.log("validaPagina123 -> " + this.validaPagina);
     }
     SolicitaTalonarioComponent.prototype.makePostSolitarTalonario = function () {
         console.log("ENTRA AQUI ---> ");
@@ -44,7 +60,7 @@ var SolicitaTalonarioComponent = /** @class */ (function () {
             templateUrl: './solicita_talonario.component.html',
             providers: [http_post_services_1.MyHttpPostService]
         }),
-        __metadata("design:paramtypes", [http_post_services_1.MyHttpPostService])
+        __metadata("design:paramtypes", [http_post_services_1.MyHttpPostService, session_services_1.SessionService])
     ], SolicitaTalonarioComponent);
     return SolicitaTalonarioComponent;
 }());

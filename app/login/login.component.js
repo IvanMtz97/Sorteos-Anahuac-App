@@ -68,13 +68,17 @@ var LoginComponent = /** @class */ (function () {
         //this.loader.display(false);  
         this.session.setToken(data.json().token);
         this.session.setIdColaborador(data.json().identificador);
-        this.router.navigate(["talonarios"], { clearHistory: true });
+        if (this.session.getFirstRun() == true) {
+            this.router.navigate(["privacidad"], { clearHistory: true });
+        }
+        else {
+            this.router.navigate(["talonarios"], { clearHistory: true });
+        }
     };
     LoginComponent.prototype.Avisos = function () {
         utils.openUrl(this.avisoPrivacidad);
     };
     LoginComponent.prototype.ConoceSorteo = function () {
-        console.log("CONOCE TU SORTEO");
         this.router.navigate(["conocesorteo"]);
     };
     LoginComponent.prototype.ListaGanadores = function () {
