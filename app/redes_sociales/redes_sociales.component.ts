@@ -17,29 +17,19 @@ export class RedesSocialesComponent {
 
   }
   
-  public showModal() {
+  public showModal(queCompartir) {
     let options = {
-        context: {},
+        context: {queCompartir},
         fullscreen: true,
         viewContainerRef: this.vcRef
     };
     this.modal.showModal(ModalComponent, options).then(res => {
         console.log(res);
-    });
+    });    
   } 
 
   @ViewChild("drawer") drawerComponent: RadSideDrawerComponent;
   private _sideDrawerTransition: DrawerTransitionBase;
-
-  public comparteSorteo()
-  { 
-    console.log("comparteSorteo()");
-  }
-
-  public comparteBoletos()
-  { 
-    console.log("comparteBoletos()");
-  }
 
   ngOnInit()
   {
