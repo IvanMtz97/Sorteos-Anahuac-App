@@ -14,29 +14,11 @@ import { SessionService } from "../services/session/session.services";
     providers: [MyHttpGetService, SessionService]
 })
 export class EstadoCuentaComponent implements OnInit {
-    public idColaborador: string = "";
     public infoColaborador: object = {};
 
     constructor(private myGetService: MyHttpGetService, private session: SessionService) {
-        this.idColaborador = this.session.getIdColaborador();
-        console.log("IDCOLABORADOR ---> ", this.idColaborador);
-    }
 
-    //GET SORTEO -------->
-    private datosColaborador() {
-        //this.loader.display(true);
-        this.myGetService
-            .getDataAuthorization('api/Colaborador/' + this.idColaborador)
-            .subscribe((result) => {
-                console.log("DATOS COLABORADOR -----> ", result);
-                this.infoColaborador = JSON.parse(result.json());
-            }, (error) => {
-                //this.loader.display(false);
-                this.infoColaborador = JSON.parse(this.session.getInformation());
-                this.mostrarMensaje('Error', 'Falló al tratar obtener los datos del colaborador');  
-            });
     }
-    //END GET --------->
 
     /* ***********************************************************
     * Use the @ViewChild decorator to get a reference to the drawer component.
@@ -49,7 +31,7 @@ export class EstadoCuentaComponent implements OnInit {
     
     ngOnInit(): void {
         this._sideDrawerTransition = new SlideInOnTopTransition();
-        this.datosColaborador();
+        this.infoColaborador = JSON.parse(this.session.getInformation());
     }
 
     get sideDrawerTransition(): DrawerTransitionBase {

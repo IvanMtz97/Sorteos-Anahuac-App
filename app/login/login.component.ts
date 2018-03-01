@@ -80,6 +80,7 @@ export class LoginComponent implements OnInit {
         //this.loader.display(false);  
         this.session.setToken(data.json().token);
         this.session.setIdColaborador(data.json().identificador);
+        this.session.setCorreoColaborador(data.json().correo)
         if(this.session.getFirstRun() == true){
             this.router.navigate(["privacidad"], { clearHistory: true });
         }else{

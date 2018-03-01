@@ -65,6 +65,15 @@ export class SessionService {
         return getString("IdColaborador");
     }
 
+    setCorreoColaborador(CorreoColaborador){
+        console.log("CorreoColaborador", CorreoColaborador);
+        setString("CorreoColaborador", CorreoColaborador);
+    }
+
+    getCorreoColaborador(){
+        return getString("CorreoColaborador");
+    }
+
     setGanadores(Ganadores){
         console.log("Ganadores", Ganadores);
         setString("Ganadores", Ganadores);
