@@ -34,7 +34,12 @@
         <StackLayout *ngIf="Datos.Tipo == 'Varios'" orientation="horizontal" class="component-header-3">
             <Label class="letter-spacing" text="VENDER BOLETOS"></Label>
             <StackLayout orientation="horizontal">
-                <Label *ngFor="let Boleto of Datos.Boletos" class="txtorange letter-spacing" [text]="Boleto.folio"></Label>
+                <StackLayout orientation="horizontal" *ngFor="let Boleto of Datos.Boletos; let i = index">
+                    <Label class="txtorange" [style]="cont == i? 'font-weight: 600' : 'font-weight:300'" [text]="Boleto.folio"></Label>
+                    <!-- <Label [text]="i"></Label>
+                    <Label [text]="Datos.Boletos.length"></Label> -->
+                    <Label *ngIf="i < Datos.Boletos.length-1" text=","></Label>
+                </StackLayout>
             </StackLayout>
         </StackLayout>
 
@@ -149,7 +154,7 @@
 
 
                         <StackLayout *ngIf="Datos.Tipo == 'Varios'" orientation="horizontal" class="vb-item center">
-                            <Button class="vb-btn" [isEnabled]="cont > 0 ? true : false" (tap)="Anterior()" text="< Anterior"></Button>
+                            <Button *ngIf="cont > 0" class="vb-btn" [isEnabled]="cont > 0 ? true : false" (tap)="Anterior()" text="< Anterior"></Button>
                             <Button class="vb-btn" [isEnabled]="true" (tap)="Siguiente()" text="Siguiente >"></Button>
                         </StackLayout>
                 

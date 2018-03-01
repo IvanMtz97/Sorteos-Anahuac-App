@@ -1,4 +1,5 @@
 import { Component, ViewChild, ElementRef, OnInit } from "@angular/core";
+import { NgClass } from "@angular/common";
 import {  ActivatedRoute } from '@angular/router';
 import { RouterExtensions } from "nativescript-angular/router/router-extensions";
 import { confirm } from "ui/dialogs";
