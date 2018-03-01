@@ -15,7 +15,8 @@ import statusBar = require("nativescript-status-bar");
 export class TalonariosComponent implements OnInit {
     public showDetails: Object = {};
     public tieneTalonarios: boolean = false; 
-    public hideBottonSales: boolean = false; 
+    public hideBottonSales: boolean = false;
+    public hideBotton: boolean = false;  
     public tienePendientes: Array<boolean> = [];
     public noTieneTalonariosTexto: string = "No existen talonarios asignados.";
     public listaTalonarios: Array<object> = [];
@@ -90,6 +91,8 @@ export class TalonariosComponent implements OnInit {
     public toggleCheck(eventData, boleto, index){
         if(this.countCheck(eventData.checked)) this.hideBottonSales = true;
         else this.hideBottonSales = false;
+        if(this.count >= 2) this.hideBotton = true;
+        else this.hideBotton = false;
         if(eventData.checked){
             this.PilaBoletos.push(boleto);
         }else{

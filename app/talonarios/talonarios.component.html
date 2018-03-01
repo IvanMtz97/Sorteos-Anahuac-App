@@ -97,7 +97,7 @@
                     </StackLayout> 
                 </StackLayout>
             </ScrollView>
-            <StackLayout height="10%" *ngIf="hideBottonSales">
+            <StackLayout height="10%" *ngIf="hideBottonSales && hideBotton">
                 <StackLayout class="btn-img-v2"  orientation="horizontal" (tap)="VenderBoletos()" width="100%">
                     <Image src="res://icono_boleto"  width="10%" height="100%" marginRight="10"></Image>
                     <Label class="txt-header" text="VENDER VARIOS BOLETOS >" verticalAlignment="center"></Label>
