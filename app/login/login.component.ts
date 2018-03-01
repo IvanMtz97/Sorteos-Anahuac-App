@@ -63,7 +63,7 @@ export class LoginComponent implements OnInit {
                 this.session.setAceptacionTalonarios(JSON.stringify(result.json().url_aceptacion));
                 this.session.setGanadores(JSON.stringify(result.json().url_lista_ganadores));
                 this.session.setConoceSorteo(JSON.stringify(result.json().url_conoce));
-                this.session.setCondiciones(JSON.stringify(result.json().url_condiciones));                                                
+                this.session.setCondiciones(JSON.stringify(result.json().url_condiciones));                                  
             }, (error) => {
                 //this.loader.display(false);
                 this.mostrarMensaje('Error', 'Falló al tratar obtener el sorteo activo.');  
@@ -87,11 +87,11 @@ export class LoginComponent implements OnInit {
         }
     }
     public Politicas() {        
-        utils.openUrl(this.politicas); 
+        utils.openUrl(JSON.parse(this.politicas)); 
         console.log("this.politicas -> " + this.politicas);
     }
     public Condiciones() {        
-        utils.openUrl("https://sorteoanahuac.mx/noticias.html");
+        utils.openUrl(JSON.parse(this.condiciones));
         console.log("this.condiciones -> " + this.condiciones);
     }
     public ConoceSorteo() {
