@@ -19,27 +19,29 @@
                     <Image src="https://sorteoanahuac.mx/app/banner_1.jpg"></Image> 
             </StackLayout>
             <StackLayout orientation="horizontal" class="component-header center">
-                <Label class="fa" text="&#xf055;"></Label>
-                <Label text="SOLICITA UN TALONARIO"></Label>
+                <!-- <Label class="fa" text="&#xf055;"></Label> -->
+                <Image src="res://icono_nuevotalonario" class="img" style="height: 7%;width: auto"></Image>
+                <Label text="SOLICITA UN TALONARIO" style="vertical-align: center"></Label>
             </StackLayout>
             <StackLayout class="container center" *ngIf="validaPagina">  
                 <Label 
                     class="txtblack txtlarge"
                     [text]="text1"
                     textWrap="true">
-                </Label> 
+                </Label>                 
                 <Label
                     class="txtgray txtsmall"
                     [text]="text2"
                     textWrap="true">
-                </Label>        
+                </Label>
+                <StackLayout class="separador"></StackLayout>        
                 <Button
                     class="btn-orange"
                     [text]="text4"
                     (tap)="solicitaTalonario()"
                     textwrap="true"
                     width= "85%">
-                </Button>
+                </Button>                
                 <Label
                     class="txtorange txtmedium container"
                     [text]="text3"
@@ -52,6 +54,7 @@
                         [text]="text1"
                         textWrap="true">
                     </Label>
+                    <StackLayout class="separador"></StackLayout>
                     <Label
                         class="txtgray txtmedium"
                         [text]="text2"
