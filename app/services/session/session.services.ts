@@ -109,6 +109,15 @@ export class SessionService {
     getConoceSorteo(){
         return getString("ConoceSorteo");
     }
+    
+    setCondiciones(Condiciones){
+        console.log("Condiciones", Condiciones);
+        setString("Condiciones", Condiciones);
+    }
+
+    getCondiciones(){
+        return getString("Condiciones");
+    }
 
     setTalonarios(tieneTalonarios)
     {

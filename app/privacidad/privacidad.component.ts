@@ -26,7 +26,7 @@ export class PrivacidadComponent implements OnInit {
         this.Politicas = this.session.getPoliticas();
         this.Aceptacion = this.session.getAceptacionTalonarios();
         this.Reglamento = this.session.getReglamento();
-        this.Condiciones = this.session.getReglamento();
+        this.Condiciones = this.session.getCondiciones();
         console.log(this.Politicas);
         console.log(this.Aceptacion);
         console.log(this.Reglamento);

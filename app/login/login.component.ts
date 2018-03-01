@@ -2,7 +2,7 @@ import { Component, ViewChild, OnInit } from "@angular/core";
 import { TextField } from "ui/text-field";
 import { Page } from "ui/page";
 import * as dialogs from "ui/dialogs";
-import * as utils from "utils/utils";
+var utils = require("utils/utils");
 import { MyHttpGetService } from "../services/http-get/http-get.services";
 import { SessionService } from "../services/session/session.services";
 import { ActivatedRoute, Router } from "@angular/router";
@@ -18,7 +18,8 @@ export class LoginComponent implements OnInit {
     public Correo: string = "";
     public Clave: string = "";
     public nextLibAvailable: boolean = false;
-    public avisoPrivacidad: string = "http://www.sorteoanahuac.mx/aviso-de-privacidad.pdf"; 
+    private politicas: string;
+    private condiciones: string;
 
     constructor(page: Page, private router: RouterExtensions, private myGetService: MyHttpGetService, private session: SessionService) {
         page.actionBarHidden = true; 
@@ -26,7 +27,7 @@ export class LoginComponent implements OnInit {
 
     ngOnInit() {
         if (this.session.loggedIn()) { this.session.setLoggedIn(false); }
-        this.SorteoActivo();
+        this.SorteoActivo();        
     }
 
 
@@ -57,15 +58,19 @@ export class LoginComponent implements OnInit {
             .getData('api/Sorteo/Activo')
             .subscribe((result) => {
                 this.session.setSorteoActivo(JSON.stringify(result.json()));
-                this.session.setPoliticas(JSON.stringify(result.json().url_terminos));
-                this.session.setReglamento(JSON.stringify(result.json().url_aviso));
-                this.session.setAceptacionTalonarios(JSON.stringify(result.json().url_tips));
-                this.session.setGanadores(JSON.stringify(result.json().ganadores));
+                this.session.setPoliticas(JSON.stringify(result.json().url_politicas));
+                this.session.setReglamento(JSON.stringify(result.json().url_reglamento));
+                this.session.setAceptacionTalonarios(JSON.stringify(result.json().url_aceptacion));
+                this.session.setGanadores(JSON.stringify(result.json().url_lista_ganadores));
                 this.session.setConoceSorteo(JSON.stringify(result.json().url_conoce));
+                this.session.setCondiciones(JSON.stringify(result.json().url_condiciones));                                                
             }, (error) => {
                 //this.loader.display(false);
                 this.mostrarMensaje('Error', 'Falló al tratar obtener el sorteo activo.');  
-            });
+            });   
+            
+            this.politicas = this.session.getPoliticas();                
+            this.condiciones = this.session.getCondiciones();         
     }
     //END GET --------->
 
@@ -81,10 +86,14 @@ export class LoginComponent implements OnInit {
             this.router.navigate(["talonarios"], { clearHistory: true });
         }
     }
-    public Avisos() {
-        utils.openUrl(this.avisoPrivacidad);
+    public Politicas() {        
+        utils.openUrl(this.politicas); 
+        console.log("this.politicas -> " + this.politicas);
     }
-
+    public Condiciones() {        
+        utils.openUrl("https://sorteoanahuac.mx/noticias.html");
+        console.log("this.condiciones -> " + this.condiciones);
+    }
     public ConoceSorteo() {
         this.router.navigate(["conocesorteo"]);
     }
