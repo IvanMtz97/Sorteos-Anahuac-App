@@ -9,19 +9,23 @@ Use the tkMainContent directive to display the content of the page when you have
             <Image src="https://sorteoanahuac.mx/app/banner_1.jpg"></Image>
     </StackLayout>
     <StackLayout class="page page-content" orientation="vertical" height="85%">
-        <Image class="LogoLogin" src="res://logo_horizontal_naranja" height="25%"></Image>
+        <Image class="LogoLogin" src="res://logo_horizontal_naranja" height="24%"></Image>
         <TextField class="text-field" (textChange)="handleCorreoChange($event)" hint="correo@anahuac.mx" keyboardType="email"></TextField>
         <TextField class="text-field" secure="true" (textChange)="handlePasswordChange($event)" hint="Contraseña"></TextField>
         <button text="E N T R A R" (tap)="Entrar()" class="btnGrey"></button>
         <Image class="separador" src="res://separador"></Image>
         <StackLayout class="page page-content" orientation="vertical">
             <StackLayout class="btn-img"  orientation="horizontal" (tap)="ConoceSorteo()" width="80%" height="28%">
+                <StackLayout width="10%"></StackLayout>
                 <Image src="res://icono_conoce_sorteo"  width="10%" height="100%" marginRight="10"></Image>
-                <Label text="CONOCE TU SORTEO" verticalAlignment="center"></Label> 
+                <Label text="CONOCE TU SORTEO" width="70%" verticalAlignment="center"></Label>
+                <StackLayout width="10%"></StackLayout> 
             </StackLayout>
             <StackLayout class="btn-img"  orientation="horizontal" (tap)="ListaGanadores()" width="80%" height="28%">
+                <StackLayout width="10%"></StackLayout>
                 <Image src="res://icono_ganadores"  width="10%" height="100%" marginRight="10"></Image>
-                <Label text="LISTADO DE GANADORES" verticalAlignment="center"></Label>
+                <Label text="LISTADO DE GANADORES" width="70%" verticalAlignment="center"></Label>
+                <StackLayout width="10%"></StackLayout>
             </StackLayout>
         </StackLayout>
         <StackLayout height="8"></StackLayout>
