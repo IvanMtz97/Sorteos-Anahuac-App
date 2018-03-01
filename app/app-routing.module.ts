@@ -21,7 +21,7 @@ const routes: Routes = [
     { path: "estadocuenta", loadChildren: "./estado_cuenta/estado_cuenta.module#EstadoCuentaModule"},
     { path: "redessociales", loadChildren: "./redes_sociales/redes_sociales.module#RedesSocialesModule"},
     { path: "notificaciones", loadChildren: "./notificaciones/notificaciones.module#NotificacionesModule"},
-    { path: "compradores", loadChildren: "./compradores/compradores.module#CompradoresModule"},
+    { path: "compradores/:data", loadChildren: "./compradores/compradores.module#CompradoresModule"},
     { path: "confirmar/:data", loadChildren: "./confirmar/confirmar.module#ConfirmarModule"}
     
 ];
