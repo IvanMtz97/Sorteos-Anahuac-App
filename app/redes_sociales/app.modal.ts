@@ -28,8 +28,14 @@ export class ModalComponent {
     }    
 
     compradores(){
-        console.log("compradores");
-        this.router.navigate(["compradores"]);
+        if(this.params.context.queCompartir == 'sorteo')
+        {
+            this.router.navigate(["compradores", JSON.stringify({url: "https://www.nativescript.org/"})]);
+        }
+        else if(this.params.context.queCompartir == 'boleto')
+        {
+            this.router.navigate(["compradores", JSON.stringify({url: "https://angular.io/"})]);
+        }                
         this.close();
     }
 
