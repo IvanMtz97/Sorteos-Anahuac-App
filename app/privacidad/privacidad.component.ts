@@ -2,6 +2,7 @@ import { Component, OnInit } from "@angular/core";
 import { Page } from "ui/page";
 import { Router } from "@angular/router";
 import { SessionService } from "../services/session/session.services";
+import { RouterExtensions } from "nativescript-angular/router/router-extensions";
 var utilityModule = require("utils/utils");
 
 @Component({
@@ -17,7 +18,7 @@ export class PrivacidadComponent implements OnInit {
     private Condiciones: string = "";
 
 
-    constructor(private page: Page, private session: SessionService, private router: Router){
+    constructor(private page: Page, private session: SessionService, private router: RouterExtensions){
         this.page.actionBarHidden = true;
         console.log("PRIVACIDAD COMPONENT");
     }
@@ -51,6 +52,6 @@ export class PrivacidadComponent implements OnInit {
 
     Aceptar(){
         this.session.setFirstRun(false);
-        this.router.navigate(["talonarios"]);
+        this.router.navigate(["talonarios"], { clearHistory: true });
     }
 }

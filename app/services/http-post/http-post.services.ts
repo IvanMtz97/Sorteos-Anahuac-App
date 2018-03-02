@@ -9,15 +9,15 @@ import { SessionService } from "../session/session.services"
 @Injectable()
 export class MyHttpPostService {
     //private serverUrl = "https://web-clara-p1.azurewebsites.net/";
-    //private serverUrl = "https://sorteoanahuac-servicios-mobile-p.azurewebsites.net/";
-    private serverUrl = "http://localhost:2393/";
+    private serverUrl = "https://sorteoanahuac-servicios-mobile-p.azurewebsites.net/";
+    //private serverUrl = "http://localhost:2393/";
 
     constructor(private http: Http, private session: SessionService) { }
 
-    postData(data: any, path) {
-        console.log("LLAMA A LA API ", path, data);
+    postData(data: Object, path) {
+        console.log("LLAMA A LA API " + path);
         let options = this.createRequestOptions();
-        return this.http.post((encodeURI(this.serverUrl + path)), { data }, { headers: options })
+        return this.http.post((encodeURI(this.serverUrl + path)),  data , { headers: options })
             .map(res => res);
     }
 

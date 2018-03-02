@@ -1,4 +1,4 @@
-import { Component, ViewChild, ElementRef, OnInit } from "@angular/core";
+import { Component, ViewChild, ElementRef, OnInit, ViewContainerRef } from "@angular/core";
 import { NgClass } from "@angular/common";
 import {  ActivatedRoute } from '@angular/router';
 import { RouterExtensions } from "nativescript-angular/router/router-extensions";
@@ -7,6 +7,10 @@ import * as dialogs from "ui/dialogs";
 import { RadSideDrawerComponent } from "nativescript-pro-ui/sidedrawer/angular";
 import { DrawerTransitionBase, SlideInOnTopTransition } from "nativescript-pro-ui/sidedrawer";
 import * as Toast from "nativescript-toast";
+
+import { VentaBoletoModalComponent } from "./ventaboleto-modal.component";
+import { ModalDialogService } from "nativescript-angular/directives/dialogs";
+import { Observable } from 'rxjs';
 
 @Component({
     selector: "VentaBoleto",
@@ -23,8 +27,40 @@ export class VentaBoletoComponent implements OnInit {
     private _sideDrawerTransition: DrawerTransitionBase;
     private status: boolean = true;
     private cont = 0;
-    private PilaBoletos: any = [];
-    private Info: any = {
+    private PilaBoletos: Array<Object> = [];
+
+    Nombre: string = "";
+    // private Info: any = {
+    //     Nombre: "",
+    //     Appat: "",
+    //     Apmat: "",
+    //     Calle: "",
+    //     Numero: "",
+    //     Codigopostal: "",
+    //     Colonia: "",
+    //     Estado: "",
+    //     Municipio: "",
+    //     Telefonofijo: "",
+    //     Telefonomovil: "",
+    //     Correoelectronico: "",
+    //     Correoalternativo: ""
+    // };
+    public Info: any = {
+        Nombre: "Eduardo",
+        Appat: "Vazquez",
+        Apmat: "De La O",
+        Calle: "Calle dos",
+        Numero: "1332",
+        Codigopostal: "64253",
+        Colonia: "Jajatl",
+        Estado: "Nuevo Leon",
+        Municipio: "Escomiedo",
+        Telefonofijo: "83340359",
+        Telefonomovil: "8126522105",
+        Correoelectronico: "eleduardojaja777youtube@vegeta.com",
+        Correoalternativo: ""
+    };
+    public Info2: any = {
         Nombre: "",
         Appat: "",
         Apmat: "",
@@ -40,8 +76,18 @@ export class VentaBoletoComponent implements OnInit {
         Correoalternativo: ""
     };
 
-    constructor(private route: ActivatedRoute, private router: RouterExtensions){ }
+    constructor(private route: ActivatedRoute, private router: RouterExtensions, private modal: ModalDialogService, private vcRef: ViewContainerRef){ }
 
+    AbrirModal(){
+        let options = {
+            context: "Xdd",
+            fullscreen: true,
+            viewContainerRef: this.vcRef
+        };
+        this.modal.showModal(VentaBoletoModalComponent, options).then(res => {
+            console.log(res);
+        });    
+    }
     ngOnInit(){
         this.route.params.subscribe(params => {
             this.Datos = JSON.parse(params["data"]);
@@ -99,9 +145,29 @@ export class VentaBoletoComponent implements OnInit {
 
     private Siguiente(){
         if(this.ValidarCampos()){
-            this.PilaBoletos.push({Boleto: this.Datos.Boletos[this.cont], Info: this.Info});
+            
+            this.PilaBoletos.push({
+                Boleto: this.Datos.Boletos[this.cont], 
+                Info: {
+                    Nombre: this.Info.Nombre,
+                    Appat: this.Info.Appat,
+                    Apmat: this.Info.Apmat,
+                    Calle: this.Info.Calle,
+                    Numero: this.Info.Numero,
+                    Codigopostal: this.Info.Codigopostal,
+                    Colonia: this.Info.Colonia,
+                    Estado: this.Info.Estado,
+                    Municipio: this.Info.Municipio,
+                    Telefonofijo: this.Info.Telefonofijo,
+                    Telefonomovil: this.Info.Telefonomovil,
+                    Correoelectronico: this.Info.Correoelectronico,
+                    Correoalternativo: this.Info.Correoalternativo
+                }
+            });
+
             Toast.makeText("Boleto asignado", "short").show();
             this.cont++;
+            
             if(this.cont == this.Datos.Boletos.length){
 
                 var Param = {
@@ -111,13 +177,15 @@ export class VentaBoletoComponent implements OnInit {
                 }
 
                 this.router.navigate(["confirmar", JSON.stringify(Param)],  { clearHistory: true } );
-
             }
+        
         }else{
+            
             dialogs.alert({
                 title: "AVISO",
                 message: "Debes llenar todos los campos marcados *",
                 okButtonText: "Ok"
+            
             });
         }
     }

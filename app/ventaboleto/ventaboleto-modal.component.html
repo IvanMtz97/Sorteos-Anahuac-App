@@ -1,0 +1,9 @@
+<StackLayout width="90%" height="90%" class="container center">
+    <Label class="container-item txtorange" style="font-weight:600" text="Seleccionar comprador previo"></Label>
+    <TextField class="txtCampo container-item" (textChange)="handleInputChanged($event)" hint="Nombre"></TextField>
+    <ListView [items]="Compradores" (itemTap)="onItemTap($event)">
+        <ng-template let-item="item" let-i="index" let-third="third">
+            <Label [text]='item.nombre'></Label>
+        </ng-template>
+    </ListView>
+</StackLayout>

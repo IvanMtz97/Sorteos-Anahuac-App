@@ -189,7 +189,10 @@ export class TalonariosComponent implements OnInit {
     }
     
     public ConsultaPagado(boleto, talonario){
-        this.router.navigate(["boletovendido", JSON.stringify({ Tipo: "pagado", Boleto: boleto, Talonario: talonario})]);
+        var Data = { Tipo: "pagado", Boleto: boleto, Talonario: talonario};
+        console.log("TALONARIOS CONSULTA PAGADO");
+        console.dir(Data.Boleto);
+        this.router.navigate(["boletovendido", JSON.stringify(Data)]);
     }
 
     public ConsultaBoleto(boleto, talonario){

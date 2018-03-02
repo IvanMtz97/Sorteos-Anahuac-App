@@ -47,11 +47,16 @@
                 <StackLayout class="container" orientation="vertical">
 
                         <StackLayout class="vb-item">
+                            <Button (tap)="AbrirModal()" class="vb-btn" text="SELECCIONAR COMPRADOR PREVIO"></Button>
+                        </StackLayout>
+
+                        <StackLayout class="vb-item">
                             <StackLayout orientation="horizontal">
                                 <Label class="letter-spacing" text="Nombre"></Label>
                                 <Label class="txtorange letter-spacing" text="*"></Label>
                             </StackLayout>
-                            <TextField class="txtCampo" id="txtNombre" (textChange)="handleInputChanged($event)"></TextField>
+                            <!-- <TextField class="txtCampo" id="txtNombre" (textChange)="handleInputChanged($event)"></TextField> -->
+                            <TextField class="txtCampo" [(ngModel)]="Info.Nombre"></TextField>
                         </StackLayout>
                 
                         <StackLayout class="vb-item">
@@ -59,7 +64,8 @@
                                 <Label class="letter-spacing" text="Apellido paterno"></Label>
                                 <Label class="txtorange letter-spacing" text="*"></Label>
                             </StackLayout>
-                            <TextField class="txtCampo" id="txtAppat" (textChange)="handleInputChanged($event)"></TextField>
+                            <!-- <TextField class="txtCampo" id="txtAppat" (textChange)="handleInputChanged($event)"></TextField> -->
+                            <TextField class="txtCampo" [(ngModel)]="Info.Appat"></TextField>
                         </StackLayout>
                 
                         <StackLayout class="vb-item">
@@ -67,7 +73,8 @@
                                 <Label class="letter-spacing" text="Apellido materno"></Label>
                                 <Label class="txtorange letter-spaccing" text="*"></Label>
                             </StackLayout>
-                            <TextField class="txtCampo" id="txtApmat" (textChange)="handleInputChanged($event)"></TextField>
+                            <!-- <TextField class="txtCampo" id="txtApmat" (textChange)="handleInputChanged($event)"></TextField> -->
+                            <TextField class="txtCampo" [(ngModel)]="Info.Apmat"></TextField>
                         </StackLayout>
                 
                         <StackLayout class="vb-item">
@@ -75,7 +82,8 @@
                                 <Label class="letter-spacing" text="Calle"></Label>
                                 <Label class="txtorange letter-spacing" text="*"></Label>
                             </StackLayout>
-                            <TextField class="txtCampo" id="txtCalle" (textChange)="handleInputChanged($event)"></TextField>
+                            <!-- <TextField class="txtCampo" id="txtCalle" (textChange)="handleInputChanged($event)"></TextField> -->
+                            <TextField class="txtCampo" [(ngModel)]="Info.Calle"></TextField>
                         </StackLayout>
                 
                         <StackLayout class="vb-item">
@@ -83,7 +91,8 @@
                                 <Label class="letter-spacing" text="Número"></Label>
                                 <Label class="txtorange" text="*"></Label>
                             </StackLayout>
-                            <TextField class="txtCampo" id="txtNumero" (textChange)="handleInputChanged($event)"></TextField>
+                            <!-- <TextField class="txtCampo" id="txtNumero" (textChange)="handleInputChanged($event)"></TextField> -->
+                            <TextField class="txtCampo" [(ngModel)]="Info.Numero"></TextField>
                         </StackLayout>
                 
                         <StackLayout class="vb-item">
@@ -91,7 +100,8 @@
                                 <Label class="letter-spacing" text="Código Postal"></Label>
                                 <Label class="txtorange letter-spacing" text="*"></Label>
                             </StackLayout>
-                            <TextField class="txtCampo" id="txtCodigopostal" (textChange)="handleInputChanged($event)" keyboardType="number" maxLength="5"></TextField>
+                            <!-- <TextField class="txtCampo" id="txtCodigopostal" (textChange)="handleInputChanged($event)" keyboardType="number" maxLength="5"></TextField> -->
+                            <TextField class="txtCampo" [(ngModel)]="Info.Codigopostal" keyboardType="number" maxLength="5"></TextField>
                         </StackLayout>
                 
                         <StackLayout class="vb-item">
@@ -99,7 +109,8 @@
                                 <Label class="letter-spacing" text="Colonia"></Label>
                                 <Label class="txtorange letter-spacing" text="*"></Label>
                             </StackLayout>
-                            <TextField class="txtCampo" id="txtColonia" (textChange)="handleInputChanged($event)"></TextField>
+                            <!-- <TextField class="txtCampo" id="txtColonia" (textChange)="handleInputChanged($event)"></TextField> -->
+                            <TextField class="txtCampo" [(ngModel)]="Info.Colonia"></TextField>
                         </StackLayout>
                 
                         <StackLayout class="vb-item">
@@ -107,7 +118,8 @@
                                 <Label class="letter-spacing" text="Estado"></Label>
                                 <Label class="txtorange letter-spaccing" text="*"></Label>
                             </StackLayout>
-                            <TextField class="txtCampo" id="txtEstado" (textChange)="handleInputChanged($event)"></TextField>
+                            <!-- <TextField class="txtCampo" id="txtEstado" (textChange)="handleInputChanged($event)"></TextField> -->
+                            <TextField class="txtCampo" [(ngModel)]="Info.Estado"></TextField>
                         </StackLayout>
                 
                         <StackLayout class="vb-item">
@@ -115,7 +127,8 @@
                                 <Label class="letter-spacing" text="Municipio/Delegación"></Label>
                                 <Label class="txtorange letter-spacing" text="*"></Label>
                             </StackLayout>
-                            <TextField class="txtCampo" id="txtMunicipio" (textChange)="handleInputChanged($event)"></TextField>
+                            <!-- <TextField class="txtCampo" id="txtMunicipio" (textChange)="handleInputChanged($event)"></TextField> -->
+                            <TextField class="txtCampo" [(ngModel)]="Info.Municipio"></TextField>
                         </StackLayout>
                 
                         <StackLayout class="vb-item">
@@ -123,7 +136,8 @@
                                 <Label class="letter-spacing" text="Teléfono fijo"></Label>
                                 <Label class="txtorange letter-spacing" text="*"></Label>
                             </StackLayout>
-                            <TextField class="txtCampo" id="txtTelefonofijo" (textChange)="handleInputChanged($event)" keyboardType="number" maxLength="10"></TextField>
+                            <!-- <TextField class="txtCampo" id="txtTelefonofijo" (textChange)="handleInputChanged($event)" keyboardType="number" maxLength="10"></TextField> -->
+                            <TextField class="txtCampo" [(ngModel)]="Info.Telefonofijo" keyboardType="number" maxLength="10"></TextField>
                         </StackLayout>
                 
                         <StackLayout class="vb-item">
@@ -131,7 +145,8 @@
                                 <Label class="letter-spacing" text="Teléfono móvil"></Label>
                                 <Label class="txtorange letter-spacing" text="*"></Label>
                             </StackLayout>
-                            <TextField class="txtCampo" id="txtTelefonomovil" (textChange)="handleInputChanged($event)" keyboardType="number" maxLength="12"></TextField>
+                            <!-- <TextField class="txtCampo" id="txtTelefonomovil" (textChange)="handleInputChanged($event)" keyboardType="number" maxLength="12"></TextField> -->
+                            <TextField class="txtCampo" [(ngModel)]="Info.Telefonomovil" keyboardType="number" maxLength="12"></TextField>
                         </StackLayout>
                 
                         <StackLayout class="vb-item">
@@ -139,13 +154,31 @@
                                 <Label class="letter-spacing" text="Correo electrónico"></Label>
                                 <Label class="txtorange letter-spacing" text="*"></Label>
                             </StackLayout>
-                            <TextField class="txtCampo" id="txtCorreoelectronico" (textChange)="handleInputChanged($event)" keyboardType="email"></TextField>
+                            <!-- <TextField class="txtCampo" id="txtCorreoelectronico" (textChange)="handleInputChanged($event)" keyboardType="email"></TextField> -->
+                            <TextField class="txtCampo" [(ngModel)]="Info.Correoelectronico" keyboardType="email"></TextField>
                         </StackLayout>
                 
                         <StackLayout class="vb-item">
                             <Label class="letter-spacing" text="Correo electrónico alterativo"></Label>
-                            <TextField class="txtCampo" id="txtCorreoalternativo" (textChange)="handleInputChanged($event)" keyboardType="email"></TextField>
+                            <!-- <TextField class="txtCampo" id="txtCorreoalternativo" (textChange)="handleInputChanged($event)" keyboardType="email"></TextField> -->
+                            <TextField class="txtCampo" [(ngModel)]="Info.Correoalternativo" keyboardType="email"></TextField>
                         </StackLayout>
+<!-- 
+                        <StackLayout>
+                            <Label [text]="Info.Nombre"></Label>
+                            <Label [text]="Info.Appat"></Label>
+                            <Label [text]="Info.Apmat"></Label>
+                            <Label [text]="Info.Calle"></Label>
+                            <Label [text]="Info.Numero"></Label>
+                            <Label [text]="Info.Codigopostal"></Label>
+                            <Label [text]="Info.Colonia"></Label>
+                            <Label [text]="Info.Estado"></Label>
+                            <Label [text]="Info.Municipio"></Label>
+                            <Label [text]="Info.Telefonofijo"></Label>
+                            <Label [text]="Info.Telefonomovil"></Label>
+                            <Label [text]="Info.Correoelectronico"></Label>
+                            <Label [text]="Info.Correoalternativo"></Label>
+                        </StackLayout> -->
 
                         <StackLayout class="vb-item center">
                             <Label class="txtorange letter-spacing" text="* Datos obligatorios"></Label>
