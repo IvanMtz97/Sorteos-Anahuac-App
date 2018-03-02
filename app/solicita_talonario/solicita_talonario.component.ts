@@ -23,7 +23,28 @@ export class SolicitaTalonarioComponent {
 
   constructor(private myPostService: MyHttpPostService, private session: SessionService) 
   { 
-    var data = JSON.parse(this.session.getInformation());    
+    var data = JSON.parse(this.session.getInformation());
+    console.log("-----------------data-----------------\n\n" + JSON.stringify(data) + "\n\n--------------------------------------");
+    // var data =
+    // {
+    //   "monto_deudor": 3200,
+    //   "monto_abonado": 0,
+    //   "monto_total": 3200,
+    //   "expira": "2018-03-02T00:09:29.7244616Z",
+    //   "clave": 1,
+    //   "talonarios": [
+    //       {
+    //           "clave": 8,
+    //           "boletos": null,
+    //           "Boletos": {
+    //               "pendientes": [],
+    //               "asignados":[],
+    //               "vendidos":[]
+    //           }
+    //       }
+    //     ]
+    // }    
+
     if(data.talonarios.length > 0)    
     {
       for(let i in data.talonarios) 

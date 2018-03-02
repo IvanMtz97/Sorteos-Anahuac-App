@@ -23,7 +23,7 @@
                 <Image src="res://icono_nuevotalonario" class="img" style="height: 7%;width: auto"></Image>
                 <Label text="SOLICITA UN TALONARIO" style="vertical-align: center"></Label>
             </StackLayout>
-            <StackLayout class="container center" *ngIf="validaPagina">  
+            <StackLayout class="container center" *ngIf="!validaPagina"> 
                 <Label 
                     class="txtblack txtlarge"
                     [text]="text1"
@@ -48,7 +48,7 @@
                     textWrap="true">
                 </Label>                        
             </StackLayout>
-            <StackLayout class="container center" *ngIf="!validaPagina">  
+            <StackLayout class="container center" *ngIf="validaPagina">  
                     <Label
                         class="txtblack txtlarge container"
                         [text]="text1"
