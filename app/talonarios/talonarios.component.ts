@@ -3,13 +3,16 @@ import { DrawerTransitionBase, SlideInOnTopTransition } from "nativescript-pro-u
 import { RadSideDrawerComponent } from "nativescript-pro-ui/sidedrawer/angular";
 import { ActivatedRoute, Router } from "@angular/router";
 import { SessionService } from "../services/session/session.services";
+import { MyHttpGetService } from "../services/http-get/http-get.services";
 import statusBar = require("nativescript-status-bar");
+import * as dialogs from "ui/dialogs";
+var utils = require("utils/utils");
 
 @Component({
     selector: "Talonarios",
     moduleId: module.id,
     templateUrl: "./talonarios.component.html",
-    providers: [ SessionService ]
+    providers: [ SessionService, MyHttpGetService ]
 })
 
 export class TalonariosComponent implements OnInit {
@@ -35,7 +38,7 @@ export class TalonariosComponent implements OnInit {
     private PilaBoletos: Array<object> = [];
     public statusBarState: boolean=true;
 
-    constructor(private session: SessionService, private route: ActivatedRoute,  private router: Router){
+    constructor(private session: SessionService, private route: ActivatedRoute,  private router: Router, private myGetService: MyHttpGetService){
         console.log("TALONARIOS");
         this.tieneTalonarios = false;          
     }
@@ -45,6 +48,7 @@ export class TalonariosComponent implements OnInit {
 
     ngOnInit(): void {
         this._sideDrawerTransition = new SlideInOnTopTransition();
+        this.GetTalonarios();
         var Data = JSON.parse(this.session.getInformation());
         this.contador = Array(Data.talonarios.length).fill(0);
         console.log("DATOS ----> ", Data);
@@ -69,6 +73,34 @@ export class TalonariosComponent implements OnInit {
 
     onDrawerButtonTap(): void {
         this.drawerComponent.sideDrawer.showDrawer();
+    }
+
+    //GET INICIO SESION-------->
+    private GetTalonarios() {
+        //this.loader.display(true);
+        this.myGetService
+            .getDataAuthorization('api/Colaborador/' + this.session.getCorreoColaborador() + '/')
+            .subscribe((result) => {
+                console.log("RESULTADO RESPUESTA -----> ", result);
+                this.onGetData(result);
+            }, (error) => {
+                console.log("Error talonarios", error);
+                //this.loader.display(false);
+                this.mostrarMensaje('Error', 'Falló al tratar de obtener los talonarios.');
+            });
+    }
+
+    private onGetData(data: Response | any) {
+        this.session.setInformation(JSON.stringify(data.json()));
+        this.session.setToken(data.json().token);
+    }
+
+    public mostrarMensaje (titulo, mensaje) {
+        dialogs.alert({
+            title:titulo,
+            message: mensaje,
+            okButtonText: "Ok"
+        });
     }
 
     public countCheck(band) {
