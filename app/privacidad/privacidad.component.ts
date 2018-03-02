@@ -12,22 +12,26 @@ var utilityModule = require("utils/utils");
 })
 
 export class PrivacidadComponent implements OnInit {
-    private Politicas: string = "";
-    private Aceptacion: string = "";
-    private Reglamento: string = "";
-    private Condiciones: string = "";
+    private Politicas: string;
+    private Aceptacion: string;
+    private Reglamento: string;
+    private Condiciones: string;
 
 
     constructor(private page: Page, private session: SessionService, private router: RouterExtensions){
         this.page.actionBarHidden = true;
-        console.log("PRIVACIDAD COMPONENT");
+        console.log("PRIVACIDAD COMPONENT"); 
     }
 
     ngOnInit(){
         this.Politicas = this.session.getPoliticas();
         this.Aceptacion = this.session.getAceptacionTalonarios();
         this.Reglamento = this.session.getReglamento();
-        this.Condiciones = this.session.getCondiciones();
+        this.Condiciones = this.session.getCondiciones();        
+        this.Politicas = JSON.parse(this.Politicas);          
+        this.Aceptacion = JSON.parse(this.Aceptacion);  
+        this.Reglamento = JSON.parse(this.Reglamento);  
+        this.Condiciones = JSON.parse(this.Condiciones); 
         console.log(this.Politicas);
         console.log(this.Aceptacion);
         console.log(this.Reglamento);
