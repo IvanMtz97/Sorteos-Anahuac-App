@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild } from "@angular/core";
 import { RadSideDrawerComponent } from "nativescript-pro-ui/sidedrawer/angular";
 import { DrawerTransitionBase, SlideInOnTopTransition } from "nativescript-pro-ui/sidedrawer";
 import statusBar = require("nativescript-status-bar");
+import { SessionService } from "../services/session/session.services";
 
 @Component({
     selector: "ConoceSorteo",
@@ -14,10 +15,13 @@ export class ConoceSorteoComponent {
     @ViewChild("drawer") drawerComponent: RadSideDrawerComponent;    
     private _sideDrawerTransition: DrawerTransitionBase;
     public statusBarState: boolean=true;
+    public conocesorteo: string;
 
-    constructor(){
+    constructor(private session: SessionService){
         console.log("CONOCE SORTEO");
-        statusBar.show();
+        this.conocesorteo = this.session.getConoceSorteo();
+        this.conocesorteo = JSON.parse(this.conocesorteo);  
+        console.log("this.conocesorteo -> " + this.conocesorteo);
     }
     onDrawerButtonTap(): void {
         this.drawerComponent.sideDrawer.showDrawer();
