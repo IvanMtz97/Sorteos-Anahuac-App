@@ -57,7 +57,6 @@ export class SessionService {
     }
 
     setIdColaborador(IdColaborador){
-        console.log("IdColaborador", IdColaborador);
         setString("IdColaborador", IdColaborador);
     }
 
@@ -66,7 +65,6 @@ export class SessionService {
     }
 
     setCorreoColaborador(CorreoColaborador){
-        console.log("CorreoColaborador", CorreoColaborador);
         setString("CorreoColaborador", CorreoColaborador);
     }
 
@@ -74,8 +72,15 @@ export class SessionService {
         return getString("CorreoColaborador");
     }
 
+    setPassColaborador(PassColaborador){
+        setString("PassColaborador", PassColaborador);
+    }
+
+    getPassColaborador(){
+        return getString("PassColaborador");
+    }
+
     setGanadores(Ganadores){
-        console.log("Ganadores", Ganadores);
         setString("Ganadores", Ganadores);
     }
 
@@ -84,7 +89,6 @@ export class SessionService {
     }
 
     setPoliticas(Politicas){
-        console.log("Politicas", Politicas);
         setString("Politicas", Politicas);
     }
 
@@ -93,7 +97,6 @@ export class SessionService {
     }
 
     setReglamento(Reglamento){
-        console.log("Reglamento", Reglamento);
         setString("Reglamento", Reglamento);
     }
 
@@ -102,7 +105,6 @@ export class SessionService {
     }
 
     setAceptacionTalonarios(AceptacionTalonarios){
-        console.log("AceptacionTalonarios", AceptacionTalonarios);
         setString("AceptacionTalonarios", AceptacionTalonarios);
     }
 
@@ -111,7 +113,6 @@ export class SessionService {
     }
 
     setConoceSorteo(ConoceSorteo){
-        console.log("ConoceSorteo", ConoceSorteo);
         setString("ConoceSorteo", ConoceSorteo);
     }
 
@@ -120,7 +121,6 @@ export class SessionService {
     }
     
     setCondiciones(Condiciones){
-        console.log("Condiciones", Condiciones);
         setString("Condiciones", Condiciones);
     }
 

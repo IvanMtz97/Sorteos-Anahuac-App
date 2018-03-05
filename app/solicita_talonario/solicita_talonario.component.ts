@@ -28,7 +28,7 @@ export class SolicitaTalonarioComponent {
     {
       for(let i in data.talonarios) 
       {
-          if(data.talonarios[i].Boletos.pendientes.length == 0)
+          if(data.talonarios[i].Boletos.pendientes.length == 0)  
           {
             this.contador = this.contador + 1;
           }

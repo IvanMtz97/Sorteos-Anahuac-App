@@ -48,7 +48,6 @@ export class TalonariosComponent implements OnInit {
 
     ngOnInit(): void {
         this._sideDrawerTransition = new SlideInOnTopTransition();
-        this.GetTalonarios();
         var Data = JSON.parse(this.session.getInformation());
         this.contador = Array(Data.talonarios.length).fill(0);
         console.log("DATOS ----> ", Data);
@@ -75,32 +74,9 @@ export class TalonariosComponent implements OnInit {
         this.drawerComponent.sideDrawer.showDrawer();
     }
 
-    //GET INICIO SESION-------->
-    private GetTalonarios() {
-        //this.loader.display(true);
-        this.myGetService
-            .getDataAuthorization('api/Colaborador/' + this.session.getCorreoColaborador() + '/')
-            .subscribe((result) => {
-                console.log("RESULTADO RESPUESTA -----> ", result);
-                this.onGetData(result);
-            }, (error) => {
-                console.log("Error talonarios", error);
-                //this.loader.display(false);
-                this.mostrarMensaje('Error', 'Falló al tratar de obtener los talonarios.');
-            });
-    }
-
     private onGetData(data: Response | any) {
         this.session.setInformation(JSON.stringify(data.json()));
         this.session.setToken(data.json().token);
-    }
-
-    public mostrarMensaje (titulo, mensaje) {
-        dialogs.alert({
-            title:titulo,
-            message: mensaje,
-            okButtonText: "Ok"
-        });
     }
 
     public countCheck(band) {
@@ -134,10 +110,6 @@ export class TalonariosComponent implements OnInit {
 
     public VenderBoletos(){
         this.router.navigate(["ventaboleto", JSON.stringify({Tipo: "Varios", Talonario: 1000002, Boletos: this.PilaBoletos})]);
-    }
-
-    public setInitialSelected (i) {
-
     }
 
     public setInitialValue(i, talonarios)

@@ -28,8 +28,8 @@
                 <Label class="txtlarge txtorange" style="margin-bottom:20px;" [text]="infoColaborador.apellido_paterno"></Label>
 
                 <StackLayout style="margin-bottom:50px;" orientation="horizontal">
-                    <Label class="txtmedium txtgray" text="Boletos asignados: "></Label>
-                    <Label class="txtmedium txtgray" [text]="infoColaborador.talonarios.length"></Label>
+                    <Label class="txtmedium txtgray" text="Boletos asignados: "></Label>  
+                    <Label class="txtmedium txtgray" [text]="infoColaborador.talonarios[0].Boletos.asignados.length"></Label>
                 </StackLayout>
 
                 <Image style="margin-bottom:50px;" src="res://separador"></Image>
