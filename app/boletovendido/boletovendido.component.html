@@ -20,16 +20,17 @@
                 <Image [src]="imagenPublicitaria" stretch ="fill"></Image>  
             </StackLayout>
         <!-- <ScrollView orientation="vertical" sdkExampleTitle sdkToggleNavButton> -->
-            <StackLayout class="talonario" orientation="horizontal">
-                <Image width="50" src="res://icono_talonario"></Image>
-                <Label class="talonario-header" text="TALONARIO"></Label>
-                <Label class="talonario-header orange" [text]="Datos.Talonario.clave"></Label>
+            <StackLayout class="component-header-2" orientation="horizontal">
+                <Image class="fa icon" width="6%" src="res://icono_talonario"></Image>
+                <Label class="txt-header" text="TALONARIO"></Label>
+                <Label class="txt-header txtorange" [text]="Datos.Talonario.clave"></Label>
             </StackLayout>
             <StackLayout>            
                 <StackLayout (tap)="toggle()" backgroundColor="#e9e9e9" class="talonario" orientation="horizontal" height="12%">
                     <Label class="text-black" text="BOLETO" color="#888888" width="30%" style="font-weight: bold;padding-left: 1%;vertical-align:center;"></Label>
                     <Label class="txtorange" [text]="Datos.Boleto.clave" width="58%" style="font-weight: bold;vertical-align:center;"></Label>
-                    <Label class="drop" text="x" width="12%" visibility="{{ selectBoleto ? 'visible' : 'collapsed' }}" color="#1D1D1D"></Label>
+                    <!-- <Label class="drop" text="x" width="12%" visibility="{{ selectBoleto ? 'visible' : 'collapsed' }}" color="#1D1D1D"></Label> -->
+                    <Image src="res://icono_cerrar_gris" style="vertical-align: center;"></Image>
                 </StackLayout>
                 <StackLayout class="arrow-down" visibility="{{ selectBoleto ? 'visible' : 'collapsed' }}"></StackLayout>
                 <StackLayout visibility="{{ selectBoleto ? 'visible' : 'collapsed' }}">
@@ -37,20 +38,20 @@
                         <StackLayout class="container" orientation="vertical">
 
                             <StackLayout orientation="vertical" class="container-item">
-                                <Label class="txtblack" text="Dueño:" ></Label>
+                                <Label class="txtblack txtmedium" style="font-weight: 700" text="Dueño:" ></Label>
                                 <Label class="txtorange txtlarge" [text]="Datos.Boleto.comprador.nombre"></Label>
                                 <Label class="txtorange txtlarge" [text]="Datos.Boleto.comprador.apellidos"></Label>
                             </StackLayout>
                             
                             <StackLayout orientation="vertical" class="container-item">
-                                <Label class="txtblack txtmedium" text="Dirección:"></Label>
+                                <Label class="txtblack txtmedium" style="font-weight: 700" text="Dirección:"></Label>
                                 <Label class="txtgray txtsmall" [text]="Datos.Boleto.comprador.direccion.calle"></Label>
                                 <Label class="txtgray txtsmall" [text]="Datos.Boleto.comprador.direccion.colonia"></Label>
                                 <Label class="txtgray txtsmall" [text]="Datos.Boleto.comprador.direccion.municipio"></Label>
                             </StackLayout>
                             
                             <StackLayout orientation="vertical" class="container-item">
-                                <Label class="txtblack txtmedium" text="Contacto:"></Label>
+                                <Label class="txtblack txtmedium" style="font-weight: 700" text="Contacto:"></Label>
                                 <Label class="txtgray txtsmall" text="Teléfono fijo: {{Datos.Boleto.comprador.direccion.telefono}}"></Label>
                                 <Label class="txtgray txtsmall" text="Teléfono móvil: {{Datos.Boleto.comprador.celular}}"></Label>
                                 <Label class="txtgray txtsmall" text="Correo electrónico:"></Label>

@@ -18,7 +18,7 @@
             <Image [src]="imagenPublicitaria" stretch ="fill"></Image>
         </StackLayout>
         <StackLayout orientation="horizontal" class="component-header center">
-            <Image src="res://icono_perfil" class="img" style="height: 7%;width: auto"></Image>
+            <Image src="res://icono_perfil" style="width: 5%;height: auto"></Image>
             <Label text="ESTADO DE CUENTA" style="vertical-align: center"></Label>
         </StackLayout>
         <ScrollView orientation="vertical">
@@ -44,12 +44,16 @@
                 </GridLayout>
 
                 <StackLayout class="container-item btn-orange" orientation="horizontal">
-                    <Image src="res://icono_dolar" width="45"></Image>
+                    <Image src="res://icono_pagar" style="width: 8%;height: auto;"></Image>
                     <Label text=" "></Label>
-                    <Label text="PAGAR" style="vertical-align: center"></Label>
+                    <Label text="PAGAR" style="vertical-align: center;letter-spacing: 0.1%"></Label>
                 </StackLayout>
+                <!-- <StackLayout class="container-item btn-orange" orientation="horizontal">
+                        <Image src="res://icono_dolar"></Image>
+                        <Label text="PAGAR" style="vertical-align: center"></Label>
+                    </StackLayout> -->
 
-            </StackLayout>   
+            </StackLayout>    
         </ScrollView>
     </StackLayout>
 </RadSideDrawer>
