@@ -34,40 +34,43 @@ export class VentaBoletoComponent implements OnInit {
     private cont = 0;
     private PilaBoletos: Array<Object> = [];
     public imagenPublicitaria: string;
+    
+    PK1: number = 0;
+    // Compradores: any = [
+    //     {
+    //         Nombre: "Milton Ivan",
+    //         Appat: "Martinez",
+    //         Apmat: "Gonzalez",
+    //         Calle: "Mina de cobre",
+    //         Numero: "306",
+    //         Codigopostal: "66087",
+    //         Colonia: "Estancia",
+    //         Estado: "Nuevo Leon",
+    //         Municipio: "San Nicolas",
+    //         Telefonofijo: "83340359",
+    //         Telefonomovil: "8126522105",
+    //         Correoelectronico: "ivanmartinez.gonzalez97@gmail.com",
+    //         Correoalternativo: ""
 
-    Compradores: any = [
-        {
-            Nombre: "Milton Ivan",
-            Appat: "Martinez",
-            Apmat: "Gonzalez",
-            Calle: "Mina de cobre",
-            Numero: "306",
-            Codigopostal: "66087",
-            Colonia: "Estancia",
-            Estado: "Nuevo Leon",
-            Municipio: "San Nicolas",
-            Telefonofijo: "83340359",
-            Telefonomovil: "8126522105",
-            Correoelectronico: "ivanmartinez.gonzalez97@gmail.com",
-            Correoalternativo: ""
+    //     },
+    //     {
+    //         Nombre: "Eduardo",
+    //         Appat: "Vazquez",
+    //         Apmat: "De La O",
+    //         Calle: "Calle dos",
+    //         Numero: "1332",
+    //         Codigopostal: "64253",
+    //         Colonia: "Jajatl",
+    //         Estado: "Nuevo Leon",
+    //         Municipio: "Escomiedo",
+    //         Telefonofijo: "83340359",
+    //         Telefonomovil: "8126522105",
+    //         Correoelectronico: "eleduardojaja777youtube@vegeta.com",
+    //         Correoalternativo: ""
+    //     }
+    // ];
 
-        },
-        {
-            Nombre: "Eduardo",
-            Appat: "Vazquez",
-            Apmat: "De La O",
-            Calle: "Calle dos",
-            Numero: "1332",
-            Codigopostal: "64253",
-            Colonia: "Jajatl",
-            Estado: "Nuevo Leon",
-            Municipio: "Escomiedo",
-            Telefonofijo: "83340359",
-            Telefonomovil: "8126522105",
-            Correoelectronico: "eleduardojaja777youtube@vegeta.com",
-            Correoalternativo: ""
-        }
-    ];
+    Compradores: any = [];
 
     Formulario: boolean = true;
     Nombre: string = "";
@@ -116,14 +119,16 @@ export class VentaBoletoComponent implements OnInit {
         // this.modal.showModal(VentaBoletoModalComponent, options).then(res => {
         //     console.log(res);
         // });    
+        this.Compradores = [];
         this.Formulario = !this.Formulario;
     }
 
     BuscarChange(evt){
-        if(evt.object.text.length > 3){
-            this.GET.getData("api/Comprador/Buscar/" + this.session.getIdColaborador() + "/" + evt.object.text).subscribe(res => {
+        if(evt.object.text.length > 1){
+            this.GET.getDataAuthorization("api/Comprador/Buscar/" + this.PK1 + "/" + evt.object.text).subscribe(res => {
                 console.log("200 COMPRADOR");
-                console.log(res);
+                console.dir(res.json());
+                this.Compradores = res.json();
             }, error => {
                 console.log("500 COMPRADOR");
                 console.log(error);
@@ -132,8 +137,25 @@ export class VentaBoletoComponent implements OnInit {
     }
 
     onTapList(evt){
+        console.log("ON TAP LIST");
         console.log(evt.index);
-        this.Info = this.Compradores[evt.index];
+        console.dir(this.Compradores[evt.index]);
+        var Apellidos = this.Compradores[evt.index].apellidos.split(" ");
+        this.Info = {
+            Nombre: this.Compradores[evt.index].nombre,
+            Appat: Apellidos[0],
+            Apmat: Apellidos[1],
+            Calle: this.Compradores[evt.index].direccion.calle,
+            Numero: this.Compradores[evt.index].direccion.numero,
+            Codigopostal: this.Compradores[evt.index].direccion.codigo_postal,
+            Colonia: this.Compradores[evt.index].direccion.colonia,
+            Estado: this.Compradores[evt.index].direccion.estado,
+            Municipio: this.Compradores[evt.index].direccion.municipio,
+            Telefonofijo: this.Compradores[evt.index].direccion.telefono,
+            Telefonomovil: this.Compradores[evt.index].celular,
+            Correoelectronico: this.Compradores[evt.index].correo,
+            Correoalternativo: ""
+        };
         this.Formulario = true;
     }
 
@@ -145,6 +167,9 @@ export class VentaBoletoComponent implements OnInit {
         this.route.params.subscribe(params => {
             this.Datos = JSON.parse(params["data"]);
         });
+        this.PK1 = JSON.parse(this.session.getInformation()).clave;
+        console.log("NG ON INIT VENTA BOLETO");
+        console.log(this.PK1);
     }
 
     onDrawerButtonTap(): void {

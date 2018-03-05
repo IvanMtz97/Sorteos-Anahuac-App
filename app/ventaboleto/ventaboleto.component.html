@@ -48,11 +48,11 @@
 
                     <StackLayout *ngIf="!Formulario">
 
-                        <Label class="container-item txtorange" style="font-weight:600" text="Seleccionar comprador previo"></Label>
+                        <Label class="txtorange" style="font-weight:600" text="Seleccionar comprador previo"></Label>
                         <TextField class="txtCampo container-item" (textChange)="BuscarChange($event)" hint="Nombre"></TextField>
                         <ListView [items]="Compradores" (itemTap)="onTapList($event)" height="150">
                             <ng-template let-item="item" let-i="index" let-third="third">
-                                <Label [text]='item.Nombre'></Label>
+                                <Label [text]='item.nombre_completo'></Label>
                             </ng-template>
                         </ListView>
                         <Button class="vb-btn" (tap)="Cancelar()" text="Cancelar"></Button>

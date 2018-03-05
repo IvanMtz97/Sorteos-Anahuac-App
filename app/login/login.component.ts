@@ -53,8 +53,9 @@ export class LoginComponent implements OnInit {
         this.myGetService
             .getLogin({ email: this.Correo, password: this.Clave }, 'api/Colaborador/' + platformModule.device.uuid)
             .subscribe((result) => {
-                console.log("RESULTADO RESPUESTA -----> ", result);
+                console.log("LOGIN ON SUCCESS");
                 this.onGetDataSesion(result);
+                console.dir(result);
             }, (error) => {
                 console.log("INICIAR SESION", error);
                 //this.loader.display(false);
