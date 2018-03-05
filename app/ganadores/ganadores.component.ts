@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild } from "@angular/core";
 import { RadSideDrawerComponent } from "nativescript-pro-ui/sidedrawer/angular";
 import { DrawerTransitionBase, SlideInOnTopTransition } from "nativescript-pro-ui/sidedrawer";
+import { SessionService } from "../services/session/session.services";
 
 @Component({
     selector: "Ganadores",
@@ -12,9 +13,12 @@ import { DrawerTransitionBase, SlideInOnTopTransition } from "nativescript-pro-u
 export class GanadoresComponent {
     @ViewChild("drawer") drawerComponent: RadSideDrawerComponent;    
     private _sideDrawerTransition: DrawerTransitionBase;
+    public ganadores: string;
 
-    constructor(){
+    constructor(private session: SessionService){
         console.log("GANADORES COMPONENT");
+        this.ganadores = this.session.getGanadores();
+        this.ganadores = JSON.parse(this.ganadores);    
     }
 
     onDrawerButtonTap(): void {
