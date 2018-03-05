@@ -1,6 +1,7 @@
 import { Component } from "@angular/core";
 import { SessionService } from "./services/session/session.services";
 import { Router } from "@angular/router";
+var http = require("http");
 
 @Component({
     selector: "ns-app",
@@ -8,6 +9,8 @@ import { Router } from "@angular/router";
     providers: [SessionService]
 })
 export class AppComponent { 
+    public imagenPublicidad: string;
+
     constructor(private session: SessionService, private router: Router){
         this.session = session;
         this.router = router;
@@ -24,6 +27,16 @@ export class AppComponent {
             this.router.navigate([""]);
         }
         
-    }
-    
+
+        http.getImage("https://sorteoanahuac.mx/app/banner_1.jpg").then((r) => {            
+            console.log("-----r-----");            
+            this.imagenPublicidad = "data:image/png;base64,"+ r.toBase64String(); 
+            this.session.setImagenPublicidad(this.imagenPublicidad);
+            console.log("-----------");
+        }, (err) => {            
+            console.log("-----e-----");
+            console.log("-----------");
+        });
+
+    }        
 }

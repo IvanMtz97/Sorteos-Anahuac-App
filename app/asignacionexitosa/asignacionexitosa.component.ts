@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
 import { RadSideDrawerComponent } from "nativescript-pro-ui/sidedrawer/angular";
 import { DrawerTransitionBase, SlideInOnTopTransition } from "nativescript-pro-ui/sidedrawer";
+import { SessionService } from "../services/session/session.services";
 
 @Component({
     selector: "AsignacionExitosa",
@@ -13,15 +14,17 @@ import { DrawerTransitionBase, SlideInOnTopTransition } from "nativescript-pro-u
 export class AsignacionExitosaComponent implements OnInit{
     @ViewChild("drawer") drawerComponent: RadSideDrawerComponent;    
     private _sideDrawerTransition: DrawerTransitionBase;
-
+    public imagenPublicitaria: string;      
     boleto: boolean = false;
     Datos: any = [];
 
     toggle(){
         this.boleto = !this.boleto;
     }
-    constructor(private router: ActivatedRoute){
+    constructor(private session: SessionService, private router: ActivatedRoute){
         console.log("ASIGNACION COMPONENT");
+          
+        this.imagenPublicitaria = this.session.getImagenPublicidad();
     }
 
     ngOnInit(){

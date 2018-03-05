@@ -3,7 +3,8 @@ import * as dialogs from "ui/dialogs";
 import { RadSideDrawerComponent } from "nativescript-pro-ui/sidedrawer/angular";
 import { DrawerTransitionBase, SlideInOnTopTransition } from "nativescript-pro-ui/sidedrawer";
 import statusBar = require("nativescript-status-bar");
-
+import { SessionService } from "../services/session/session.services";
+ 
 @Component({
   selector: 'notificaciones',
   moduleId: module.id,
@@ -16,6 +17,12 @@ export class NotificacionesComponent {
   public hideButtonDelete: boolean = true;
   public count: number = 0;
   private PilaMensajes: Array<object> = [];
+  public imagenPublicitaria: string;
+
+  constructor(private session: SessionService)
+  {
+    this.imagenPublicitaria = this.session.getImagenPublicidad();
+  }
 
   ngOnInit()
   {

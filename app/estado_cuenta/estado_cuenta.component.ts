@@ -15,9 +15,10 @@ import { SessionService } from "../services/session/session.services";
 })
 export class EstadoCuentaComponent implements OnInit {
     public infoColaborador: object = {};
+    public imagenPublicitaria: string; 
 
     constructor(private myGetService: MyHttpGetService, private session: SessionService) {
-
+        this.imagenPublicitaria = this.session.getImagenPublicidad();
     }
 
     /* ***********************************************************

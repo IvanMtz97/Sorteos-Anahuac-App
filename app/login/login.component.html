@@ -6,9 +6,9 @@ Use the tkMainContent directive to display the content of the page when you have
 -->
 <StackLayout class="page page-content" orientation="vertical">
     <StackLayout class="page page-content" orientation="vertical" height="13%" backgroundColor="lightgray">
-            <Image src="https://sorteoanahuac.mx/app/banner_1.jpg"></Image>
+            <Image [src]="imagenPublicitaria" stretch ="fill"></Image>
     </StackLayout>
-    <StackLayout class="page page-content" orientation="vertical" height="85%">
+    <StackLayout class="page page-content" orientation="vertical" height="80%">
         <Image class="LogoLogin" src="res://logo_horizontal_naranja" height="24%"></Image>
         <TextField class="text-field" (textChange)="handleCorreoChange($event)" hint="correo@anahuac.mx" keyboardType="email"></TextField>
         <TextField class="text-field" secure="true" (textChange)="handlePasswordChange($event)" hint="Contraseña"></TextField>

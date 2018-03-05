@@ -16,10 +16,12 @@ export class PrivacidadComponent implements OnInit {
     private Aceptacion: string;
     private Reglamento: string;
     private Condiciones: string;
+    public imagenPublicitaria: string;
 
 
     constructor(private page: Page, private session: SessionService, private router: RouterExtensions){
         this.page.actionBarHidden = true;
+        this.imagenPublicitaria = this.session.getImagenPublicidad();
         console.log("PRIVACIDAD COMPONENT"); 
     }
 

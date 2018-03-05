@@ -145,4 +145,14 @@ export class SessionService {
     getFirstRun(){
         return getBoolean("firstrun", true);
     }
+
+    setImagenPublicidad(Publicidad)
+    {
+        setString("Publicidad", Publicidad);
+    }
+
+    getImagenPublicidad()
+    {
+        return getString("Publicidad");
+    }
 }

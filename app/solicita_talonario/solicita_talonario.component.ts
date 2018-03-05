@@ -5,6 +5,8 @@ import { DrawerTransitionBase, SlideInOnTopTransition } from "nativescript-pro-u
 import statusBar = require("nativescript-status-bar");
 import { MyHttpPostService } from "../services/http-post/http-post.services";
 import { SessionService } from "../services/session/session.services";
+  
+
 
 @Component({
   selector: 'solicitatalonario',
@@ -20,11 +22,13 @@ export class SolicitaTalonarioComponent {
   message : string = "";  
   contador: number = 0;
   validaPagina: boolean = true;
+  public imagenPublicitaria: string; 
 
   constructor(private myPostService: MyHttpPostService, private session: SessionService) 
   { 
     var data = JSON.parse(this.session.getInformation());
     console.log("-----------------data-----------------\n\n" + JSON.stringify(data) + "\n\n--------------------------------------");
+    this.imagenPublicitaria = this.session.getImagenPublicidad();
     // var data =
     // {
     //   "monto_deudor": 3200,

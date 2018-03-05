@@ -11,6 +11,10 @@ import * as Toast from "nativescript-toast";
 import { VentaBoletoModalComponent } from "./ventaboleto-modal.component";
 import { ModalDialogService } from "nativescript-angular/directives/dialogs";
 import { Observable } from 'rxjs';
+import { SessionService } from "../services/session/session.services";
+ 
+ 
+
 
 @Component({
     selector: "VentaBoleto",
@@ -28,6 +32,7 @@ export class VentaBoletoComponent implements OnInit {
     private status: boolean = true;
     private cont = 0;
     private PilaBoletos: Array<Object> = [];
+    public imagenPublicitaria: string;
 
     Nombre: string = "";
     // private Info: any = {
@@ -76,7 +81,10 @@ export class VentaBoletoComponent implements OnInit {
         Correoalternativo: ""
     };
 
-    constructor(private route: ActivatedRoute, private router: RouterExtensions, private modal: ModalDialogService, private vcRef: ViewContainerRef){ }
+    constructor(private session: SessionService, private route: ActivatedRoute, private router: RouterExtensions, private modal: ModalDialogService, private vcRef: ViewContainerRef)
+    { 
+        this.imagenPublicitaria = this.session.getImagenPublicidad(); 
+    }
 
     AbrirModal(){
         let options = {

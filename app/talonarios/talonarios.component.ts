@@ -7,6 +7,7 @@ import { MyHttpGetService } from "../services/http-get/http-get.services";
 import statusBar = require("nativescript-status-bar");
 import * as dialogs from "ui/dialogs";
 var utils = require("utils/utils");
+var http = require("http");
 
 @Component({
     selector: "Talonarios",
@@ -36,12 +37,16 @@ export class TalonariosComponent implements OnInit {
     public cantBolVendidos: Array<number> = [];
     //private talonarios: Array<object> = [];
     private PilaBoletos: Array<object> = [];
-    public statusBarState: boolean=true;
+    public statusBarState: boolean=true;    
+    public imagenPublicitaria: string;   
 
     constructor(private session: SessionService, private route: ActivatedRoute,  private router: Router, private myGetService: MyHttpGetService){
         console.log("TALONARIOS");
-        this.tieneTalonarios = false;          
+        this.tieneTalonarios = false;  
+        this.imagenPublicitaria = this.session.getImagenPublicidad();
     }
+
+
     @ViewChild("drawer") drawerComponent: RadSideDrawerComponent;
 
     private _sideDrawerTransition: DrawerTransitionBase;

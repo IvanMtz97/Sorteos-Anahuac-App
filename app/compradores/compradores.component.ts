@@ -1,6 +1,7 @@
 import { Component, ViewChild } from "@angular/core";
 import { RadSideDrawerComponent } from "nativescript-pro-ui/sidedrawer/angular";
 import { DrawerTransitionBase, SlideInOnTopTransition } from "nativescript-pro-ui/sidedrawer";
+import { SessionService } from "../services/session/session.services";
 
 @Component({
     selector: "Compradores",
@@ -12,8 +13,11 @@ import { DrawerTransitionBase, SlideInOnTopTransition } from "nativescript-pro-u
 export class CompradoresComponent {
     @ViewChild("drawer") drawerComponent: RadSideDrawerComponent;
     private _sideDrawerTransition: DrawerTransitionBase;
-    constructor(){
+    public imagenPublicitaria: string; 
+
+    constructor(private session: SessionService){
         console.log("COMPRADORES");
+        this.imagenPublicitaria = this.session.getImagenPublicidad();
     }
 
     onDrawerButtonTap(): void {

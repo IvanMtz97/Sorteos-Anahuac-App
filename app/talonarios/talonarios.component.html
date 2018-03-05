@@ -5,7 +5,7 @@
     <StackLayout orientation="horizontal"
                ios:horizontalAlignment="center"
                android:horizontalAlignment="center">
-        <Image src="res://icono_logo_encabezado" class="img"></Image>   
+        <Image src="res://icono_logo_encabezado" class="img" alt="logo"></Image>    
     </StackLayout>
 </ActionBar>
 <RadSideDrawer #drawer showOverNavigation="true" [drawerTransition]="sideDrawerTransition" drawerContentSize="360">
@@ -14,7 +14,7 @@
     </StackLayout>
     <StackLayout orientation="vertical" tkMainContent>
         <StackLayout class="page page-content" orientation="vertical" height="13%" backgroundColor="lightgray">
-            <Image src="https://sorteoanahuac.mx/app/banner_1.jpg"></Image>
+            <Image [src]="imagenPublicitaria" stretch ="fill"></Image>
         </StackLayout>
         <StackLayout width="100%" height="100%" *ngIf="tieneTalonarios">
             <ScrollView height="90%" orientation="vertical" sdkExampleTitle sdkToggleNavButton>
@@ -57,16 +57,16 @@
                                 </StackLayout>
                                 <StackLayout *ngFor="let boletoAsignado of talonario.Boletos.asignados; let i_asignado = index">
                                     <GridLayout class="component-header-4" columns="auto, auto, *" rows="auto, auto, auto" height="65">
-                                        <Label col="0" [row]="i_asignado" [text]="boletoAsignado.folio" class="text1"></Label>
-                                        <Label col="1" [row]="i_asignado" class="text3" text=" - "></Label>
-                                        <Label col="2" [row]="i_asignado" class="text3" [text]="boletoAsignado.comprador.nombre_completo" style="text-align:left;"></Label>  
-                                        <Label col="3" [row]="i_asignado" class="text2" style="text-align:right;" row="0" (tap)="ConsultaPagado(boletoAsignado, talonario)" text="Consultar   "></Label>
-                                        <Label col="4" [row]="i_asignado" class="text2" style="text-align:right;" row="0" text="&#x203A;"></Label>  
+                                        <Label col="0" [row]="i_asignado" [text]="boletoAsignado.folio" class="text1"></Label> 
+                                        <Label col="1" [row]="i_asignado" class="txtgray txtsmall" text=" - "></Label> 
+                                        <Label col="2" [row]="i_asignado" class="txtgray txtsmall" [text]="boletoAsignado.comprador.nombre_completo" style="text-align:left;width: 200px;white-space: nowrap;overflow: hidden;text-overflow: ellipsis;"></Label>  
+                                        <Label col="3" [row]="i_asignado" class="txtorange txtsmall" style="text-align: right;font-weight: 400;" row="0" (tap)="ConsultaPagado(boletoAsignado, talonario)" text="Consultar   "></Label>
+                                        <Label col="4" [row]="i_asignado" class="txtorange txtsmall" style="text-align: right;font-weight: 400;" row="0" text="&#x203A;"></Label> 
                                     </GridLayout>
                                     <StackLayout class="delimitador"></StackLayout>
                                 </StackLayout>
-                            </StackLayout>
-                            <!--FIN BOLETOS ASIGNADOS-->
+                            </StackLayout> 
+                            <!--FIN BOLETOS ASIGNADOS--> 
                             <!--BOLETOS VENDIDOS-->
                             <StackLayout visibility="{{ validaStackBolVen[i] ? 'visible' : 'collapsed' }}"> 
                                 <StackLayout orientation="horizontal" class="component-header-3">

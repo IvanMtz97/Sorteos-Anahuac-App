@@ -3,7 +3,7 @@ import { RadSideDrawerComponent } from "nativescript-pro-ui/sidedrawer/angular";
 import { DrawerTransitionBase, SlideInOnTopTransition } from "nativescript-pro-ui/sidedrawer";
 import statusBar = require("nativescript-status-bar");
 import { SessionService } from "../services/session/session.services";
-
+  
 @Component({
     selector: "ConoceSorteo",
     moduleId: module.id,
@@ -16,12 +16,14 @@ export class ConoceSorteoComponent {
     private _sideDrawerTransition: DrawerTransitionBase;
     public statusBarState: boolean=true;
     public conocesorteo: string;
+    public imagenPublicitaria: string;
 
     constructor(private session: SessionService){
         console.log("CONOCE SORTEO");
         this.conocesorteo = this.session.getConoceSorteo();
         this.conocesorteo = JSON.parse(this.conocesorteo);  
         console.log("this.conocesorteo -> " + this.conocesorteo);
+        this.imagenPublicitaria = this.session.getImagenPublicidad();
     }
     onDrawerButtonTap(): void {
         this.drawerComponent.sideDrawer.showDrawer();

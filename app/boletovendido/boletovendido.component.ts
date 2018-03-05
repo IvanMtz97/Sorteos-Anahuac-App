@@ -1,9 +1,10 @@
 import { Component, OnInit, ViewChild } from "@angular/core";
 import { RadSideDrawerComponent } from "nativescript-pro-ui/sidedrawer/angular";
 import { DrawerTransitionBase, SlideInOnTopTransition } from "nativescript-pro-ui/sidedrawer";
-import { ActivatedRoute } from "@angular/router";
+import { ActivatedRoute, Router } from "@angular/router";
 import statusBar = require("nativescript-status-bar");
-    
+import { SessionService } from "../services/session/session.services";
+  
 @Component({
     selector: "BoletoVendido",
     moduleId: module.id,
@@ -16,10 +17,12 @@ export class BoletoVendidoComponent implements OnInit {
     private _sideDrawerTransition: DrawerTransitionBase; 
     private Datos: any = [];  
     private visibility: boolean = true; 
+    public imagenPublicitaria: string; 
 
-    constructor(private router: ActivatedRoute)
+    constructor(private session: SessionService, private router: ActivatedRoute, private route: Router)
     {
         console.log("BOLETO VENDIDO COMPONENT");
+        this.imagenPublicitaria = this.session.getImagenPublicidad();
     }
     
     ngOnInit(): void 
@@ -43,24 +46,10 @@ export class BoletoVendidoComponent implements OnInit {
 
     public toggle()
     {
-        this.selectBoleto = !this.selectBoleto;
+        // this.selectBoleto = !this.selectBoleto;
+        this.route.navigate(['talonarios']);
     }
     onDrawerButtonTap(): void {
         this.drawerComponent.sideDrawer.showDrawer();
     }
- 
-    // public statusBarState: boolean=true;// statusBar.show();(swipe)="hideStatusBar()"
-    // hideStatusBar()
-    // {        
-    //     if(this.statusBarState == true)
-    //     {
-    //         statusBar.hide();
-    //         this.statusBarState = false;
-    //     }
-    //     else if(this.statusBarState == false)
-    //     {
-    //         statusBar.show();
-    //         this.statusBarState = true;
-    //     }
-    // }
 }
