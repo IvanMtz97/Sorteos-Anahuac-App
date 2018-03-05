@@ -58,7 +58,7 @@ export class LoginComponent implements OnInit {
                 console.dir(result);
             }, (error) => {
                 console.log("INICIAR SESION", error);
-                //this.loader.display(false);
+                this.loader.display(false);
                 this.mostrarMensaje('Autenticación', 'Usuario o contraseña invalidos. Recuerda que esta aplicación es únicamente para colaboradores de Sorteos Anáhuac.');
             });
     }
