@@ -5,12 +5,7 @@ import { NativeScriptRouterModule } from "nativescript-angular/router";
 const routes: Routes = [
     { path: "", redirectTo: "/login", pathMatch: "full" },
     { path: "login", loadChildren: "./login/login.module#LoginModule" },
-    { path: "boletovendido/:data", loadChildren: "./boletovendido/boletovendido.module#BoletoVendidoModule" },
-    { path: "home", loadChildren: "./home/home.module#HomeModule" },
-    { path: "browse", loadChildren: "./browse/browse.module#BrowseModule" },
-    { path: "search", loadChildren: "./search/search.module#SearchModule" },
-    { path: "featured", loadChildren: "./featured/featured.module#FeaturedModule" },
-    { path: "settings", loadChildren: "./settings/settings.module#SettingsModule" },
+    { path: "boletovendido/:data", loadChildren: "./boletovendido/boletovendido.module#BoletoVendidoModule" },            
     { path: "ventaboleto/:data", loadChildren: "./ventaboleto/ventaboleto.module#VentaBoletoModule"},
     { path: "conocesorteo", loadChildren: "./conocesorteo/conocesorteo.module#ConoceSorteoModule"},
     { path: "ganadores", loadChildren: "./ganadores/ganadores.module#GanadoresModule"},
