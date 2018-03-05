@@ -7,6 +7,9 @@ import { MyHttpGetService } from "../services/http-get/http-get.services";
 import statusBar = require("nativescript-status-bar");
 import * as dialogs from "ui/dialogs";
 var utils = require("utils/utils");
+import {registerElement} from "nativescript-angular/element-registry";
+
+//registerElement("Ripple", () => require("nativescript-ripple").Ripple);
 
 @Component({
     selector: "Talonarios",

@@ -2,6 +2,9 @@ import { Component, Input, OnInit } from "@angular/core";
 import { RouterExtensions } from "nativescript-angular/router";
 import { DrawerTransitionBase, SlideInOnTopTransition } from "nativescript-pro-ui/sidedrawer";
 import { RadSideDrawerComponent } from "nativescript-pro-ui/sidedrawer/angular";
+import {registerElement} from "nativescript-angular/element-registry";
+
+registerElement("Ripple", () => require("nativescript-ripple").Ripple);
 
 /* ***********************************************************
 * Keep data that is displayed as drawer items in the MyDrawer component class.

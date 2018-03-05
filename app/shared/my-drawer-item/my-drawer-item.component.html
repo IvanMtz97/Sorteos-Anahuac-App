@@ -1,7 +1,9 @@
 <StackLayout style="padding-top: 7.5%;"></StackLayout>
-<GridLayout columns="auto, auto, *" class="sidedrawer-list-item" [class.selected]="isSelected" (tap)="onNavItemTap(route)">    
-    <Image col="0" src="res://icono_{{icon}}" class="fa icon"></Image>
-    <Label col="1" [text]="title" class="p-r-10"></Label>
-    <Label col="2" text="&#x203A;" style="display: block; text-align: right;padding-right: 15%;"></Label>
-</GridLayout>
+<Ripple rippleColor="#dd741d" (tap)="onNavItemTap(route)">
+        <GridLayout columns="auto, auto, *" class="sidedrawer-list-item" [class.selected]="isSelected">    
+                <Image col="0" src="res://icono_{{icon}}" class="fa icon"></Image>
+                <Label col="1" [text]="title" class="p-r-10"></Label>
+                <Label col="2" text="&#x203A;" style="display: block; text-align: right;padding-right: 15%;"></Label>
+            </GridLayout>
+    </Ripple> 
 <StackLayout class="delimitador" style="padding-bottom: 7.5%"></StackLayout>
