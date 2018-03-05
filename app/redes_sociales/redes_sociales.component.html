@@ -18,8 +18,9 @@
         <StackLayout class="page page-content" orientation="vertical" height="13%" backgroundColor="lightgray">
             <Image [src]="imagenPublicitaria" stretch ="fill"></Image> 
         </StackLayout>
-        <StackLayout orientation="horizontal" class="component-header center">
-            <Label class="fa" text="&#xf007;"></Label> <!--res://icono_compartir-->
+        <StackLayout orientation="horizontal" class="component-header center" style="padding-left: 50%">
+            <!-- <Label class="fa" text="&#xf007;"></Label> --> <!-- res://icono_compartir -->
+            <Image src="res://icono_compartir" style="width: 5%; height: auto"></Image>
             <Label text="REDES SOCIALES"></Label>
         </StackLayout>        
         <StackLayout class="container center">  
@@ -32,13 +33,13 @@
                 width= "85%">
             </Button>
             <StackLayout height="7%"></StackLayout>
-            <Button
+            <!-- <Button
                 class="btn-orange"
                 text="COMPARTE MIS BOLETOS"                
                 (tap)="showModal('boleto')"
                 textwrap="true"
                 width= "85%">
-            </Button>                                      
+            </Button>                                       -->
         </StackLayout>        
     </StackLayout>
 <!-- </ScrollView>     -->
