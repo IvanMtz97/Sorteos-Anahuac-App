@@ -63,12 +63,14 @@
 
                             <StackLayout *ngIf="Datos.Tipo == 'pagado'" class="container-item btn-orange" orientation="horizontal">
                                 <Image src="res://icono_boleto"></Image>
-                                <Label text="PAGAR"></Label>
+                                <Label text=" "></Label>
+                                <Label text="PAGAR" style="vertical-align: center;"></Label>
                             </StackLayout>
 
                             <StackLayout *ngIf="Datos.Tipo == 'pendiente'" class="container-item btn-orange" orientation="horizontal">
                                 <Image src="res://icono_boleto"></Image>
-                                <Label text="ENVIAR POR CORREO"></Label>
+                                <Label text=" "></Label>
+                                <Label text="ENVIAR POR CORREO" style="vertical-align: center;"></Label>
                             </StackLayout>
 
                         </StackLayout>
