@@ -157,12 +157,22 @@ export class TalonariosComponent implements OnInit {
     }
 
     public VentaBoleto(boleto, talonario){
-        var Data = {
-            Tipo: "Uno",
-            Boleto: boleto,
-            Talonario: talonario.clave
-        };
-        this.router.navigate(['ventaboleto', JSON.stringify(Data)]);
+        console.log("VENTA BOLETO");
+        console.dir(boleto);
+        if(boleto.vendido){
+            dialogs.alert({
+                title:"Aviso",
+                message: "Este boleto ya se vendio",
+                okButtonText: "Ok"
+            });
+        }else{
+            var Data = {
+                Tipo: "Uno",
+                Boleto: boleto,
+                Talonario: talonario.clave
+            };
+            this.router.navigate(['ventaboleto', JSON.stringify(Data)]);
+        }
     }
     
     public ConsultaPagado(boleto, talonario){

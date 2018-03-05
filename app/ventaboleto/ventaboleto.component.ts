@@ -12,6 +12,7 @@ import { VentaBoletoModalComponent } from "./ventaboleto-modal.component";
 import { ModalDialogService } from "nativescript-angular/directives/dialogs";
 import { Observable } from 'rxjs';
 import { SessionService } from "../services/session/session.services";
+import { MyHttpGetService } from "../services/http-get/http-get.services";
  
  
 
@@ -34,23 +35,43 @@ export class VentaBoletoComponent implements OnInit {
     private PilaBoletos: Array<Object> = [];
     public imagenPublicitaria: string;
 
+    Compradores: any = [
+        {
+            Nombre: "Milton Ivan",
+            Appat: "Martinez",
+            Apmat: "Gonzalez",
+            Calle: "Mina de cobre",
+            Numero: "306",
+            Codigopostal: "66087",
+            Colonia: "Estancia",
+            Estado: "Nuevo Leon",
+            Municipio: "San Nicolas",
+            Telefonofijo: "83340359",
+            Telefonomovil: "8126522105",
+            Correoelectronico: "ivanmartinez.gonzalez97@gmail.com",
+            Correoalternativo: ""
+
+        },
+        {
+            Nombre: "Eduardo",
+            Appat: "Vazquez",
+            Apmat: "De La O",
+            Calle: "Calle dos",
+            Numero: "1332",
+            Codigopostal: "64253",
+            Colonia: "Jajatl",
+            Estado: "Nuevo Leon",
+            Municipio: "Escomiedo",
+            Telefonofijo: "83340359",
+            Telefonomovil: "8126522105",
+            Correoelectronico: "eleduardojaja777youtube@vegeta.com",
+            Correoalternativo: ""
+        }
+    ];
+
+    Formulario: boolean = true;
     Nombre: string = "";
-    // private Info: any = {
-    //     Nombre: "",
-    //     Appat: "",
-    //     Apmat: "",
-    //     Calle: "",
-    //     Numero: "",
-    //     Codigopostal: "",
-    //     Colonia: "",
-    //     Estado: "",
-    //     Municipio: "",
-    //     Telefonofijo: "",
-    //     Telefonomovil: "",
-    //     Correoelectronico: "",
-    //     Correoalternativo: ""
-    // };
-    public Info: any = {
+    public Info2: any = {
         Nombre: "Eduardo",
         Appat: "Vazquez",
         Apmat: "De La O",
@@ -65,7 +86,7 @@ export class VentaBoletoComponent implements OnInit {
         Correoelectronico: "eleduardojaja777youtube@vegeta.com",
         Correoalternativo: ""
     };
-    public Info2: any = {
+    public Info: any = {
         Nombre: "",
         Appat: "",
         Apmat: "",
@@ -81,21 +102,45 @@ export class VentaBoletoComponent implements OnInit {
         Correoalternativo: ""
     };
 
-    constructor(private session: SessionService, private route: ActivatedRoute, private router: RouterExtensions, private modal: ModalDialogService, private vcRef: ViewContainerRef)
+    constructor(private GET: MyHttpGetService, private session: SessionService, private route: ActivatedRoute, private router: RouterExtensions, private modal: ModalDialogService, private vcRef: ViewContainerRef)
     { 
         this.imagenPublicitaria = this.session.getImagenPublicidad(); 
     }
 
     AbrirModal(){
-        let options = {
-            context: "Xdd",
-            fullscreen: true,
-            viewContainerRef: this.vcRef
-        };
-        this.modal.showModal(VentaBoletoModalComponent, options).then(res => {
-            console.log(res);
-        });    
+        // let options = {
+        //     context: "Xdd",
+        //     fullscreen: true,
+        //     viewContainerRef: this.vcRef
+        // };
+        // this.modal.showModal(VentaBoletoModalComponent, options).then(res => {
+        //     console.log(res);
+        // });    
+        this.Formulario = !this.Formulario;
     }
+
+    BuscarChange(evt){
+        if(evt.object.text.length > 3){
+            this.GET.getData("api/Comprador/Buscar/" + this.session.getIdColaborador() + "/" + evt.object.text).subscribe(res => {
+                console.log("200 COMPRADOR");
+                console.log(res);
+            }, error => {
+                console.log("500 COMPRADOR");
+                console.log(error);
+            });
+        }
+    }
+
+    onTapList(evt){
+        console.log(evt.index);
+        this.Info = this.Compradores[evt.index];
+        this.Formulario = true;
+    }
+
+    Cancelar(){
+        this.Formulario = !this.Formulario;
+    }
+    
     ngOnInit(){
         this.route.params.subscribe(params => {
             this.Datos = JSON.parse(params["data"]);
