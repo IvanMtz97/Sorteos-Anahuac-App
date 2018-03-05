@@ -18,7 +18,7 @@
     <StackLayout orientation="vertical" tkMainContent>
 
         <StackLayout class="page page-content" orientation="vertical" height="13%" backgroundColor="lightgray">
-            <Image src="https://sorteoanahuac.mx/app/banner_1.jpg"></Image>
+            <Image [src]="imagenPublicitaria" stretch ="fill"></Image>
         </StackLayout>
         <StackLayout orientation="horizontal" class="component-header-2">
             <Label class="fa icon" text="&#xf01c;"></Label>
@@ -46,9 +46,24 @@
         <ScrollView>
                 <StackLayout class="container" orientation="vertical">
 
+                    <StackLayout *ngIf="!Formulario">
+
+                        <Label class="container-item txtorange" style="font-weight:600" text="Seleccionar comprador previo"></Label>
+                        <TextField class="txtCampo container-item" (textChange)="BuscarChange($event)" hint="Nombre"></TextField>
+                        <ListView [items]="Compradores" (itemTap)="onTapList($event)" height="150">
+                            <ng-template let-item="item" let-i="index" let-third="third">
+                                <Label [text]='item.Nombre'></Label>
+                            </ng-template>
+                        </ListView>
+                        <Button class="vb-btn" (tap)="Cancelar()" text="Cancelar"></Button>
+
+                    </StackLayout>
+
+                    <StackLayout *ngIf="Formulario">
                         <StackLayout class="vb-item">
                             <Button (tap)="AbrirModal()" class="vb-btn" text="SELECCIONAR COMPRADOR PREVIO"></Button>
                         </StackLayout>
+
 
                         <StackLayout class="vb-item">
                             <StackLayout orientation="horizontal">
@@ -188,14 +203,14 @@
 
                         <StackLayout *ngIf="Datos.Tipo == 'Varios'" orientation="horizontal" class="vb-item center">
                             <Button *ngIf="cont > 0" class="vb-btn" [isEnabled]="cont > 0 ? true : false" (tap)="Anterior()" text="< Anterior"></Button>
-                            <Button class="vb-btn" [isEnabled]="true" (tap)="Siguiente()" text="Siguiente >"></Button>
+                            <Button class="vb-btn" [isEnabled]="true" (tap)="Siguiente()" [text]="cont == Datos.Boletos.length-1? 'Vender >' : 'Siguiente >'"></Button>
                         </StackLayout>
                 
                         <StackLayout *ngIf="Datos.Tipo == 'Uno'" class="vb-item">
                             <Button class="vb-btn" (tap)="VenderBoleto()" text="vender boleto"></Button>
                         </StackLayout>
                 
-
+                    </StackLayout>
 
                     </StackLayout>
         </ScrollView>

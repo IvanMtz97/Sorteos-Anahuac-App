@@ -21,9 +21,11 @@ export class LoginComponent implements OnInit {
     public nextLibAvailable: boolean = false;
     private politicas: string;
     private condiciones: string;
+    public imagenPublicitaria: string; 
 
     constructor(page: Page, private router: RouterExtensions, private myGetService: MyHttpGetService, private session: SessionService) {
         page.actionBarHidden = true; 
+    this.imagenPublicitaria = this.session.getImagenPublicidad();
         console.log("UUID --> ", platformModule.device.uuid);
     }
 

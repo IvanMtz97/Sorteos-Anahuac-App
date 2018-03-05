@@ -1,6 +1,7 @@
 import { Component } from "@angular/core";
 import { SessionService } from "./services/session/session.services";
 import { Router } from "@angular/router";
+var http = require("http");
 import { MyHttpGetService } from "./services/http-get/http-get.services";
 import statusBar = require("nativescript-status-bar");
 import * as dialogs from "ui/dialogs";
@@ -11,6 +12,7 @@ import * as dialogs from "ui/dialogs";
     providers: [SessionService, MyHttpGetService]
 })
 export class AppComponent { 
+    public imagenPublicidad: string;
     constructor(private session: SessionService, private router: Router, private myGetService: MyHttpGetService){
         this.session = session;
         this.router = router;
@@ -30,6 +32,16 @@ export class AppComponent {
             this.router.navigate([""]);
         }
         
+
+        http.getImage("https://sorteoanahuac.mx/app/banner_1.jpg").then((r) => {            
+            console.log("-----r-----");            
+            this.imagenPublicidad = "data:image/png;base64,"+ r.toBase64String(); 
+            this.session.setImagenPublicidad(this.imagenPublicidad);
+            console.log("-----------");
+        }, (err) => {            
+            console.log("-----e-----");
+            console.log("-----------");
+        });            
     }
 
      //GET INICIO SESION-------->

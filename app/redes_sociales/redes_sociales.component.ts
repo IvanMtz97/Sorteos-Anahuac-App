@@ -4,6 +4,7 @@ import { RadSideDrawerComponent } from "nativescript-pro-ui/sidedrawer/angular";
 import { DrawerTransitionBase, SlideInOnTopTransition } from "nativescript-pro-ui/sidedrawer";
 import { ModalComponent } from "./app.modal";
 import { ModalDialogService } from "nativescript-angular/directives/dialogs";
+import { SessionService } from "../services/session/session.services";
 
 @Component({
   selector: 'redessociales',
@@ -11,10 +12,11 @@ import { ModalDialogService } from "nativescript-angular/directives/dialogs";
   templateUrl: './redes_sociales.component.html'
 })
 export class RedesSocialesComponent {
-
-  public constructor(private modal: ModalDialogService, private vcRef: ViewContainerRef)
+  public imagenPublicitaria: string; 
+  
+  constructor(private session: SessionService, private modal: ModalDialogService, private vcRef: ViewContainerRef)
   {
-
+    this.imagenPublicitaria = this.session.getImagenPublicidad();
   }
   
   public showModal(queCompartir) {

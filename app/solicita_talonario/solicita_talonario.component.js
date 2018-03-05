@@ -18,6 +18,7 @@ var SolicitaTalonarioComponent = /** @class */ (function () {
         this.validaPagina = true;
         var data = JSON.parse(this.session.getInformation());
         console.log("-----------------data-----------------\n\n" + JSON.stringify(data) + "\n\n--------------------------------------");
+        this.imagenPublicitaria = this.session.getImagenPublicidad();
         // var data =
         // {
         //   "monto_deudor": 3200,

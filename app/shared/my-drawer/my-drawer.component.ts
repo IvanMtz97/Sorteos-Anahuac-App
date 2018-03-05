@@ -1,5 +1,7 @@
 import { Component, Input, OnInit } from "@angular/core";
 import { SessionService } from "../../services/session/session.services";
+ 
+
 
 @Component({
     selector: "MyDrawer",
@@ -11,9 +13,11 @@ export class MyDrawerComponent implements OnInit {
     @Input() selectedPage: string;
 
     public menuAUX: boolean = true;
+    public imagenPublicitaria: string; 
 
     constructor(private session: SessionService)
     {
+        this.imagenPublicitaria = this.session.getImagenPublicidad();
         if(this.session.loggedIn())
         {
             this.menuAUX = true;

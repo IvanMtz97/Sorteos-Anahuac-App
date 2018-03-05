@@ -6,7 +6,7 @@ import { MyHttpPutService } from "../services/http-put/http-put.services";
 import { SessionService } from "../services/session/session.services";
 import { RadSideDrawerComponent } from "nativescript-pro-ui/sidedrawer/angular";
 import { DrawerTransitionBase, SlideInOnTopTransition } from "nativescript-pro-ui/sidedrawer";
-
+ 
 @Component({
     selector: "Confirmar",
     moduleId: module.id,
@@ -19,12 +19,14 @@ export class ConfirmarComponent implements OnInit{
     private Datos: any = [];
     private Boleto: Object = {};
     private Boletos: Array<Object> = [];
+    public imagenPublicitaria: string;
 
     @ViewChild("drawer") drawerComponent: RadSideDrawerComponent;
     private _sideDrawerTransition: DrawerTransitionBase;
 
     constructor(private route: ActivatedRoute, private router: RouterExtensions, private API: MyHttpPostService, private PUT: MyHttpPutService, private session: SessionService){
         console.log("CONFIRMAR COMPONENT");
+        this.imagenPublicitaria = this.session.getImagenPublicidad();
     }
 
     ngOnInit(){
