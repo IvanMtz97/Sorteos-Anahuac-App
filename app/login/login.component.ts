@@ -9,6 +9,7 @@ import { ActivatedRoute, Router } from "@angular/router";
 import { RouterExtensions } from "nativescript-angular/router/router-extensions";
 import * as platformModule from "tns-core-modules/platform";
 import { LoadingService } from "../services/loading/loading";
+var http = require("http");
 
 @Component({
     selector: "Login",
@@ -26,13 +27,23 @@ export class LoginComponent implements OnInit {
 
     constructor(page: Page, private router: RouterExtensions, private myGetService: MyHttpGetService, private session: SessionService, private loader: LoadingService) {
         page.actionBarHidden = true; 
-    this.imagenPublicitaria = this.session.getImagenPublicidad();
         console.log("UUID --> ", platformModule.device.uuid);
     }
 
     ngOnInit() {
         if (this.session.loggedIn()) { this.session.setLoggedIn(false); }
-        this.SorteoActivo();        
+        this.SorteoActivo();  
+        this.downloadImage();      
+    }
+
+    private downloadImage() {
+        http.getImage("https://sorteoanahuac.mx/app/banner_1.jpg").then((r) => {             
+            console.log("-----r-----");            
+            this.imagenPublicitaria = "data:image/png;base64,"+ r.toBase64String(); 
+            this.session.setImagenPublicidad("data:image/png;base64,"+ r.toBase64String());
+        }, (err) => {            
+            console.log("-----e-----");
+        });  
     }
 
 
