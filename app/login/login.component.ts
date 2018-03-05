@@ -8,12 +8,13 @@ import { SessionService } from "../services/session/session.services";
 import { ActivatedRoute, Router } from "@angular/router";
 import { RouterExtensions } from "nativescript-angular/router/router-extensions";
 import * as platformModule from "tns-core-modules/platform";
+import { LoadingService } from "../services/loading/loading";
 
 @Component({
     selector: "Login",
     moduleId: module.id,
     templateUrl: "./login.component.html",
-    providers: [MyHttpGetService, SessionService]
+    providers: [MyHttpGetService, SessionService, LoadingService]
 })
 export class LoginComponent implements OnInit {
     public Correo: string = "";
@@ -23,7 +24,7 @@ export class LoginComponent implements OnInit {
     private condiciones: string;
     public imagenPublicitaria: string; 
 
-    constructor(page: Page, private router: RouterExtensions, private myGetService: MyHttpGetService, private session: SessionService) {
+    constructor(page: Page, private router: RouterExtensions, private myGetService: MyHttpGetService, private session: SessionService, private loader: LoadingService) {
         page.actionBarHidden = true; 
     this.imagenPublicitaria = this.session.getImagenPublicidad();
         console.log("UUID --> ", platformModule.device.uuid);
@@ -37,7 +38,7 @@ export class LoginComponent implements OnInit {
 
     //GET INICIO SESION-------->
     private IniciarSesion() {
-        //this.loader.display(true);
+        this.loader.display(true);
         this.myGetService
             .getLogin({ email: this.Correo, password: this.Clave }, 'api/Colaborador/' + platformModule.device.uuid)
             .subscribe((result) => {
@@ -81,7 +82,7 @@ export class LoginComponent implements OnInit {
     public setInfo(data) { 
         this.session.setLoggedIn(true);
         this.session.setInformation(JSON.stringify(data.json()));
-        //this.loader.display(false);  
+        this.loader.display(false);  
         this.session.setToken(data.json().token);
         this.session.setIdColaborador(data.json().identificador);
         this.session.setCorreoColaborador(data.json().correo)
