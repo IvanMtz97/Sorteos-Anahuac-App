@@ -21,7 +21,7 @@ import { loadAppCss } from "tns-core-modules/application/application";
               backgroundColor : "#000"
             },
             ios: {
-              details: "Additional detail note!",
+              details: "Obteniendo Información!",
               margin: 10,
               dimBackground: true,
               color: "#ea7200", // color of indicator and labels
