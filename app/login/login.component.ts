@@ -7,6 +7,7 @@ import { MyHttpGetService } from "../services/http-get/http-get.services";
 import { SessionService } from "../services/session/session.services";
 import { ActivatedRoute, Router } from "@angular/router";
 import { RouterExtensions } from "nativescript-angular/router/router-extensions";
+import * as platformModule from "tns-core-modules/platform";
 
 @Component({
     selector: "Login",
@@ -25,6 +26,7 @@ export class LoginComponent implements OnInit {
     constructor(page: Page, private router: RouterExtensions, private myGetService: MyHttpGetService, private session: SessionService) {
         page.actionBarHidden = true; 
     this.imagenPublicitaria = this.session.getImagenPublicidad();
+        console.log("UUID --> ", platformModule.device.uuid);
     }
 
     ngOnInit() {
@@ -37,7 +39,7 @@ export class LoginComponent implements OnInit {
     private IniciarSesion() {
         //this.loader.display(true);
         this.myGetService
-            .getLogin({ email: this.Correo, password: this.Clave }, 'api/Colaborador')
+            .getLogin({ email: this.Correo, password: this.Clave }, 'api/Colaborador/' + platformModule.device.uuid)
             .subscribe((result) => {
                 console.log("RESULTADO RESPUESTA -----> ", result);
                 this.onGetDataSesion(result);
@@ -83,6 +85,7 @@ export class LoginComponent implements OnInit {
         this.session.setToken(data.json().token);
         this.session.setIdColaborador(data.json().identificador);
         this.session.setCorreoColaborador(data.json().correo)
+        this.session.setPassColaborador(this.Clave);
         if(this.session.getFirstRun() == true){
             this.router.navigate(["privacidad"], { clearHistory: true });
         }else{

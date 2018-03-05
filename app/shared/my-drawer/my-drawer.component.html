@@ -11,19 +11,19 @@ Feel free to customize layouts and components to change how your app drawer look
     </StackLayout> 
     <ScrollView row="2"> 
         <StackLayout class="sidedrawer-content" *ngIf="menuAUX">            
-            <MyDrawerItem title="VENTA DE BOLETOS" route="/talonarios" icon="talonario">
+            <MyDrawerItem title="VENTA DE BOLETOS" route="/talonarios" icon="talonario" [isSelected]="isPageSelected('Talonarios')">
             </MyDrawerItem>
-            <MyDrawerItem title="ESTADO DE CUENTA" route="/estadocuenta" icon="perfil">
+            <MyDrawerItem title="ESTADO DE CUENTA" route="/estadocuenta" icon="perfil" [isSelected]="isPageSelected('Estado_Cuenta')">
             </MyDrawerItem>
-            <MyDrawerItem title="CONOCE TU SORTEO" route="/conocesorteo" icon="conoce_sorteo">
+            <MyDrawerItem title="CONOCE TU SORTEO" route="/conocesorteo" icon="conoce_sorteo" [isSelected]="isPageSelected('Conoce_sorteo')">
             </MyDrawerItem>
-            <MyDrawerItem title="SOLICITA UN TALONARIO" route="/solicitatalonario" icon="nuevotalonario">
+            <MyDrawerItem title="SOLICITA UN TALONARIO" route="/solicitatalonario" icon="nuevotalonario" [isSelected]="isPageSelected('solicitatalonario')">
             </MyDrawerItem>
-            <MyDrawerItem title="LISTADO DE GANADORES" route="/ganadores" icon="ganadores">
+            <MyDrawerItem title="LISTADO DE GANADORES" route="/ganadores" icon="ganadores" [isSelected]="isPageSelected('Ganadores')">
             </MyDrawerItem>
-            <!-- <MyDrawerItem title="NOTIFICACIONES" route="/redessociales" icon="notificaciones">
+            <!-- <MyDrawerItem title="NOTIFICACIONES" route="/redessociales" icon="notificaciones" [isSelected]="isPageSelected('notificaciones')">
             </MyDrawerItem> -->
-            <MyDrawerItem title="REDES SOCIALES" route="/redessociales" icon="compartir">
+            <MyDrawerItem title="REDES SOCIALES" route="/redessociales" icon="compartir" [isSelected]="isPageSelected('redessociales')">
             </MyDrawerItem>
             <MyDrawerItem title="CERRAR SESION" route="/login" icon="logout">
             </MyDrawerItem>            
