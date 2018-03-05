@@ -20,6 +20,8 @@ export class MyDrawerItemComponent implements OnInit {
     @Input() route: string;
     @Input() icon: string;
     @Input() isSelected: boolean;
+    private clean: boolean = false;
+    private cleanArray: object = { '/login' : true };
 
     constructor(private routerExtensions: RouterExtensions, private drawer: RadSideDrawerComponent) {
 
@@ -37,11 +39,13 @@ export class MyDrawerItemComponent implements OnInit {
     * based on the tapped navigationItem's route.
     *************************************************************/
     onNavItemTap(navItemRoute: string): void {
+        if(this.cleanArray[navItemRoute]) this.clean = true;
         this.drawer.sideDrawer.toggleDrawerState();        
         this.routerExtensions.navigate([navItemRoute], {
             transition: {
                 name: "fade"
-            }
+            },
+            clearHistory: this.clean
         });
     }
 }
