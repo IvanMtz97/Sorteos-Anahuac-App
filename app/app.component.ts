@@ -5,6 +5,7 @@ var http = require("http");
 import { MyHttpGetService } from "./services/http-get/http-get.services";
 import statusBar = require("nativescript-status-bar");
 import * as dialogs from "ui/dialogs";
+import { RouterExtensions } from "nativescript-angular/router/router-extensions";
 
 @Component({
     selector: "ns-app",
@@ -13,7 +14,7 @@ import * as dialogs from "ui/dialogs";
 })
 export class AppComponent { 
     public imagenPublicidad: string;
-    constructor(private session: SessionService, private router: Router, private myGetService: MyHttpGetService){
+    constructor(private session: SessionService, private router: Router, private myGetService: MyHttpGetService, private routeExtension: RouterExtensions){
         this.session = session;
         this.router = router;
         console.log("FIRST RUN", this.session.getFirstRun());
@@ -69,6 +70,9 @@ export class AppComponent {
             title:titulo,
             message: mensaje,
             okButtonText: "Ok"
+        }).then(() => {
+            console.log("Dialog closed!");
+            this.routeExtension.navigate(['/login'], {clearHistory: true})
         });
     }
     
