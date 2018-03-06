@@ -39,11 +39,10 @@
                                 <StackLayout *ngFor="let boletoPendiente of talonario.Boletos.pendientes; let i_pendiente = index">
                                     <GridLayout class="component-header-4" columns="auto, auto, *" rows="auto, auto, *" height="65">
                                         <StackLayout class="vb-item" col="0" row="0">
-                                            <CheckBox #makeup (checkedChange)="toggleCheck(makeup, boletoPendiente, index)" checked="false"></CheckBox>
+                                            <CheckBox #makeup (checkedChange)="toggleCheck(makeup, boletoPendiente, index)" checked="false"></CheckBox> 
                                         </StackLayout> 
                                         <Label col="1" row="0" width="50%" [text]="boletoPendiente.folio" class="text1" style="vertical-align: center; text-align:left;"></Label>   
-                                        <Label col="2" row="0" class="txtorange txtsmall" style="text-align:center;font-weight: 400;" row="0" text="Vender" (tap)="VentaBoleto(boletoPendiente, talonario)" *ngIf="!hideBottonSales"></Label>
-                                        <Label col="3" row="0" class="txtorange txtsmall" style="text-align:right;font-weight: 400;" row="0" text="&#x203A;" *ngIf="!hideBottonSales"></Label>
+                                        <Label col="2" row="0" class="txtorange txtsmall" style="text-align:right;font-weight: 400;" row="0" text="Vender &#x203A;" (tap)="VentaBoleto(boletoPendiente, talonario)" *ngIf="!hideBottonSales"></Label>
                                     </GridLayout>
                                     <StackLayout class="delimitador"></StackLayout>
                                 </StackLayout>
@@ -56,17 +55,16 @@
                                     <Label class="txtorange txt-header-title" [text]="cantBolAsignados[i]"></Label>
                                 </StackLayout>
                                 <StackLayout *ngFor="let boletoAsignado of talonario.Boletos.asignados; let i_asignado = index">
-                                    <GridLayout class="component-header-4" columns="auto, auto, *" rows="auto, auto, *" height="75">
+                                    <GridLayout class="component-header-4" columns="auto, auto, *" rows="auto, auto, *" height="75">  
                                         <Label col="0" row="0" [text]="boletoAsignado.folio" class="text1" style="text-align:left;"></Label>   
-                                        <Label col="0" row="1" width="62%" class="txtgray txtsmall" colSpan="1" [text]="boletoAsignado.comprador.nombre_completo" style="text-align:left;"></Label>
-                                        <Label col="1" row="0" class="txtorange txtsmall" style="text-align: right;font-weight: 400;" row="0" (tap)="ConsultaPagado(boletoAsignado, talonario)" text="Consultar"></Label>  
-                                        <Label col="2" row="0" class="txtorange txtsmall" style="text-align: right;font-weight: 400;" row="0" text="&#x203A;"></Label> 
+                                        <Label col="0" row="1" width="65%" class="txtgray txtsmall" colSpan="1" [text]="boletoAsignado.comprador.nombre_completo" style="text-align:left;"></Label>
+                                        <Label col="1" row="0" class="txtorange txtsmall" colSpan="2" style="text-align: right;font-weight: 400;" row="0" (tap)="ConsultaPagado(boletoAsignado, talonario)" text="Consultar &#x203A;"></Label>  
                                     </GridLayout> 
                                     <StackLayout class="delimitador"></StackLayout> 
-                                </StackLayout>
+                                </StackLayout> 
                             </StackLayout> 
                             <!--FIN BOLETOS ASIGNADOS--> 
-                            <!--BOLETOS VENDIDOS-->
+                            <!--BOLETOS VENDIDOS--> 
                             <StackLayout visibility="{{ validaStackBolVen[i] ? 'visible' : 'collapsed' }}"> 
                                 <StackLayout orientation="horizontal" class="component-header-3">
                                     <Label class="txt-header-title" text="BOLETOS PAGADOS:"></Label>
@@ -75,9 +73,8 @@
                                 <StackLayout *ngFor="let boletoVendido of talonario.Boletos.vendidos; let i_vendido = index">
                                     <GridLayout class="component-header-4" columns="auto, auto, *" rows="auto, auto, *" height="75">                        
                                         <Label col="0" row="0" [text]="boletoVendido.folio" class="text1" style="text-align:left;"></Label>
-                                        <Label col="0" row="1" width="62%" class="txtgray txtsmall" colSpan="1" [text]="boletoVendido.comprador.nombre_completo" style="text-align:left;"></Label>
-                                        <Label col="1" row="0" class="txtorange txtsmall" style="text-align:right;font-weight: 400;" row="0" text="Pagar" (tap)="ConsultaBoleto(boletoVendido, talonario)"></Label> 
-                                        <Label col="2" row="0" class="txtorange txtsmall" style="text-align:right;font-weight: 400;" row="0" text="&#x203A;"></Label>      
+                                        <Label col="0" row="1" width="65%" class="txtgray txtsmall" colSpan="1" [text]="boletoVendido.comprador.nombre_completo" style="text-align:left;"></Label>
+                                        <Label col="1" row="0" class="txtorange txtsmall" colSpan="2" style="text-align:right;font-weight: 400;" row="0" text="Pagar &#x203A;" (tap)="ConsultaBoleto(boletoVendido, talonario)"></Label>   
                                     </GridLayout>
                                     <StackLayout class="delimitador"></StackLayout>
                                 </StackLayout>
