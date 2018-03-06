@@ -4,6 +4,8 @@ import { DrawerTransitionBase, SlideInOnTopTransition } from "nativescript-pro-u
 import { ActivatedRoute, Router } from "@angular/router";
 import statusBar = require("nativescript-status-bar");
 import { SessionService } from "../services/session/session.services";
+import { RouterExtensions } from "nativescript-angular/router/router-extensions";
+import { isAndroid, isIOS } from "platform";
   
 @Component({
     selector: "BoletoVendido",
@@ -19,7 +21,7 @@ export class BoletoVendidoComponent implements OnInit {
     private visibility: boolean = true; 
     public imagenPublicitaria: string; 
 
-    constructor(private session: SessionService, private router: ActivatedRoute, private route: Router)
+    constructor(private session: SessionService, private router: ActivatedRoute, private route: Router, private routerExtensions: RouterExtensions)
     {
         console.log("BOLETO VENDIDO COMPONENT");
         this.imagenPublicitaria = this.session.getImagenPublicidad();
@@ -50,6 +52,10 @@ export class BoletoVendidoComponent implements OnInit {
         this.route.navigate(['talonarios']);
     }
     onDrawerButtonTap(): void {
-        this.drawerComponent.sideDrawer.showDrawer();
+        if(isIOS){
+            this.routerExtensions.back();
+        }else if(isAndroid){
+            this.drawerComponent.sideDrawer.showDrawer();
+        }
     }
 }

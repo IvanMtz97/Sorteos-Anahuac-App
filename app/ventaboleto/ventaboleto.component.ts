@@ -6,14 +6,15 @@ import { confirm } from "ui/dialogs";
 import * as dialogs from "ui/dialogs";
 import { RadSideDrawerComponent } from "nativescript-pro-ui/sidedrawer/angular";
 import { DrawerTransitionBase, SlideInOnTopTransition } from "nativescript-pro-ui/sidedrawer";
-import * as Toast from "nativescript-toast";
 
 import { VentaBoletoModalComponent } from "./ventaboleto-modal.component";
 import { ModalDialogService } from "nativescript-angular/directives/dialogs";
 import { Observable } from 'rxjs';
 import { SessionService } from "../services/session/session.services";
 import { MyHttpGetService } from "../services/http-get/http-get.services";
- 
+import { isIOS, isAndroid } from "platform";
+
+import * as Toast from "nativescript-toast";
  
 
 
@@ -173,7 +174,11 @@ export class VentaBoletoComponent implements OnInit {
     }
 
     onDrawerButtonTap(): void {
-        this.drawerComponent.sideDrawer.showDrawer();
+        if(isIOS){
+            this.router.back();
+        }else if(isAndroid){
+            this.drawerComponent.sideDrawer.showDrawer();
+        }
     }
 
     handleInputChanged(event){
