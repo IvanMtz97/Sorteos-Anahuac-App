@@ -18,28 +18,12 @@ export class ConoceSorteoComponent {
     public conocesorteo: string;
     public imagenPublicitaria: string;
 
-    constructor(private session: SessionService){
-        console.log("CONOCE SORTEO");
+    constructor(private session: SessionService){        
         this.conocesorteo = this.session.getConoceSorteo();
         this.conocesorteo = JSON.parse(this.conocesorteo);  
-        console.log("this.conocesorteo -> " + this.conocesorteo);
         this.imagenPublicitaria = this.session.getImagenPublicidad();
     }
     onDrawerButtonTap(): void {
         this.drawerComponent.sideDrawer.showDrawer();
     }
-    // public statusBarState: boolean=true;// statusBar.show();(swipe)="hideStatusBar()"
-    // hideStatusBar()
-    // {        
-    //     if(this.statusBarState == true)
-    //     {
-    //         statusBar.hide();
-    //         this.statusBarState = false;
-    //     }
-    //     else if(this.statusBarState == false)
-    //     {
-    //         statusBar.show();
-    //         this.statusBarState = true;
-    //     }
-    // }
 }

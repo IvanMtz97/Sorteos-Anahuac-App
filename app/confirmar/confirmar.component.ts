@@ -24,8 +24,7 @@ export class ConfirmarComponent implements OnInit{
     @ViewChild("drawer") drawerComponent: RadSideDrawerComponent;
     private _sideDrawerTransition: DrawerTransitionBase;
 
-    constructor(private route: ActivatedRoute, private router: RouterExtensions, private API: MyHttpPostService, private PUT: MyHttpPutService, private session: SessionService){
-        console.log("CONFIRMAR COMPONENT");
+    constructor(private route: ActivatedRoute, private router: RouterExtensions, private API: MyHttpPostService, private PUT: MyHttpPutService, private session: SessionService){        
         this.imagenPublicitaria = this.session.getImagenPublicidad();
     }
 
@@ -91,43 +90,27 @@ export class ConfirmarComponent implements OnInit{
     Si(){
         if(this.Datos.Tipo == "Uno"){
             this.API.postData(this.Boleto, "api/Boleto/Vender").subscribe(res => {
-                console.log("SUCCESS API");
-                console.log(res);
                 this.router.navigate(["asignacionexitosa", JSON.stringify({ Tipo: "Uno", Boletos: this.Datos } )], { clearHistory: true });
                 this.PUT.putData({}, "api/Colaborador").subscribe(res => {
-                    console.log("SUCCESS PUT");
-                    console.log(res);
                     this.session.setToken(res.json().token);
                 }, error => {
-                    console.log("ERROR PUT");
-                    console.log(res);
                 });
             }, error => {
-                console.log("ERROR API");
-                console.log(error);
             });
             
         }else{
             var contador = 0;
             this.Boletos.forEach(function(boleto) {
                 this.API.postData(boleto, "api/Boleto/Vender").subscribe(res => {
-                    console.log("BOLETO VENDIDO");
                     if(contador == this.Boletos.length-1){
-                        console.log("CONTADOR: " + contador + ",LENGTH: " + this.Boletos.length);
                         this.router.navigate(["talonarios"], { clearHistory : true});
                         this.PUT.putData({}, "api/Colaborador").subscribe(res => {
-                            console.log("SUCCESS PUT");
-                            console.log(res);
                             this.session.setToken(res.json().token);
                         }, error => {
-                            console.log("ERROR PUT");
-                            console.log(res);
                         });
                     }
                     contador++;
                 }, error => {
-                    console.log("ERROR API VARIOS");
-                    console.log(error);
                 });
             }.bind(this));
         }

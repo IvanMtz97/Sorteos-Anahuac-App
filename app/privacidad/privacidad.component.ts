@@ -21,8 +21,7 @@ export class PrivacidadComponent implements OnInit {
 
     constructor(private page: Page, private session: SessionService, private router: RouterExtensions){
         this.page.actionBarHidden = true;
-        this.imagenPublicitaria = this.session.getImagenPublicidad();
-        console.log("PRIVACIDAD COMPONENT"); 
+        this.imagenPublicitaria = this.session.getImagenPublicidad();        
     }
 
     ngOnInit(){
@@ -34,10 +33,6 @@ export class PrivacidadComponent implements OnInit {
         this.Aceptacion = JSON.parse(this.Aceptacion);  
         this.Reglamento = JSON.parse(this.Reglamento);  
         this.Condiciones = JSON.parse(this.Condiciones); 
-        console.log(this.Politicas);
-        console.log(this.Aceptacion);
-        console.log(this.Reglamento);
-        console.log(this.Condiciones);
     }
 
     btnPolitica(){

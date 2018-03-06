@@ -126,20 +126,13 @@ export class VentaBoletoComponent implements OnInit {
     BuscarChange(evt){
         if(evt.object.text.length > 1){
             this.GET.getDataAuthorization("api/Comprador/Buscar/" + this.PK1 + "/" + evt.object.text).subscribe(res => {
-                console.log("200 COMPRADOR");
-                console.dir(res.json());
                 this.Compradores = res.json();
             }, error => {
-                console.log("500 COMPRADOR");
-                console.log(error);
             });
         }
     }
 
     onTapList(evt){
-        console.log("ON TAP LIST");
-        console.log(evt.index);
-        console.dir(this.Compradores[evt.index]);
         var Apellidos = this.Compradores[evt.index].apellidos.split(" ");
         this.Info = {
             Nombre: this.Compradores[evt.index].nombre,
@@ -168,8 +161,6 @@ export class VentaBoletoComponent implements OnInit {
             this.Datos = JSON.parse(params["data"]);
         });
         this.PK1 = JSON.parse(this.session.getInformation()).clave;
-        console.log("NG ON INIT VENTA BOLETO");
-        console.log(this.PK1);
     }
 
     onDrawerButtonTap(): void {

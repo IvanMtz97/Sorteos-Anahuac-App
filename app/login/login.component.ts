@@ -26,8 +26,7 @@ export class LoginComponent implements OnInit {
     public imagenPublicitaria: string; 
 
     constructor(page: Page, private router: RouterExtensions, private myGetService: MyHttpGetService, private session: SessionService, private loader: LoadingService) {
-        page.actionBarHidden = true; 
-        console.log("UUID --> ", platformModule.device.uuid);
+        page.actionBarHidden = true;         
     }
 
     ngOnInit() {
@@ -37,12 +36,10 @@ export class LoginComponent implements OnInit {
     }
 
     private downloadImage() {
-        http.getImage("https://sorteoanahuac.mx/app/banner_1.jpg").then((r) => {             
-            console.log("-----r-----");            
+        http.getImage("https://sorteoanahuac.mx/app/banner_1.jpg").then((r) => {                                 
             this.imagenPublicitaria = "data:image/png;base64,"+ r.toBase64String(); 
             this.session.setImagenPublicidad("data:image/png;base64,"+ r.toBase64String());
-        }, (err) => {            
-            console.log("-----e-----");
+        }, (err) => {                        
         });  
     }
 
@@ -52,12 +49,9 @@ export class LoginComponent implements OnInit {
         this.loader.display(true);
         this.myGetService
             .getLogin({ email: this.Correo, password: this.Clave }, 'api/Colaborador/' + platformModule.device.uuid)
-            .subscribe((result) => {
-                console.log("LOGIN ON SUCCESS");
-                this.onGetDataSesion(result);
-                console.dir(result);
+            .subscribe((result) => {                
+                this.onGetDataSesion(result);                
             }, (error) => {
-                console.log("INICIAR SESION", error);
                 this.loader.display(false);
                 this.mostrarMensaje('Autenticación', 'Usuario o contraseña invalidos. Recuerda que esta aplicación es únicamente para colaboradores de Sorteos Anáhuac.');
             });
@@ -106,19 +100,16 @@ export class LoginComponent implements OnInit {
         }
     }
     public Politicas() {        
-        utils.openUrl(JSON.parse(this.politicas)); 
-        console.log("this.politicas -> " + this.politicas);
+        utils.openUrl(JSON.parse(this.politicas));         
     }
     public Condiciones() {        
         utils.openUrl(JSON.parse(this.condiciones));
-        console.log("this.condiciones -> " + this.condiciones);
     }
     public ConoceSorteo() {
         this.router.navigate(["conocesorteo"]);
     }
 
     public ListaGanadores() {
-        console.log("LISTA DE GANADORES");
         this.router.navigate(["ganadores"]);
     }
 

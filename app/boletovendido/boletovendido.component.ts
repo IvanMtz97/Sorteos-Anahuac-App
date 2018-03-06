@@ -20,14 +20,12 @@ export class BoletoVendidoComponent implements OnInit {
     public imagenPublicitaria: string; 
 
     constructor(private session: SessionService, private router: ActivatedRoute, private route: Router)
-    {
-        console.log("BOLETO VENDIDO COMPONENT");
+    {        
         this.imagenPublicitaria = this.session.getImagenPublicidad();
     }
     
     ngOnInit(): void 
-    {
-        console.log("BOLETOVENDIDO");
+    {        
         this._sideDrawerTransition = new SlideInOnTopTransition();
         this.router.params.subscribe((params) => {
             this.Datos = JSON.parse(params["data"]);

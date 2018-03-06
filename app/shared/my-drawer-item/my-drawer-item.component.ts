@@ -6,9 +6,6 @@ import {registerElement} from "nativescript-angular/element-registry";
 
 registerElement("Ripple", () => require("nativescript-ripple").Ripple);
 
-/* ***********************************************************
-* Keep data that is displayed as drawer items in the MyDrawer component class.
-*************************************************************/
 @Component({
     selector: "MyDrawerItem",
     moduleId: module.id,
@@ -27,17 +24,9 @@ export class MyDrawerItemComponent implements OnInit {
 
     }
 
-    ngOnInit(): void {
-        /* ***********************************************************
-        * Use the MyDrawerItemComponent "onInit" event handler to initialize the properties data values.
-        *************************************************************/
+    ngOnInit(): void {    
     }
 
-    /* ***********************************************************
-    * Use the "tap" event handler of the GridLayout component for handling navigation item taps.
-    * The "tap" event handler of the app drawer item <GridLayout> is used to navigate the app
-    * based on the tapped navigationItem's route.
-    *************************************************************/
     onNavItemTap(navItemRoute: string): void {
         if(this.cleanArray[navItemRoute]) this.clean = true;
         this.drawer.sideDrawer.toggleDrawerState();        

@@ -21,16 +21,13 @@ export class AsignacionExitosaComponent implements OnInit{
     toggle(){
         this.boleto = !this.boleto;
     }
-    constructor(private session: SessionService, private router: ActivatedRoute){
-        console.log("ASIGNACION COMPONENT");
-          
+    constructor(private session: SessionService, private router: ActivatedRoute){                  
         this.imagenPublicitaria = this.session.getImagenPublicidad();
     }
 
     ngOnInit(){
         this.router.params.subscribe(params => {
             this.Datos = JSON.parse(params["data"]);
-            console.dir(this.Datos);
         });
     }
 
