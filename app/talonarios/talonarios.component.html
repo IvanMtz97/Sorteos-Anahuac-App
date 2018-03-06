@@ -41,9 +41,9 @@
                                         <StackLayout class="vb-item" col="0" row="0">
                                             <CheckBox #makeup (checkedChange)="toggleCheck(makeup, boletoPendiente, index)" checked="false"></CheckBox>
                                         </StackLayout> 
-                                        <Label col="1" row="0" [text]="boletoPendiente.folio" class="text1" style="vertical-align: center"></Label>  
-                                        <Label col="2" row="0" class="txtorange txtsmall" style="text-align:right;vertical-align: center;font-weight: 400; margin-right: 40px;" row="0" text="Vender" (tap)="VentaBoleto(boletoPendiente, talonario)" *ngIf="!hideBottonSales"></Label>
-                                        <Label col="3" row="0" class="txtorange txtsmall" style="text-align:right;vertical-align: center;font-weight: 400;" row="0" text="&#x203A;" *ngIf="!hideBottonSales"></Label>
+                                        <Label col="1" row="0" width="50%" [text]="boletoPendiente.folio" class="text1" style="vertical-align: center; text-align:left;"></Label>   
+                                        <Label col="2" row="0" class="txtorange txtsmall" style="text-align:center;font-weight: 400;" row="0" text="Vender" (tap)="VentaBoleto(boletoPendiente, talonario)" *ngIf="!hideBottonSales"></Label>
+                                        <Label col="3" row="0" class="txtorange txtsmall" style="text-align:right;font-weight: 400;" row="0" text="&#x203A;" *ngIf="!hideBottonSales"></Label>
                                     </GridLayout>
                                     <StackLayout class="delimitador"></StackLayout>
                                 </StackLayout>
