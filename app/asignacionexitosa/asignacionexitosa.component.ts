@@ -1,8 +1,9 @@
 import { Component, OnInit, ViewChild } from "@angular/core";
-import { ActivatedRoute } from "@angular/router";
+import { ActivatedRoute, Router } from "@angular/router";
 import { RadSideDrawerComponent } from "nativescript-pro-ui/sidedrawer/angular";
 import { DrawerTransitionBase, SlideInOnTopTransition } from "nativescript-pro-ui/sidedrawer";
 import { SessionService } from "../services/session/session.services";
+import { isAndroid, isIOS } from "platform";
 
 @Component({
     selector: "AsignacionExitosa",
@@ -21,7 +22,9 @@ export class AsignacionExitosaComponent implements OnInit{
     toggle(){
         this.boleto = !this.boleto;
     }
-    constructor(private session: SessionService, private router: ActivatedRoute){                  
+    constructor(private session: SessionService, private router: ActivatedRoute, private Router: Router){
+        console.log("ASIGNACION COMPONENT");
+          
         this.imagenPublicitaria = this.session.getImagenPublicidad();
     }
 
@@ -32,6 +35,10 @@ export class AsignacionExitosaComponent implements OnInit{
     }
 
     onDrawerButtonTap(): void {
-        this.drawerComponent.sideDrawer.showDrawer();
+        if(isIOS){
+            this.Router.navigate(["talonarios"]);
+        }else if (isAndroid){
+            this.drawerComponent.sideDrawer.showDrawer();
+        }
     }
 }
