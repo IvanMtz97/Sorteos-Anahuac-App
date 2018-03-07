@@ -48,13 +48,13 @@ export class AsignacionExitosaComponent implements OnInit{
         var Boleto = this.Datos.Boletos.Boleto.Boleto.clave;
         console.dir(this.Datos.Boletos);
         this.GET.getDataAuthorization("api/Boleto/Notificar?clave=" + Boleto).subscribe(res => {
-            console.log("2OO CORREO");
-            console.log(res);
             dialogs.alert({
                 title:"AVISO",
                 message: "Se ha notificado exitosamente al correo " + this.Datos.Info.Correoelectronico,
                 okButtonText: "Ok"
             });
+            console.log("2OO CORREO");
+            console.log(res);
         }, error => {
             console.log("500 CORREO");
             console.log(error);
