@@ -25,14 +25,12 @@ export class NotificacionesComponent {
   }
 
   ngOnInit()
-  {
-    console.log("NOTIFICACIONES");
+  {    
     this._sideDrawerTransition = new SlideInOnTopTransition();
   }
 
   eliminarSeleccion()
-  {
-      console.log("eliminarSeleccion()");
+  {      
   }
 
   onDrawerButtonTap(): void {
@@ -44,7 +42,6 @@ export class NotificacionesComponent {
     var bandera = true;
     this.count = (band) ? this.count + 1 : this.count - 1;
     if(this.count == 0) bandera = false;
-    console.log("COUNT --->", this.count);
     return bandera; 
     }
 
@@ -57,20 +54,7 @@ export class NotificacionesComponent {
         this.PilaMensajes.splice(index, 1);
     }
     console.log("hideButtonDelete: " + this.hideButtonDelete);
-}
-  // public statusBarState: boolean=true;// statusBar.show();(swipe)="hideStatusBar()"
-  // {        
-  //     if(this.statusBarState == true)
-  //     {
-  //         statusBar.hide();
-  //         this.statusBarState = false;
-  //     }
-  //     else if(this.statusBarState == false)
-  //     {
-  //         statusBar.show();
-  //         this.statusBarState = true;
-  //     }
-  // } 
+} 
   public mensajes = 
   [
     {

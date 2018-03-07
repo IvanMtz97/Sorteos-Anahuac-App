@@ -23,8 +23,8 @@
                         <StackLayout>
                             <StackLayout (tap)="toggle(i)" orientation="horizontal" class="component-header-2">
                                 <Image class="fa icon" width="6%" [src]="srcIconoTalonario[i]"></Image> 
-                                <Label class="txt-header" width="31%" text="TALONARIO"></Label>
-                                <Label class="txtorange txt-header" style="text-align: left;" [text]="talonario.clave" width="43%"></Label>
+                                <Label class="txt-header" width="31%" text="TALONARIO" [style]="srcIconoTalonario[i] == 'res://icono_talonario_gris'? 'color: gray' : 'color: white'"></Label>
+                                <Label class="txtorange txt-header" style="text-align: left;" [style]="srcIconoTalonario[i] == 'res://icono_talonario_gris'? 'color: gray' : 'color: orange'" [text]="talonario.clave" width="43%"></Label>
                                 <Image width="6%" [src]="srcFlecha[i]"></Image>
                             </StackLayout>
                         </StackLayout>

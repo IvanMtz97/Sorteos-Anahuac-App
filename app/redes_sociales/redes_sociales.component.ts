@@ -25,8 +25,7 @@ export class RedesSocialesComponent {
         fullscreen: true,
         viewContainerRef: this.vcRef
     };
-    this.modal.showModal(ModalComponent, options).then(res => {
-        console.log(res);
+    this.modal.showModal(ModalComponent, options).then(res => {        
     });    
   } 
 
@@ -34,8 +33,7 @@ export class RedesSocialesComponent {
   private _sideDrawerTransition: DrawerTransitionBase;
 
   ngOnInit()
-  {
-    console.log("REDES SOCIALES");
+  {    
     this._sideDrawerTransition = new SlideInOnTopTransition();
   }
 

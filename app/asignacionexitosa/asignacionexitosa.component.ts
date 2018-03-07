@@ -4,6 +4,8 @@ import { RadSideDrawerComponent } from "nativescript-pro-ui/sidedrawer/angular";
 import { DrawerTransitionBase, SlideInOnTopTransition } from "nativescript-pro-ui/sidedrawer";
 import { SessionService } from "../services/session/session.services";
 import { isAndroid, isIOS } from "platform";
+import { MyHttpGetService } from "../services/http-get/http-get.services";
+import * as dialogs from "ui/dialogs";
 
 @Component({
     selector: "AsignacionExitosa",
@@ -22,7 +24,7 @@ export class AsignacionExitosaComponent implements OnInit{
     toggle(){
         this.boleto = !this.boleto;
     }
-    constructor(private session: SessionService, private router: ActivatedRoute, private Router: Router){
+    constructor(private session: SessionService, private router: ActivatedRoute, private Router: Router, private GET: MyHttpGetService){
         console.log("ASIGNACION COMPONENT");
           
         this.imagenPublicitaria = this.session.getImagenPublicidad();
@@ -31,7 +33,6 @@ export class AsignacionExitosaComponent implements OnInit{
     ngOnInit(){
         this.router.params.subscribe(params => {
             this.Datos = JSON.parse(params["data"]);
-            console.dir(this.Datos);
         });
     }
 
@@ -41,5 +42,22 @@ export class AsignacionExitosaComponent implements OnInit{
         }else if (isAndroid){
             this.drawerComponent.sideDrawer.showDrawer();
         }
+    }
+    
+    EnviarCorreo(){
+        var Boleto = this.Datos.Boletos.Boleto.Boleto.clave;
+        console.dir(this.Datos.Boletos);
+        this.GET.getDataAuthorization("api/Boleto/Notificar?clave=" + Boleto).subscribe(res => {
+            dialogs.alert({
+                title:"AVISO",
+                message: "Se ha notificado exitosamente al correo " + this.Datos.Info.Correoelectronico,
+                okButtonText: "Ok"
+            });
+            console.log("2OO CORREO");
+            console.log(res);
+        }, error => {
+            console.log("500 CORREO");
+            console.log(error);
+        });
     }
 }

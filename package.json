@@ -29,6 +29,7 @@
     "nativescript-angular": "~5.2.0",
     "nativescript-checkbox": "^3.0.3",
     "nativescript-clipboard": "^1.1.7",
+    "nativescript-exit": "^1.0.1",
     "nativescript-loading-indicator": "^2.4.0",
     "nativescript-pro-ui": "~3.3.0",
     "nativescript-ripple": "^2.0.0",

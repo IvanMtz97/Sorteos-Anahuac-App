@@ -20,11 +20,7 @@ export class EstadoCuentaComponent implements OnInit {
     constructor(private myGetService: MyHttpGetService, private session: SessionService) {
         this.imagenPublicitaria = this.session.getImagenPublicidad();
     }
-
-    /* ***********************************************************
-    * Use the @ViewChild decorator to get a reference to the drawer component.
-    * It is used in the "onDrawerButtonTap" function below to manipulate the drawer.
-    *************************************************************/
+    
     @ViewChild("drawer") drawerComponent: RadSideDrawerComponent;
 
     private _sideDrawerTransition: DrawerTransitionBase;

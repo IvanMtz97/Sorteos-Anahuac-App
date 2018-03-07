@@ -26,8 +26,7 @@ export class SolicitaTalonarioComponent {
 
   constructor(private myPostService: MyHttpPostService, private session: SessionService) 
   { 
-    var data = JSON.parse(this.session.getInformation());
-    console.log("-----------------data-----------------\n\n" + JSON.stringify(data) + "\n\n--------------------------------------");
+    var data = JSON.parse(this.session.getInformation());    
     this.imagenPublicitaria = this.session.getImagenPublicidad();
     // var data =
     // {
@@ -64,37 +63,41 @@ export class SolicitaTalonarioComponent {
           }
       }
     }
-    console.log("validaPagina123 -> " + this.validaPagina);
   }
   
   @ViewChild("drawer") drawerComponent: RadSideDrawerComponent;
   private _sideDrawerTransition: DrawerTransitionBase;
 
   public makePostSolitarTalonario() {
-    console.log("ENTRA AQUI ---> ");
     this.myPostService
         .postData({}, 'api/Talonario/Solicitar')
-        .subscribe(res => {
-            console.log("RES --->", res);
-            //this.message = (<any>res).json.data.username;
+        .subscribe(res => {            
         });
   }
 
   public solicitaTalonario()
-  { 
-    console.log("ESPERE SOLICITANDO...........>")
+  {     
     this.makePostSolitarTalonario();
+    this.mostrarMensaje("Solicitud", "La solicitud ha sido enviada. Gracias.");
   }
 
   ngOnInit()
-  {
-    console.log("SOLICITA TALONARIO");
+  {    
     this._sideDrawerTransition = new SlideInOnTopTransition();
   }
 
   onDrawerButtonTap(): void {
     this.drawerComponent.sideDrawer.showDrawer();
   }
+
+  public mostrarMensaje (titulo, mensaje) {
+    dialogs.alert({
+        title:titulo,
+        message: mensaje,
+        okButtonText: "Ok"
+    }).then(() => {       
+    });
+}
 //   if(this.talonarios.length > 0) {
 //     //BOLETOS PENDIENTES
 //     if(this.talonarios[i].pendientes.length == 0)
