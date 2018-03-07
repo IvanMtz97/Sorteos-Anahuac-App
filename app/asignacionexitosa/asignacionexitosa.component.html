@@ -17,11 +17,11 @@
         <StackLayout class="page page-content" orientation="vertical" height="13%" backgroundColor="lightgray">
             <Image [src]="imagenPublicitaria" stretch ="fill"></Image>
         </StackLayout>
-        <StackLayout orientation="horizontal" class="component-header-2">
+        <!-- <StackLayout orientation="horizontal" class="component-header-2">
             <Label class="fa icon" text="&#xf01c;"></Label>
             <Label text="TALONARIO"></Label>
             <Label class="txtorange" [text]="Datos.Boletos.Talonario"></Label>
-        </StackLayout>
+        </StackLayout> -->
 
         <ScrollView>
 
@@ -42,12 +42,12 @@
 
                     <StackLayout class="btn-orange container-item" orientation="horizontal">
                         <Image src="res://icono_dolar"></Image>
-                        <Label text="PAGAR AHORA"></Label>
+                        <Label text="PAGAR AHORA" style="horizontal-align: center;"></Label>
                     </StackLayout>
 
-                    <StackLayout class="btn-orange container-item" orientation="horizontal">
+                    <StackLayout (tap)="EnviarCorreo()" class="btn-orange container-item" orientation="horizontal">
                         <Image src="res://icono_boleto"></Image>
-                        <Label text="ENVIAR POR CORREO"></Label>
+                        <Label text="ENVIAR POR CORREO" style="horizontal-align: center;"></Label>
                     </StackLayout>
 
                 </StackLayout>

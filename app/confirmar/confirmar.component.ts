@@ -116,6 +116,14 @@ export class ConfirmarComponent implements OnInit{
         }
     }
 
+    Siasdasd(){
+        if(this.Datos.Tipo == "Uno"){
+            this.router.navigate(["asignacionexitosa", JSON.stringify({ Tipo: "Uno", Boletos: this.Datos } )], { clearHistory: true });
+        }else{
+            this.router.navigate(["talonarios"], { clearHistory : true});
+        }
+    }
+
     Varios(){
         this.router.navigate(["talonarios"], { clearHistory: true });
     }
