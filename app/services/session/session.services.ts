@@ -22,8 +22,7 @@ export class SessionService {
     }
 
     getInformation(){
-        var data = JSON.parse(getString("Information"));
-        console.log("INFORMACION", data.length);
+        var data = JSON.parse(getString("Information"));        
         return data;
     }
 
@@ -37,8 +36,7 @@ export class SessionService {
     }
 
     getSorteoActivo(){
-        var data = JSON.parse(getString("SorteoActivo"));
-        console.log("INFORMACION", data.length);
+        var data = JSON.parse(getString("SorteoActivo"));        
         return data;
     }
 

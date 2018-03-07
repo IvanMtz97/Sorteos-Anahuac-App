@@ -44,7 +44,6 @@ export class TalonariosComponent implements OnInit {
     public imagenPublicitaria: string;   
 
     constructor(private session: SessionService, private route: ActivatedRoute,  private router: Router, private myGetService: MyHttpGetService){
-        console.log("TALONARIOS");
         this.tieneTalonarios = false;  
         this.imagenPublicitaria = this.session.getImagenPublicidad();
     }
@@ -58,7 +57,6 @@ export class TalonariosComponent implements OnInit {
         this._sideDrawerTransition = new SlideInOnTopTransition();
         var Data = JSON.parse(this.session.getInformation());
         this.contador = Array(Data.talonarios.length).fill(0);
-        console.log("DATOS ----> ", Data);
         if(Data.talonarios.length > 0) {
             this.tieneTalonarios = true;
             this.listaTalonarios = Data.talonarios;
@@ -160,8 +158,6 @@ export class TalonariosComponent implements OnInit {
     }
 
     public VentaBoleto(boleto, talonario){
-        console.log("VENTA BOLETO");
-        console.dir(boleto);
         if(boleto.vendido){
             dialogs.alert({
                 title:"Aviso",
@@ -180,8 +176,6 @@ export class TalonariosComponent implements OnInit {
     
     public ConsultaPagado(boleto, talonario){
         var Data = { Tipo: "pagado", Boleto: boleto, Talonario: talonario};
-        console.log("TALONARIOS CONSULTA PAGADO");
-        console.dir(Data.Boleto);
         this.router.navigate(["boletovendido", JSON.stringify(Data)]);
     }
 

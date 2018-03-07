@@ -17,11 +17,7 @@ export class AppComponent {
     constructor(private session: SessionService, private router: Router, private myGetService: MyHttpGetService, private routeExtension: RouterExtensions){
         this.session = session;
         this.router = router;
-        console.log("FIRST RUN", this.session.getFirstRun());
-        console.log("SESSION", this.session.loggedIn());
         if (this.session.loggedIn()) {
-            console.log("USER --> ", this.session.getCorreoColaborador());
-            console.log("PASS --> ", this.session.getPassColaborador());
             this.GetTalonarios();
             if(this.session.getFirstRun() == true){
                 this.router.navigate(["privacidad"]);
@@ -35,13 +31,9 @@ export class AppComponent {
         
 
         http.getImage("https://sorteoanahuac.mx/app/banner_1.jpg").then((r) => {            
-            console.log("-----r-----");            
             this.imagenPublicidad = "data:image/png;base64,"+ r.toBase64String(); 
             this.session.setImagenPublicidad(this.imagenPublicidad);
-            console.log("-----------");
         }, (err) => {            
-            console.log("-----e-----");
-            console.log("-----------");
         });            
     }
 
@@ -51,10 +43,8 @@ export class AppComponent {
         this.myGetService  
             .getDataAuthorization('api/Colaborador/GetCorreo/' + this.session.getCorreoColaborador() + '/')
             .subscribe((result) => {
-                console.log("RESULTADO RESPUESTA -----> ", result);
                 this.onGetData(result);
             }, (error) => {
-                console.log("Error talonarios", error);
                 //this.loader.display(false);
                 this.mostrarMensaje('Error', 'Falló al tratar de obtener los talonarios. El token expiro favor de iniciar sesion.');
             });

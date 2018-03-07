@@ -15,8 +15,7 @@ export class CompradoresComponent {
     private _sideDrawerTransition: DrawerTransitionBase;
     public imagenPublicitaria: string; 
 
-    constructor(private session: SessionService){
-        console.log("COMPRADORES");
+    constructor(private session: SessionService){        
         this.imagenPublicitaria = this.session.getImagenPublicidad();
     }
 

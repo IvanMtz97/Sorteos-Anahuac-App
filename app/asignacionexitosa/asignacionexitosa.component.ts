@@ -33,7 +33,6 @@ export class AsignacionExitosaComponent implements OnInit{
     ngOnInit(){
         this.router.params.subscribe(params => {
             this.Datos = JSON.parse(params["data"]);
-            console.dir(this.Datos);
         });
     }
 

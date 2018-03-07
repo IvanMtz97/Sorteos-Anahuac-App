@@ -106,19 +106,12 @@ var VentaBoletoComponent = /** @class */ (function () {
         var _this = this;
         if (evt.object.text.length > 1) {
             this.GET.getDataAuthorization("api/Comprador/Buscar/" + this.PK1 + "/" + evt.object.text).subscribe(function (res) {
-                console.log("200 COMPRADOR");
-                console.dir(res.json());
                 _this.Compradores = res.json();
             }, function (error) {
-                console.log("500 COMPRADOR");
-                console.log(error);
             });
         }
     };
     VentaBoletoComponent.prototype.onTapList = function (evt) {
-        console.log("ON TAP LIST");
-        console.log(evt.index);
-        console.dir(this.Compradores[evt.index]);
         var Apellidos = this.Compradores[evt.index].apellidos.split(" ");
         this.Info = {
             Nombre: this.Compradores[evt.index].nombre,
@@ -146,8 +139,6 @@ var VentaBoletoComponent = /** @class */ (function () {
             _this.Datos = JSON.parse(params["data"]);
         });
         this.PK1 = JSON.parse(this.session.getInformation()).clave;
-        console.log("NG ON INIT VENTA BOLETO");
-        console.log(this.PK1);
     };
     VentaBoletoComponent.prototype.onDrawerButtonTap = function () {
         if (platform_1.isIOS) {

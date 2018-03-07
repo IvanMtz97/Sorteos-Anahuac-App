@@ -17,7 +17,6 @@ var ConfirmarComponent = /** @class */ (function () {
         this.Datos = [];
         this.Boleto = {};
         this.Boletos = [];
-        console.log("CONFIRMAR COMPONENT");
         this.imagenPublicitaria = this.session.getImagenPublicidad();
     }
     ConfirmarComponent.prototype.ngOnInit = function () {
@@ -78,20 +77,12 @@ var ConfirmarComponent = /** @class */ (function () {
         var _this = this;
         if (this.Datos.Tipo == "Uno") {
             this.API.postData(this.Boleto, "api/Boleto/Vender").subscribe(function (res) {
-                console.log("SUCCESS API");
-                console.log(res);
                 _this.router.navigate(["asignacionexitosa", JSON.stringify({ Tipo: "Uno", Boletos: _this.Datos })], { clearHistory: true });
                 _this.PUT.putData({}, "api/Colaborador").subscribe(function (res) {
-                    console.log("SUCCESS PUT");
-                    console.log(res);
                     _this.session.setToken(res.json().token);
                 }, function (error) {
-                    console.log("ERROR PUT");
-                    console.log(res);
                 });
             }, function (error) {
-                console.log("ERROR API");
-                console.log(error);
             });
         }
         else {
@@ -99,23 +90,15 @@ var ConfirmarComponent = /** @class */ (function () {
             this.Boletos.forEach(function (boleto) {
                 var _this = this;
                 this.API.postData(boleto, "api/Boleto/Vender").subscribe(function (res) {
-                    console.log("BOLETO VENDIDO");
                     if (contador == _this.Boletos.length - 1) {
-                        console.log("CONTADOR: " + contador + ",LENGTH: " + _this.Boletos.length);
                         _this.router.navigate(["talonarios"], { clearHistory: true });
                         _this.PUT.putData({}, "api/Colaborador").subscribe(function (res) {
-                            console.log("SUCCESS PUT");
-                            console.log(res);
                             _this.session.setToken(res.json().token);
                         }, function (error) {
-                            console.log("ERROR PUT");
-                            console.log(res);
                         });
                     }
                     contador++;
                 }, function (error) {
-                    console.log("ERROR API VARIOS");
-                    console.log(error);
                 });
             }.bind(this));
         }

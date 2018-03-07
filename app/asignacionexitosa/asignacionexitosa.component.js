@@ -15,7 +15,6 @@ var AsignacionExitosaComponent = /** @class */ (function () {
         this.GET = GET;
         this.boleto = false;
         this.Datos = [];
-        console.log("ASIGNACION COMPONENT");
         this.imagenPublicitaria = this.session.getImagenPublicidad();
     }
     AsignacionExitosaComponent.prototype.toggle = function () {
@@ -25,7 +24,6 @@ var AsignacionExitosaComponent = /** @class */ (function () {
         var _this = this;
         this.router.params.subscribe(function (params) {
             _this.Datos = JSON.parse(params["data"]);
-            console.dir(_this.Datos);
         });
     };
     AsignacionExitosaComponent.prototype.onDrawerButtonTap = function () {

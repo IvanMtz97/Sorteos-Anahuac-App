@@ -16,12 +16,10 @@ var BoletoVendidoComponent = /** @class */ (function () {
         this.selectBoleto = true;
         this.Datos = [];
         this.visibility = true;
-        console.log("BOLETO VENDIDO COMPONENT");
         this.imagenPublicitaria = this.session.getImagenPublicidad();
     }
     BoletoVendidoComponent.prototype.ngOnInit = function () {
         var _this = this;
-        console.log("BOLETOVENDIDO");
         this._sideDrawerTransition = new sidedrawer_1.SlideInOnTopTransition();
         this.router.params.subscribe(function (params) {
             _this.Datos = JSON.parse(params["data"]);

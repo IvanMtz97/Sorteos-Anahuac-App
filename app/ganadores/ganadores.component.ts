@@ -16,8 +16,7 @@ export class GanadoresComponent {
     public ganadores: string;
     public imagenPublicitaria: string;
 
-    constructor(private session: SessionService){
-        console.log("GANADORES COMPONENT");
+    constructor(private session: SessionService){        
         this.ganadores = this.session.getGanadores();
         this.ganadores = JSON.parse(this.ganadores);
         this.imagenPublicitaria = this.session.getImagenPublicidad();    

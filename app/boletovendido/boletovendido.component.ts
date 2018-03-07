@@ -28,8 +28,7 @@ export class BoletoVendidoComponent implements OnInit {
     }
     
     ngOnInit(): void 
-    {
-        console.log("BOLETOVENDIDO");
+    {        
         this._sideDrawerTransition = new SlideInOnTopTransition();
         this.router.params.subscribe((params) => {
             this.Datos = JSON.parse(params["data"]);

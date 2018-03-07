@@ -26,8 +26,6 @@ export class MyDrawerComponent implements OnInit {
         {
             this.menuAUX = false
         }
-        console.log("session.loggedIn -> " + this.session.loggedIn());
-        console.log("this.menuAUX -> " + this.session.loggedIn());
     }
 
     ngOnInit(): void {
