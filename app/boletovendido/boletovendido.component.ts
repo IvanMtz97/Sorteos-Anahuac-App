@@ -6,11 +6,15 @@ import statusBar = require("nativescript-status-bar");
 import { SessionService } from "../services/session/session.services";
 import { RouterExtensions } from "nativescript-angular/router/router-extensions";
 import { isAndroid, isIOS } from "platform";
-  
+import { MyHttpGetService } from "../services/http-get/http-get.services";
+import { LoadingService } from "../services/loading/loading";
+import * as dialogs from "ui/dialogs";
+
 @Component({
     selector: "BoletoVendido",
     moduleId: module.id,
-    templateUrl: "./boletovendido.component.html"
+    templateUrl: "./boletovendido.component.html",
+    providers: [ MyHttpGetService, LoadingService ]
 })
 export class BoletoVendidoComponent implements OnInit {
     public selectBoleto: boolean = true;
@@ -21,7 +25,7 @@ export class BoletoVendidoComponent implements OnInit {
     private visibility: boolean = true; 
     public imagenPublicitaria: string; 
 
-    constructor(private session: SessionService, private router: ActivatedRoute, private route: Router, private routerExtensions: RouterExtensions)
+    constructor(private session: SessionService, private router: ActivatedRoute, private route: Router, private routerExtensions: RouterExtensions, private API: MyHttpGetService, private loading: LoadingService)
     {
         console.log("BOLETO VENDIDO COMPONENT");
         this.imagenPublicitaria = this.session.getImagenPublicidad();
@@ -56,5 +60,27 @@ export class BoletoVendidoComponent implements OnInit {
         }else if(isAndroid){
             this.drawerComponent.sideDrawer.showDrawer();
         }
+    }
+
+    EnviarCorreo(){
+        this.loading.display(true);
+        this.API.getDataAuthorization("api/Boleto/Notificar?clave="+this.Datos.Boleto.clave).subscribe(res => {
+            console.log("200 ENVIAR CORREO BOLETO VENDIDO");
+            console.log(res);
+            this.loading.display(false);
+            dialogs.alert({
+                title: "AVISO",
+                message: "Se ha notificado al comprador",
+                okButtonText: "Ok"
+            });
+        }, error => {
+            console.log("500 BOLETO VENDIDO");
+            console.log(error);
+            dialogs.alert({
+                title: "AVISO",
+                message: "Ha ocurrido un error al notificar al comprador",
+                okButtonText: "Ok"
+            });
+        });
     }
 }
