@@ -6,13 +6,15 @@ import { MyHttpPutService } from "../services/http-put/http-put.services";
 import { SessionService } from "../services/session/session.services";
 import { RadSideDrawerComponent } from "nativescript-pro-ui/sidedrawer/angular";
 import { DrawerTransitionBase, SlideInOnTopTransition } from "nativescript-pro-ui/sidedrawer";
+import { LoadingService } from "../services/loading/loading";
+import * as dialogs from "ui/dialogs";
  
 @Component({
     selector: "Confirmar",
     moduleId: module.id,
     templateUrl: "./confirmar.component.html",
     styleUrls: ["./confirmar.css"],
-    providers: [ MyHttpPostService, MyHttpPutService, SessionService ]
+    providers: [ MyHttpPostService, MyHttpPutService, SessionService, LoadingService ]
 })
 
 export class ConfirmarComponent implements OnInit{
@@ -24,7 +26,7 @@ export class ConfirmarComponent implements OnInit{
     @ViewChild("drawer") drawerComponent: RadSideDrawerComponent;
     private _sideDrawerTransition: DrawerTransitionBase;
 
-    constructor(private route: ActivatedRoute, private router: RouterExtensions, private API: MyHttpPostService, private PUT: MyHttpPutService, private session: SessionService){        
+    constructor(private route: ActivatedRoute, private router: RouterExtensions, private API: MyHttpPostService, private PUT: MyHttpPutService, private session: SessionService, private loading: LoadingService){        
         this.imagenPublicitaria = this.session.getImagenPublicidad();
     }
 
@@ -88,13 +90,26 @@ export class ConfirmarComponent implements OnInit{
     }
 
     Si(){
+        this.loading.display(true);
         if(this.Datos.Tipo == "Uno"){
             this.API.postData(this.Boleto, "api/Boleto/Vender").subscribe(res => {
-                this.router.navigate(["asignacionexitosa", JSON.stringify({ Tipo: "Uno", Boletos: this.Datos } )], { clearHistory: true });
                 this.PUT.putData({}, "api/Colaborador").subscribe(res => {
+                    console.log("PUT TOKEN");
+                    console.log(res.json().token);
                     this.session.setToken(res.json().token);
                 }, error => {
+                    console.log("ERROR AL RENOVAR TOKEN");
+                    console.log(error);
                 });
+                this.loading.display(false);
+                dialogs.alert({
+                    title: "AVISO",
+                    message: "Boleto vendido exitosamente",
+                    okButtonText: "Ok"
+                }).then(() => {
+                    this.router.navigate(["asignacionexitosa", JSON.stringify({ Tipo: "Uno", Boletos: this.Datos } )], { clearHistory: true });
+                });
+
             }, error => {
             });
             
@@ -103,10 +118,13 @@ export class ConfirmarComponent implements OnInit{
             this.Boletos.forEach(function(boleto) {
                 this.API.postData(boleto, "api/Boleto/Vender").subscribe(res => {
                     if(contador == this.Boletos.length-1){
-                        this.router.navigate(["talonarios"], { clearHistory : true});
-                        this.PUT.putData({}, "api/Colaborador").subscribe(res => {
-                            this.session.setToken(res.json().token);
-                        }, error => {
+                        this.loading.display(false);
+                        dialogs.alert({
+                            title: "AVISO",
+                            message: "Se han vendido exitosamente los boletos",
+                            okButtonText: "Ok"
+                        }).then(()=>{
+                            this.router.navigate(["talonarios"], { clearHistory : true});
                         });
                     }
                     contador++;
