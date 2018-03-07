@@ -15,8 +15,7 @@ import { MyHttpGetService } from "../services/http-get/http-get.services";
 import { isIOS, isAndroid } from "platform";
 
 import * as Toast from "nativescript-toast";
- 
-
+import { SearchBar } from "ui/search-bar";
 
 @Component({
     selector: "VentaBoleto",
@@ -301,5 +300,15 @@ export class VentaBoletoComponent implements OnInit {
             Correoelectronico: "",
             Correoalternativo: ""
         };
+    }
+
+    public onSubmit(args) {
+        let searchBar = <SearchBar>args.object;
+        alert("You are searching for " + searchBar.text);
+    }
+
+    public onTextChanged(args) {
+        let searchBar = <SearchBar>args.object;
+        console.log("SearchBar text changed! New value: " + searchBar.text);
     }
 }

@@ -117,7 +117,9 @@
                                 <Label class="txtorange letter-spacing" text="*"></Label>
                             </StackLayout>
                             <!-- <TextField class="txtCampo" id="txtCodigopostal" (textChange)="handleInputChanged($event)" keyboardType="number" maxLength="5"></TextField> -->
-                            <TextField class="txtCampo" [(ngModel)]="Info.Codigopostal" keyboardType="number" maxLength="5"></TextField>
+                            <!-- <TextField class="txtCampo" [(ngModel)]="Info.Codigopostal" keyboardType="number" maxLength="5"></TextField> -->
+                            <SearchBar hint="Search hint" [text]="searchPhrase" (textChange)="onTextChanged($event)" (submit)="onSubmit($event)" 
+                            color="#CCC" textFieldBackgroundColor="white" textFieldHintColor="#CCC"></SearchBar>
                         </StackLayout>
                 
                         <StackLayout class="vb-item">
