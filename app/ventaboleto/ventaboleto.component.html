@@ -20,12 +20,12 @@
         <StackLayout class="page page-content" orientation="vertical" height="13%" backgroundColor="lightgray">
             <Image [src]="imagenPublicitaria" stretch ="fill"></Image>
         </StackLayout>
-        <StackLayout orientation="horizontal" class="component-header-2">
-            <!-- <Label class="fa icon" text="&#xf01c;"></Label> -->
+
+        <!-- <StackLayout orientation="horizontal" class="component-header-2">
             <Image src="res://icono_talonario" style="width: 5%; height: auto"></Image>
             <Label class="letter-spacing" text=" TALONARIO"></Label>
             <Label class="txtorange letter-spacing" [text]="Datos.Talonario"></Label>
-        </StackLayout>
+        </StackLayout> -->
 
         <StackLayout *ngIf="Datos.Tipo == 'Uno'" orientation="horizontal" class="component-header-3">
             <Label class="letter-spacing" text="VENDER BOLETO"></Label>
