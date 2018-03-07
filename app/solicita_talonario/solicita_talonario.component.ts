@@ -78,6 +78,7 @@ export class SolicitaTalonarioComponent {
   public solicitaTalonario()
   {     
     this.makePostSolitarTalonario();
+    this.mostrarMensaje("Solicitud", "La solicitud ha sido enviada. Gracias.");
   }
 
   ngOnInit()
@@ -88,6 +89,15 @@ export class SolicitaTalonarioComponent {
   onDrawerButtonTap(): void {
     this.drawerComponent.sideDrawer.showDrawer();
   }
+
+  public mostrarMensaje (titulo, mensaje) {
+    dialogs.alert({
+        title:titulo,
+        message: mensaje,
+        okButtonText: "Ok"
+    }).then(() => {       
+    });
+}
 //   if(this.talonarios.length > 0) {
 //     //BOLETOS PENDIENTES
 //     if(this.talonarios[i].pendientes.length == 0)
