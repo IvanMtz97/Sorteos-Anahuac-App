@@ -118,8 +118,8 @@
                             </StackLayout>
                             <!-- <TextField class="txtCampo" id="txtCodigopostal" (textChange)="handleInputChanged($event)" keyboardType="number" maxLength="5"></TextField> -->
                             <!-- <TextField class="txtCampo" [(ngModel)]="Info.Codigopostal" keyboardType="number" maxLength="5"></TextField> -->
-                            <SearchBar hint="Search hint" [text]="searchPhrase" (textChange)="onTextChanged($event)" (submit)="onSubmit($event)" 
-                            color="#CCC" textFieldBackgroundColor="white" textFieldHintColor="#CCC"></SearchBar>
+                            <SearchBar class="txtCampo" hint="Buscar" (loaded)="sBLoaded($event)" [(ngModel)]="Info.Codigopostal" keyboardType="number" maxLength="5" (submit)="onSubmit($event)" 
+                            color="#CCC" textFieldBackgroundColor="white" textFieldHintColor="#CCC" width="100%"></SearchBar>
                         </StackLayout>
                 
                         <StackLayout class="vb-item">

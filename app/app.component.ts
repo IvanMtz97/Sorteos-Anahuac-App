@@ -9,6 +9,9 @@ import { RouterExtensions } from "nativescript-angular/router/router-extensions"
 import * as app from "application";
 import { AndroidApplication, AndroidActivityBackPressedEventData } from "application";
 import { exit } from "nativescript-exit";
+import * as pushPlugin from "nativescript-push-notifications";
+import * as platformModule from "tns-core-modules/platform";
+import { alert } from "ui/dialogs";
 
 @Component({
     selector: "ns-app",
@@ -53,6 +56,57 @@ export class AppComponent implements OnInit{
                     exit();
                 }
             });
+        });
+
+        var pushSettings = {
+            senderID: "870994298438", // Required: setting with the sender/project number
+            badge: true,
+            sound: true,
+            alert: true,
+            interactiveSettings: {
+                actions: [{
+                    identifier: 'READ_IDENTIFIER',
+                    title: 'Read',
+                    activationMode: "foreground",
+                    destructive: false,
+                    authenticationRequired: true
+                }, {
+                    identifier: 'CANCEL_IDENTIFIER',
+                    title: 'Cancel',
+                    activationMode: "foreground",
+                    destructive: true,
+                    authenticationRequired: true
+                }],
+                categories: [{
+                    identifier: 'READ_CATEGORY',
+                    actionsForDefaultContext: ['READ_IDENTIFIER', 'CANCEL_IDENTIFIER'],
+                    actionsForMinimalContext: ['READ_IDENTIFIER', 'CANCEL_IDENTIFIER']
+                }]
+            },
+            notificationCallbackAndroid: function (stringifiedData, fcmNotification) {
+                var notificationBody = fcmNotification && fcmNotification.getBody();
+               console.log("Message received!\n" + notificationBody + "\n" + stringifiedData);
+               alert("Message received!\n" + notificationBody + "\n" + stringifiedData);
+            },
+            notificationCallbackIOS: (message: any) => {
+                alert("Message received!\n" + JSON.stringify(message));
+            }
+        };
+
+        pushPlugin.register(pushSettings, (token: String) => {
+            alert("Device registered. Access token: " + token);
+            console.log("TOKEN DEVICE ---> ", token);
+            console.log("OS: " + platformModule.device.os);
+            // Register the interactive settings
+            // if(pushSettings.interactiveSettings) {
+            //     pushPlugin.registerUserNotificationSettings(() => {
+            //         alert('Successfully registered for interactive push.');
+            //     }, (err) => {
+            //         alert('Error registering for interactive push: ' + JSON.stringify(err));
+            //     });
+            // }
+        }, (errorMessage: any) => {
+            alert("Device NOT registered! " + JSON.stringify(errorMessage));
         });
     }
 
