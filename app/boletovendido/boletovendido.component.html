@@ -25,7 +25,6 @@
                     <Label class="text-black" text="BOLETO" color="#888888" width="30%" style="font-weight: bold;padding-left: 1%;vertical-align:center;"></Label>
                     <Label class="txtorange" [text]="Datos.Boleto.clave" width="58%" style="font-weight: bold;vertical-align:center;"></Label>
                     <!-- <Label class="drop" text="x" width="12%" visibility="{{ selectBoleto ? 'visible' : 'collapsed' }}" color="#1D1D1D"></Label> -->
-                    <Image src="res://icono_cerrar_gris" style="vertical-align: center;"></Image>
                 </StackLayout>
                 <StackLayout class="arrow-down" visibility="{{ selectBoleto ? 'visible' : 'collapsed' }}"></StackLayout>
                 <StackLayout visibility="{{ selectBoleto ? 'visible' : 'collapsed' }}">
@@ -57,13 +56,13 @@
                             <Label class="txtsmall container-item" text="http://anahuac.edu?Boleto=lokem/fff/gfsjdg46546jh(ahgsdfghsaf54)"></Label>
 
                             <StackLayout *ngIf="Datos.Tipo == 'pagado'" class="container-item btn-orange" orientation="horizontal">
-                                <Image src="res://icono_boleto"></Image>
+                                <Image src="res://icono_pagar"></Image>
                                 <Label text=" "></Label>
                                 <Label text="PAGAR" style="vertical-align: center;"></Label>
                             </StackLayout>
 
-                            <StackLayout *ngIf="Datos.Tipo == 'pendiente'" class="container-item btn-orange" orientation="horizontal">
-                                <Image src="res://icono_boleto"></Image>
+                            <StackLayout *ngIf="Datos.Tipo != 'pendiente'" (tap)="EnviarCorreo()" class="container-item btn-orange" orientation="horizontal">
+                                <Image src="res://icono_correo"></Image>
                                 <Label text=" "></Label>
                                 <Label text="ENVIAR POR CORREO" style="vertical-align: center;"></Label>
                             </StackLayout>

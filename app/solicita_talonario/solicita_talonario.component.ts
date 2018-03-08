@@ -16,7 +16,7 @@ import { SessionService } from "../services/session/session.services";
 })
 export class SolicitaTalonarioComponent {
   text1: string = '¡Apreciamos mucho tu apoyo!';
-  text2: string = 'Haz click en el boton para solicitar un nuevo talonario.';
+  text2: string = 'Haz clic en el botón para solicitar un nuevo talonario.';
   text3: string = '¡GRACIAS!';
   text4: string = 'SOLICITAR TALONARIO';
   message : string = "";  

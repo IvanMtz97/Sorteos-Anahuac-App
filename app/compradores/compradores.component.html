@@ -24,7 +24,21 @@
             <Label text="MIS COMPRADORES"></Label>
         </StackLayout>
 
-        <StackLayout>
+        <ScrollView height="65%">
+            <StackLayout orientation="vertical" class="container">
+                
+                <CheckBox #makeup (checkedChange)="toggleCheck(makeup, comprador.Clave, comprador.Comprador.correo)" *ngFor="let comprador of Compradores" checked="false" class="container-item" [text]="comprador.Comprador.nombre_completo"></CheckBox>
+    
+            </StackLayout>
+        </ScrollView>
+
+            <StackLayout *ngIf="Claves.length > 0" (tap)="Compartir()" class="btn-orange container-item" orientation="horizontal">
+                <Image src="res://icono_compartir"></Image>
+                <Label text=" "></Label>
+                <Label text="COMPARTIR" style="vertical-align: center;"></Label>
+            </StackLayout>
+
+        <!-- <StackLayout>
             <StackLayout class="container" orientation="horizontal">
                 <CheckBox checked="false"></CheckBox>
                 <Label text="José Hernandez"></Label>
@@ -43,7 +57,7 @@
                 <CheckBox checked="true"></CheckBox>
                 <Label text="Ana González"></Label>
             </StackLayout>
-        </StackLayout>
+        </StackLayout> -->
         
     </StackLayout>
 </RadSideDrawer>
