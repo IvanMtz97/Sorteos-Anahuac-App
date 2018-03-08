@@ -19,6 +19,8 @@ export class SolicitaTalonarioComponent {
   text2: string = 'Haz clic en el botón para solicitar un nuevo talonario.';
   text3: string = '¡GRACIAS!';
   text4: string = 'SOLICITAR TALONARIO';
+  text5: string = '¡Agradecemos tu interés!';
+  text6: string = 'Podrás solicitar otro talonario hasta vender la totalidad de tus boletos asignados actualmente.';
   message : string = "";  
   contador: number = 0;
   validaPagina: boolean = true;
