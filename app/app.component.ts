@@ -48,7 +48,7 @@ export class AppComponent implements OnInit{
             data.cancel = true;
             dialogs.confirm({
                 title:"AVISO",
-                message: "Deseas salir de la aplicacion?",
+                message: "¿Deseas salir de la aplicación?",
                 okButtonText: "SI",
                 cancelButtonText: "NO"
             }).then(result => {
@@ -119,7 +119,7 @@ export class AppComponent implements OnInit{
                 this.onGetData(result);
             }, (error) => {
                 //this.loader.display(false);
-                this.mostrarMensaje('Error', 'Falló al tratar de obtener los talonarios. El token expiro favor de iniciar sesion.');
+                this.mostrarMensaje('Error', 'Falló al tratar de obtener los talonarios. El token expiró favor de iniciar sesión.');
             });
     }
 

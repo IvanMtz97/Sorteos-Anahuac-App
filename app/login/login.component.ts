@@ -53,7 +53,7 @@ export class LoginComponent implements OnInit {
                 this.onGetDataSesion(result);                
             }, (error) => {
                 this.loader.display(false);
-                this.mostrarMensaje('Autenticación', 'Usuario o contraseña invalidos. Recuerda que esta aplicación es únicamente para colaboradores de Sorteos Anáhuac.');
+                this.mostrarMensaje('Autenticación', 'Usuario o contraseña inválidos. Recuerda que esta aplicación es únicamente para colaboradores de Sorteos Anáhuac.');
             });
     }
 
