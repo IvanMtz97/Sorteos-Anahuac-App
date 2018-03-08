@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "870994298438",
+    "firebase_url": "https://sorteoanahuac2-hybridapp.firebaseio.com",
+    "project_id": "sorteoanahuac2-hybridapp",
+    "storage_bucket": "sorteoanahuac2-hybridapp.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:870994298438:android:6f0a24a9399c27c4",
+        "android_client_info": {
+          "package_name": "org.nativescript.SorteosAnahuacApp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "870994298438-aas4j1cdd5ikuoeb6k32a94klutbid1k.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB_hzrZrY1S8m4olinQCbbKZOV7aE4HYNk"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
