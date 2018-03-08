@@ -314,28 +314,44 @@ export class VentaBoletoComponent implements OnInit {
     public onSubmit(args) {
         this.loading.display(true);
         let searchBar = <SearchBar>args.object;
-        this.GET.getDataAuthorization("api/Comprador/Buscar/"+ searchBar.text).subscribe(res => {
-            console.log("200 COD POSTAL");
-            console.dir(res);
-            res.json().forEach(function(codigo){
-                if(codigo.codigo == Number(searchBar.text) - 1 || codigo.codigo == Number(searchBar.text) || codigo.codigo == Number(searchBar.text) + 1){
-                    console.log("ENTRA EN CONDICIONAL COD POSTAL");
-                    this.Info.Colonia = codigo.asentamiento;
-                    this.Info.Estado = codigo.estado;
-                    this.Info.Municipio = codigo.municipio;
-                    this.loading.display(false);
-                }
-            }.bind(this));
-        }, error => {
-            console.log("500 COD POSTAL");
-            console.log(error);
-            this.loading.display(false);
+        if(searchBar.text.length > 5){
             dialogs.alert({
-                title: "AVISO",
-                message: "Ha ocurrido un error al consultar el codigo postal",
+                title:"AVISO",
+                message: "El codigo postal no debe llevar mas de 5 caracteres",
                 okButtonText: "Ok"
             });
-        });
+        }else{
+            this.GET.getDataAuthorization("api/Comprador/Buscar/"+ searchBar.text).subscribe(res => {
+                console.log("200 COD POSTAL");
+                console.dir(res);
+                if(res.json().length == 0){
+                    dialogs.alert({
+                        title: "AVISO",
+                        message: "No se encontraron datos para el codigo postal proporcionado",
+                        okButtonText: "Ok"
+                    });
+                }else{
+                    res.json().forEach(function(codigo){
+                        if(codigo.codigo == Number(searchBar.text) - 1 || codigo.codigo == Number(searchBar.text) || codigo.codigo == Number(searchBar.text) + 1){
+                            console.log("ENTRA EN CONDICIONAL COD POSTAL");
+                            this.Info.Colonia = codigo.asentamiento;
+                            this.Info.Estado = codigo.estado;
+                            this.Info.Municipio = codigo.municipio;
+                            this.loading.display(false);
+                        }
+                    }.bind(this));
+                }
+            }, error => {
+                console.log("500 COD POSTAL");
+                console.log(error);
+                this.loading.display(false);
+                dialogs.alert({
+                    title: "AVISO",
+                    message: "Ha ocurrido un error al consultar el codigo postal",
+                    okButtonText: "Ok"
+                });
+            });
+        }
     }
 
     public onTextChanged(args) {
