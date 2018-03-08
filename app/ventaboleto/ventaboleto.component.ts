@@ -12,6 +12,7 @@ import { ModalDialogService } from "nativescript-angular/directives/dialogs";
 import { Observable } from 'rxjs';
 import { SessionService } from "../services/session/session.services";
 import { MyHttpGetService } from "../services/http-get/http-get.services";
+import { LoadingService } from "../services/loading/loading";
 import { isIOS, isAndroid } from "platform";
 
 import * as Toast from "nativescript-toast";
@@ -21,7 +22,8 @@ import { SearchBar } from "ui/search-bar";
     selector: "VentaBoleto",
     moduleId: module.id,
     templateUrl: "./ventaboleto.component.html",
-    styleUrls: ["./ventaboleto.scss"]
+    styleUrls: ["./ventaboleto.scss"],
+    providers: [ MyHttpGetService, LoadingService ]
 })
 
 export class VentaBoletoComponent implements OnInit {
@@ -105,7 +107,7 @@ export class VentaBoletoComponent implements OnInit {
         Correoalternativo: ""
     };
 
-    constructor(private GET: MyHttpGetService, private session: SessionService, private route: ActivatedRoute, private router: RouterExtensions, private modal: ModalDialogService, private vcRef: ViewContainerRef)
+    constructor(private loading: LoadingService, private GET: MyHttpGetService, private session: SessionService, private route: ActivatedRoute, private router: RouterExtensions, private modal: ModalDialogService, private vcRef: ViewContainerRef)
     { 
         this.imagenPublicitaria = this.session.getImagenPublicidad(); 
     }
@@ -121,6 +123,13 @@ export class VentaBoletoComponent implements OnInit {
         // });    
         this.Compradores = [];
         this.Formulario = !this.Formulario;
+    }
+
+    public sBLoaded(args){
+        var searchbar:SearchBar = <SearchBar>args.object;
+        if(isAndroid){
+            searchbar.android.clearFocus();
+        }
     }
 
     BuscarChange(evt){
@@ -303,8 +312,30 @@ export class VentaBoletoComponent implements OnInit {
     }
 
     public onSubmit(args) {
+        this.loading.display(true);
         let searchBar = <SearchBar>args.object;
-        alert("You are searching for " + searchBar.text);
+        this.GET.getDataAuthorization("api/Comprador/Buscar/"+ searchBar.text).subscribe(res => {
+            console.log("200 COD POSTAL");
+            console.dir(res);
+            res.json().forEach(function(codigo){
+                if(codigo.codigo == Number(searchBar.text) - 1 || codigo.codigo == Number(searchBar.text) || codigo.codigo == Number(searchBar.text) + 1){
+                    console.log("ENTRA EN CONDICIONAL COD POSTAL");
+                    this.Info.Colonia = codigo.asentamiento;
+                    this.Info.Estado = codigo.estado;
+                    this.Info.Municipio = codigo.municipio;
+                    this.loading.display(false);
+                }
+            }.bind(this));
+        }, error => {
+            console.log("500 COD POSTAL");
+            console.log(error);
+            this.loading.display(false);
+            dialogs.alert({
+                title: "AVISO",
+                message: "Ha ocurrido un error al consultar el codigo postal",
+                okButtonText: "Ok"
+            });
+        });
     }
 
     public onTextChanged(args) {
