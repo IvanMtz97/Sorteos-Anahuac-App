@@ -27,6 +27,7 @@
     "@angular/router": "~5.2.0",
     "base-64": "^0.1.0",
     "nativescript-angular": "~5.2.0",
+    "nativescript-bitmap-factory": "^1.7.1",
     "nativescript-checkbox": "^3.0.3",
     "nativescript-clipboard": "^1.1.7",
     "nativescript-exit": "^1.0.1",
