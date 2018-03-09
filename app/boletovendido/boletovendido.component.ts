@@ -9,6 +9,9 @@ import { isAndroid, isIOS } from "platform";
 import { MyHttpGetService } from "../services/http-get/http-get.services";
 import { LoadingService } from "../services/loading/loading";
 import * as dialogs from "ui/dialogs";
+var ZXing = require('nativescript-zxing');
+import * as imgSource from "tns-core-modules/image-source";
+var utilityModule = require("utils/utils");
 
 @Component({
     selector: "BoletoVendido",
@@ -18,12 +21,15 @@ import * as dialogs from "ui/dialogs";
 })
 export class BoletoVendidoComponent implements OnInit {
     public selectBoleto: boolean = true;
+    public imgSrc: string;
+    public token: string;
     @ViewChild("drawer") drawerComponent: RadSideDrawerComponent;
 
     private _sideDrawerTransition: DrawerTransitionBase; 
     private Datos: any = [];  
     private visibility: boolean = true; 
     public imagenPublicitaria: string; 
+    public urlBoleto: string;
 
     constructor(private session: SessionService, private router: ActivatedRoute, private route: Router, private routerExtensions: RouterExtensions, private API: MyHttpGetService, private loading: LoadingService)
     {
@@ -35,10 +41,8 @@ export class BoletoVendidoComponent implements OnInit {
     {        
         this._sideDrawerTransition = new SlideInOnTopTransition();
         this.router.params.subscribe((params) => {
-            this.Datos = JSON.parse(params["data"]);
-            console.dir(this.Datos);
-        });
-
+            this.Datos = JSON.parse(params["data"]);            
+        });        
         if(this.Datos != undefined)
         {
             this.visibility = true;
@@ -47,6 +51,29 @@ export class BoletoVendidoComponent implements OnInit {
         {
             this.visibility = false;
         }
+
+        this.token = this.Datos.Boleto.token;
+        var serverURL = this.session.getURL()
+        var zx = new ZXing();    
+        var img = zx.createBarcode({encode: serverURL + "boleto/" + this.token, height: 100, width: 100, format: ZXing.QR_CODE});
+        
+    
+        this.imgSrc = "data:image/png;base64," + imgSource.fromNativeSource(img).toBase64String("png");
+        console.log("this.imgSrc -> " + this.imgSrc);    
+            console.dir(img);
+            console.log(img);
+    
+            var options = {tryHarder: true, formats: [ZXing.QR_CODE, ZXing.ITF]};
+            
+            
+           var results = zx.decodeBarcode(img, options);
+           if (!results) {
+               console.log("Unable to decode barcode");           
+           } else {
+               console.log("Barcode format", results.format);
+               console.log("Barcode value", results.barcode); 
+               this.urlBoleto = results.barcode;                  
+           }
     }
 
     public toggle()
@@ -54,6 +81,12 @@ export class BoletoVendidoComponent implements OnInit {
         // this.selectBoleto = !this.selectBoleto;
         this.route.navigate(['talonarios']);
     }
+
+    Launch()
+    {
+        utilityModule.openUrl(this.urlBoleto.toString());
+    }
+
     onDrawerButtonTap(): void {
         if(isIOS){
             this.routerExtensions.back();
