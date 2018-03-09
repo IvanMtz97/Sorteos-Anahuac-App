@@ -4,6 +4,22 @@ import { getBoolean, setBoolean, getNumber, setNumber, getString, setString, has
 @Injectable()
 export class SessionService {   
 
+    setClave(Clave: string){
+        setString("ClaveLogin", Clave);
+    }
+
+    getClave(){
+        return getString("ClaveLogin");
+    }
+
+    setCorreo(Correo: string){
+        setString("CorreoLogin", Correo);
+    }
+
+    getCorreo(){
+        return getString("CorreoLogin");
+    }
+
     setLoggedIn(status){
         setBoolean("loggedIn", status);
     }

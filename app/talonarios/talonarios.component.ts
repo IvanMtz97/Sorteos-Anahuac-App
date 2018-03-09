@@ -8,7 +8,6 @@ import statusBar = require("nativescript-status-bar");
 import * as dialogs from "ui/dialogs";
 var utils = require("utils/utils");
 import {registerElement} from "nativescript-angular/element-registry";
-
 //registerElement("Ripple", () => require("nativescript-ripple").Ripple);
 var http = require("http");
 
@@ -20,7 +19,7 @@ var http = require("http");
 })
 
 export class TalonariosComponent implements OnInit {
-    public showDetails: Object = {};
+    public showDetails: Array<Object> = [];
     public tieneTalonarios: boolean = false; 
     public hideBottonSales: boolean = false;
     public hideBotton: boolean = false;  
@@ -54,13 +53,23 @@ export class TalonariosComponent implements OnInit {
     private _sideDrawerTransition: DrawerTransitionBase;
 
     ngOnInit(): void {
+        console.log("on Init talonarios");
+        var Correo = this.session.getCorreoColaborador();
+        this.myGetService.getDataAuthorization("api/Colaborador/GetCorreo/"+Correo+"/").subscribe(res => {
+            console.log("TALONARIOS COMPONENT");
+            console.log("TALONARIOS ACTUALIZADOS");
+            this.session.setInformation(JSON.stringify(res.json()));
+        }, error => {
+            console.log("ERROR AL ACTUALIZAR TALONARIOS");
+            console.log(error);
+        });
         this._sideDrawerTransition = new SlideInOnTopTransition();
         var Data = JSON.parse(this.session.getInformation());
         this.contador = Array(Data.talonarios.length).fill(0);
         if(Data.talonarios.length > 0) {
             this.tieneTalonarios = true;
             this.listaTalonarios = Data.talonarios;
-        } 
+        }
     }
 
     hideStatusBar()
@@ -93,6 +102,12 @@ export class TalonariosComponent implements OnInit {
     }
 
     public toggle(index){
+        this.PilaBoletos = [];
+        for(var i = 0; i<this.showDetails.length; i++){
+            if(i != index){
+                this.showDetails[i] = false;
+            }
+        }
         this.showDetails[index] = !this.showDetails[index];   
         this.flecha[index] = !this.flecha[index];    
         if(this.flecha[index] == true) {

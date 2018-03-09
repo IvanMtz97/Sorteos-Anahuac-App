@@ -10,8 +10,9 @@ Use the tkMainContent directive to display the content of the page when you have
     </StackLayout>
     <StackLayout class="page page-content" orientation="vertical" height="80%">
         <Image class="LogoLogin" src="res://logo_horizontal_naranja" height="24%"></Image>
-        <TextField class="text-field" (textChange)="handleCorreoChange($event)" hint="correo@anahuac.mx" keyboardType="email"></TextField>
-        <TextField class="text-field" secure="true" (textChange)="handlePasswordChange($event)" hint="Contraseña"></TextField>
+        <TextField class="text-field" [(ngModel)]="Correo" hint="correo@anahuac.mx" keyboardType="email"></TextField>
+        <TextField class="text-field" [(ngModel)]="Clave" secure="true" hint="Contraseña"></TextField>
+        <CheckBox #makeup (checkedChange)="toggleCheck(makeup)" checked="false" text="Recordar usuario y contraseña" style="margin-left:10%;"></CheckBox>
         <button text="E N T R A R" (tap)="Entrar()" class="btnGrey"></button>
         <Image class="separador" src="res://separador"></Image>
         <StackLayout class="page page-content" orientation="vertical">

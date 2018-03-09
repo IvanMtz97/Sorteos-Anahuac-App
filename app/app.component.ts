@@ -6,21 +6,24 @@ import { MyHttpGetService } from "./services/http-get/http-get.services";
 import statusBar = require("nativescript-status-bar");
 import * as dialogs from "ui/dialogs";
 import { RouterExtensions } from "nativescript-angular/router/router-extensions";
-import * as app from "application";
-import { AndroidApplication, AndroidActivityBackPressedEventData } from "application";
-import { exit } from "nativescript-exit";
 import * as pushPlugin from "nativescript-push-notifications";
 import * as platformModule from "tns-core-modules/platform";
 import { alert } from "ui/dialogs";
+import * as app from "application";
+import { AndroidApplication, AndroidActivityBackPressedEventData } from "application";
+import { exit } from "nativescript-exit";
+
+import { LoadingService } from "./services/loading/loading";
+
 
 @Component({
     selector: "ns-app",
     templateUrl: "app.component.html",
-    providers: [SessionService, MyHttpGetService]
+    providers: [SessionService, MyHttpGetService, LoadingService]
 })
 export class AppComponent implements OnInit{ 
     public imagenPublicidad: string;
-    constructor(private session: SessionService, private router: Router, private myGetService: MyHttpGetService, private routeExtension: RouterExtensions){
+    constructor(private session: SessionService, private router: Router, private myGetService: MyHttpGetService, private routeExtension: RouterExtensions, private loading: LoadingService){
         this.session = session;
         this.router = router;
         if (this.session.loggedIn()) {
@@ -45,18 +48,20 @@ export class AppComponent implements OnInit{
 
     ngOnInit(){
         app.android.on(AndroidApplication.activityBackPressedEvent, (data: AndroidActivityBackPressedEventData) => {
-            data.cancel = true;
-            dialogs.confirm({
-                title:"AVISO",
-                message: "¿Deseas salir de la aplicación?",
-                okButtonText: "SI",
-                cancelButtonText: "NO"
-            }).then(result => {
-                if(result){
-                    exit();
-                }
-            });
-        });
+            if(this.router.isActive("/", true) || this.router.isActive("/talonarios", true) || this.router.isActive("", true) || this.router.isActive("/login", true)){
+                data.cancel = true;
+                dialogs.confirm({
+                    title:"AVISO",
+                    message: "Deseas salir de la aplicacion?",
+                    okButtonText: "SI",
+                    cancelButtonText: "NO"
+                }).then(result => {
+                    if(result){
+                        exit();
+                    }
+                });
+            }
+        }); 
 
         var pushSettings = {
             senderID: "870994298438", // Required: setting with the sender/project number
@@ -94,9 +99,9 @@ export class AppComponent implements OnInit{
         };
 
         pushPlugin.register(pushSettings, (token: String) => {
-            alert("Device registered. Access token: " + token);
-            console.log("TOKEN DEVICE ---> ", token);
-            console.log("OS: " + platformModule.device.os);
+            //alert("Device registered. Access token: " + token);
+            //console.log("TOKEN DEVICE ---> ", token);
+            //console.log("OS: " + platformModule.device.os);
             // Register the interactive settings
             // if(pushSettings.interactiveSettings) {
             //     pushPlugin.registerUserNotificationSettings(() => {
@@ -119,7 +124,20 @@ export class AppComponent implements OnInit{
                 this.onGetData(result);
             }, (error) => {
                 //this.loader.display(false);
-                this.mostrarMensaje('Error', 'Falló al tratar de obtener los talonarios. El token expiró favor de iniciar sesión.');
+                //this.mostrarMensaje('Error', 'Falló al tratar de obtener los talonarios. El token expiro favor de iniciar sesion.');
+                this.loading.display(true);
+                this.myGetService.getLogin({email: this.session.getCorreoColaborador(), password: this.session.getPassColaborador()}, "api/Colaborador/" + platformModule.device.uuid).subscribe((result) => {
+                    this.loading.display(false);
+                    console.log("TOKEN EXPIRADO");
+                    console.dir(result.json());
+                    this.session.setLoggedIn(true);
+                    this.session.setInformation(JSON.stringify(result.json()));
+                    this.session.setToken(result.json().token);
+                    this.session.setIdColaborador(result.json().identificador);
+                }, (error) => {
+                    this.loading.display(false);
+                    this.mostrarMensaje('Error', 'Usuario y/o contraseña incorrectos, favor de iniciar sesion.');
+                });
             });
     }
 
