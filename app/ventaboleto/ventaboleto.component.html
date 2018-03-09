@@ -50,7 +50,10 @@
                     <StackLayout *ngIf="!Formulario">
 
                         <Label class="txtorange" style="font-weight:600" text="Seleccionar comprador previo"></Label>
-                        <TextField class="txtCampo container-item" (textChange)="BuscarChange($event)" hint="Nombre"></TextField>
+                        <StackLayout orientation="horizontal">
+                            <TextField width="90%" class="txtCampo container-item" (textChange)="BuscarChange($event)" hint="Nombre"></TextField>
+                            <ActivityIndicator [busy]="Cargando" width="30" height="30" class="activity-indicator" style="vertical-align:center;"></ActivityIndicator>
+                        </StackLayout>
                         <ListView [items]="Compradores" (itemTap)="onTapList($event)" height="150">
                             <ng-template let-item="item" let-i="index" let-third="third">
                                 <Label [text]='item.nombre_completo'></Label>
@@ -118,7 +121,7 @@
                             </StackLayout>
                             <!-- <TextField class="txtCampo" id="txtCodigopostal" (textChange)="handleInputChanged($event)" keyboardType="number" maxLength="5"></TextField> -->
                             <!-- <TextField class="txtCampo" [(ngModel)]="Info.Codigopostal" keyboardType="number" maxLength="5"></TextField> -->
-                            <SearchBar class="txtCampo" hint="Buscar" (loaded)="sBLoaded($event)" [(ngModel)]="Info.Codigopostal" keyboardType="number" maxLength="5" (submit)="onSubmit($event)" 
+                            <SearchBar class="txtCampo" style="color: #000;" hint="Buscar" (loaded)="sBLoaded($event)" [(ngModel)]="Info.Codigopostal" keyboardType="number" maxLength="5" (submit)="onSubmit($event)" 
                             color="#CCC" textFieldBackgroundColor="white" textFieldHintColor="#CCC" width="100%"></SearchBar>
                         </StackLayout>
                 

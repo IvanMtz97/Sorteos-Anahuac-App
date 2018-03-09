@@ -15,12 +15,13 @@ var platformModule = require("tns-core-modules/platform");
 var dialogs_1 = require("ui/dialogs");
 var firebase = require("nativescript-plugin-firebase");
 var AppComponent = /** @class */ (function () {
-    function AppComponent(session, router, myGetService, routeExtension) {
+    function AppComponent(session, router, myGetService, routeExtension, loading) {
         var _this = this;
         this.session = session;
         this.router = router;
         this.myGetService = myGetService;
         this.routeExtension = routeExtension;
+        this.loading = loading;
         this.session = session;
         this.router = router;
         if (this.session.loggedIn()) {
@@ -43,18 +44,21 @@ var AppComponent = /** @class */ (function () {
     }
     AppComponent.prototype.ngOnInit = function () {
         if (platformModule.device.os == 'Android') {
-            app.android.on(application_1.AndroidApplication.activityBackPressedEvent, function (data) {
-                data.cancel = true;
-                dialogs.confirm({
-                    title: "AVISO",
-                    message: "Deseas salir de la aplicacion?",
-                    okButtonText: "SI",
-                    cancelButtonText: "NO"
-                }).then(function (result) {
-                    if (result) {
-                        nativescript_exit_1.exit();
-                    }
-                });
+        var _this = this;
+        app.android.on(application_1.AndroidApplication.activityBackPressedEvent, function (data) {
+                if (_this.router.isActive("/", true) || _this.router.isActive("/talonarios", true) || _this.router.isActive("", true) || _this.router.isActive("/login", true)) {
+                    data.cancel = true;
+                    dialogs.confirm({
+                        title: "AVISO",
+                        message: "Deseas salir de la aplicacion?",
+                        okButtonText: "SI",
+                        cancelButtonText: "NO"
+                    }).then(function (result) {
+                        if (result) {
+                            nativescript_exit_1.exit();
+                        }
+                    });
+                }
             });
         }
         firebase.init({
@@ -87,7 +91,20 @@ var AppComponent = /** @class */ (function () {
             _this.onGetData(result);
         }, function (error) {
             //this.loader.display(false);
-            _this.mostrarMensaje('Error', 'Falló al tratar de obtener los talonarios. El token expiro favor de iniciar sesion.');
+            //this.mostrarMensaje('Error', 'Falló al tratar de obtener los talonarios. El token expiro favor de iniciar sesion.');
+            _this.loading.display(true);
+            _this.myGetService.getLogin({ email: _this.session.getCorreoColaborador(), password: _this.session.getPassColaborador() }, "api/Colaborador/" + platformModule.device.uuid).subscribe(function (result) {
+                _this.loading.display(false);
+                console.log("TOKEN EXPIRADO");
+                console.dir(result.json());
+                _this.session.setLoggedIn(true);
+                _this.session.setInformation(JSON.stringify(result.json()));
+                _this.session.setToken(result.json().token);
+                _this.session.setIdColaborador(result.json().identificador);
+            }, function (error) {
+                _this.loading.display(false);
+                _this.mostrarMensaje('Error', 'Usuario y/o contraseña incorrectos, favor de iniciar sesion.');
+            });
         });
     };
     AppComponent.prototype.onGetData = function (data) {
@@ -109,9 +126,9 @@ var AppComponent = /** @class */ (function () {
         core_1.Component({
             selector: "ns-app",
             templateUrl: "app.component.html",
-            providers: [session_services_1.SessionService, http_get_services_1.MyHttpGetService]
+            providers: [session_services_1.SessionService, http_get_services_1.MyHttpGetService, loading_1.LoadingService]
         }),
-        __metadata("design:paramtypes", [session_services_1.SessionService, router_1.Router, http_get_services_1.MyHttpGetService, router_extensions_1.RouterExtensions])
+        __metadata("design:paramtypes", [session_services_1.SessionService, router_1.Router, http_get_services_1.MyHttpGetService, router_extensions_1.RouterExtensions, loading_1.LoadingService])
     ], AppComponent);
     return AppComponent;
 }());

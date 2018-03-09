@@ -5,13 +5,15 @@ import { DrawerTransitionBase, SlideInOnTopTransition } from "nativescript-pro-u
 import { SessionService } from "../services/session/session.services";
 import { isAndroid, isIOS } from "platform";
 import { MyHttpGetService } from "../services/http-get/http-get.services";
+import { UtilsService } from "../services/Utils";
 import * as dialogs from "ui/dialogs";
 
 @Component({
     selector: "AsignacionExitosa",
     moduleId: module.id,
     templateUrl: "./asignacionexitosa.component.html",
-    styleUrls: ["./asignacionexitosa.css"]
+    styleUrls: ["./asignacionexitosa.css"],
+    providers: [ SessionService, UtilsService, MyHttpGetService ]
 })
 
 export class AsignacionExitosaComponent implements OnInit{
@@ -24,7 +26,7 @@ export class AsignacionExitosaComponent implements OnInit{
     toggle(){
         this.boleto = !this.boleto;
     }
-    constructor(private session: SessionService, private router: ActivatedRoute, private Router: Router, private GET: MyHttpGetService){
+    constructor(private Utils: UtilsService, private session: SessionService, private router: ActivatedRoute, private Router: Router, private GET: MyHttpGetService){
         console.log("ASIGNACION COMPONENT");
           
         this.imagenPublicitaria = this.session.getImagenPublicidad();
@@ -34,6 +36,7 @@ export class AsignacionExitosaComponent implements OnInit{
         this.router.params.subscribe(params => {
             this.Datos = JSON.parse(params["data"]);
         });
+        this.Utils.ActualizarTalonarios();
     }
 
     onDrawerButtonTap(): void {
