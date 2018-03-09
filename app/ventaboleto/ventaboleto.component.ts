@@ -14,9 +14,12 @@ import { SessionService } from "../services/session/session.services";
 import { MyHttpGetService } from "../services/http-get/http-get.services";
 import { LoadingService } from "../services/loading/loading";
 import { isIOS, isAndroid } from "platform";
+import * as app from "application";
+import { AndroidApplication, AndroidActivityBackPressedEventData } from "application";
 
-import * as Toast from "nativescript-toast";
 import { SearchBar } from "ui/search-bar";
+import { forEach } from "@angular/router/src/utils/collection";
+import * as Toast from "nativescript-toast";
 
 @Component({
     selector: "VentaBoleto",
@@ -36,6 +39,7 @@ export class VentaBoletoComponent implements OnInit {
     private cont = 0;
     private PilaBoletos: Array<Object> = [];
     public imagenPublicitaria: string;
+    Cargando: boolean = false;
     
     PK1: number = 0;
     // Compradores: any = [
@@ -134,9 +138,12 @@ export class VentaBoletoComponent implements OnInit {
 
     BuscarChange(evt){
         if(evt.object.text.length > 1){
+            this.Cargando = true;
             this.GET.getDataAuthorization("api/Comprador/Buscar/" + this.PK1 + "/" + evt.object.text).subscribe(res => {
+                this.Cargando = false;
                 this.Compradores = res.json();
             }, error => {
+                this.Cargando = false;
             });
         }
     }
@@ -169,7 +176,12 @@ export class VentaBoletoComponent implements OnInit {
         this.route.params.subscribe(params => {
             this.Datos = JSON.parse(params["data"]);
         });
-        this.PK1 = JSON.parse(this.session.getInformation()).clave;
+        this.PilaBoletos = [];
+        this.PK1 = JSON.parse(this.session.getInformation()).clave;        
+        app.android.on(AndroidApplication.activityBackPressedEvent, (data: AndroidActivityBackPressedEventData) => {
+            data.cancel = true;
+            this.router.navigate(["talonarios"]);
+        });
     }
 
     onDrawerButtonTap(): void {
@@ -202,13 +214,22 @@ export class VentaBoletoComponent implements OnInit {
 
     private VenderBoleto(){
 
+        if(!this.SoloLetras()){
+            dialogs.alert({
+                title: "AVISO",
+                message: "El nombre, apellido materno y apellido paterno no pueden contener numeros",
+                okButtonText: "Ok"
+            });
+            return false;
+        }
+
         if(this.ValidarCampos()){
             this.router.navigate(["confirmar", JSON.stringify({
                 Talonario: this.Datos.Talonario,
                 Boleto: this.Datos,
                 Info: this.Info,
                 Tipo: "Uno"
-            })], { clearHistory: true });
+            })]);
         }else{
             dialogs.alert({
                 title: "AVISO",
@@ -258,7 +279,7 @@ export class VentaBoletoComponent implements OnInit {
                     Talonario: this.Datos.Talonario
                 }
 
-                this.router.navigate(["confirmar", JSON.stringify(Param)],  { clearHistory: true } );
+                this.router.navigate(["confirmar", JSON.stringify(Param)]);
             }
         
         }else{
@@ -288,9 +309,40 @@ export class VentaBoletoComponent implements OnInit {
         if(this.Info.Nombre && this.Info.Appat && this.Info.Apmat && this.Info.Calle && this.Info.Numero && this.Info.Codigopostal && this.Info.Colonia && this.Info.Estado && this.Info.Municipio && this.Info.Telefonofijo && this.Info.Telefonomovil && this.Info.Correoelectronico){
             if(this.Info.Correoalternativo.length < 1) this.Info.Correoalternativo = "n/a";
             return true;
-        }else {
+        } else {
             return false;
         }
+    }
+
+    private SoloLetras(): boolean {
+
+        for(var i = 0; i < this.Info.Appat.length; i++){
+            if(!isNaN(this.Info.Appat[i])){
+                console.log("APPAT CON NUMERO");
+                return false;
+            }
+        }
+
+        for(var i = 0; i < this.Info.Apmat.length; i++){
+            if(!isNaN(this.Info.Apmat[i])){
+                console.log("APPAT CON NUMERO");
+                return false;
+            }
+        }
+
+        var Nombre = this.Info.Nombre;
+        if(!isNaN(Nombre)){
+            console.log("NOMBRE CON NUMERO");
+            return false;
+        }
+        // for(var i = 0; i < Nombre.length; i++){
+        //     if(!isNaN(this.Info.Nombre[i])){
+        //         console.log("NOMBRE CON NUMERO");
+        //         return false;
+        //     }
+        // }
+
+        return true;
     }
 
     private LimpiarCampos(){
@@ -314,6 +366,8 @@ export class VentaBoletoComponent implements OnInit {
     public onSubmit(args) {
         this.loading.display(true);
         let searchBar = <SearchBar>args.object;
+        searchBar.dismissSoftInput();
+        searchBar.android.clearFocus();
         if(searchBar.text.length > 5){
             dialogs.alert({
                 title:"AVISO",
@@ -322,8 +376,8 @@ export class VentaBoletoComponent implements OnInit {
             });
         }else{
             this.GET.getDataAuthorization("api/Comprador/Buscar/"+ searchBar.text).subscribe(res => {
+                this.loading.display(false);
                 console.log("200 COD POSTAL");
-                console.dir(res);
                 if(res.json().length == 0){
                     dialogs.alert({
                         title: "AVISO",
@@ -331,15 +385,10 @@ export class VentaBoletoComponent implements OnInit {
                         okButtonText: "Ok"
                     });
                 }else{
-                    res.json().forEach(function(codigo){
-                        if(codigo.codigo == Number(searchBar.text) - 1 || codigo.codigo == Number(searchBar.text) || codigo.codigo == Number(searchBar.text) + 1){
-                            console.log("ENTRA EN CONDICIONAL COD POSTAL");
-                            this.Info.Colonia = codigo.asentamiento;
-                            this.Info.Estado = codigo.estado;
-                            this.Info.Municipio = codigo.municipio;
-                            this.loading.display(false);
-                        }
-                    }.bind(this));
+                    var Datos = res.json();
+                    this.Info.Estado = Datos[0].estado;
+                    this.Info.Municipio = Datos[0].municipio;
+                    Toast.makeText("Estado y municipio cargado.", "short").show();
                 }
             }, error => {
                 console.log("500 COD POSTAL");
@@ -347,7 +396,7 @@ export class VentaBoletoComponent implements OnInit {
                 this.loading.display(false);
                 dialogs.alert({
                     title: "AVISO",
-                    message: "Ha ocurrido un error al consultar el codigo postal",
+                    message: "No se encontraron datos para el codigo postal proporcionado",
                     okButtonText: "Ok"
                 });
             });

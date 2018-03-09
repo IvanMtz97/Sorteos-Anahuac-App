@@ -24,15 +24,23 @@ export class LoginComponent implements OnInit {
     private politicas: string;
     private condiciones: string;
     public imagenPublicitaria: string; 
+    Check: boolean = false;
 
     constructor(page: Page, private router: RouterExtensions, private myGetService: MyHttpGetService, private session: SessionService, private loader: LoadingService) {
-        page.actionBarHidden = true;         
+        page.actionBarHidden = true;        
     }
 
     ngOnInit() {
         if (this.session.loggedIn()) { this.session.setLoggedIn(false); }
         this.SorteoActivo();  
-        this.downloadImage();      
+        this.downloadImage();
+        console.log("Correo: " + this.session.getCorreo() + ", Clave: " + this.session.getClave());
+        this.Correo = this.session.getCorreo();
+        this.Clave = this.session.getClave();
+    }
+
+    public toggleCheck(eventData){
+        this.Check = eventData.checked;
     }
 
     private downloadImage() {
@@ -58,6 +66,16 @@ export class LoginComponent implements OnInit {
     }
 
     private onGetDataSesion(data: Response | any) {
+        console.log("CHECKBOX " + this.Check);
+        if(this.Check){
+            console.log("ENTRA TRUE");
+            this.session.setClave(this.Clave);
+            this.session.setCorreo(this.Correo);
+        }else{
+            console.log("ENTRA FALSE");
+            this.session.setClave("");
+            this.session.setCorreo("");
+        }
         this.setInfo(data);
     }
     //END GET --------->
@@ -77,7 +95,9 @@ export class LoginComponent implements OnInit {
                 this.session.setCondiciones(JSON.stringify(result.json().url_condiciones));                                  
             }, (error) => {
                 //this.loader.display(false);
-                this.mostrarMensaje('Error', 'Falló al tratar obtener el sorteo activo.');  
+                //this.mostrarMensaje('Error', 'Falló al tratar obtener el sorteo activo.');  
+                console.log("Error al tratar de obtener servicio");
+                console.log(error);
             });   
             
             this.politicas = this.session.getPoliticas();                
@@ -85,7 +105,7 @@ export class LoginComponent implements OnInit {
     }
     //END GET --------->
 
-    public setInfo(data) { 
+    public setInfo(data) {
         this.session.setLoggedIn(true);
         this.session.setInformation(JSON.stringify(data.json()));
         this.loader.display(false);  
@@ -113,16 +133,6 @@ export class LoginComponent implements OnInit {
         this.router.navigate(["ganadores"]);
     }
 
-    public handleCorreoChange(evt){    
-        let txtCorreo = <TextField> evt.object;
-        this.Correo = txtCorreo.text;
-    }
-
-    public handlePasswordChange(evt){
-        let txtClave = <TextField> evt.object;
-        this.Clave = txtClave.text;
-    }
-
     public mostrarMensaje (titulo, mensaje) {
         dialogs.alert({
             title:titulo,
@@ -132,6 +142,7 @@ export class LoginComponent implements OnInit {
     }
 
     public Entrar() {
+        console.log("CORREO: " + this.Correo + ", CLAVE: " + this.Clave);
         if(this.Correo.length == 0 || this.Clave.length == 0){
             dialogs.alert({
                 title: "Aviso",

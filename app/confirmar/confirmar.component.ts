@@ -8,13 +8,14 @@ import { RadSideDrawerComponent } from "nativescript-pro-ui/sidedrawer/angular";
 import { DrawerTransitionBase, SlideInOnTopTransition } from "nativescript-pro-ui/sidedrawer";
 import { LoadingService } from "../services/loading/loading";
 import * as dialogs from "ui/dialogs";
+import { UtilsService } from "../services/Utils";
  
 @Component({
     selector: "Confirmar",
     moduleId: module.id,
     templateUrl: "./confirmar.component.html",
     styleUrls: ["./confirmar.css"],
-    providers: [ MyHttpPostService, MyHttpPutService, SessionService, LoadingService ]
+    providers: [ MyHttpPostService, MyHttpPutService, SessionService, LoadingService, UtilsService ]
 })
 
 export class ConfirmarComponent implements OnInit{
@@ -26,7 +27,7 @@ export class ConfirmarComponent implements OnInit{
     @ViewChild("drawer") drawerComponent: RadSideDrawerComponent;
     private _sideDrawerTransition: DrawerTransitionBase;
 
-    constructor(private route: ActivatedRoute, private router: RouterExtensions, private API: MyHttpPostService, private PUT: MyHttpPutService, private session: SessionService, private loading: LoadingService){        
+    constructor(private Utils: UtilsService, private route: ActivatedRoute, private router: RouterExtensions, private API: MyHttpPostService, private PUT: MyHttpPutService, private session: SessionService, private loading: LoadingService){        
         this.imagenPublicitaria = this.session.getImagenPublicidad();
     }
 
@@ -93,14 +94,6 @@ export class ConfirmarComponent implements OnInit{
         this.loading.display(true);
         if(this.Datos.Tipo == "Uno"){
             this.API.postData(this.Boleto, "api/Boleto/Vender").subscribe(res => {
-                this.PUT.putData({}, "api/Colaborador").subscribe(res => {
-                    console.log("PUT TOKEN");
-                    console.log(res.json().token);
-                    this.session.setToken(res.json().token);
-                }, error => {
-                    console.log("ERROR AL RENOVAR TOKEN");
-                    console.log(error);
-                });
                 this.loading.display(false);
                 dialogs.alert({
                     title: "AVISO",
@@ -111,6 +104,8 @@ export class ConfirmarComponent implements OnInit{
                 });
 
             }, error => {
+                console.log("ERROR AL VENDER BOLETO");
+                console.log(error);
             });
             
         }else{
@@ -124,11 +119,14 @@ export class ConfirmarComponent implements OnInit{
                             message: "Se han vendido exitosamente los boletos",
                             okButtonText: "Ok"
                         }).then(()=>{
+                            this.Utils.ActualizarTalonarios();
                             this.router.navigate(["talonarios"], { clearHistory : true});
                         });
                     }
                     contador++;
                 }, error => {
+                    console.log("ERROR AL VENDER VARIOS BOLETOS");
+                    console.log(error);
                 });
             }.bind(this));
         }

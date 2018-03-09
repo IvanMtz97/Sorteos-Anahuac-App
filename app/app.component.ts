@@ -6,23 +6,27 @@ import { MyHttpGetService } from "./services/http-get/http-get.services";
 import statusBar = require("nativescript-status-bar");
 import * as dialogs from "ui/dialogs";
 import { RouterExtensions } from "nativescript-angular/router/router-extensions";
+import * as platformModule from "tns-core-modules/platform";
+// import { Message } from "nativescript-plugin-firebase";
+import { alert } from "ui/dialogs";
 import * as app from "application";
 import { AndroidApplication, AndroidActivityBackPressedEventData } from "application";
 import { exit } from "nativescript-exit";
-import * as pushPlugin from "nativescript-push-notifications";
-import * as platformModule from "tns-core-modules/platform";
-import { alert } from "ui/dialogs";
+
+import { LoadingService } from "./services/loading/loading";
+
+
+const firebase = require("nativescript-plugin-firebase");
 
 @Component({
     selector: "ns-app",
     templateUrl: "app.component.html",
-    providers: [SessionService, MyHttpGetService]
+    providers: [SessionService, MyHttpGetService, LoadingService]
 })
 export class AppComponent implements OnInit{ 
     public imagenPublicidad: string;
     private serverUrl = "https://sorteoanahuac-servicios-mobile-p.azurewebsites.net/";
-
-    constructor(private session: SessionService, private router: Router, private myGetService: MyHttpGetService, private routeExtension: RouterExtensions){
+    constructor(private session: SessionService, private router: Router, private myGetService: MyHttpGetService, private routeExtension: RouterExtensions, private loading: LoadingService){
         this.session = session;
         this.router = router;
         
@@ -49,71 +53,47 @@ export class AppComponent implements OnInit{
     }
 
     ngOnInit(){
-        app.android.on(AndroidApplication.activityBackPressedEvent, (data: AndroidActivityBackPressedEventData) => {
-            data.cancel = true;
-            dialogs.confirm({
-                title:"AVISO",
-                message: "¿Deseas salir de la aplicación?",
-                okButtonText: "SI",
-                cancelButtonText: "NO"
-            }).then(result => {
-                if(result){
-                    exit();
+        if(platformModule.device.os == 'Android'){
+            app.android.on(AndroidApplication.activityBackPressedEvent, (data: AndroidActivityBackPressedEventData) => {
+                if(this.router.isActive("/", true) || this.router.isActive("/talonarios", true) || this.router.isActive("", true) || this.router.isActive("/login", true)){
+                    data.cancel = true;
+                    dialogs.confirm({
+                        title:"AVISO",
+                        message: "Deseas salir de la aplicacion?",
+                        okButtonText: "SI",
+                        cancelButtonText: "NO"
+                    }).then(result => {
+                        if(result){
+                            exit();
+                        }
+                    });
                 }
             });
-        });
-
-
-        var pushSettings = {
-            senderID: "870994298438", // Required: setting with the sender/project number
-            badge: true,
-            sound: true,
-            alert: true,
-            interactiveSettings: {
-                actions: [{
-                    identifier: 'READ_IDENTIFIER',
-                    title: 'Read',
-                    activationMode: "foreground",
-                    destructive: false,
-                    authenticationRequired: true
-                }, {
-                    identifier: 'CANCEL_IDENTIFIER',
-                    title: 'Cancel',
-                    activationMode: "foreground",
-                    destructive: true,
-                    authenticationRequired: true
-                }],
-                categories: [{
-                    identifier: 'READ_CATEGORY',
-                    actionsForDefaultContext: ['READ_IDENTIFIER', 'CANCEL_IDENTIFIER'],
-                    actionsForMinimalContext: ['READ_IDENTIFIER', 'CANCEL_IDENTIFIER']
-                }]
-            },
-            notificationCallbackAndroid: function (stringifiedData, fcmNotification) {
-                var notificationBody = fcmNotification && fcmNotification.getBody();
-               console.log("Message received!\n" + notificationBody + "\n" + stringifiedData);
-               alert("Message received!\n" + notificationBody + "\n" + stringifiedData);
-            },
-            notificationCallbackIOS: (message: any) => {
-                alert("Message received!\n" + JSON.stringify(message));
+        }
+        
+        firebase.init({
+            // Optionally pass in properties for database, authentication and cloud messaging,
+            // see their respective docs.
+            onMessageReceivedCallback: function(message) {
+                console.log("Title: " + message.title);
+                console.log("Body: " + message.body);
+                // if your server passed a custom property called 'foo', then do this:
+                console.log("Value of 'foo': " + message.data.foo);
+                alert("Message Receivable: " + message.title + message.body);
             }
-        };
-
-        pushPlugin.register(pushSettings, (token: String) => {
-            alert("Device registered. Access token: " + token);
-            console.log("TOKEN DEVICE ---> ", token);
-            console.log("OS: " + platformModule.device.os);
-            // Register the interactive settings
-            // if(pushSettings.interactiveSettings) {
-            //     pushPlugin.registerUserNotificationSettings(() => {
-            //         alert('Successfully registered for interactive push.');
-            //     }, (err) => {
-            //         alert('Error registering for interactive push: ' + JSON.stringify(err));
-            //     });
-            // }
-        }, (errorMessage: any) => {
-            alert("Device NOT registered! " + JSON.stringify(errorMessage));
-        });
+          }).then(
+            instance => {
+              console.log("firebase.init done");
+            },
+            error => {
+              console.log(`firebase.init error: ${error}`);
+            }
+          );
+          
+          firebase.getCurrentPushToken().then((token: string) => {
+              // may be null if not known yet
+              console.log("Current push token: " + token);
+          }); 
     }
 
      //GET INICIO SESION-------->
@@ -125,7 +105,20 @@ export class AppComponent implements OnInit{
                 this.onGetData(result);
             }, (error) => {
                 //this.loader.display(false);
-                this.mostrarMensaje('Error', 'Falló al tratar de obtener los talonarios. El token expiró favor de iniciar sesión.');
+                //this.mostrarMensaje('Error', 'Falló al tratar de obtener los talonarios. El token expiro favor de iniciar sesion.');
+                this.loading.display(true);
+                this.myGetService.getLogin({email: this.session.getCorreoColaborador(), password: this.session.getPassColaborador()}, "api/Colaborador/" + platformModule.device.uuid).subscribe((result) => {
+                    this.loading.display(false);
+                    console.log("TOKEN EXPIRADO");
+                    console.dir(result.json());
+                    this.session.setLoggedIn(true);
+                    this.session.setInformation(JSON.stringify(result.json()));
+                    this.session.setToken(result.json().token);
+                    this.session.setIdColaborador(result.json().identificador);
+                }, (error) => {
+                    this.loading.display(false);
+                    this.mostrarMensaje('Error', 'Usuario y/o contraseña incorrectos, favor de iniciar sesion.');
+                });
             });
     }
 
