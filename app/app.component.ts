@@ -9,9 +9,11 @@ import { RouterExtensions } from "nativescript-angular/router/router-extensions"
 import * as app from "application";
 import { AndroidApplication, AndroidActivityBackPressedEventData } from "application";
 import { exit } from "nativescript-exit";
-import * as pushPlugin from "nativescript-push-notifications";
 import * as platformModule from "tns-core-modules/platform";
+// import { Message } from "nativescript-plugin-firebase";
 import { alert } from "ui/dialogs";
+
+const firebase = require("nativescript-plugin-firebase");
 
 @Component({
     selector: "ns-app",
@@ -44,70 +46,45 @@ export class AppComponent implements OnInit{
     }
 
     ngOnInit(){
-        app.android.on(AndroidApplication.activityBackPressedEvent, (data: AndroidActivityBackPressedEventData) => {
-            data.cancel = true;
-            dialogs.confirm({
-                title:"AVISO",
-                message: "Deseas salir de la aplicacion?",
-                okButtonText: "SI",
-                cancelButtonText: "NO"
-            }).then(result => {
-                if(result){
-                    exit();
-                }
+        if(platformModule.device.os == 'Android'){
+            app.android.on(AndroidApplication.activityBackPressedEvent, (data: AndroidActivityBackPressedEventData) => {
+                data.cancel = true;
+                dialogs.confirm({
+                    title:"AVISO",
+                    message: "Deseas salir de la aplicacion?",
+                    okButtonText: "SI",
+                    cancelButtonText: "NO"
+                }).then(result => {
+                    if(result){
+                        exit();
+                    }
+                });
             });
-        });
-
-        var pushSettings = {
-            senderID: "870994298438", // Required: setting with the sender/project number
-            badge: true,
-            sound: true,
-            alert: true,
-            interactiveSettings: {
-                actions: [{
-                    identifier: 'READ_IDENTIFIER',
-                    title: 'Read',
-                    activationMode: "foreground",
-                    destructive: false,
-                    authenticationRequired: true
-                }, {
-                    identifier: 'CANCEL_IDENTIFIER',
-                    title: 'Cancel',
-                    activationMode: "foreground",
-                    destructive: true,
-                    authenticationRequired: true
-                }],
-                categories: [{
-                    identifier: 'READ_CATEGORY',
-                    actionsForDefaultContext: ['READ_IDENTIFIER', 'CANCEL_IDENTIFIER'],
-                    actionsForMinimalContext: ['READ_IDENTIFIER', 'CANCEL_IDENTIFIER']
-                }]
-            },
-            notificationCallbackAndroid: function (stringifiedData, fcmNotification) {
-                var notificationBody = fcmNotification && fcmNotification.getBody();
-               console.log("Message received!\n" + notificationBody + "\n" + stringifiedData);
-               alert("Message received!\n" + notificationBody + "\n" + stringifiedData);
-            },
-            notificationCallbackIOS: (message: any) => {
-                alert("Message received!\n" + JSON.stringify(message));
+        }
+        
+        firebase.init({
+            // Optionally pass in properties for database, authentication and cloud messaging,
+            // see their respective docs.
+            onMessageReceivedCallback: function(message) {
+                console.log("Title: " + message.title);
+                console.log("Body: " + message.body);
+                // if your server passed a custom property called 'foo', then do this:
+                console.log("Value of 'foo': " + message.data.foo);
+                alert("Message Receivable: " + message.title + message.body);
             }
-        };
-
-        pushPlugin.register(pushSettings, (token: String) => {
-            alert("Device registered. Access token: " + token);
-            console.log("TOKEN DEVICE ---> ", token);
-            console.log("OS: " + platformModule.device.os);
-            // Register the interactive settings
-            // if(pushSettings.interactiveSettings) {
-            //     pushPlugin.registerUserNotificationSettings(() => {
-            //         alert('Successfully registered for interactive push.');
-            //     }, (err) => {
-            //         alert('Error registering for interactive push: ' + JSON.stringify(err));
-            //     });
-            // }
-        }, (errorMessage: any) => {
-            alert("Device NOT registered! " + JSON.stringify(errorMessage));
-        });
+          }).then(
+            instance => {
+              console.log("firebase.init done");
+            },
+            error => {
+              console.log(`firebase.init error: ${error}`);
+            }
+          );
+          
+          firebase.getCurrentPushToken().then((token: string) => {
+              // may be null if not known yet
+              console.log("Current push token: " + token);
+          }); 
     }
 
      //GET INICIO SESION-------->
