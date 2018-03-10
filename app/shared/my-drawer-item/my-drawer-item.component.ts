@@ -3,6 +3,9 @@ import { RouterExtensions } from "nativescript-angular/router";
 import { DrawerTransitionBase, SlideInOnTopTransition } from "nativescript-pro-ui/sidedrawer";
 import { RadSideDrawerComponent } from "nativescript-pro-ui/sidedrawer/angular";
 import {registerElement} from "nativescript-angular/element-registry";
+import { LoadingService } from "../../services/loading/loading";
+import { setInterval, setTimeout, clearInterval } from "timer";
+var timer = require("timer");
 
 registerElement("Ripple", () => require("nativescript-ripple").Ripple);
 
@@ -19,16 +22,17 @@ export class MyDrawerItemComponent implements OnInit {
     @Input() isSelected: boolean;
     private clean: boolean = false;
     private cleanArray: object = { '/login' : true };
+    public id;
 
-    constructor(private routerExtensions: RouterExtensions, private drawer: RadSideDrawerComponent) {
+    constructor(private routerExtensions: RouterExtensions, private drawer: RadSideDrawerComponent, private loader: LoadingService) {
 
     }
 
     ngOnInit(): void {    
     }
 
-    onNavItemTap(navItemRoute: string): void {
-        if(this.cleanArray[navItemRoute]) this.clean = true;
+    onNavItemTap(navItemRoute: string): void {        
+        if(this.cleanArray[navItemRoute]) this.clean = true;        
         this.drawer.sideDrawer.toggleDrawerState();        
         this.routerExtensions.navigate([navItemRoute], {
             transition: {
@@ -36,5 +40,19 @@ export class MyDrawerItemComponent implements OnInit {
             },
             clearHistory: this.clean
         });
+        this.loader.display(true); 
+
+
+        const id = timer.setTimeout(() => {
+            this.setTimer();
+        }, 2000);
+    }
+
+    setTimer()
+    {
+        console.log("setTimer");
+
+        this.loader.display(false);
+        
     }
 }
