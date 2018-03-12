@@ -96,7 +96,7 @@ export class AppComponent implements OnInit{
           }); 
 
         const iosSettings = {
-            senderID: "<ENTER_YOUR_PROJECT_NUMBER>", // Required: setting with the sender/project number
+            senderID: "870994298438", // Required: setting with the sender/project number
             badge: true,
             sound: true,
             alert: true,
@@ -132,14 +132,17 @@ export class AppComponent implements OnInit{
 
         pushPlugin.register(iosSettings, (token: String) => {
             console.log("Device registered. Access token: " + token);
-         
-            // Register the interactive settings
-            if(iosSettings.interactiveSettings) {
-                pushPlugin.registerUserNotificationSettings(() => {
-                    alert('Successfully registered for interactive push.');
-                }, (err) => {
-                    alert('Error registering for interactive push: ' + JSON.stringify(err));
-                });
+            console.log("Platform: " + platformModule.device.os);
+            
+            if(platformModule.device.os == "iOS") {
+                // Register the interactive settings
+                if(iosSettings.interactiveSettings) {
+                    pushPlugin.registerUserNotificationSettings(() => {
+                        alert('Successfully registered for interactive push.');
+                    }, (err) => {
+                        alert('Error registering for interactive push: ' + JSON.stringify(err));
+                    });
+                }
             }
         }, (errorMessage: any) => {
             alert("Device NOT registered! " + JSON.stringify(errorMessage));
