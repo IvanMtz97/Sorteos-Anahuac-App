@@ -46,9 +46,16 @@ export class AppComponent implements OnInit{
         }
         
 
-        http.getImage("https://sorteoanahuac.mx/app/banner_1.jpg").then((r) => {            
-            this.imagenPublicidad = "data:image/png;base64,"+ r.toBase64String(); 
-            this.session.setImagenPublicidad(this.imagenPublicidad);
+        http.getImage("https://sorteoanahuac.mx/app/banner_1.jpg").then((r) => {
+            if(platformModule.device.os == 'Android')
+            {
+                this.imagenPublicidad = "data:image/png;base64,"+ r.toBase64String();     
+            }            
+            else
+            {
+                this.imagenPublicidad = "https://sorteoanahuac.mx/app/banner_1.jpg";
+            } 
+            this.session.setImagenPublicidad(this.imagenPublicidad);          
         }, (err) => { 
             console.log("----------\nError en la imagen de publicidad\n----------");           
         });            

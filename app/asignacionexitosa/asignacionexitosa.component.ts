@@ -38,7 +38,6 @@ export class AsignacionExitosaComponent implements OnInit{
         this.imagenPublicitaria = this.session.getImagenPublicidad();
 
         
-        this.token = this.Datos.Boletos.Boleto.Boleto.token;
         var serverURL = this.session.getURL()
         var zx = new ZXing();    
         var img = zx.createBarcode({encode: serverURL + "boleto/" + this.token, height: 100, width: 100, format: ZXing.QR_CODE});
