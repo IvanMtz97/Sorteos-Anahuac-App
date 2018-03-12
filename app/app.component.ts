@@ -97,7 +97,7 @@ export class AppComponent implements OnInit{
             }
           );
           
-          firebase.getCurrentPushToken().then((token: string) => {
+          firebase.getCurrentPushToken().then((token: string) => {   
               // may be null if not known yet
               console.log("Current push token: " + token);
           }); 
