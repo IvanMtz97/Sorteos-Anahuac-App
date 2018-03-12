@@ -74,6 +74,9 @@
                 <Button class="btn" text="buscar"></Button>
             </StackLayout>
         </StackLayout> -->
-        <WebView src="{{ganadores}}"></WebView>
+        <GridLayout height="100%" width="100%">
+            <WebView class="cs-iframe" [src]="ganadores"></WebView>
+            <!-- <WebView class="cs-iframe" src="https://www.npmjs.com/"></WebView> -->
+        </GridLayout>
     </StackLayout>
     </RadSideDrawer>

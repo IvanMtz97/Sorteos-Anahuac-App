@@ -14,6 +14,13 @@ export class MyHttpPostService {
 
     constructor(private http: Http, private session: SessionService) { }
 
+    postNoAuth(data: Object, path) {
+        console.log("LLAMA A LA API " + path);
+        let options = this.createRequestOptionsNoAuth();
+        return this.http.post((encodeURI(this.serverUrl + path)),  data , { headers: options })
+            .map(res => res);
+    }
+
     postData(data: Object, path) {
         console.log("LLAMA A LA API " + path);
         let options = this.createRequestOptions();
@@ -24,6 +31,12 @@ export class MyHttpPostService {
     private createRequestOptions() {
         let headers = new Headers();
         headers.set("Authorization", "Bearer " + this.session.getToken());
+        headers.set("Content-Type", "application/json");
+        return headers;
+    }
+
+    private createRequestOptionsNoAuth() {
+        let headers = new Headers();
         headers.set("Content-Type", "application/json");
         return headers;
     }

@@ -23,12 +23,10 @@
                 <Label text="CONOCE TU SORTEO"></Label>
             </StackLayout>
 
-            <ScrollView>
-                <StackLayout>
-                    <WebView class="cs-iframe" [src]="conocesorteo"></WebView>
-                    <!-- <WebView class="cs-iframe" src="https://www.npmjs.com/"></WebView> -->
-                </StackLayout>
-            </ScrollView>
+            <GridLayout height="100%" width="100%">
+                <WebView class="cs-iframe" [src]="conocesorteo"></WebView>
+                <!-- <WebView class="cs-iframe" src="https://www.npmjs.com/"></WebView> -->
+            </GridLayout>
 
         </StackLayout>
     </RadSideDrawer>
