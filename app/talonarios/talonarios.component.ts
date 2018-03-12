@@ -106,6 +106,7 @@ export class TalonariosComponent implements OnInit {
         for(var i = 0; i<this.showDetails.length; i++){
             if(i != index){
                 this.showDetails[i] = false;
+                this.srcFlecha[i] = "res://arrow_down";
             }
         }
         this.showDetails[index] = !this.showDetails[index];   
@@ -176,7 +177,7 @@ export class TalonariosComponent implements OnInit {
         if(boleto.vendido){
             dialogs.alert({
                 title:"Aviso",
-                message: "Este boleto ya se vendio",
+                message: "Este boleto ya se vendió.",
                 okButtonText: "Ok"
             });
         }else{

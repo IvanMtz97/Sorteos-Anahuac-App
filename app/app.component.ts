@@ -74,7 +74,7 @@ export class AppComponent implements OnInit{
                     data.cancel = true;
                     dialogs.confirm({
                         title:"AVISO",
-                        message: "Deseas salir de la aplicacion?",
+                        message: "¿Deseas salir de la aplicación?",
                         okButtonText: "SI",
                         cancelButtonText: "NO"
                     }).then(result => {
@@ -210,7 +210,7 @@ export class AppComponent implements OnInit{
                     this.session.setIdColaborador(result.json().identificador);
                 }, (error) => {
                     this.loading.display(false);
-                    this.mostrarMensaje('Error', 'Usuario y/o contraseña incorrectos, favor de iniciar sesion.');
+                    this.mostrarMensaje('Error', 'Usuario y/o contraseña incorrectos, favor de iniciar sesión.');
                 });
             });
     }

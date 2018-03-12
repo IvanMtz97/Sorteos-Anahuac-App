@@ -67,7 +67,7 @@ var AppComponent = /** @class */ (function () {
                     data.cancel = true;
                     dialogs.confirm({
                         title: "AVISO",
-                        message: "Deseas salir de la aplicacion?",
+                        message: "¿Deseas salir de la aplicación?",
                         okButtonText: "SI",
                         cancelButtonText: "NO"
                     }).then(function (result) {
@@ -193,7 +193,7 @@ var AppComponent = /** @class */ (function () {
                 _this.session.setIdColaborador(result.json().identificador);
             }, function (error) {
                 _this.loading.display(false);
-                _this.mostrarMensaje('Error', 'Usuario y/o contraseña incorrectos, favor de iniciar sesion.');
+                _this.mostrarMensaje('Error', 'Usuario y/o contraseña incorrectos, favor de iniciar sesión.');
             });
         });
     };
