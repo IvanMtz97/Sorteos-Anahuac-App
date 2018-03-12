@@ -3,6 +3,7 @@ import { SessionService } from "./services/session/session.services";
 import { Router } from "@angular/router";
 var http = require("http");
 import { MyHttpGetService } from "./services/http-get/http-get.services";
+import { MyHttpPostService } from "./services/http-post/http-post.services";
 import statusBar = require("nativescript-status-bar");
 import * as dialogs from "ui/dialogs";
 import { RouterExtensions } from "nativescript-angular/router/router-extensions";
@@ -22,12 +23,17 @@ const firebase = require("nativescript-plugin-firebase");
 @Component({
     selector: "ns-app",
     templateUrl: "app.component.html",
-    providers: [SessionService, MyHttpGetService, LoadingService]
+    providers: [SessionService, MyHttpGetService, LoadingService, MyHttpPostService]
 })
 export class AppComponent implements OnInit{ 
     public imagenPublicidad: string;
     private serverUrl = "https://sorteoanahuac-servicios-mobile-p.azurewebsites.net/";
-    constructor(private session: SessionService, private router: Router, private myGetService: MyHttpGetService, private routeExtension: RouterExtensions, private loading: LoadingService){
+    public Info: any = {
+        token: "",
+        correo: "",
+        sistema: ""
+    };
+    constructor(private session: SessionService, private router: Router, private myGetService: MyHttpGetService, private routeExtension: RouterExtensions, private loading: LoadingService, private API: MyHttpPostService){
         this.session = session;
         this.router = router;
         
@@ -95,14 +101,16 @@ export class AppComponent implements OnInit{
             error => {
               console.log(`firebase.init error: ${error}`);  
             }
-          );
+        );
           
-          firebase.getCurrentPushToken().then((token: string) => {   
-              // may be null if not known yet
-              console.log("Current push token: " + token);
-          }); 
+        firebase.getCurrentPushToken().then((token: string) => {   
+            // may be null if not known yet
+            console.log("Current push token: " + token);
+            this.loading.display(true);
+            this.PostRegistroDispositivo(token);
+        }); 
 
-        const iosSettings = {
+        const settingsDevice = {
             senderID: "870994298438", // Required: setting with the sender/project number
             badge: true,
             sound: true,
@@ -137,17 +145,17 @@ export class AppComponent implements OnInit{
             }
         };
 
-        pushPlugin.register(iosSettings, (token: String) => {
+        pushPlugin.register(settingsDevice, (token: String) => {
             console.log("Device registered. Access token: " + token);
             console.log("Platform: " + platformModule.device.os);
             
             if(platformModule.device.os == "iOS") {
                 // Register the interactive settings
-                if(iosSettings.interactiveSettings) {
+                if(settingsDevice.interactiveSettings) {
                     pushPlugin.registerUserNotificationSettings(() => {
-                        alert('Successfully registered for interactive push.');
+                        console.log('Successfully registered for interactive push.');
                     }, (err) => {
-                        alert('Error registering for interactive push: ' + JSON.stringify(err));
+                        console.log('Error registering for interactive push: ' + JSON.stringify(err));
                     });
                 }
             }
@@ -155,6 +163,31 @@ export class AppComponent implements OnInit{
             alert("Device NOT registered! " + JSON.stringify(errorMessage));
         });
     }
+
+    //POST REGISTRO DISPOSITIVO
+    private PostRegistroDispositivo(token) {
+        console.log("<------ REGISTRAR DEVICE --------->");
+        console.log("<<<<<<<<<<<<<TOKEN DEVICE -> ", token);
+        this.Info.token = token;
+        this.Info.sistema = platformModule.device.os;
+        this.Info.correo = this.session.getCorreoColaborador();
+        console.log("<<<<<<<<<<<<DATA ENVIO DISPOSITIVO>>>>>>>>>>>>>>>", JSON.stringify(this.Info));
+        this.API.postNoAuth(this.Info, "api/Dispositivos/Agregar").subscribe(res => {
+            this.loading.display(false);
+            dialogs.alert({
+                title: "AVISO",
+                message: "Dispositivo agregado exitosamente",
+                okButtonText: "Ok"
+            }).then(() => {
+
+            });
+
+        }, error => {
+            console.log("ERROR AL REGISTRAR DISPOSITIVO");
+            console.log(error);
+        });
+    }
+    //END POST
 
      //GET INICIO SESION-------->
     private GetTalonarios() {
