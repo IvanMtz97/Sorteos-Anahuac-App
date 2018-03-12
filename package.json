@@ -5,11 +5,11 @@
   "repository": "<fill-your-repository-here>",
   "nativescript": {
     "id": "org.nativescript.SorteosAnahuacApp",
-    "tns-android": {
-      "version": "3.4.2"
-    },
     "tns-ios": {
       "version": "3.4.1"
+    },
+    "tns-android": {
+      "version": "3.4.2"
     }
   },
   "scripts": {
@@ -27,6 +27,7 @@
     "@angular/router": "~5.2.0",
     "base-64": "^0.1.0",
     "nativescript-angular": "~5.2.0",
+    "nativescript-bitmap-factory": "^1.7.1",
     "nativescript-checkbox": "^3.0.3",
     "nativescript-clipboard": "^1.1.7",
     "nativescript-exit": "^1.0.1",

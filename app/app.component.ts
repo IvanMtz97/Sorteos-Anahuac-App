@@ -26,9 +26,13 @@ const firebase = require("nativescript-plugin-firebase");
 })
 export class AppComponent implements OnInit{ 
     public imagenPublicidad: string;
+    private serverUrl = "https://sorteoanahuac-servicios-mobile-p.azurewebsites.net/";
     constructor(private session: SessionService, private router: Router, private myGetService: MyHttpGetService, private routeExtension: RouterExtensions, private loading: LoadingService){
         this.session = session;
         this.router = router;
+        
+        this.session.setURL(this.serverUrl);
+
         if (this.session.loggedIn()) {
             this.GetTalonarios();
             if(this.session.getFirstRun() == true){

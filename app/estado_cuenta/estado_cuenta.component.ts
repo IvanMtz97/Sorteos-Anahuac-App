@@ -16,6 +16,7 @@ import { SessionService } from "../services/session/session.services";
 export class EstadoCuentaComponent implements OnInit {
     public infoColaborador: object = {};
     public imagenPublicitaria: string; 
+    public cantBoletosAsignados: number = 0;
 
     constructor(private myGetService: MyHttpGetService, private session: SessionService) {
         this.imagenPublicitaria = this.session.getImagenPublicidad();
@@ -29,6 +30,16 @@ export class EstadoCuentaComponent implements OnInit {
     ngOnInit(): void {
         this._sideDrawerTransition = new SlideInOnTopTransition();
         this.infoColaborador = JSON.parse(this.session.getInformation());
+        var infoColaboradorAux = JSON.parse(this.session.getInformation())
+                               
+        console.log("----------\n" + JSON.stringify(this.infoColaborador) + "\n----------");
+        
+        var contadorAux = infoColaboradorAux.talonarios.length;
+        for(var i=0; i<contadorAux; i++)
+        {
+            this.cantBoletosAsignados = this.cantBoletosAsignados + infoColaboradorAux.talonarios[i].Boletos.asignados.length;
+            console.log("cantBoletosAsignados -> " + this.cantBoletosAsignados);
+        }
     }
 
     get sideDrawerTransition(): DrawerTransitionBase {
@@ -45,5 +56,5 @@ export class EstadoCuentaComponent implements OnInit {
             message: mensaje,
             okButtonText: "Ok"
         });
-    }
+    }    
 }

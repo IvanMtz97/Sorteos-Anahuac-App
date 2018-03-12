@@ -37,8 +37,8 @@
                     <Label text="Eres dueño del boleto:"></Label>
                     <Label class="txtlarge txtorange" [text]="Datos.Boletos.Boleto.Boleto.folio"></Label>
 
-                    <Image class="imgmedium" src="res://qr"></Image>
-                    <Label class="container-item" text="http://anahuac.edu?boleto=!osmdp2m1osamkasd_ampdqadw1amsp$asmp"></Label>
+                    <Image class="imgmedium" [src]="imgSrc"></Image>
+                    <a class="container-item" [text]="urlBoleto"></a>
 
                     <StackLayout class="btn-orange container-item" orientation="horizontal">
                         <Image src="res://icono_dolar"></Image>

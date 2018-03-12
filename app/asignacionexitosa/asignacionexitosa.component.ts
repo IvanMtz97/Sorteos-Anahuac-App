@@ -7,6 +7,8 @@ import { isAndroid, isIOS } from "platform";
 import { MyHttpGetService } from "../services/http-get/http-get.services";
 import { UtilsService } from "../services/Utils";
 import * as dialogs from "ui/dialogs";
+var ZXing = require('nativescript-zxing');
+import * as imgSource from "tns-core-modules/image-source";
 
 @Component({
     selector: "AsignacionExitosa",
@@ -19,9 +21,13 @@ import * as dialogs from "ui/dialogs";
 export class AsignacionExitosaComponent implements OnInit{
     @ViewChild("drawer") drawerComponent: RadSideDrawerComponent;    
     private _sideDrawerTransition: DrawerTransitionBase;
-    public imagenPublicitaria: string;      
+    public imagenPublicitaria: string; 
+    public qrImage: string;     
     boleto: boolean = false;
     Datos: any = [];
+    public imgSrc: string;
+    public token: string; 
+    public urlBoleto;
 
     toggle(){
         this.boleto = !this.boleto;
@@ -30,6 +36,30 @@ export class AsignacionExitosaComponent implements OnInit{
         console.log("ASIGNACION COMPONENT");
           
         this.imagenPublicitaria = this.session.getImagenPublicidad();
+
+        
+        this.token = this.Datos.Boletos.Boleto.Boleto.token;
+        var serverURL = this.session.getURL()
+        var zx = new ZXing();    
+        var img = zx.createBarcode({encode: serverURL + "boleto/" + this.token, height: 100, width: 100, format: ZXing.QR_CODE});
+        
+    
+        this.imgSrc = "data:image/png;base64," + imgSource.fromNativeSource(img).toBase64String("png");
+        console.log("this.imgSrc -> " + this.imgSrc);    
+            console.dir(img);
+            console.log(img);
+    
+            var options = {tryHarder: true, formats: [ZXing.QR_CODE, ZXing.ITF]};
+            
+            
+           var results = zx.decodeBarcode(img, options);
+           if (!results) {
+               console.log("Unable to decode barcode");           
+           } else {
+               console.log("Barcode format", results.format);
+               console.log("Barcode value", results.barcode);  
+               this.urlBoleto = results.barcode;                 
+           }
     }
 
     ngOnInit(){

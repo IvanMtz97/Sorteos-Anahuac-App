@@ -8,6 +8,8 @@ var platform_1 = require("platform");
 var http_get_services_1 = require("../services/http-get/http-get.services");
 var Utils_1 = require("../services/Utils");
 var dialogs = require("ui/dialogs");
+var ZXing = require('nativescript-zxing');
+var imgSource = require("tns-core-modules/image-source");
 var AsignacionExitosaComponent = /** @class */ (function () {
     function AsignacionExitosaComponent(Utils, session, router, Router, GET) {
         this.Utils = Utils;
@@ -19,6 +21,24 @@ var AsignacionExitosaComponent = /** @class */ (function () {
         this.Datos = [];
         console.log("ASIGNACION COMPONENT");
         this.imagenPublicitaria = this.session.getImagenPublicidad();
+        this.token = this.Datos.Boletos.Boleto.Boleto.token;
+        var serverURL = this.session.getURL();
+        var zx = new ZXing();
+        var img = zx.createBarcode({ encode: serverURL + "boleto/" + this.token, height: 100, width: 100, format: ZXing.QR_CODE });
+        this.imgSrc = "data:image/png;base64," + imgSource.fromNativeSource(img).toBase64String("png");
+        console.log("this.imgSrc -> " + this.imgSrc);
+        console.dir(img);
+        console.log(img);
+        var options = { tryHarder: true, formats: [ZXing.QR_CODE, ZXing.ITF] };
+        var results = zx.decodeBarcode(img, options);
+        if (!results) {
+            console.log("Unable to decode barcode");
+        }
+        else {
+            console.log("Barcode format", results.format);
+            console.log("Barcode value", results.barcode);
+            this.urlBoleto = results.barcode;
+        }
     }
     AsignacionExitosaComponent.prototype.toggle = function () {
         this.boleto = !this.boleto;

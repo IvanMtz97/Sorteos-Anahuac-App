@@ -23,7 +23,7 @@
             <StackLayout>            
                 <StackLayout (tap)="toggle()" backgroundColor="#e9e9e9" class="talonario" orientation="horizontal" height="12%">
                     <Label class="text-black" text="BOLETO" color="#888888" width="30%" style="font-weight: bold;padding-left: 1%;vertical-align:center;"></Label>
-                    <Label class="txtorange" [text]="Datos.Boleto.clave" width="58%" style="font-weight: bold;vertical-align:center;"></Label>
+                    <Label class="txtorange" [text]="Datos.Boleto.folio" width="58%" style="font-weight: bold;vertical-align:center;"></Label>
                     <!-- <Label class="drop" text="x" width="12%" visibility="{{ selectBoleto ? 'visible' : 'collapsed' }}" color="#1D1D1D"></Label> -->
                 </StackLayout>
                 <StackLayout class="arrow-down" visibility="{{ selectBoleto ? 'visible' : 'collapsed' }}"></StackLayout>
@@ -52,8 +52,8 @@
                                 <Label class="txtgray txtsmall" [text]="Datos.Boleto.comprador.correo"></Label>
                             </StackLayout>
 
-                            <Image src="res://qr" width="60%"></Image>
-                            <Label class="txtsmall container-item" text="http://anahuac.edu?Boleto=lokem/fff/gfsjdg46546jh(ahgsdfghsaf54)"></Label>
+                            <Image [src]="imgSrc" width="60%"></Image>
+                            <Label class="txtsmall container-item" style="color: blue;text-decoration: underline;" [text]="urlBoleto" (tap)="Launch()"></Label>
 
                             <StackLayout *ngIf="Datos.Tipo == 'pagado'" class="container-item btn-orange" orientation="horizontal">
                                 <Image src="res://icono_pagar"></Image>

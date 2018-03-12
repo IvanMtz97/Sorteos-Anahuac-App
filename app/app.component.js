@@ -23,9 +23,11 @@ var AppComponent = /** @class */ (function () {
         this.router = router;
         this.myGetService = myGetService;
         this.routeExtension = routeExtension;
+        this.serverUrl = "https://sorteoanahuac-servicios-mobile-p.azurewebsites.net/";
         this.loading = loading;
         this.session = session;
         this.router = router;
+        this.session.setURL(this.serverUrl);
         if (this.session.loggedIn()) {
             this.GetTalonarios();
             if (this.session.getFirstRun() == true) {

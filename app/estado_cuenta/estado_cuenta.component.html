@@ -29,18 +29,18 @@
 
                 <StackLayout style="margin-bottom:50px;" orientation="horizontal">
                     <Label class="txtmedium txtgray" text="Boletos asignados: "></Label>  
-                    <Label class="txtmedium txtgray" [text]="infoColaborador.talonarios[0].Boletos.asignados.length"></Label>
+                    <Label class="txtmedium txtgray" [text]="cantBoletosAsignados"></Label>
                 </StackLayout>
 
                 <Image style="margin-bottom:50px;" src="res://separador"></Image>
 
                 <GridLayout columns="*, *" rows="*, *, 100%">
                     <Label class="txtmedium txtgray" col="0" row="0" text="Total a pagar: "></Label>
-                    <Label class="txtmedium txtgray" col="1" row="0" [text]="infoColaborador.monto_total"></Label>
+                    <Label class="txtmedium txtgray" style="font-weight: 700" col="1" row="0" [text]="infoColaborador.monto_total"></Label>
                     <Label class="txtmedium txtgray" col="0" row="1" text="Pagado: "></Label>
                     <Label class="txtmedium txtgray" col="1" row="1" [text]="infoColaborador.monto_abonado"></Label>
                     <Label class="txtmedium txtgray" col="0" row="2" text="Saldo pendiente: "></Label>
-                    <Label class="txtmedium txtgray" col="1" row="2" [text]="infoColaborador.monto_deudor"></Label>
+                    <Label class="txtmedium txtorange" col="1" row="2" [text]="infoColaborador.monto_deudor"></Label>
                 </GridLayout>
 
                 <StackLayout class="container-item btn-orange" orientation="horizontal">
