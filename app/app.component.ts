@@ -15,6 +15,7 @@ import { exit } from "nativescript-exit";
 
 import { LoadingService } from "./services/loading/loading";
 
+import * as pushPlugin from "nativescript-push-notifications";
 
 const firebase = require("nativescript-plugin-firebase");
 
@@ -25,9 +26,13 @@ const firebase = require("nativescript-plugin-firebase");
 })
 export class AppComponent implements OnInit{ 
     public imagenPublicidad: string;
+    private serverUrl = "https://sorteoanahuac-servicios-mobile-p.azurewebsites.net/";
     constructor(private session: SessionService, private router: Router, private myGetService: MyHttpGetService, private routeExtension: RouterExtensions, private loading: LoadingService){
         this.session = session;
         this.router = router;
+        
+        this.session.setURL(this.serverUrl);
+
         if (this.session.loggedIn()) {
             this.GetTalonarios();
             if(this.session.getFirstRun() == true){
@@ -44,7 +49,8 @@ export class AppComponent implements OnInit{
         http.getImage("https://sorteoanahuac.mx/app/banner_1.jpg").then((r) => {            
             this.imagenPublicidad = "data:image/png;base64,"+ r.toBase64String(); 
             this.session.setImagenPublicidad(this.imagenPublicidad);
-        }, (err) => {            
+        }, (err) => { 
+            console.log("----------\nError en la imagen de publicidad\n----------");           
         });            
     }
 
@@ -68,21 +74,19 @@ export class AppComponent implements OnInit{
         }
         
         firebase.init({
-            // Optionally pass in properties for database, authentication and cloud messaging,
-            // see their respective docs.
             onMessageReceivedCallback: function(message) {
                 console.log("Title: " + message.title);
                 console.log("Body: " + message.body);
                 // if your server passed a custom property called 'foo', then do this:
                 console.log("Value of 'foo': " + message.data.foo);
-                alert("Message Receivable: " + message.title + message.body);
-            }
-          }).then(
+                alert("Message " + message.title + message.body);
+              }
+        }).then(
             instance => {
               console.log("firebase.init done");
             },
             error => {
-              console.log(`firebase.init error: ${error}`);
+              console.log(`firebase.init error: ${error}`);  
             }
           );
           
@@ -90,6 +94,59 @@ export class AppComponent implements OnInit{
               // may be null if not known yet
               console.log("Current push token: " + token);
           }); 
+
+        const iosSettings = {
+            senderID: "870994298438", // Required: setting with the sender/project number
+            badge: true,
+            sound: true,
+            alert: true,
+            sandbox: true,
+            interactiveSettings: {
+                actions: [{
+                    identifier: 'READ_IDENTIFIER',
+                    title: 'Read',
+                    activationMode: "foreground",
+                    destructive: false,
+                    authenticationRequired: true
+                }, {
+                    identifier: 'CANCEL_IDENTIFIER',
+                    title: 'Cancel',
+                    activationMode: "foreground",
+                    destructive: true,
+                    authenticationRequired: true
+                }],
+                categories: [{
+                    identifier: 'READ_CATEGORY',
+                    actionsForDefaultContext: ['READ_IDENTIFIER', 'CANCEL_IDENTIFIER'],
+                    actionsForMinimalContext: ['READ_IDENTIFIER', 'CANCEL_IDENTIFIER']
+                }]
+            },
+            notificationCallbackIOS: (message: any) => {
+                alert("Message received!\n" + JSON.stringify(message));
+            },
+            notificationCallbackAndroid: (stringifiedData: String, fcmNotification: any) => {
+                const notificationBody = fcmNotification && fcmNotification.getBody();
+                alert("Message received!\n" + notificationBody + "\n" + stringifiedData);
+            }
+        };
+
+        pushPlugin.register(iosSettings, (token: String) => {
+            console.log("Device registered. Access token: " + token);
+            console.log("Platform: " + platformModule.device.os);
+            
+            if(platformModule.device.os == "iOS") {
+                // Register the interactive settings
+                if(iosSettings.interactiveSettings) {
+                    pushPlugin.registerUserNotificationSettings(() => {
+                        alert('Successfully registered for interactive push.');
+                    }, (err) => {
+                        alert('Error registering for interactive push: ' + JSON.stringify(err));
+                    });
+                }
+            }
+        }, (errorMessage: any) => {
+            alert("Device NOT registered! " + JSON.stringify(errorMessage));
+        });
     }
 
      //GET INICIO SESION-------->

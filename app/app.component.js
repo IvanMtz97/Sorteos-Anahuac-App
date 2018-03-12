@@ -14,6 +14,7 @@ var app = require("application");
 var application_1 = require("application");
 var nativescript_exit_1 = require("nativescript-exit");
 var loading_1 = require("./services/loading/loading");
+var pushPlugin = require("nativescript-push-notifications");
 var firebase = require("nativescript-plugin-firebase");
 var AppComponent = /** @class */ (function () {
     function AppComponent(session, router, myGetService, routeExtension, loading) {
@@ -23,8 +24,10 @@ var AppComponent = /** @class */ (function () {
         this.myGetService = myGetService;
         this.routeExtension = routeExtension;
         this.loading = loading;
+        this.serverUrl = "https://sorteoanahuac-servicios-mobile-p.azurewebsites.net/";
         this.session = session;
         this.router = router;
+        this.session.setURL(this.serverUrl);
         if (this.session.loggedIn()) {
             this.GetTalonarios();
             if (this.session.getFirstRun() == true) {
@@ -41,6 +44,7 @@ var AppComponent = /** @class */ (function () {
             _this.imagenPublicidad = "data:image/png;base64," + r.toBase64String();
             _this.session.setImagenPublicidad(_this.imagenPublicidad);
         }, function (err) {
+            console.log("----------\nError en la imagen de publicidad\n----------");
         });
     }
     AppComponent.prototype.ngOnInit = function () {
@@ -63,14 +67,12 @@ var AppComponent = /** @class */ (function () {
             });
         }
         firebase.init({
-            // Optionally pass in properties for database, authentication and cloud messaging,
-            // see their respective docs.
             onMessageReceivedCallback: function (message) {
                 console.log("Title: " + message.title);
                 console.log("Body: " + message.body);
                 // if your server passed a custom property called 'foo', then do this:
                 console.log("Value of 'foo': " + message.data.foo);
-                dialogs_1.alert("Message Receivable: " + message.title + message.body);
+                dialogs_1.alert("Message " + message.title + message.body);
             }
         }).then(function (instance) {
             console.log("firebase.init done");
@@ -80,6 +82,56 @@ var AppComponent = /** @class */ (function () {
         firebase.getCurrentPushToken().then(function (token) {
             // may be null if not known yet
             console.log("Current push token: " + token);
+        });
+        var iosSettings = {
+            senderID: "870994298438",
+            badge: true,
+            sound: true,
+            alert: true,
+            sandbox: true,
+            interactiveSettings: {
+                actions: [{
+                        identifier: 'READ_IDENTIFIER',
+                        title: 'Read',
+                        activationMode: "foreground",
+                        destructive: false,
+                        authenticationRequired: true
+                    }, {
+                        identifier: 'CANCEL_IDENTIFIER',
+                        title: 'Cancel',
+                        activationMode: "foreground",
+                        destructive: true,
+                        authenticationRequired: true
+                    }],
+                categories: [{
+                        identifier: 'READ_CATEGORY',
+                        actionsForDefaultContext: ['READ_IDENTIFIER', 'CANCEL_IDENTIFIER'],
+                        actionsForMinimalContext: ['READ_IDENTIFIER', 'CANCEL_IDENTIFIER']
+                    }]
+            },
+            notificationCallbackIOS: function (message) {
+                dialogs_1.alert("Message received!\n" + JSON.stringify(message));
+            },
+            notificationCallbackAndroid: function (stringifiedData, fcmNotification) {
+                var notificationBody = fcmNotification && fcmNotification.getBody();
+                dialogs_1.alert("Message received!\n" + notificationBody + "\n" + stringifiedData);
+            }
+        };
+        pushPlugin.register(iosSettings, function (token) {
+            console.log("Device registered. Access token: " + token);
+            console.log("Platform: " + platformModule.device.os);
+            if (platformModule.device.os == "iOS") {
+                // Register the interactive settings
+                if (iosSettings.interactiveSettings) {
+                    pushPlugin.registerUserNotificationSettings(function () {
+                        dialogs_1.alert('Successfully registered for interactive push.');
+                    }, function (err) {
+                        dialogs_1.alert('Error registering for interactive push: ' + JSON.stringify(err));
+                    });
+                }
+            }
+        }, function (errorMessage) {
+            dialogs_1.alert("Device NOT registered! " + JSON.stringify(errorMessage));
         });
     };
     //GET INICIO SESION-------->

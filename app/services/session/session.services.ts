@@ -2,7 +2,17 @@ import { Injectable } from "@angular/core";
 import { getBoolean, setBoolean, getNumber, setNumber, getString, setString, hasKey, remove, clear } from "application-settings";
 
 @Injectable()
-export class SessionService {   
+export class SessionService { 
+    
+    setURL(url)
+    {
+        setString("url", url);
+    }
+
+    getURL()
+    {
+        return getString("url");
+    }
 
     setClave(Clave: string){
         setString("ClaveLogin", Clave);
