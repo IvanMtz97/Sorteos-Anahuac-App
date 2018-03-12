@@ -177,7 +177,7 @@ export class TalonariosComponent implements OnInit {
         if(boleto.vendido){
             dialogs.alert({
                 title:"Aviso",
-                message: "Este boleto ya se vendio",
+                message: "Este boleto ya se vendió.",
                 okButtonText: "Ok"
             });
         }else{
