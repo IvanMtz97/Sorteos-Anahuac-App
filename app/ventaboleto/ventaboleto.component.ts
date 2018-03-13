@@ -117,14 +117,6 @@ export class VentaBoletoComponent implements OnInit {
     }
 
     AbrirModal(){
-        // let options = {
-        //     context: "Xdd",
-        //     fullscreen: true,
-        //     viewContainerRef: this.vcRef
-        // };
-        // this.modal.showModal(VentaBoletoModalComponent, options).then(res => {
-        //     console.log(res);
-        // });    
         this.Compradores = [];
         this.Formulario = !this.Formulario;
     }
@@ -142,6 +134,8 @@ export class VentaBoletoComponent implements OnInit {
             this.GET.getDataAuthorization("api/Comprador/Buscar/" + this.PK1 + "/" + evt.object.text).subscribe(res => {
                 this.Cargando = false;
                 this.Compradores = res.json();
+                console.log("RESPUESTA BUSCAR COMPRADOR");
+                console.dir(this.Compradores);
             }, error => {
                 this.Cargando = false;
             });
@@ -178,6 +172,7 @@ export class VentaBoletoComponent implements OnInit {
         });
         this.PilaBoletos = [];
         this.PK1 = JSON.parse(this.session.getInformation()).clave;        
+        console.log("CLAVE VENTA BOLETO: " + this.PK1);
         app.android.on(AndroidApplication.activityBackPressedEvent, (data: AndroidActivityBackPressedEventData) => {
             data.cancel = true;
             this.router.navigate(["talonarios"]);
@@ -214,16 +209,15 @@ export class VentaBoletoComponent implements OnInit {
 
     private VenderBoleto(){
 
-        if(!this.SoloLetras()){
-            dialogs.alert({
-                title: "AVISO",
-                message: "El nombre, apellido materno y apellido paterno no pueden contener numeros",
-                okButtonText: "Ok"
-            });
-            return false;
-        }
-
         if(this.ValidarCampos()){
+            if(!this.SoloLetras()){
+                dialogs.alert({
+                    title: "AVISO",
+                    message: "El nombre, apellido paterno y apellido materno no pueden contener numeros",
+                    okButtonText: "Ok"
+                });
+                return false;
+            }
             this.router.navigate(["confirmar", JSON.stringify({
                 Talonario: this.Datos.Talonario,
                 Boleto: this.Datos,
@@ -248,6 +242,15 @@ export class VentaBoletoComponent implements OnInit {
 
     private Siguiente(){
         if(this.ValidarCampos()){
+
+            if(!this.SoloLetras()){
+                dialogs.alert({
+                    title: "AVISO",
+                    message: "El nombre, apellido paterno y apellido materno no pueden contener numeros",
+                    okButtonText: "Ok"
+                });
+                return false;
+            }
             
             this.PilaBoletos.push({
                 Boleto: this.Datos.Boletos[this.cont], 
