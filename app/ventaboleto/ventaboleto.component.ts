@@ -213,7 +213,7 @@ export class VentaBoletoComponent implements OnInit {
             if(!this.SoloLetras()){
                 dialogs.alert({
                     title: "AVISO",
-                    message: "El nombre, apellido paterno y apellido materno no pueden contener numeros",
+                    message: "El nombre, apellido paterno y apellido materno no pueden contener números",
                     okButtonText: "Ok"
                 });
                 return false;
@@ -246,7 +246,7 @@ export class VentaBoletoComponent implements OnInit {
             if(!this.SoloLetras()){
                 dialogs.alert({
                     title: "AVISO",
-                    message: "El nombre, apellido paterno y apellido materno no pueden contener numeros",
+                    message: "El nombre, apellido paterno y apellido materno no pueden contener números",
                     okButtonText: "Ok"
                 });
                 return false;
@@ -374,7 +374,7 @@ export class VentaBoletoComponent implements OnInit {
         if(searchBar.text.length > 5){
             dialogs.alert({
                 title:"AVISO",
-                message: "El codigo postal no debe llevar mas de 5 caracteres",
+                message: "El código postal no debe llevar más de 5 caracteres",
                 okButtonText: "Ok"
             });
         }else{
@@ -384,7 +384,7 @@ export class VentaBoletoComponent implements OnInit {
                 if(res.json().length == 0){
                     dialogs.alert({
                         title: "AVISO",
-                        message: "No se encontraron datos para el codigo postal proporcionado",
+                        message: "No se encontraron datos para el código postal proporcionado",
                         okButtonText: "Ok"
                     });
                 }else{
@@ -399,7 +399,7 @@ export class VentaBoletoComponent implements OnInit {
                 this.loading.display(false);
                 dialogs.alert({
                     title: "AVISO",
-                    message: "No se encontraron datos para el codigo postal proporcionado",
+                    message: "No se encontraron datos para el código postal proporcionado",
                     okButtonText: "Ok"
                 });
             });
