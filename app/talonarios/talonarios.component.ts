@@ -53,16 +53,6 @@ export class TalonariosComponent implements OnInit {
     private _sideDrawerTransition: DrawerTransitionBase;
 
     ngOnInit(): void {
-        console.log("on Init talonarios");
-        var Correo = this.session.getCorreoColaborador();
-        this.myGetService.getDataAuthorization("api/Colaborador/GetCorreo/"+Correo+"/").subscribe(res => {
-            console.log("TALONARIOS COMPONENT");
-            console.log("TALONARIOS ACTUALIZADOS");
-            this.session.setInformation(JSON.stringify(res.json()));
-        }, error => {
-            console.log("ERROR AL ACTUALIZAR TALONARIOS");
-            console.log(error);
-        });
         this._sideDrawerTransition = new SlideInOnTopTransition();
         var Data = JSON.parse(this.session.getInformation());
         this.contador = Array(Data.talonarios.length).fill(0);
