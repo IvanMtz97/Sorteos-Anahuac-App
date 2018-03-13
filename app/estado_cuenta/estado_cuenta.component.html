@@ -34,12 +34,12 @@
 
                 <Image style="margin-bottom:50px;" src="res://separador"></Image>
 
-                <GridLayout columns="*, *" rows="*, *, 100%">
+                <GridLayout columns="180%, *" rows="*, *, 100%">
                     <Label class="txtmedium txtgray" col="0" row="0" text="Total a pagar: "></Label>
                     <Label class="txtmedium txtgray" style="font-weight: 700" col="1" row="0" [text]="infoColaborador.monto_total"></Label>
                     <Label class="txtmedium txtgray" col="0" row="1" text="Pagado: "></Label>
                     <Label class="txtmedium txtgray" col="1" row="1" [text]="infoColaborador.monto_abonado"></Label>
-                    <Label class="txtmedium txtgray" col="0" row="2" text="Saldo pendiente: "></Label>
+                    <Label class="txtmedium txtgray" style="padding-right: 50px" col="0" row="2" text="Saldo pendiente: "></Label>
                     <Label class="txtmedium txtorange" col="1" row="2" [text]="infoColaborador.monto_deudor"></Label>
                 </GridLayout>
 
