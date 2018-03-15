@@ -10,6 +10,7 @@ import { RouterExtensions } from "nativescript-angular/router/router-extensions"
 import * as platformModule from "tns-core-modules/platform";
 import { LoadingService } from "../services/loading/loading";
 var http = require("http");
+import * as connectivity from "tns-core-modules/connectivity";
 
 @Component({
     selector: "Login",
@@ -23,16 +24,16 @@ export class LoginComponent implements OnInit {
     public nextLibAvailable: boolean = false;
     private politicas: string;
     private condiciones: string;
-    public imagenPublicitaria: string; 
+    public imagenPublicitaria: string;
     Check: boolean = false;
 
     constructor(page: Page, private router: RouterExtensions, private myGetService: MyHttpGetService, private session: SessionService, private loader: LoadingService) {
-        page.actionBarHidden = true;        
+        page.actionBarHidden = true;
     }
 
     ngOnInit() {
         if (this.session.loggedIn()) { this.session.setLoggedIn(false); }
-        this.SorteoActivo();  
+        this.SorteoActivo();
         this.downloadImage();
         console.log("Correo: " + this.session.getCorreo() + ", Clave: " + this.session.getClave());
         this.Correo = this.session.getCorreo();
@@ -44,24 +45,24 @@ export class LoginComponent implements OnInit {
     }
 
     private downloadImage() {
-        http.getImage("https://sorteoanahuac.mx/app/banner_1.jpg").then((r) => {                                 
-            this.imagenPublicitaria = "data:image/png;base64,"+ r.toBase64String(); 
+        http.getImage("https://sorteoanahuac.mx/app/banner_1.jpg").then((r) => {
+            this.imagenPublicitaria = "data:image/png;base64,"+ r.toBase64String();
             this.session.setImagenPublicidad("data:image/png;base64,"+ r.toBase64String());
-        }, (err) => {                        
-        });  
+        }, (err) => {
+        });
     }
 
 
     //GET INICIO SESION-------->
-    private IniciarSesion() {
+    private IniciarSesion() {        
         this.loader.display(true);
         this.myGetService
             .getLogin({ email: this.Correo, password: this.Clave }, 'api/Colaborador/' + platformModule.device.uuid)
-            .subscribe((result) => {                
-                this.onGetDataSesion(result);                
+            .subscribe((result) => {
+                this.onGetDataSesion(result);
             }, (error) => {
                 this.loader.display(false);
-                this.mostrarMensaje('Autenticación', 'Usuario o contraseña inválidos. Recuerda que esta aplicación es únicamente para colaboradores de Sorteos Anáhuac.');
+                this.validarConexion();
             });
     }
 
@@ -92,23 +93,23 @@ export class LoginComponent implements OnInit {
                 this.session.setAceptacionTalonarios(JSON.stringify(result.json().url_aceptacion));
                 this.session.setGanadores(JSON.stringify(result.json().url_lista_ganadores));
                 this.session.setConoceSorteo(JSON.stringify(result.json().url_conoce));
-                this.session.setCondiciones(JSON.stringify(result.json().url_condiciones));                                  
+                this.session.setCondiciones(JSON.stringify(result.json().url_condiciones));
             }, (error) => {
                 //this.loader.display(false);
-                //this.mostrarMensaje('Error', 'Falló al tratar obtener el sorteo activo.');  
+                //this.mostrarMensaje('Error', 'Falló al tratar obtener el sorteo activo.');
                 console.log("Error al tratar de obtener servicio");
                 console.log(error);
-            });   
-            
-            this.politicas = this.session.getPoliticas();                
-            this.condiciones = this.session.getCondiciones();         
+            });
+
+            this.politicas = this.session.getPoliticas();
+            this.condiciones = this.session.getCondiciones();
     }
     //END GET --------->
 
     public setInfo(data) {
         this.session.setLoggedIn(true);
         this.session.setInformation(JSON.stringify(data.json()));
-        this.loader.display(false);  
+        this.loader.display(false);
         this.session.setToken(data.json().token);
         this.session.setIdColaborador(data.json().identificador);
         this.session.setCorreoColaborador(data.json().correo)
@@ -119,10 +120,10 @@ export class LoginComponent implements OnInit {
             this.router.navigate(["talonarios"], { clearHistory: true });
         }
     }
-    public Politicas() {        
-        utils.openUrl(JSON.parse(this.politicas));         
+    public Politicas() {
+        utils.openUrl(JSON.parse(this.politicas));
     }
-    public Condiciones() {        
+    public Condiciones() {
         utils.openUrl(JSON.parse(this.condiciones));
     }
     public ConoceSorteo() {
@@ -151,6 +152,19 @@ export class LoginComponent implements OnInit {
             });
         }else{
             this.IniciarSesion();
+        }
+    }
+
+    public validarConexion()
+    {
+        var connectionType = connectivity.getConnectionType();
+        if (connectionType == connectivity.connectionType.none)
+        {
+            this.mostrarMensaje('Autenticación', 'No se encontro una conexión a internet.');
+        }
+        else
+        {
+            this.mostrarMensaje('Autenticación', 'Usuario o contraseña inválidos. Recuerda que esta aplicación es únicamente para colaboradores de Sorteos Anáhuac.');
         }
     }
 }
