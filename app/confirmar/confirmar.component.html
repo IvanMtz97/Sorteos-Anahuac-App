@@ -37,7 +37,7 @@
             <StackLayout orientation="vertical" class="container-item">
                 
                 <StackLayout *ngIf="Datos.Tipo == 'Uno'" orientation="vertical">
-                    <Label class="txtorange" text="02143"></Label>
+                    <Label class="txtorange" [text]="folio"></Label>
                     <Label [text]="Datos.Info.Correoelectronico"></Label>
                 </StackLayout>                
                 

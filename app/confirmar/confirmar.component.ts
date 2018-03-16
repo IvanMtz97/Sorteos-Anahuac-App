@@ -23,6 +23,7 @@ export class ConfirmarComponent implements OnInit{
     private Boleto: Object = {};
     private Boletos: Array<Object> = [];
     public imagenPublicitaria: string;
+    public folio: string;
 
     @ViewChild("drawer") drawerComponent: RadSideDrawerComponent;
     private _sideDrawerTransition: DrawerTransitionBase;
@@ -33,9 +34,9 @@ export class ConfirmarComponent implements OnInit{
 
     ngOnInit(){
         this.route.params.subscribe((params) => {
-            this.Datos = JSON.parse(params["data"]);
+            this.Datos = JSON.parse(params["data"]);  
             
-
+            
             if(this.Datos.Tipo == "Varios"){
                 this.Datos.Boletos.forEach(function(Item) {
                     this.Boletos.push({
@@ -88,6 +89,7 @@ export class ConfirmarComponent implements OnInit{
 
 
         });
+        this.folio = this.Datos.Boleto.Boleto.folio;
     }
 
     Si(){
