@@ -11,6 +11,8 @@ import * as platformModule from "tns-core-modules/platform";
 import { LoadingService } from "../services/loading/loading";
 var http = require("http");
 import * as connectivity from "tns-core-modules/connectivity";
+import { setInterval, setTimeout, clearInterval } from "timer";
+var timer = require("timer");
 
 @Component({
     selector: "Login",
@@ -37,7 +39,7 @@ export class LoginComponent implements OnInit {
         this.downloadImage();
         console.log("Correo: " + this.session.getCorreo() + ", Clave: " + this.session.getClave());
         this.Correo = this.session.getCorreo();
-        this.Clave = this.session.getClave();
+        this.Clave = this.session.getClave();                 
     }
 
     public toggleCheck(eventData){
@@ -55,7 +57,7 @@ export class LoginComponent implements OnInit {
 
     //GET INICIO SESION-------->
     private IniciarSesion() {        
-        this.loader.display(true);
+        this.loader.display(true);        
         this.myGetService
             .getLogin({ email: this.Correo, password: this.Clave }, 'api/Colaborador/' + platformModule.device.uuid)
             .subscribe((result) => {
@@ -108,12 +110,16 @@ export class LoginComponent implements OnInit {
 
     public setInfo(data) {
         this.session.setLoggedIn(true);
-        this.session.setInformation(JSON.stringify(data.json()));
-        this.loader.display(false);
+        this.session.setInformation(JSON.stringify(data.json()));        
         this.session.setToken(data.json().token);
         this.session.setIdColaborador(data.json().identificador);
         this.session.setCorreoColaborador(data.json().correo)
         this.session.setPassColaborador(this.Clave);
+
+        const id = timer.setTimeout(() => {
+            this.setTimer();
+        }, 3500);
+
         if(this.session.getFirstRun() == true){
             this.router.navigate(["privacidad"], { clearHistory: true });
         }else{
@@ -166,5 +172,10 @@ export class LoginComponent implements OnInit {
         {
             this.mostrarMensaje('Autenticación', 'Usuario o contraseña inválidos. Recuerda que esta aplicación es únicamente para colaboradores de Sorteos Anáhuac.');
         }
+    }
+
+    public setTimer()
+    {
+        this.loader.display(false);
     }
 }
