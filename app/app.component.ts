@@ -189,6 +189,7 @@ export class AppComponent implements OnInit{
         }, error => {
             console.log("ERROR AL REGISTRAR DISPOSITIVO");
             console.log(error);
+            this.loading.display(false);
         });
     }
     //END POST

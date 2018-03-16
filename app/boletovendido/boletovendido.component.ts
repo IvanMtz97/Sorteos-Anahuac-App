@@ -52,7 +52,8 @@ export class BoletoVendidoComponent implements OnInit {
             this.visibility = false;
         }
 
-        this.token = this.Datos.Boleto.token;
+        // this.token = this.Datos.Boleto.token;
+        this.token = this.Datos.Boletos.Boleto.Boleto.token;
         var serverURL = this.session.getURL()
         var zx = new ZXing();    
         var img = zx.createBarcode({encode: serverURL + "boleto/" + this.token, height: 100, width: 100, format: ZXing.QR_CODE});
