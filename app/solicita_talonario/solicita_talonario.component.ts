@@ -5,6 +5,7 @@ import { DrawerTransitionBase, SlideInOnTopTransition } from "nativescript-pro-u
 import statusBar = require("nativescript-status-bar");
 import { MyHttpPostService } from "../services/http-post/http-post.services";
 import { SessionService } from "../services/session/session.services";
+import { RouterExtensions } from "nativescript-angular/router/router-extensions";
   
 
 
@@ -26,7 +27,7 @@ export class SolicitaTalonarioComponent {
   validaPagina: boolean = true;
   public imagenPublicitaria: string; 
 
-  constructor(private myPostService: MyHttpPostService, private session: SessionService) 
+  constructor(private myPostService: MyHttpPostService, private session: SessionService, private router: RouterExtensions) 
   { 
     var data = JSON.parse(this.session.getInformation());        
     this.imagenPublicitaria = this.session.getImagenPublicidad();
@@ -79,6 +80,7 @@ export class SolicitaTalonarioComponent {
         .postData({}, 'api/Talonario/Solicitar')
         .subscribe(res => {   
           this.mostrarMensaje("Solicitud", "La solicitud ha sido enviada. Gracias.");
+          this.router.navigate(["talonarios"], { clearHistory: true });
         }, (error) => {
           this.mostrarMensaje("Solicitud", "La solicitud no ha podido ser enviada.");
       });
