@@ -9,6 +9,7 @@ import { UtilsService } from "../services/Utils";
 import * as dialogs from "ui/dialogs";
 var ZXing = require('nativescript-zxing');
 import * as imgSource from "tns-core-modules/image-source";
+var utilityModule = require("utils/utils");
 
 @Component({
     selector: "AsignacionExitosa",
@@ -37,9 +38,16 @@ export class AsignacionExitosaComponent implements OnInit{
           
         this.imagenPublicitaria = this.session.getImagenPublicidad();
 
-        
+        this.router.params.subscribe(params => {
+            this.Datos = JSON.parse(params["data"]);
+        });
+
+        console.log("--------------\nDATOS EN ASIGNACION" + JSON.stringify(this.Datos) + "\n----------------");
+
+        this.token = this.Datos.Boletos.Boleto.Boleto.token;
+        console.log("token ->" + this.token);
         var serverURL = this.session.getURL()
-        var zx = new ZXing();    
+        var zx = new ZXing();           
         var img = zx.createBarcode({encode: serverURL + "boleto/" + this.token, height: 100, width: 100, format: ZXing.QR_CODE});
         
     
@@ -62,9 +70,7 @@ export class AsignacionExitosaComponent implements OnInit{
     }
 
     ngOnInit(){
-        this.router.params.subscribe(params => {
-            this.Datos = JSON.parse(params["data"]);
-        });
+        console.log("ActualizarTalonarios");
         this.Utils.ActualizarTalonarios();
     }
 
@@ -78,18 +84,17 @@ export class AsignacionExitosaComponent implements OnInit{
     
     EnviarCorreo(){
         var Boleto = this.Datos.Boletos.Boleto.Boleto.clave;
-        console.dir(this.Datos.Boletos);
-        this.GET.getDataAuthorization("api/Boleto/Notificar?clave=" + Boleto).subscribe(res => {
-            dialogs.alert({
-                title:"AVISO",
-                message: "Se ha notificado exitosamente al correo " + this.Datos.Info.Correoelectronico,
-                okButtonText: "Ok"
-            });
-            console.log("2OO CORREO");
-            console.log(res);
-        }, error => {
-            console.log("500 CORREO");
-            console.log(error);
+        this.GET.getDataAuthorization("api/Boleto/Notificar?clave=" + Boleto).subscribe(res => {                                
+        dialogs.alert({
+            title:"AVISO",
+            message: "Se ha notificado exitosamente al correo " + this.Datos.Info.Correoelectronico,
+            okButtonText: "Ok"
         });
+        console.log("2OO CORREO");
+        console.log(res);
+    }, error => {
+        console.log("500 CORREO");
+        console.log(error);
+    });
     }
 }

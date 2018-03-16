@@ -38,7 +38,7 @@
                     <Label class="txtlarge txtorange" [text]="Datos.Boletos.Boleto.Boleto.folio"></Label>
 
                     <Image class="imgmedium" [src]="imgSrc"></Image>
-                    <a class="container-item" [text]="urlBoleto"></a>
+                    <Label class="txtsmall container-item" style="color: blue;text-decoration: underline;" [text]="urlBoleto" (tap)="openURL()"></Label>
 
                     <StackLayout class="btn-orange container-item" orientation="horizontal">
                         <Image src="res://icono_dolar"></Image>
