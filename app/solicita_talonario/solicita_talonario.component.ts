@@ -28,7 +28,7 @@ export class SolicitaTalonarioComponent {
 
   constructor(private myPostService: MyHttpPostService, private session: SessionService) 
   { 
-    var data = JSON.parse(this.session.getInformation());    
+    var data = JSON.parse(this.session.getInformation());        
     this.imagenPublicitaria = this.session.getImagenPublicidad();
     // var data =
     // {
@@ -49,7 +49,7 @@ export class SolicitaTalonarioComponent {
     //       }
     //     ]
     // }    
-
+    
     if(data.talonarios.length > 0)    
     {
       for(let i in data.talonarios) 
@@ -65,6 +65,10 @@ export class SolicitaTalonarioComponent {
           }
       }
     }
+    else 
+    {
+        this.validaPagina = false;
+    }
   }
   
   @ViewChild("drawer") drawerComponent: RadSideDrawerComponent;
@@ -73,14 +77,16 @@ export class SolicitaTalonarioComponent {
   public makePostSolitarTalonario() {
     this.myPostService
         .postData({}, 'api/Talonario/Solicitar')
-        .subscribe(res => {            
-        });
+        .subscribe(res => {   
+          this.mostrarMensaje("Solicitud", "La solicitud ha sido enviada. Gracias.");
+        }, (error) => {
+          this.mostrarMensaje("Solicitud", "La solicitud no ha podido ser enviada.");
+      });
   }
 
   public solicitaTalonario()
   {     
-    this.makePostSolitarTalonario();
-    this.mostrarMensaje("Solicitud", "La solicitud ha sido enviada. Gracias.");
+    this.makePostSolitarTalonario();    
   }
 
   ngOnInit()
