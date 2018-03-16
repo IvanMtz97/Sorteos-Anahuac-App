@@ -4,6 +4,7 @@ import { Page } from "ui/page";
 import * as dialogs from "ui/dialogs";
 var utils = require("utils/utils");
 import { MyHttpGetService } from "../services/http-get/http-get.services";
+import { MyHttpPostService } from "../services/http-post/http-post.services";
 import { SessionService } from "../services/session/session.services";
 import { ActivatedRoute, Router } from "@angular/router";
 import { RouterExtensions } from "nativescript-angular/router/router-extensions";
@@ -18,7 +19,7 @@ var timer = require("timer");
     selector: "Login",
     moduleId: module.id,
     templateUrl: "./login.component.html",
-    providers: [MyHttpGetService, SessionService, LoadingService]
+    providers: [MyHttpGetService, SessionService, LoadingService, MyHttpPostService]
 })
 export class LoginComponent implements OnInit {
     public Correo: string = "";
@@ -28,9 +29,14 @@ export class LoginComponent implements OnInit {
     private condiciones: string;
     public imagenPublicitaria: string;
     Check: boolean = false;
+    public Info: any = {
+        token: "",
+        correo: "",
+        sistema: ""
+    };
 
-    constructor(page: Page, private router: RouterExtensions, private myGetService: MyHttpGetService, private session: SessionService, private loader: LoadingService) {
-        page.actionBarHidden = true;
+    constructor(page: Page, private router: RouterExtensions, private myGetService: MyHttpGetService, private session: SessionService, private loader: LoadingService, private API: MyHttpPostService) {
+        page.actionBarHidden = true;        
     }
 
     ngOnInit() {
@@ -80,8 +86,34 @@ export class LoginComponent implements OnInit {
             this.session.setCorreo("");
         }
         this.setInfo(data);
+        this.PostRegistroDispositivo(this.session.getTokenDevice());
     }
     //END GET --------->
+
+        //POST REGISTRO DISPOSITIVO
+        private PostRegistroDispositivo(token) {
+            console.log("<------ REGISTRAR DEVICE --------->");
+            console.log("<<<<<<<<<<<<<TOKEN DEVICE -> ", token);
+            this.Info.token = token;
+            this.Info.sistema = platformModule.device.os;
+            this.Info.correo = this.session.getCorreoColaborador();
+            console.log("<<<<<<<<<<<<DATA ENVIO DISPOSITIVO>>>>>>>>>>>>>>>", JSON.stringify(this.Info));
+            this.API.postNoAuth(this.Info, "api/Dispositivos/Agregar").subscribe(res => {
+                this.loader.display(false);
+                 dialogs.alert({
+                     title: "AVISO",
+                     message: "Dispositivo agregado exitosamente",
+                     okButtonText: "Ok"
+                 }).then(() => {
+                    
+                 });
+    
+            }, error => {
+                console.log("ERROR AL REGISTRAR DISPOSITIVO");
+                console.log(error);
+            });
+        }
+        //END POST
 
     //GET SORTEO -------->
     private SorteoActivo() {

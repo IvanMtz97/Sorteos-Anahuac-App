@@ -80,6 +80,20 @@ export class SessionService {
         return getString("Token");
     }
 
+    setTokenDevice(TokenDevice){
+        console.log("TokenDevice", TokenDevice);
+        setString("TokenDevice", TokenDevice);
+        // if(TokenDevice.length < 1){
+        //     setString("TokenDevice", TokenDevice);
+        // }else{
+        //     throw("Debes ingresar un TokenDevice válido");
+        // }
+    }
+
+    getTokenDevice(){
+        return getString("TokenDevice");
+    }
+
     setIdColaborador(IdColaborador){
         setString("IdColaborador", IdColaborador);
     }

@@ -37,22 +37,24 @@ export class MyDrawerItemComponent implements OnInit {
         this.drawer.sideDrawer.toggleDrawerState();
         console.log("navItemRoute -> " + navItemRoute); 
         if(navItemRoute == "/login")
-        {            
-            dialogs.confirm({
-                title:"AVISO",
-                message: "¿Deseas cerrar la sesión?",
-                okButtonText: "SI",
-                cancelButtonText: "NO"
-            }).then(result => {
-                if(result){
-                    this.routerExtensions.navigate([navItemRoute], {
-                        transition: {
-                            name: "fade"
-                        },
-                        clearHistory: this.clean
-                    });
-                }
-            });
+        {  
+            timer.setTimeout(() => {
+                dialogs.confirm({
+                    title:"AVISO",
+                    message: "¿Deseas cerrar la sesión?",
+                    okButtonText: "SI",
+                    cancelButtonText: "NO"
+                }).then(result => {
+                    if(result){
+                        this.routerExtensions.navigate([navItemRoute], {
+                            transition: {
+                                name: "fade"
+                            },
+                            clearHistory: this.clean
+                        });
+                    }
+                });
+            }, 1000);          
         }
         else
         {       
