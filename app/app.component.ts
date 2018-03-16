@@ -30,11 +30,7 @@ const firebase = require("nativescript-plugin-firebase");
 export class AppComponent implements OnInit{ 
     public imagenPublicidad: string;
     private serverUrl = "https://sorteoanahuac-servicios-mobile-p.azurewebsites.net/";
-    public Info: any = {
-        token: "",
-        correo: "",
-        sistema: ""
-    };
+    public tokenDevice: String = "";
     constructor(private PUT: MyHttpPutService, private utils: UtilsService ,private session: SessionService, private router: Router, private myGetService: MyHttpGetService, private routeExtension: RouterExtensions, private loading: LoadingService, private API: MyHttpPostService){
         this.session = session;
         this.router = router;
@@ -92,15 +88,15 @@ export class AppComponent implements OnInit{
         
         firebase.init({
             onMessageReceivedCallback: function(message) {
-                //console.log("Title: " + message.title);
-                //console.log("Body: " + message.body);
+                console.log("Title: " + message.title);
+                console.log("Body: " + message.body);
                 // if your server passed a custom property called 'foo', then do this:
                 //console.log("Value of 'foo': " + message.data.foo);
                 alert("Message " + message.title + message.body);
               }
         }).then(
             instance => {
-              //console.log("firebase.init done");
+              console.log("firebase.init done");
             },
             error => {
               console.log(`firebase.init error: ${error}`);  
@@ -109,9 +105,9 @@ export class AppComponent implements OnInit{
           
         firebase.getCurrentPushToken().then((token: string) => {   
             // may be null if not known yet
-            //console.log("Current push token: " + token);
-            this.loading.display(true);
-            this.PostRegistroDispositivo(token);
+            console.log("Current push token: " + token);
+            this.tokenDevice = token;
+            this.session.setTokenDevice(this.tokenDevice);
         }); 
 
         const settingsDevice = {
@@ -141,6 +137,7 @@ export class AppComponent implements OnInit{
                 }]
             },
             notificationCallbackIOS: (message: any) => {
+                console.log("CALLBACK IOS -------->"+JSON.stringify(message));
                 alert("Message received!\n" + JSON.stringify(message));
             },
             notificationCallbackAndroid: (stringifiedData: String, fcmNotification: any) => {
@@ -150,14 +147,14 @@ export class AppComponent implements OnInit{
         };
 
         pushPlugin.register(settingsDevice, (token: String) => {
-            //console.log("Device registered. Access token: " + token);
-            //console.log("Platform: " + platformModule.device.os);
+            console.log("Device registered. Access token: " + token);
+            console.log("Platform: " + platformModule.device.os);
             
             if(platformModule.device.os == "iOS") {
                 // Register the interactive settings
                 if(settingsDevice.interactiveSettings) {
                     pushPlugin.registerUserNotificationSettings(() => {
-                        //console.log('Successfully registered for interactive push.');
+                        console.log('Successfully registered for interactive push.');
                     }, (err) => {
                         console.log('Error registering for interactive push: ' + JSON.stringify(err));
                     });
@@ -167,31 +164,6 @@ export class AppComponent implements OnInit{
             alert("Device NOT registered! " + JSON.stringify(errorMessage));
         });
     }
-
-    //POST REGISTRO DISPOSITIVO
-    private PostRegistroDispositivo(token) {
-        //console.log("<------ REGISTRAR DEVICE --------->");
-        //console.log("<<<<<<<<<<<<<TOKEN DEVICE -> ", token);
-        this.Info.token = token;
-        this.Info.sistema = platformModule.device.os;
-        this.Info.correo = this.session.getCorreoColaborador();
-        //console.log("<<<<<<<<<<<<DATA ENVIO DISPOSITIVO>>>>>>>>>>>>>>>", JSON.stringify(this.Info));
-        this.API.postNoAuth(this.Info, "api/Dispositivos/Agregar").subscribe(res => {
-            this.loading.display(false);
-            // dialogs.alert({
-            //     title: "AVISO",
-            //     message: "Dispositivo agregado exitosamente",
-            //     okButtonText: "Ok"
-            // }).then(() => {
-
-            // });
-
-        }, error => {
-            console.log("ERROR AL REGISTRAR DISPOSITIVO");
-            console.log(error);
-        });
-    }
-    //END POST
 
      //GET INICIO SESION-------->
     private GetTalonarios() {
