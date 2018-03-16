@@ -17,7 +17,8 @@ const routes: Routes = [
     { path: "redessociales", loadChildren: "./redes_sociales/redes_sociales.module#RedesSocialesModule"},
     { path: "notificaciones", loadChildren: "./notificaciones/notificaciones.module#NotificacionesModule"},
     { path: "compradores/:data", loadChildren: "./compradores/compradores.module#CompradoresModule"},
-    { path: "confirmar/:data", loadChildren: "./confirmar/confirmar.module#ConfirmarModule"}
+    { path: "confirmar/:data", loadChildren: "./confirmar/confirmar.module#ConfirmarModule"},
+    { path: "micuenta", loadChildren: "./micuenta/micuenta.module#MiCuentaModule"}
     
 ];
 
