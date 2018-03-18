@@ -52,18 +52,17 @@ export class BoletoVendidoComponent implements OnInit {
             this.visibility = false;
         }
 
-        // this.token = this.Datos.Boleto.token;
-        this.token = this.Datos.Boletos.Boleto.Boleto.token;
+        // this.token = this.Datos.Boleto.token; 
+        console.log("--------DATOS--------");
+        console.dir(this.Datos);
+        console.log("---------------------");       
         var serverURL = this.session.getURL()
         var zx = new ZXing();    
-        var img = zx.createBarcode({encode: serverURL + "boleto/" + this.token, height: 100, width: 100, format: ZXing.QR_CODE});
+        var img = zx.createBarcode({encode: serverURL + "boleto/" + this.token, height: 200, width: 200, format: ZXing.QR_CODE});
         
     
         this.imgSrc = "data:image/png;base64," + imgSource.fromNativeSource(img).toBase64String("png");
         console.log("this.imgSrc -> " + this.imgSrc);    
-            console.dir(img);
-            console.log(img);
-    
             var options = {tryHarder: true, formats: [ZXing.QR_CODE, ZXing.ITF]};
             
             

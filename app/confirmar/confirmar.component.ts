@@ -121,11 +121,11 @@ export class ConfirmarComponent implements OnInit{
                             message: "Se han vendido exitosamente los boletos",
                             okButtonText: "Ok"
                         }).then(()=>{
-                            this.Utils.ActualizarTalonarios();
                             this.router.navigate(["talonarios"], { clearHistory : true});
                         });
                     }
                     contador++;
+                    this.Utils.ActualizarTalonarios();
                 }, error => {
                     console.log("ERROR AL VENDER VARIOS BOLETOS");
                     console.log(error);

@@ -42,13 +42,11 @@ export class AsignacionExitosaComponent implements OnInit{
             this.Datos = JSON.parse(params["data"]);
         });
 
-        console.log("--------------\nDATOS EN ASIGNACION" + JSON.stringify(this.Datos) + "\n----------------");
-
         this.token = this.Datos.Boletos.Boleto.Boleto.token;
         console.log("token ->" + this.token);
         var serverURL = this.session.getURL()
         var zx = new ZXing();           
-        var img = zx.createBarcode({encode: serverURL + "boleto/" + this.token, height: 100, width: 100, format: ZXing.QR_CODE});
+        var img = zx.createBarcode({encode: serverURL + "boleto/" + this.token, height: 200, width: 200, format: ZXing.QR_CODE});
         
     
         this.imgSrc = "data:image/png;base64," + imgSource.fromNativeSource(img).toBase64String("png");
@@ -96,5 +94,10 @@ export class AsignacionExitosaComponent implements OnInit{
         console.log("500 CORREO");
         console.log(error);
     });
+    }
+
+    Launch()
+    {
+        utilityModule.openUrl(this.urlBoleto.toString());
     }
 }
