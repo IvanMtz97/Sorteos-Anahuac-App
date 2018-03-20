@@ -14,12 +14,13 @@ var http = require("http");
 import * as connectivity from "tns-core-modules/connectivity";
 import { setInterval, setTimeout, clearInterval } from "timer";
 var timer = require("timer");
+import { MyHttpPutService } from "../services/http-put/http-put.services";
 
 @Component({
     selector: "Login",
     moduleId: module.id,
     templateUrl: "./login.component.html",
-    providers: [MyHttpGetService, SessionService, LoadingService, MyHttpPostService]
+    providers: [MyHttpGetService, SessionService, LoadingService, MyHttpPostService, MyHttpPutService]
 })
 export class LoginComponent implements OnInit {
     public Correo: string = "";
@@ -34,8 +35,9 @@ export class LoginComponent implements OnInit {
         correo: "",
         sistema: ""
     };
+    public validaPrivacidad: number;
 
-    constructor(page: Page, private router: RouterExtensions, private myGetService: MyHttpGetService, private session: SessionService, private loader: LoadingService, private API: MyHttpPostService) {
+    constructor(page: Page, private router: RouterExtensions, private myGetService: MyHttpGetService, private session: SessionService, private loader: LoadingService, private API: MyHttpPostService, private PUT: MyHttpPutService) {
         page.actionBarHidden = true;        
     }
 
@@ -139,7 +141,6 @@ export class LoginComponent implements OnInit {
             this.condiciones = this.session.getCondiciones();
     }
     //END GET --------->
-
     public setInfo(data) {
         this.session.setLoggedIn(true);
         this.session.setInformation(JSON.stringify(data.json()));        
@@ -147,16 +148,21 @@ export class LoginComponent implements OnInit {
         this.session.setIdColaborador(data.json().identificador);
         this.session.setCorreoColaborador(data.json().correo)
         this.session.setPassColaborador(this.Clave);
+        
+        this.setPrivacidad(data.json().clave);
+        console.log("Datos en sesión -> \n");
+        console.log(JSON.stringify(data.json()));
 
         const id = timer.setTimeout(() => {
             this.setTimer();
         }, 3500);
 
-        if(this.session.getFirstRun() == true){
-            this.router.navigate(["privacidad"], { clearHistory: true });
-        }else{
-            this.router.navigate(["talonarios"], { clearHistory: true });
-        }
+        // if(this.session.getFirstRun() == true){
+        //     this.router.navigate(["privacidad"], { clearHistory: true });
+        // }else{
+        //     this.router.navigate(["talonarios"], { clearHistory: true });
+        // }
+        
     }
     public Politicas() {
         utils.openUrl(JSON.parse(this.politicas));
@@ -209,5 +215,46 @@ export class LoginComponent implements OnInit {
     public setTimer()
     {
         this.loader.display(false);
+    }
+
+    public setPrivacidad(PK1)
+    {
+        this.PUT.putData({}, "api/Colaborador/Actualiza/" + PK1).subscribe(res => {
+            console.log("ACTUALIZADO EXITOSO");
+            console.log(res);
+            console.log("------------\n" + res.text());
+            if(res.text() == "1")
+            {
+                console.log("No mostrar privacidad");
+                this.validaPrivacidad = 1;
+            }
+            else
+            {
+                console.log("Mostrar privacidad");
+                this.validaPrivacidad = 0;
+            }
+
+
+
+            console.log("Privacidad -> " + this.validaPrivacidad);
+            if(this.validaPrivacidad == 0)
+            {
+                console.log("Mostrando privacidad");
+                this.router.navigate(["privacidad"], { clearHistory: true });
+            }
+            else if(this.validaPrivacidad == 1)
+            {
+                console.log("No mostrando privacidad");
+                this.router.navigate(["talonarios"], { clearHistory: true });
+            }
+            else
+            {
+                console.log("No mostrando privacidadx2");
+                this.router.navigate(["talonarios"], { clearHistory: true });
+            }
+        }, error => {
+            console.log("ACTUALIZADO FALLIDO");
+            console.log(error);
+        })
     }
 }
