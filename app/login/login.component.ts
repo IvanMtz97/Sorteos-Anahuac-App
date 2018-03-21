@@ -102,13 +102,13 @@ export class LoginComponent implements OnInit {
             console.log("<<<<<<<<<<<<DATA ENVIO DISPOSITIVO>>>>>>>>>>>>>>>", JSON.stringify(this.Info));
             this.API.postNoAuth(this.Info, "api/Dispositivos/Agregar").subscribe(res => {
                 this.loader.display(false);
-                 dialogs.alert({
-                     title: "AVISO",
-                     message: "Dispositivo agregado exitosamente",
-                     okButtonText: "Ok"
-                 }).then(() => {
+                //  dialogs.alert({
+                //      title: "AVISO",
+                //      message: "Dispositivo agregado exitosamente",
+                //      okButtonText: "Ok"
+                //  }).then(() => {
                     
-                 });
+                //  });
     
             }, error => {
                 console.log("ERROR AL REGISTRAR DISPOSITIVO");

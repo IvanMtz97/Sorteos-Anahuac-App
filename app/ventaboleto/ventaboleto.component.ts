@@ -40,7 +40,9 @@ export class VentaBoletoComponent implements OnInit {
     private PilaBoletos: Array<Object> = [];
     public imagenPublicitaria: string;
     Cargando: boolean = false;
-    
+    //Colonias: Array<Object> = [{ colonia: "Estancia"},{colonia: "Reales"},{colonia: "Costas"}];
+    Colonias: any = [];
+
     PK1: number = 0;
     // Compradores: any = [
     //     {
@@ -388,7 +390,16 @@ export class VentaBoletoComponent implements OnInit {
                         okButtonText: "Ok"
                     });
                 }else{
+                    this.Colonias = [];
                     var Datos = res.json();
+                    console.dir(Datos);
+                    if(Datos.length == 1){
+                        this.Info.Colonia = Datos[0].colonia;
+                    } else {
+                        Datos.forEach(function(item){
+                            this.Colonias.push({colonia: item.colonia});
+                        }.bind(this));
+                    }
                     this.Info.Estado = Datos[0].estado;
                     this.Info.Municipio = Datos[0].municipio;
                     Toast.makeText("Estado y municipio cargado.", "short").show();
@@ -404,6 +415,12 @@ export class VentaBoletoComponent implements OnInit {
                 });
             });
         }
+    }
+
+    onColoniaTap(evt){
+        console.log("ON COLONIA TAP");
+        console.log(evt.index);
+        this.Info.Colonia = this.Colonias[evt.index].colonia;
     }
 
     public onTextChanged(args) {

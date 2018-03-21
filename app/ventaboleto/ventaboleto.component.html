@@ -123,6 +123,12 @@
                             <!-- <TextField class="txtCampo" [(ngModel)]="Info.Codigopostal" keyboardType="number" maxLength="5"></TextField> -->
                             <SearchBar class="txtCampo" style="color: #000;" hint="Buscar" (loaded)="sBLoaded($event)" [(ngModel)]="Info.Codigopostal" keyboardType="number" maxLength="5" (submit)="onSubmit($event)" 
                             color="#CCC" textFieldBackgroundColor="white" textFieldHintColor="#CCC" width="100%"></SearchBar>
+                            <Label *ngIf="Colonias.length > 0" class="txtmedium" text="Seleccione una colonia"></Label>
+                            <ListView *ngIf="Colonias.length > 0" [items]="Colonias" (itemTap)="onColoniaTap($event)" height="145">
+                                <ng-template let-item="item" let-i="index" let-third="third">
+                                    <Label [text]='item.colonia'></Label>
+                                </ng-template>
+                            </ListView>
                         </StackLayout>
                 
                         <StackLayout class="vb-item">
