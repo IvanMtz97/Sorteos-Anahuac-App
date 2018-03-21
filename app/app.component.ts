@@ -39,11 +39,7 @@ export class AppComponent implements OnInit{
 
         if (this.session.loggedIn()) {
             this.GetTalonarios();
-            if(this.session.getFirstRun() == true){
-                this.router.navigate(["privacidad"]);
-            }else{
-                this.router.navigate(["talonarios"]);
-            }
+            this.router.navigate(["talonarios"]);
         }
         else {
             this.router.navigate([""]);
