@@ -5,6 +5,16 @@
 **/.DS_Store
 **/__MACOSX/**/*
 
+
+*.js.map
+app/**/*.js
+e2e/**/*.js
+e2e/reports/
+hooks/
+lib/
+tmp/
+test-results.xml
+
 bin/dist
 node_modules
 tags
