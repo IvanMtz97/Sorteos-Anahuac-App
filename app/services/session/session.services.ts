@@ -126,6 +126,18 @@ export class SessionService {
         return getString("Ganadores");
     }
 
+    getMiCuenta()
+    {
+        return getString("MiCuenta");
+    }
+    
+    setMiCuenta(MiCuenta)
+    {
+        setString("MiCuenta", MiCuenta);
+    }
+
+   
+
     setPoliticas(Politicas){
         setString("Politicas", Politicas);
     }

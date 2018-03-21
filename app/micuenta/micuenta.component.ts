@@ -3,7 +3,7 @@ import { RadSideDrawerComponent } from "nativescript-pro-ui/sidedrawer/angular";
 import { DrawerTransitionBase, SlideInOnTopTransition } from "nativescript-pro-ui/sidedrawer";
 import statusBar = require("nativescript-status-bar");
 import { SessionService } from "../services/session/session.services";
-  
+
 @Component({
     selector: "micuenta",
     moduleId: module.id,
@@ -16,10 +16,10 @@ export class MiCuentaComponent {
     public statusBarState: boolean=true;
     public micuenta: string;
     public imagenPublicitaria: string;
-
+    
     constructor(private session: SessionService){        
-        this.micuenta = this.session.getConoceSorteo();
-        this.micuenta = JSON.parse(this.micuenta);  
+        this.micuenta = this.session.getMiCuenta();
+        this.micuenta = JSON.parse(this.micuenta);
         this.imagenPublicitaria = this.session.getImagenPublicidad();
     }
     onDrawerButtonTap(): void {

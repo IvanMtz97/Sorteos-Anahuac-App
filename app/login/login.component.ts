@@ -123,7 +123,9 @@ export class LoginComponent implements OnInit {
         this.myGetService
             .getData('api/Sorteo/Activo')
             .subscribe((result) => {
+                console.log("result -> \n" + JSON.stringify(result.json()));
                 this.session.setSorteoActivo(JSON.stringify(result.json()));
+                this.session.setMiCuenta(JSON.stringify(result.json().url_cambio_contrasena));
                 this.session.setPoliticas(JSON.stringify(result.json().url_politicas));
                 this.session.setReglamento(JSON.stringify(result.json().url_reglamento));
                 this.session.setAceptacionTalonarios(JSON.stringify(result.json().url_aceptacion));
