@@ -54,7 +54,7 @@
                             <TextField width="90%" class="txtCampo container-item" (textChange)="BuscarChange($event)" hint="Nombre"></TextField>
                             <ActivityIndicator [busy]="Cargando" width="30" height="30" class="activity-indicator" style="vertical-align:center;"></ActivityIndicator>
                         </StackLayout>
-                        <ListView [items]="Compradores" (itemTap)="onTapList($event)" height="150">
+                        <ListView [items]="Compradores" (itemTap)="onTapList($event)" separatorColor="transparent" height="150">
                             <ng-template let-item="item" let-i="index" let-third="third">
                                 <Label [text]='item.nombre_completo'></Label>
                             </ng-template>
@@ -124,7 +124,7 @@
                             <SearchBar class="txtCampo" style="color: #000;" hint="Buscar" (loaded)="sBLoaded($event)" [(ngModel)]="Info.Codigopostal" keyboardType="number" maxLength="5" (submit)="onSubmit($event)" 
                             color="#CCC" textFieldBackgroundColor="white" textFieldHintColor="#CCC" width="100%"></SearchBar>
                             <Label *ngIf="Colonias.length > 0" class="txtmedium" text="Seleccione una colonia"></Label>
-                            <ListView *ngIf="Colonias.length > 0" [items]="Colonias" (itemTap)="onColoniaTap($event)" height="145">
+                            <ListView *ngIf="Colonias.length > 0" [items]="Colonias" (itemTap)="onColoniaTap($event)" separatorColor="transparent" item-width="auto">
                                 <ng-template let-item="item" let-i="index" let-third="third">
                                     <Label [text]='item.colonia'></Label>
                                 </ng-template>

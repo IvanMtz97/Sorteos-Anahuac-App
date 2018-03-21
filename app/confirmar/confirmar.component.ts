@@ -35,13 +35,15 @@ export class ConfirmarComponent implements OnInit{
     ngOnInit(){
         this.route.params.subscribe((params) => {
             this.Datos = JSON.parse(params["data"]);  
-            
+            console.log("PK1 COMPRADOR");
+            console.log(this.Datos.id);            
             
             if(this.Datos.Tipo == "Varios"){
                 this.Datos.Boletos.forEach(function(Item) {
                     this.Boletos.push({
                             comprador: {
-                                    direccion: {
+                                pk1: Number(this.Datos.id),
+                                direccion: {
                                     telefono: Item.Info.Telefonofijo,
                                     municipio: Item.Info.Municipio,
                                     estado: Item.Info.Estado,
@@ -65,6 +67,7 @@ export class ConfirmarComponent implements OnInit{
             else if(this.Datos.Boleto.Tipo == "Uno"){
                 this.Boleto = {
                     comprador: {
+                        pk1: Number(this.Datos.id),
                         direccion: {
                             telefono: this.Datos.Info.Telefonofijo,
                             municipio: this.Datos.Info.Municipio,
@@ -104,6 +107,7 @@ export class ConfirmarComponent implements OnInit{
                 }).then(() => {
                     this.router.navigate(["asignacionexitosa", JSON.stringify({ Tipo: "Uno", Boletos: this.Datos } )], { clearHistory: true });
                 });
+                //this.router.navigate(["asignacionexitosa", JSON.stringify({Tipo: "Uno", Boletos: this.Datos})], {clearHistory: true});
 
             }, error => {
                 console.log("ERROR AL VENDER BOLETO");

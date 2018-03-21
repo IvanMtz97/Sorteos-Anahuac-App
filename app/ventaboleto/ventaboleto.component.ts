@@ -42,6 +42,7 @@ export class VentaBoletoComponent implements OnInit {
     Cargando: boolean = false;
     //Colonias: Array<Object> = [{ colonia: "Estancia"},{colonia: "Reales"},{colonia: "Costas"}];
     Colonias: any = [];
+    idComprador: Number = -1;
 
     PK1: number = 0;
     // Compradores: any = [
@@ -136,8 +137,10 @@ export class VentaBoletoComponent implements OnInit {
             this.GET.getDataAuthorization("api/Comprador/Buscar/" + this.PK1 + "/" + evt.object.text).subscribe(res => {
                 this.Cargando = false;
                 this.Compradores = res.json();
+                //this.idComprador = res.json().comprador.id;
                 console.log("RESPUESTA BUSCAR COMPRADOR");
                 console.dir(this.Compradores);
+                //console.log("ID COMPRADOR: " + this.idComprador);
             }, error => {
                 this.Cargando = false;
             });
@@ -145,6 +148,7 @@ export class VentaBoletoComponent implements OnInit {
     }
 
     onTapList(evt){
+        this.idComprador = this.Compradores[evt.index].pk1 == "" ? -1 : this.Compradores[evt.index].pk1;
         var Apellidos = this.Compradores[evt.index].apellidos.split(" ");
         this.Info = {
             Nombre: this.Compradores[evt.index].nombre,
@@ -174,11 +178,12 @@ export class VentaBoletoComponent implements OnInit {
         });
         this.PilaBoletos = [];
         this.PK1 = JSON.parse(this.session.getInformation()).clave;        
-        console.log("CLAVE VENTA BOLETO: " + this.PK1);
-        app.android.on(AndroidApplication.activityBackPressedEvent, (data: AndroidActivityBackPressedEventData) => {
-            data.cancel = true;
-            this.router.navigate(["talonarios"]);
-        });
+        if(isAndroid){
+            app.android.on(AndroidApplication.activityBackPressedEvent, (data: AndroidActivityBackPressedEventData) => {
+                data.cancel = true;
+                this.router.navigate(["talonarios"]);
+            });
+        }
     }
 
     onDrawerButtonTap(): void {
@@ -220,11 +225,21 @@ export class VentaBoletoComponent implements OnInit {
                 });
                 return false;
             }
+
+            if(!this.validateEmail(this.Info.Correoelectronico)){
+                dialogs.alert({
+                    title: "AVISO",
+                    message: "Debe introducir un correo válido.",
+                    okButtonText: "Ok"
+                });
+                return false;
+            }
             this.router.navigate(["confirmar", JSON.stringify({
                 Talonario: this.Datos.Talonario,
                 Boleto: this.Datos,
                 Info: this.Info,
-                Tipo: "Uno"
+                Tipo: "Uno",
+                id: this.idComprador
             })]);
         }else{
             dialogs.alert({
@@ -249,6 +264,15 @@ export class VentaBoletoComponent implements OnInit {
                 dialogs.alert({
                     title: "AVISO",
                     message: "El nombre, apellido paterno y apellido materno no pueden contener números",
+                    okButtonText: "Ok"
+                });
+                return false;
+            }
+
+            if(!this.validateEmail(this.Info.Correoelectronico)){
+                dialogs.alert({
+                    title: "AVISO",
+                    message: "Debe introducir un correo válido.",
                     okButtonText: "Ok"
                 });
                 return false;
@@ -281,7 +305,8 @@ export class VentaBoletoComponent implements OnInit {
                 var Param = {
                     Tipo: "Varios",
                     Boletos: this.PilaBoletos,
-                    Talonario: this.Datos.Talonario
+                    Talonario: this.Datos.Talonario,
+                    id: this.idComprador
                 }
 
                 this.router.navigate(["confirmar", JSON.stringify(Param)]);
@@ -372,7 +397,7 @@ export class VentaBoletoComponent implements OnInit {
         this.loading.display(true);
         let searchBar = <SearchBar>args.object;
         searchBar.dismissSoftInput();
-        searchBar.android.clearFocus();
+//        searchBar.android.clearFocus();
         if(searchBar.text.length > 5){
             dialogs.alert({
                 title:"AVISO",
@@ -402,7 +427,12 @@ export class VentaBoletoComponent implements OnInit {
                     }
                     this.Info.Estado = Datos[0].estado;
                     this.Info.Municipio = Datos[0].municipio;
-                    Toast.makeText("Estado y municipio cargado.", "short").show();
+                    dialogs.alert({
+                        title: "AVISO",
+                        message: "Estado y municipio cargado.",
+                        okButtonText: "Ok"
+                    });
+                    //Toast.makeText("Estado y municipio cargado.", "short").show();
                 }
             }, error => {
                 console.log("500 COD POSTAL");
@@ -415,6 +445,11 @@ export class VentaBoletoComponent implements OnInit {
                 });
             });
         }
+    }
+
+    validateEmail(email){
+        var re = /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
+        return re.test(email);
     }
 
     onColoniaTap(evt){

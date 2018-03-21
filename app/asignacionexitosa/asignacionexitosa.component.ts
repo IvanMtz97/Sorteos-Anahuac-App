@@ -45,7 +45,7 @@ export class AsignacionExitosaComponent implements OnInit{
         this.token = this.Datos.Boletos.Boleto.Boleto.token;
         console.log("token ->" + this.token);
         var serverURL = this.session.getURL()
-        var zx = new ZXing();           
+        /*var zx = new ZXing();           
         var img = zx.createBarcode({encode: serverURL + "boleto/" + this.token, height: 200, width: 200, format: ZXing.QR_CODE});
         
     
@@ -64,7 +64,7 @@ export class AsignacionExitosaComponent implements OnInit{
                console.log("Barcode format", results.format);
                console.log("Barcode value", results.barcode);  
                this.urlBoleto = results.barcode;                 
-           }
+           }*/
     }
 
     ngOnInit(){
