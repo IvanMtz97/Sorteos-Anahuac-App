@@ -130,37 +130,41 @@ export class TalonariosComponent implements OnInit {
             this.srcFlecha[i] = "res://arrow_down";   
         }
         this.contador[i] = (this.contador[i]+1);
-
+        console.log("Se imprime talonarios---->");
+        console.log(JSON.stringify(talonarios.Boletos));
+        console.log("Separador _____________");
+        console.log(JSON.stringify(talonarios[i].Boletos.pendientes == undefined));
         if(talonarios.length > 0) {
             //BOLETOS PENDIENTES
-            if(talonarios[i].Boletos.pendientes.length == 0) {
-                this.srcIconoTalonario[i] = "res://icono_talonario_gris";
-                this.validaStackBolPen[i] = false;
-                this.tienePendientes[i] = false;
-            } else {
-                this.srcIconoTalonario[i] = "res://icono_talonario";
-                this.validaStackBolPen[i] = true;
-                this.tienePendientes[i] = true;
-                this.cantBolPendientes[i] = talonarios[i].Boletos.pendientes.length;
-                this.session.setTalonarios(true);
-            }
-
-            //BOLETOS ASIGNADOS
-            if(talonarios[i].Boletos.asignados.length == 0) {
-                this.validaStackBolAsig[i] = false;
-            } else {
-                this.cantBolAsignados[i] = talonarios[i].Boletos.asignados.length;
-                this.validaStackBolAsig[i] = true;            
-            }
-
-            //BOLETOS VENDIDOS
-            if(talonarios[i].Boletos.vendidos.length == 0) {
-                this.validaStackBolVen[i] = false;
-            } else {
-                this.cantBolVendidos[i] = talonarios[i].Boletos.vendidos.length;
-                this.validaStackBolVen[i] = true;            
-            }
+            //console.log(talonarios[i].boletos.length);
+                if(talonarios[i].Boletos.pendientes == null || talonarios[i].Boletos.pendientes == undefined) {
+                    this.srcIconoTalonario[i] = "res://icono_talonario_gris";
+                    this.validaStackBolPen[i] = false;
+                    this.tienePendientes[i] = false;
+                } else {
+                    this.srcIconoTalonario[i] = "res://icono_talonario";
+                    this.validaStackBolPen[i] = true;
+                    this.tienePendientes[i] = true;
+                    this.cantBolPendientes[i] = talonarios[i].Boletos.pendientes.length;
+                    this.session.setTalonarios(true);
+                }
+            
+                //BOLETOS ASIGNADOS
+                if(talonarios[i].Boletos.asignados == null || talonarios[i].Boletos.asignados == {}) {
+                    this.validaStackBolAsig[i] = false;
+                } else {
+                    this.cantBolAsignados[i] = talonarios[i].Boletos.asignados.length;
+                    this.validaStackBolAsig[i] = true;            
+                }
+                //BOLETOS VENDIDOS
+                if(talonarios[i].Boletos.vendidos == null || talonarios[i].Boletos.vendidos == {}) {
+                    this.validaStackBolVen[i] = false;
+                } else {
+                    this.cantBolVendidos[i] = talonarios[i].Boletos.vendidos.length;
+                    this.validaStackBolVen[i] = true;            
+                }
         }
+        
     }
 
     public VentaBoleto(boleto, talonario){
