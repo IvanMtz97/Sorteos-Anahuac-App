@@ -7,6 +7,7 @@ import { LoadingService } from "../../services/loading/loading";
 import { setInterval, setTimeout, clearInterval } from "timer";
 var timer = require("timer");
 import * as dialogs from "ui/dialogs";
+import { SessionService } from "../../services/session/session.services";
 
 registerElement("Ripple", () => require("nativescript-ripple").Ripple);
 
@@ -25,7 +26,7 @@ export class MyDrawerItemComponent implements OnInit {
     private cleanArray: object = { '/login' : true };
     public id;
 
-    constructor(private routerExtensions: RouterExtensions, private drawer: RadSideDrawerComponent, private loader: LoadingService) {
+    constructor(private routerExtensions: RouterExtensions, private drawer: RadSideDrawerComponent, private loader: LoadingService, private session: SessionService) {
 
     }
 
@@ -36,7 +37,7 @@ export class MyDrawerItemComponent implements OnInit {
         if(this.cleanArray[navItemRoute]) this.clean = true;        
         this.drawer.sideDrawer.toggleDrawerState();
         console.log("navItemRoute -> " + navItemRoute); 
-        if(navItemRoute == "/login")
+        if(navItemRoute == "/login" && this.session.loggedIn())
         {  
             timer.setTimeout(() => {
                 dialogs.confirm({
